@@ -1,4 +1,4 @@
-import StatesList from '../../Helpers/statesData'
+//import StatesList from '../../Helpers/statesData'
 
 const initialState = {
     AnswersList: [],
@@ -9,10 +9,10 @@ const initialState = {
 function InitiateNextQuestion(state = initialState, action) {
     let nextState
     let myQuestionsCounter = action.value
-    console.log("dans Reducer InitiateNextQuestion action = ", action, " myQuestionsCounter = ", myQuestionsCounter)
+    StatesList = global.G_StatesList;
+//    console.log("dans Reducer InitiateNextQuestion action = ", action, " Value = ", myQuestionsCounter)
     switch (action.type) {
        case 'INITIATE-NEXT-QUESTION' :   
-            console.log("dans Reducer InitiateNextQuestion debut du traitement")
             let myAnswersList = [];
             let myRightAnswer = G_SeriesQRList[myQuestionsCounter]
             cloneStatesList = [...StatesList];
@@ -24,8 +24,6 @@ function InitiateNextQuestion(state = initialState, action) {
             }
             index = Math.floor(Math.random()*myAnswersList.length) // on choisit l'endroit de la liste où l'on va insérer la bonne réponse
             myAnswersList.splice(index, 0, myRightAnswer) //on insère la bonne réponse dans la liste
-            console.log("dans Reducer InitiateNextQuestion myRightAnswer", myRightAnswer)
-            console.log("dans Reducer InitiateNextQuestion myAnswersList", myAnswersList)
 
             nextState = {
                 ...state,
@@ -33,7 +31,7 @@ function InitiateNextQuestion(state = initialState, action) {
                         RightAnswer: myRightAnswer,
                         QuestionsCounter: myQuestionsCounter
             }
-            console.log("Dans Reducer Initiate Next Question nextState = ", nextState)
+//            console.log("Dans Reducer Initiate Next Question nextState = ", nextState)
             return nextState
         default:
             return state;

@@ -1,42 +1,52 @@
 export default data = [
     {
         state: 'FRANCE',
-        capital: 'Paris'
+        capital: 'Paris',
+        image: require('../Helpers/capital_images/paris.jpeg')
     },
     {
         state: 'ITALIE',
-        capital: 'Rome'
+        capital: 'Rome',
+        image: require('../Helpers/capital_images/rome.jpeg')
     },
     {
         state: 'ALLEMAGNE',
-        capital: 'Berlin'
+        capital: 'Berlin',
+        image: require('../Helpers/capital_images/berlin.jpeg')
     },
     {
         state: 'ESPAGNE',
-        capital: 'Madrid'
+        capital: 'Madrid',
+        image: require('../Helpers/capital_images/madrid.jpeg')
     },
     {
         state: 'PORTUGAL',
-        capital: 'Lisbonne'
+        capital: 'Lisbonne',
+        image: require('../Helpers/capital_images/lisbonne.jpeg')
     },
     {
         state: 'SUISSE',
-        capital: 'Genève'
+        capital: 'Genève',
+        image: require('../Helpers/capital_images/geneve.jpeg')
     },
     {
         state: 'SUEDE',
-        capital: 'Stockholm'
+        capital: 'Stockholm',
+        image: require('../Helpers/capital_images/stockholm.jpeg')
     },
     {
         state: 'POLOGNE',
-        capital: 'Varsovie'
+        capital: 'Varsovie',
+        image: require('../Helpers/capital_images/varsovie.jpeg')
     },
     {
         state: 'CAMEROUN',
-        capital: 'Yaoundé'
+        capital: 'Yaoundé',
+        image: require('../Helpers/capital_images/yaounde.jpeg')
     },
     {
         state: 'CHINE',
-        capital: 'Pékin'
+        capital: 'Pékin',
+        image: require('../Helpers/capital_images/paris.jpeg')
     }
 ]

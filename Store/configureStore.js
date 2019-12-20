@@ -1,6 +1,7 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux'
 import InitiateQRSeries from './Reducers/InitiateQRSeriesReducer'
 import InitiateNextQuestion from './Reducers/InitiateNextQuestion'
+import HandleAnswersList from './Reducers/HandleAnswersList'
 import { persistCombineReducers } from 'redux-persist'
 
 // je ne suis pas parvenu à faire fonctionner les deux reducers en même temps
@@ -20,5 +21,5 @@ const rootPersistConfig = {
 export default createStore(persistCombineReducers(rootPersistConfig, { InitiateNextQuestion, InitiateQRSeries }))
 */
 
-export default createStore(InitiateNextQuestion)
-
+// export default createStore(InitiateNextQuestion)
+export default createStore(combineReducers({ InitiateNextQuestion, HandleAnswersList }))

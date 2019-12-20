@@ -1,4 +1,4 @@
-import StatesList from '../../Helpers/statesData'
+//import StatesList from '../../Helpers/statesData'
 
 
 
@@ -9,6 +9,7 @@ const initialState = {
 
 function InitiateQRSeries(state = initialState, action) {
     let nextState
+    StatesList = global.G_StatesList;
     switch (action.type) {
        case 'INITIATE-SERIES' :   
             console.log("dans Reducer InitiateQRSeries G_SeriesLength = ", G_SeriesLength )

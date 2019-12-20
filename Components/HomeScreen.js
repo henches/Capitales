@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 class HomeScreen extends React.Component {
     
-    constructor() {
+   constructor() {
         super();
     }
 
@@ -17,6 +17,12 @@ class HomeScreen extends React.Component {
     }
 
     render() {
+        const im = {
+            varsovie : 'pologne',
+            rome: 'italie'
+        }
+        console.log("ZZZZZZZZZZZZZZZZZZZZ   IM  ZZZZZZZZZZZZZZZZZZZZZZZZZ  im[rome]=", im['rome'])
+     
         return(
           <View style={styles.main_view}>
             <View style={styles.title_view}>
