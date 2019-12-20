@@ -10,20 +10,12 @@ import { Divider, Button } from 'react-native-elements'
 class SeriesScreen extends React.Component {
     static navigationOptions = {
         headerTitle: "CAPITALES",
-        headerRight: () => (
-            <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                color="#fff"
-            />
-        ),
-        headerLeft: () => (
-            <Button
-                onPress={() => alert('This is a button!')}
-                title="Info"
-                color="#fff"
-            />
-        ),
+        headerStyle: {
+            backgroundColor: 'whitesmoke',
+            fontWeight: 'bold',
+            fontSize: 35
+        },
+        headerLeft: null,
     }
 
     state = {
@@ -76,11 +68,12 @@ class SeriesScreen extends React.Component {
         const popupAnswerIsKO = "DOMMAGE !"
         const answerList = this.props.AnswersList
 
+        let popupBackgroundColor = this.state.isAnswerRight ? 'palegreen' : 'lightcoral'
         let imageUrl = 'file:../Helpers/capital_images/' + this.props.RightAnswer.capital.toLowerCase() + '.jpeg'
         console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ   IMAGE URL   ZZZZZZZZZZZZZZZZZZZZZZZZZZZ', imageUrl)
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: 'whitesmoke'}}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 20 }}> {this.props.QuestionsCounter + 1} / {G_SeriesLength}</Text>
                 </View>
@@ -142,14 +135,17 @@ class SeriesScreen extends React.Component {
                     onRequestClose={() => {
                         Alert.alert('Modal has been closed')
                     }}>
-                    <View style={{ flex: 1, backgroundColor: "#00000000" }}>
+                    <View style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}></View>
+                        <View style={{ flex: 1 }}></View>
+                        <View style={{ flex: 2 }}></View>
                         <View style={{ flex: 7 }}></View>
-                        <View style={{ flex: 8, backgroundColor: 'aqua', borderRadius: 10, margin: 30 }}>
+                        <View style={{ flex: 8, backgroundColor: popupBackgroundColor, borderRadius: 10, margin: 30 }}>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 25 }}>{this.state.isAnswerRight ? popupAnswerIsOK : popupAnswerIsKO}</Text>
                             </View>
-                            <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 25 }}>La capitale de {this.props.RightAnswer.state} est :</Text>
+                            <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 22 , margin: 10 }}>La capitale de {this.props.RightAnswer.state} est :</Text>
                                 <Text style={{ fontSize: 50 }}>{this.props.RightAnswer.capital}</Text>
                             </View>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
