@@ -1,12 +1,14 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Button, ThemeProvider } from 'react-native-elements'
 import { connect } from 'react-redux'
+import Emoji from 'react-native-emoji'
 
 class HomeScreen extends React.Component {
     
    constructor() {
-        super();
+        super();   
+    
     }
 
     _goSeriesScreen = () => {
@@ -30,21 +32,20 @@ class HomeScreen extends React.Component {
             </View>
             <View style={styles.stats_view}>
                 <Text style={styles.stats_text}>Vous connaissez x capitales</Text>
+                <Emoji name='flushed' style={{ fontSize: 30 }}/>
+                <Emoji name='sunglasses' style={{ fontSize: 30 }}/>
             </View>
             <View style={styles.play_view}>
-                    <Button title='Go mec' onPress={() => {this._goSeriesScreen()}}/>
+                <TouchableOpacity style={styles.button}
+                        onPress={() => { this._goSeriesScreen() }}>
+                        <Text style={styles.button_text}>JOUER</Text>
+                </TouchableOpacity>
             </View>
           </View>  
         )
     }
 }
 
-/*
-            <View style={styles.play_view}>
-                <Button title='JOUER' onPress={() => {this._goSeriesScreen()}}/>
-            </View>                     
-
-*/
 const styles = StyleSheet.create({
     main_view: {
         flex: 1,
@@ -68,6 +69,19 @@ const styles = StyleSheet.create({
     play_button: {
         height: 50
     },
+    button: {
+        height: 50,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: 'Helvetica',
+        fontWeight: 'bold',
+        borderBottomColor: 'steelblue',
+        borderBottomWidth: 5,
+        backgroundColor: 'dodgerblue',
+        margin: 5
+    },
+
 })
 
 const mapStateToProps = state => {

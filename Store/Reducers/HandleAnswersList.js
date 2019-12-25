@@ -9,9 +9,10 @@ function HandleAnswersList(state = initialState, action) {
     console.log("dans Reducer HandleAnswersList state = ", state)
     switch (action.type) {
        case 'ADD-ANSWERED-QUESTION' :   
-            const eltGivenAnswersList = {rightAnswer: action.value.rightAnswer, givenAnwser: action.value.givenAnswer}
-            console.log("dans Reducer HandleAnswersList myGivenAnswersList  avant push = ", myGivenAnswersList)
             const myGivenAnswersList = state.GivenAnswersList;
+            const eltGivenAnswersList = { id: myGivenAnswersList.length.toString(), isAnswerRight: action.value.isAnswerRight, rightAnswer: action.value.rightAnswer, givenAnswer: action.value.givenAnswer }
+            console.log("*****************************************************************dans Reducer HandleAnswersList")
+            console.log("dans Reducer HandleAnswersList myGivenAnswersList  avant push = ", myGivenAnswersList)
             myGivenAnswersList.push(eltGivenAnswersList)
             console.log("dans Reducer HandleAnswersList myGivenAnswersList apres push = ", myGivenAnswersList)
             nextState = {

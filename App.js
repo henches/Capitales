@@ -10,9 +10,9 @@ export default class App extends React.Component {
   constructor() {
     console.log('-------------------------------- DEBUT de lAPP  CONSTRUCTOR------------------------------------')
     super()
-    global.G_SeriesLength = 4;
-    global.G_WrongAnswersNumber = 7;
-    global.G_SeriesQRList = [];
+    global.G_SeriesLength = 2
+    global.G_WrongAnswersNumber = 7
+    global.G_SeriesQRList = []
     global.G_StatesList = StatesList
 
 // Ce qui suit est merdique : cela devrait être dans le reducer InitiateQRSeriesReducer. MAis je ne suis pas parvenu à faire fonctionner les deux reducers en même temps

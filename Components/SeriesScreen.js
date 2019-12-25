@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Alert, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { Divider, Button } from 'react-native-elements'
+import { Divider } from 'react-native-elements'
+import COLORS from './Styles'
 
 
 
@@ -50,7 +51,7 @@ class SeriesScreen extends React.Component {
 
     __hideAnswerResults = () => {
         console.log('*****************************   Quit Popup ****************************')
-        const action = { type: "ADD-ANSWERED-QUESTION", value: { rightAnswer: this.props.RightAnswer, givenAnswer: this.state.givenAnswer } }
+        const action = { type: "ADD-ANSWERED-QUESTION", value: { isAnswerRight: this.state.isAnswerRight, rightAnswer: this.props.RightAnswer, givenAnswer: this.state.givenAnswer } }
         this.props.dispatch(action)
         this.setState({ modalVisible: false })
         this._goSeriesScreen();
@@ -65,27 +66,46 @@ class SeriesScreen extends React.Component {
         //        console.log('Render props', this.props)
 
         const popupAnswerIsOK = "BRAVO !"
-        const popupAnswerIsKO = "DOMMAGE !"
+        const popupAnswerIsKO = "ATTENTION !"
         const answerList = this.props.AnswersList
 
-        let popupBackgroundColor = this.state.isAnswerRight ? 'palegreen' : 'lightcoral'
         let imageUrl = 'file:../Helpers/capital_images/' + this.props.RightAnswer.capital.toLowerCase() + '.jpeg'
+        let progressWidth = ((this.props.QuestionsCounter+1) / G_SeriesLength)*100+'%'
+        popupAnswer = ''
+        if (this.state.isAnswerRight) {
+            popupAnswer = popupAnswerIsOK
+            popupBackgroundColor = COLORS.okBackgroundColor
+            popupTextColor = COLORS.okTextColor
+            popupButtonBackgroundColor = COLORS.okButtonBackgroundColor
+            popupButtonBorderBottomColor = COLORS.okButtonBorderBottomColor
+        }
+        else {
+            popupAnswer = popupAnswerIsKO
+            popupBackgroundColor = COLORS.nokBackgroundColor
+            popupTextColor = COLORS.nokTextColor
+            popupButtonBackgroundColor = COLORS.nokButtonBackgroundColor
+            popupButtonBorderBottomColor = COLORS.nokButtonBorderBottomColor
+        }
         console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ   IMAGE URL   ZZZZZZZZZZZZZZZZZZZZZZZZZZZ', imageUrl)
 
+
         return (
-            <View style={{ flex: 1, backgroundColor: 'whitesmoke'}}>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20 }}> {this.props.QuestionsCounter + 1} / {G_SeriesLength}</Text>
+            <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor}}>
+                <View style={{ flex: 1, justifyContent: 'center', paddingLeft: '3%', paddingRight: '3%' }}>
+                    <View style={{ flexDirection: 'row', backgroundColor: 'gainsboro', borderRadius: 10, height: 10 }}>
+                        <View style={{ backgroundColor: '#78c800', borderRadius: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: progressWidth}}>
+                        </View>        
+                    </View>      
                 </View>
-                <Divider />
+                <Divider/>
                 <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
                     <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {this.props.RightAnswer.state} </Text>
                 </View>
-                <Divider />
+                <Divider/>
                 <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
                     <Image style={{ width: 220, height: 220 }} source={this.props.RightAnswer.image} />
                 </View>
-                <Divider />
+                <Divider/>
                 <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                         <TouchableOpacity style={styles.button}
@@ -124,12 +144,12 @@ class SeriesScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <Divider />
+                <Divider/>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <Text style={styles.title_text}></Text>
                 </View>
                 <Modal
-                    animationType="none"
+                    animationType="slide"
                     transparent={true}
                     visible={this.state.modalVisible}
                     onRequestClose={() => {
@@ -140,21 +160,20 @@ class SeriesScreen extends React.Component {
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 2 }}></View>
                         <View style={{ flex: 7 }}></View>
-                        <View style={{ flex: 8, backgroundColor: popupBackgroundColor, borderRadius: 10, margin: 30 }}>
+                        <View style={{ flex: 8, backgroundColor: popupBackgroundColor, padding: 10}}>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 25 }}>{this.state.isAnswerRight ? popupAnswerIsOK : popupAnswerIsKO}</Text>
+                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupAnswer}</Text>
                             </View>
                             <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 22 , margin: 10 }}>La capitale de {this.props.RightAnswer.state} est :</Text>
-                                <Text style={{ fontSize: 50 }}>{this.props.RightAnswer.capital}</Text>
+                                <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>La capitale de {this.props.RightAnswer.state} est</Text>
+                                <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{this.props.RightAnswer.capital}</Text>
                             </View>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <TouchableOpacity style={styles.button} onPress={() => { this.__hideAnswerResults() }}>
-                                    <Text style={styles.button_text}>OK</Text>
+                                <TouchableOpacity style={[styles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideAnswerResults() }}>
+                                    <Text style={{ padding: 10, fontSize: 25, color: 'white' }}>OK</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <View style={{ flex: 1 }}></View>
                     </View>
                 </Modal>
             </View>
@@ -183,50 +202,22 @@ const styles = StyleSheet.create({
     button: {
         height: 50,
         borderRadius: 10,
-        //        borderStyle: 'solid',
-        //        borderWidth: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'dodgerblue',
-        //        display: 'block',
-
-        //        margin: 0 auto;
-        //        width: 50%;
-        //        height: 50px;
         fontFamily: 'Helvetica',
         fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
+        backgroundColor: 'dodgerblue',
         margin: 5
-        //        background: 'linear-gradient(#5FDDFF,#53ADDF)',
-        //        border-top: none;
-        //        border-left: none;
-        //        border-right: none;
-        //        color: white;
-        //        border-radius: 10px;
-        //        box-shadow: 0px 2px 10px grey;
-        //        transition: 150ms ease;
-
-        /*      
-        display: block;
-        margin: 0 auto;
-        width: 50%;
-        height: 50px;
-        font-family: Helvetica;
-        border-bottom: 5px solid steelblue;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        background: linear-gradient(#5FDDFF,#53ADDF);
-        color: white;
-        border-radius: 10px;
-        transition: 150ms ease;
-        font-weight: bold;
-        */
-
-
-
-
+    },
+    progressBar: {
+     position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, height: 20,
+     width: '40%',
+     borderColor: '#000',
+     borderWidth: 4,
+     borderRadius: 5,
+     backgroundColor: "#8BED4F"
     },
     button_text: {
         fontSize: 25,
