@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         GivenAnswersList: state.HandleAnswersList.GivenAnswersList
+//        State_SeriesQRList: state.InitiateQRSeries.State_SeriesQRList
     }
 }
 

@@ -86,10 +86,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        AnswersList: state.AnswersList,
-        RightAnswer: state.RightAnswer,       
-        QuestionsCounter: state.QuestionsCounter  
+        AnswersList: state.InitiateNextQuestion.InitiateAnswersList,
+        RightAnswer: state.InitiateNextQuestion.RightAnswer,       
+        QuestionsCounter: state.InitiateNextQuestion.QuestionsCounter  
 //        State_SeriesQRList: state.State_SeriesQRList
+
     }
 }
 

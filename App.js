@@ -30,6 +30,13 @@ export default class App extends React.Component {
     console.log("dans App : G_SeriesQRList = ", G_SeriesQRList)
 // Merdique jusqu'ici donc
 
+    // Tentons ...
+    /*
+    const action = { type: "INITIATE-SERIES", value: 0 }
+    this.props.dispatch(action)
+    */
+
+
     global.G_SerializeQRList= function G_SerializeQRList(aQRList) {
         s = ""
         for (var i = 0; i < aQRList.length; i++) {
