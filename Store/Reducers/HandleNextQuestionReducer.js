@@ -1,4 +1,4 @@
-//import StatesList from '../../Helpers/statesData'
+import { G_SerializeQRList } from '../../Helpers/GlobalFunctions'
 
 const initialState = {
     AnswersList: [],
@@ -6,13 +6,22 @@ const initialState = {
     QuestionsCounter: 0
 }
 
-function InitiateNextQuestion(state = initialState, action) {
+function HandleNextQuestionReducer(state = initialState, action) {
     let nextState
     let myQuestionsCounter = action.value
     StatesList = global.G_StatesList;
-//    console.log("dans Reducer InitiateNextQuestion action = ", action, " Value = ", myQuestionsCounter)
+//    console.log("dans Reducer HandleNextQuestionReducer action = ", action, " Value = ", myQuestionsCounter)
     switch (action.type) {
-       case 'INITIATE-NEXT-QUESTION' :   
+        case 'RAZ-SERIES' :   
+            console.log("Reducer HandleNextQuestionReducer / RAZ-SERIES")
+            nextState = {
+                ...state,
+                        AnswersList: [],
+                        RightAnswer: {},
+                        QuestionsCounter: 0
+            }
+            return nextState
+        case 'INITIATE-NEXT-QUESTION-OF-THE-SERIES' :   
             let myAnswersList = [];
             let myRightAnswer = G_SeriesQRList[myQuestionsCounter]
             cloneStatesList = [...StatesList];
@@ -32,10 +41,12 @@ function InitiateNextQuestion(state = initialState, action) {
                         QuestionsCounter: myQuestionsCounter
             }
 //            console.log("Dans Reducer Initiate Next Question nextState = ", nextState)
+            console.log("Reducer HandleNextQuestionReducer / INITIATE-NEXT-QUESTION-OF-THE-SERIES AnswersList =", G_SerializeQRList(myAnswersList))
+
             return nextState
         default:
             return state;
     }
 }
 
-export default InitiateNextQuestion
+export default HandleNextQuestionReducer

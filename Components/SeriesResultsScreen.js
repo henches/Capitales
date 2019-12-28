@@ -21,12 +21,6 @@ class SeriesResultsScreen extends React.Component {
     }
     
     
-    constructor() {
-        super();
-        global.RunningSeries = [];
-        global.G_SeriesLength=3;
-    }
- 
     _goStatView = () => {
         console.log("On va à l'écran des stats du joueur")
         this.props.navigation.navigate('GeneralStatisticsScreen', {})   
@@ -46,10 +40,9 @@ class SeriesResultsScreen extends React.Component {
         return nb
     }
 
- //   <Emoji type="coffee" style={{fontSize: 50}} />
 
     render() {
-        console.log("Serie de réponses [1] ", this.props.GivenAnswersList[1])
+        // console.log("Serie de réponses [1] ", this.props.GivenAnswersList[1])
         nbRightAnswers = this._calculateNumberOfRightAnswers(this.props.GivenAnswersList)
         console.log("nbre de bonnes répones / nombre total de réponses ", nbRightAnswers, " / ", this.props.GivenAnswersList.length)
         return(
@@ -120,7 +113,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Helvetica',
         fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
@@ -134,8 +126,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        GivenAnswersList: state.HandleAnswersList.GivenAnswersList
-//        State_SeriesQRList: state.InitiateQRSeries.State_SeriesQRList
+        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList
+//        SeriesQRList: state.InitiateQRSeriesReducer.SeriesQRList
     }
 }
 

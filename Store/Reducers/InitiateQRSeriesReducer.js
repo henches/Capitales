@@ -1,18 +1,17 @@
-//import StatesList from '../../Helpers/statesData'
+import { G_SerializeQRList } from '../../Helpers/GlobalFunctions'
 
 
 
 const initialState = {
-    State_SeriesQRList: []
+    SeriesQRList: []
 }
 
 
-function InitiateQRSeries(state = initialState, action) {
+function InitiateQRSeriesReducer(state = initialState, action) {
     let nextState
     StatesList = global.G_StatesList;
     switch (action.type) {
        case 'INITIATE-SERIES' :   
-            console.log("dans Reducer InitiateQRSeries G_SeriesLength = ", G_SeriesLength )
             let seriesQRList = []
             let cloneStatesList = [...StatesList]
             for (var i = 0; i < G_SeriesLength; i++) {
@@ -21,7 +20,7 @@ function InitiateQRSeries(state = initialState, action) {
                 cloneStatesList.splice(index,1)
             }
             G_SeriesQRList = seriesQRList;
-                console.log('Liste de Questions Reponses = ', seriesQRList)
+                console.log('Reducer InitiateQRSeriesReducer INITIATE-SERIES : Liste de Questions Reponses = ', G_SerializeQRList(seriesQRList))
             nextState = {
                 ...state,
                 SeriesQRList : G_SeriesQRList
@@ -33,4 +32,4 @@ function InitiateQRSeries(state = initialState, action) {
     }
 }
 
-export default InitiateQRSeries
+export default InitiateQRSeriesReducer

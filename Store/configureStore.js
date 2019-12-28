@@ -1,8 +1,9 @@
 import { createStore, combineReducers } from 'redux'
-import InitiateQRSeries from './Reducers/InitiateQRSeriesReducer'
-import InitiateNextQuestion from './Reducers/InitiateNextQuestion'
-import HandleAnswersList from './Reducers/HandleAnswersList'
+import InitiateQRSeriesReducer from './Reducers/InitiateQRSeriesReducer'
+import HandleNextQuestionReducer from './Reducers/HandleNextQuestionReducer'
+import HandleAnswersListReducer from './Reducers/HandleAnswersListReducer'
 import { persistCombineReducers } from 'redux-persist'
+
 
 // je ne suis pas parvenu à faire fonctionner les deux reducers en même temps
 // Le problème était dans le persist. Quand j'ai oté le persist et suis revenu a un seul reducer cela fonctionnait
@@ -18,8 +19,8 @@ const rootPersistConfig = {
     storage: AsyncStorage
 }
 
-export default createStore(persistCombineReducers(rootPersistConfig, { InitiateNextQuestion, InitiateQRSeries }))
+export default createStore(persistCombineReducers(rootPersistConfig, { HandleNextQuestionReducer, InitiateQRSeriesReducerReducerReducer }))
 */
 
-// export default createStore(InitiateNextQuestion)
-export default createStore(combineReducers({ InitiateNextQuestion, HandleAnswersList }))
+// export default createStore(HandleNextQuestionReducer)
+export default createStore(combineReducers({ HandleNextQuestionReducer, HandleAnswersListReducer, InitiateQRSeriesReducer }))

@@ -10,29 +10,29 @@ Appel Reducer :
 
 HomeScreen :
 StateGlobal :
-        AnswersList: state.InitiateNextQuestion.InitiateAnswersList,
-        RightAnswer: state.InitiateNextQuestion.RightAnswer,       
-        QuestionsCounter: state.InitiateNextQuestion.QuestionsCounter  
-//        State_SeriesQRList: state.State_SeriesQRList
+        AnswersList: state.HandleNextQuestionReducer.InitiateAnswersList,
+        RightAnswer: state.HandleNextQuestionReducer.RightAnswer,       
+        QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter  
+//        SeriesQRList: state.SeriesQRList
 Appel Reducers :
-        Avant l'invocation de l'écran SeriesScreen : INITIATE-NEXT-QUESTION (Dans InitiateNextQuestionReducer)
+        Avant l'invocation de l'écran SeriesScreen : INITIATE-NEXT-QUESTION-OF-THE-SERIES (Dans HandleNextQuestionReducerReducer)
 
 SeriesScreen :
 StateGlobal:
-        AnswersList: state.InitiateNextQuestion.AnswersList,
-        RightAnswer: state.InitiateNextQuestion.RightAnswer,
-        QuestionsCounter: state.InitiateNextQuestion.QuestionsCounter,
-        GivenAnswersList: state.HandleAnswersList.GivenAnswersList
+        AnswersList: state.HandleNextQuestionReducer.AnswersList,
+        RightAnswer: state.HandleNextQuestionReducer.RightAnswer,
+        QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
+        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList
 Appel Reducers :
-        A l'appel de la série suivante : INITIATE-NEXT-QUESTION (Dans InitiateNextQuestionReducer)
-        A chaque Hide de Popup qui sanctionne une réponse : ADD-ANSWERED-QUESTION (Dans HandleAnswersList)
+        A l'appel de la série suivante : INITIATE-NEXT-QUESTION-OF-THE-SERIES (Dans HandleNextQuestionReducerReducer)
+        A chaque Hide de Popup qui sanctionne une réponse : ADD-ANSWERED-QUESTION (Dans HandleAnswersListReducer)
 
 
 
 SeriesResultsScreen :
 StateGlobal :
-        GivenAnswersList: state.HandleAnswersList.GivenAnswersList
-        State_SeriesQRList: state.InitiateQRSeries.State_SeriesQRList
+        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList
+        SeriesQRList: state.InitiateQRSeriesReducer.SeriesQRList
 Appel Reducers :
 0
 

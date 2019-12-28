@@ -6,24 +6,27 @@ import Emoji from 'react-native-emoji'
 
 class HomeScreen extends React.Component {
     
-   constructor() {
-        super();   
-    
-    }
-
     _goSeriesScreen = () => {
         console.log("Go Series");
-        const action = { type: "INITIATE-NEXT-QUESTION", value: 0 }
-        this.props.dispatch(action)
+
+        const actionIS = { type: "INITIATE-SERIES", value: 0 }
+        this.props.dispatch(actionIS)
+        
+        const actionRNQL = { type: "RAZ-SERIES", value: 0 }
+        this.props.dispatch(actionRNQL)
+
+        const actionRGAL = { type: "RAZ-GIVEN-ANSWERS-LIST", value: 0 }
+        this.props.dispatch(actionRGAL)
+        
+        const actionINQ = { type: "INITIATE-NEXT-QUESTION-OF-THE-SERIES", value: 0 }
+        this.props.dispatch(actionINQ)
+
         this.props.navigation.navigate('SeriesScreen', {})   
     }
 
     render() {
-        const im = {
-            varsovie : 'pologne',
-            rome: 'italie'
-        }
-        console.log("ZZZZZZZZZZZZZZZZZZZZ   IM  ZZZZZZZZZZZZZZZZZZZZZZZZZ  im[rome]=", im['rome'])
+
+   
      
         return(
           <View style={styles.main_view}>
@@ -69,12 +72,12 @@ const styles = StyleSheet.create({
     play_button: {
         height: 50
     },
+    
     button: {
         height: 50,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Helvetica',
         fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
@@ -86,10 +89,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        AnswersList: state.InitiateNextQuestion.InitiateAnswersList,
-        RightAnswer: state.InitiateNextQuestion.RightAnswer,       
-        QuestionsCounter: state.InitiateNextQuestion.QuestionsCounter  
-//        State_SeriesQRList: state.State_SeriesQRList
+        AnswersList: state.HandleNextQuestionReducer.InitiateAnswersList,
+        RightAnswer: state.HandleNextQuestionReducer.RightAnswer,       
+        QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
+
+        SeriesQRList: state.InitiateQRSeriesReducer.SeriesQRList
 
     }
 }

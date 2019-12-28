@@ -26,23 +26,23 @@ class SeriesScreen extends React.Component {
     }
 
     _goSeriesScreen = () => {
-        console.log("ON LANCE LA QUESTION SUIVANTE OU ON S'ARRETE SI ON ATTEINT LA FIN DE LA Series")
+        // console.log("ON LANCE LA QUESTION SUIVANTE OU ON S'ARRETE SI ON ATTEINT LA FIN DE LA Series")
         if (this.props.QuestionsCounter < G_SeriesLength - 1) {
-            console.log("-> On continue la Series")
-            const action = { type: "INITIATE-NEXT-QUESTION", value: this.props.QuestionsCounter + 1 }
+            // console.log("-> On continue la Series")
+            const action = { type: "INITIATE-NEXT-QUESTION-OF-THE-SERIES", value: this.props.QuestionsCounter + 1 }
             this.props.dispatch(action)
             this.props.navigation.push('SeriesScreen', {})
         }
         else {
-            console.log("> On arrête la série")
+            // console.log("> On arrête la série")
             this.props.navigation.navigate('SeriesResultsScreen', {})
         }
     }
 
     _displayAnswerResults = (myAnswer) => {
-        console.log('*****************************   go Popup ****************************')
-        console.log('go Popup : myAnswer = ', myAnswer)
-        console.log('go Popup : RightAnswer = ', this.props.RightAnswer)
+        // console.log('*****************************   go Popup ****************************')
+        // console.log('go Popup : myAnswer = ', myAnswer)
+        // console.log('go Popup : RightAnswer = ', this.props.RightAnswer)
         isAnswerRight = (myAnswer.capital.localeCompare(this.props.RightAnswer.capital) == 0)
         this.setState({ givenAnswer: myAnswer })
         this.setState({ isAnswerRight: isAnswerRight })
@@ -50,7 +50,7 @@ class SeriesScreen extends React.Component {
     }
 
     __hideAnswerResults = () => {
-        console.log('*****************************   Quit Popup ****************************')
+        // console.log('*****************************   Quit Popup ****************************')
         const action = { type: "ADD-ANSWERED-QUESTION", value: { isAnswerRight: this.state.isAnswerRight, rightAnswer: this.props.RightAnswer, givenAnswer: this.state.givenAnswer } }
         this.props.dispatch(action)
         this.setState({ modalVisible: false })
@@ -59,8 +59,6 @@ class SeriesScreen extends React.Component {
 
 
     render() {
-        console.log("SeriesScreen RENDER")
-        QuestionsCounter: 0
         //        console.log('state', this.state)
         //        console.log('state.givenAnswer', this.state.givenAnswer)
         //        console.log('Render props', this.props)
@@ -86,7 +84,6 @@ class SeriesScreen extends React.Component {
             popupButtonBackgroundColor = COLORS.nokButtonBackgroundColor
             popupButtonBorderBottomColor = COLORS.nokButtonBorderBottomColor
         }
-        console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ   IMAGE URL   ZZZZZZZZZZZZZZZZZZZZZZZZZZZ', imageUrl)
 
 
         return (
@@ -204,7 +201,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontFamily: 'Helvetica',
         fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
@@ -242,10 +238,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        AnswersList: state.InitiateNextQuestion.AnswersList,
-        RightAnswer: state.InitiateNextQuestion.RightAnswer,
-        QuestionsCounter: state.InitiateNextQuestion.QuestionsCounter,
-        GivenAnswersList: state.HandleAnswersList.GivenAnswersList
+        AnswersList: state.HandleNextQuestionReducer.AnswersList,
+        RightAnswer: state.HandleNextQuestionReducer.RightAnswer,
+        QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
+        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList
     }
 }
 
