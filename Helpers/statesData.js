@@ -2,6 +2,7 @@ export default data = [
     {
         state: 'FRANCE',
         capital: 'Paris',
+        zone : 'Europe',
         image: require('../Helpers/capital_images/paris.jpeg')
     },
     {
