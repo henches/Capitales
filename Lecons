@@ -5,6 +5,22 @@ Avec ça : https://stackoverflow.com/questions/55358811/error-unable-to-resolve-
 Mais il reste un pb de version (trop récente ?)
 Pour l'instant, j'ignore quand je lance l'appli.
 
+03/01 : 
+après installation de async storage
+il me donne l'erreur (compil) ASyncStorage=Null
+-> https://github.com/react-native-community/async-storage/issues/158
+-> react-native link @react-native-community/async-storage dans la directory du projet
+-> la commande react-native n'existe pas
+-> j'essaye de la réinstaller
+-> il me dit que la version node est trop ancienne (node ou npm ?)
+-> j'essaye de reinstaller node
+-> ca foire (pb semver notamment)
+-> je fais ça : https://askubuntu.com/questions/1152570/npm-cant-find-module-semver-error-in-ubuntu-19-04
+-> tout s'installe
+-> la version de node et de npm est OK
+-> je refais react-native link @react-native-community/async-storage dans la directory du projet, ca a l'air de fonctionner
+-> quand je veux relancer expo start il me dit que expo n'existe pas *
+
 
 Git :
 git add : ajoute un fihcier dans le repo

@@ -6,7 +6,7 @@ import { createAppContainer } from 'react-navigation'
 import HomeScreen from '../Components/HomeScreen'
 import SeriesScreen from '../Components/SeriesScreen'
 import SeriesResultsScreen from '../Components/SeriesResultsScreen'
-import GeneralStatisticsScreen from '../Components/GeneralStatisticsScreen'
+import GlobalQuestionStatsScreen from '../Components/GlobalQuestionStatsScreen'
 
 const SearchStackNavigator = createStackNavigator({
   HomeScreen: { 
@@ -27,10 +27,10 @@ const SearchStackNavigator = createStackNavigator({
       title: 'Results'
     }
   },
-  GeneralStatisticsScreen: { 
-    screen: GeneralStatisticsScreen,
+  GlobalQuestionStatsScreen: { 
+    screen: GlobalQuestionStatsScreen,
     navigationOptions: {
-      title: 'Stats du joueur'
+      title: 'Stats générales'
     }
   }
 })
