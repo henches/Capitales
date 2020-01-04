@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import COLORS from './Styles'
+import { storeQuestionStats } from '../Helpers/StorageFunctions'
+
 
 
 class GlobalQuestionStatsScreen extends React.Component {
@@ -23,7 +25,11 @@ class GlobalQuestionStatsScreen extends React.Component {
     _testModifList = () => {
         console.log('dans testModifList')
         this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: 0 })
-    }
+        storeQuestionStats(this.props.QuestionStatsList)
+            .then(myList => {
+                console.log('fin de l\'écriture de la liste')
+            })
+}
     
     
     render() {

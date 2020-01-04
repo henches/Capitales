@@ -30,6 +30,11 @@ export default data = [
       continent: 'Amérique du Nord',
    },
    {
+      state: 'Antarctique',
+      capital: '',
+      continent: 'Antarctique',
+   },
+   {
       state: 'Antigua et Barbuda',
       capital: 'Saint-Jean',
       continent: 'Amérique du Nord',
@@ -138,6 +143,11 @@ export default data = [
       state: 'Iles Vierges Britanniques',
       capital: 'Road Town',
       continent: 'Amérique du Nord',
+   },
+   {
+      state: 'Brunéi',
+      capital: 'Bandar Seri Begawan',
+      continent: 'Asie',
    },
    {
       state: 'Bulgarie',
@@ -455,6 +465,11 @@ export default data = [
       continent: 'Asie',
    },
    {
+      state: 'Zone Neutre Irak-Arabie Saoud.',
+      capital: '',
+      continent: 'Asie',
+   },
+   {
       state: 'Irlande',
       capital: 'Dublin',
       continent: 'Europe',
@@ -625,6 +640,11 @@ export default data = [
       continent: 'Amérique du Nord',
    },
    {
+      state: 'Etats fédérés de Micronésie',
+      capital: 'Palikar',
+      continent: 'Océanie',
+   },
+   {
       state: 'Moldavie',
       capital: 'Chisinau',
       continent: 'Europe',
@@ -732,6 +752,11 @@ export default data = [
    {
       state: 'Panama',
       capital: 'Panama',
+      continent: 'Amérique du Nord',
+   },
+   {
+      state: 'Canal de Panama',
+      capital: '',
       continent: 'Amérique du Nord',
    },
    {
@@ -965,6 +990,11 @@ export default data = [
       continent: 'Océanie',
    },
    {
+      state: 'Iles Vierges Américaines',
+      capital: 'Charlotte Amalie',
+      continent: 'Amérique du Nord',
+   },
+   {
       state: 'Ouganda',
       capital: 'Kampala',
       continent: 'Afrique',
@@ -1018,6 +1048,11 @@ export default data = [
       state: 'Vietnam',
       capital: 'Hanoi',
       continent: 'Asie',
+   },
+   {
+      state: 'Sahara Occidental',
+      capital: '',
+      continent: 'Afrique',
    },
    {
       state: 'Samoa Orientale',

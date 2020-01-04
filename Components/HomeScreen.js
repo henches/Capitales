@@ -1,10 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Button, ThemeProvider } from 'react-native-elements'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
 import { AsyncStorage } from 'react-native'
-import { G_SerializeQRList } from '../Helpers/GlobalFunctions'
 
 class HomeScreen extends React.Component {
     
@@ -63,7 +61,6 @@ class HomeScreen extends React.Component {
         
         if (G_InitState)  // Horrible verrue
           this.props.dispatch({ type: "INIT-QUESTION-STATS", value: 0 })
-        
 
         this.props.dispatch({ type: "RAZ-SERIES", value: 0 })
 
