@@ -61,7 +61,9 @@ class HomeScreen extends React.Component {
 
         this.props.dispatch({ type: "INITIATE-SERIES", value: 0 })
         
-        this.props.dispatch({ type: "TEST", value: G_StatesList })
+        if (G_InitState)  // Horrible verrue
+          this.props.dispatch({ type: "INIT-QUESTION-STATS", value: 0 })
+        
 
         this.props.dispatch({ type: "RAZ-SERIES", value: 0 })
 

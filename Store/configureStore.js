@@ -24,5 +24,5 @@ export default createStore(persistCombineReducers(rootPersistConfig, { HandleNex
 */
 
 
-export default createStore(combineReducers({ HandleListOfQuestionStatsReducer,     HandleNextQuestionReducer, 
+export default createStore(combineReducers({ HandleListOfQuestionStatsReducer, HandleNextQuestionReducer, 
     HandleAnswersListReducer, InitiateQRSeriesReducer }))

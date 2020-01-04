@@ -1,3 +1,4 @@
+/*
 import { AsyncStorage } from 'react-native'
 
 storeQuestionStats = async (questionsStatsList) => {
@@ -22,48 +23,49 @@ initQuestionStats = () => {
 getStoredQuestionStats = async () => {
     try {
       console.log("juste avant getStoredQuestionStatsItem")
-      questionsStatsList = await AsyncStorage.getItem('QuestionStats')
-      console.log("juste aprrès getStoredQuestionStatsItem questionsStatsList= ", questionsStatsList)
-      if (questionsStatsList !== null) {
+      list = await AsyncStorage.getItem('QuestionStats')
+      console.log("juste après getStoredQuestionStatsItem list= ", list)
+      if (list !== null) {
         console.log("la key existe bien : Les QuestionsStats existent bien en base")
-        console.log('valeur de QuestionStats', questionsStatList)
+        console.log('valeur de QuestionStats', list)
+        return list
       }
       else {
         console.log("la key n'existe pas, c'est la première fois que l'app est appelée, on initialise la liste des QuestionStats")
-        questionsStatsList = initQuestionStats()
-        storeQuestionStats(questionsStatsList)
+        myList = initQuestionStats()
+//        storeQuestionStats(questionsStatsList)
+        return myList
       }
     } catch (error) {
-      console.log('ERREUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUR')
-      console.log(error)
+      console.log('ERREUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUR error=', error)
     }
-    return questionsStatsList
 }
- 
+*/
+
 const initialState = {
-    ListOfQuestionStats: []
+    QuestionStatsList: []
 }
 
 function HandleListOfQuestionStatsReducer(state = initialState, action) {
     let nextState
     switch (action.type) {
-       case 'TEST' :   
-            console.log("Reducer HandleListOfQuestionStatsReducer TEST")
- //           const myListOfQuestionStats = getStoredQuestionStats()
-            getStoredQuestionStats()
-                .then(data) {
-                    console.log("Data", data)
-                }
-                .catch(error) {
-                    console.log("error", error)
-                }
-            console.log("Reducer HandleListOfQuestionStatsReducer TEST myListOfQuestionStats=", myListOfQuestionStats)
+        case 'INIT-QUESTION-STATS' :   
+            console.log("Reducer HandleListOfQuestionStatsReducer INIT-QUESTION-STATS")
             nextState = {
                 ...state,
-                        ListOfQuestionStats: myListOfQuestionStats
+                    QuestionStatsList: G_InitialQuestionStatsList
             }
             return nextState
-
+        case 'UPDATE-QUESTION-STATS' :   
+            console.log("Reducer HandleListOfQuestionStatsReducer UPDATE-QUESTION-STATS")
+            list = state.QuestionStatsList.slice()
+            console.log('list[2]', list[2])
+            list[2].RightAnswersNb++
+            nextState = {
+                ...state,
+                    QuestionStatsList: list
+            }
+            return nextState
         default:
             return state;
     }

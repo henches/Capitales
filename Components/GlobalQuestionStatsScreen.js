@@ -20,7 +20,12 @@ class GlobalQuestionStatsScreen extends React.Component {
     }
     
 
-
+    _testModifList = () => {
+        console.log('dans testModifList')
+        this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: 0 })
+    }
+    
+    
     render() {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
@@ -30,8 +35,8 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <Divider/>
                     <View style={{ flex: 10 }}>
                         <FlatList
-                            data={this.props.ListOfQuestionStats}
-//                            data={this.props.ListOfQuestionStats.sort((a,b) => a.WrongAnswersNb > b.WrongAnswersNb)}
+//                            data={this.props.QuestionStatsList}
+                            data={this.props.QuestionStatsList.sort((a,b) => a.RightAnswersNb > b.RightAnswersNb)}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: COLORS.okButtonBackgroundColor, 
@@ -47,7 +52,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                     </View>
                     <Divider/>
                     <View style={{ flex: 1 }}>
-                        <Button title='Marge' onPress={() => { this._goHomeScreen() }}/>
+                        <Button title='Marge' onPress={() => { this._testModifList() }}/>
                     </View>               
                 </View>  
         )
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        ListOfQuestionStats: state.HandleListOfQuestionStatsReducer.ListOfQuestionStats,
+        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList
     }
 }
 
