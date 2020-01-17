@@ -12,46 +12,6 @@ class HomeScreen extends React.Component {
         questionsList: [],
       };
   }
-
-  _getAllKeys = async () => {
-    let keys = []
-    try {
-        console.log("juste avant getAllKeys")
-        keys = await AsyncStorage.getAllKeys()
-    } catch(e) {
-      // read key error
-    }
-    console.log("les clés", keys)
-  }
-    
-    
-  _storeData = async () => {
-      try {
-        console.log("juste avant setItem")
-        await AsyncStorage.setItem('Table#1', 'table#1value');
-      } catch (error) {
-        // Error saving data
-      }
-  }
-   
-  _getData = async () => {
-    try {
-      console.log("juste avant getItem")
-      const value = await AsyncStorage.getItem('totoclé');
-      if (value !== null) {
-        console.log('valeur de totoclé', value)
-      }
-    } catch (error) {
-      // Error saving data
-    }
-}
- 
-
-    _essaiAsyncStorage = () => {
-        console.log("Essai Async Storage");
-        this._storeData();
-    }
-
     
     
     _goSeriesScreen = () => {
@@ -68,8 +28,8 @@ class HomeScreen extends React.Component {
         
         this.props.dispatch({ type: "INITIATE-NEXT-QUESTION-OF-THE-SERIES", value: 0 })
 
-//        this.props.navigation.navigate('SeriesScreen', {})   
-        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
+        this.props.navigation.navigate('SeriesScreen', {})   
+//        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
     }
 
     render() {

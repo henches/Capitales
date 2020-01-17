@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import COLORS from './Styles'
-import { storeQuestionStats } from '../Helpers/StorageFunctions'
 
 
 
@@ -16,21 +15,12 @@ class GlobalQuestionStatsScreen extends React.Component {
             type='ionicon'
             name='ios-home'
             color='blue'
-//            onPress={() => navigation.navigate('HomeScreen', {}) }
+  //          onPress={() => navigation.navigate('HomeScreen', {}) }
           />
         )
     }
     
-
-    _testModifList = () => {
-        console.log('dans testModifList')
-        this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: 0 })
-        storeQuestionStats(this.props.QuestionStatsList)
-            .then(myList => {
-                console.log('fin de l\'écriture de la liste')
-            })
-}
-    
+   
     
     render() {
         return(
@@ -42,7 +32,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <View style={{ flex: 10 }}>
                         <FlatList
 //                            data={this.props.QuestionStatsList}
-                            data={this.props.QuestionStatsList.sort((a,b) => a.RightAnswersNb > b.RightAnswersNb)}
+                            data={this.props.QuestionStatsList.sort((a,b) => a.RightAnswersNb < b.RightAnswersNb)}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: COLORS.okButtonBackgroundColor, 
@@ -58,7 +48,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                     </View>
                     <Divider/>
                     <View style={{ flex: 1 }}>
-                        <Button title='Marge' onPress={() => { this._testModifList() }}/>
+                        <Button title='Marge' onPress={() => { this.props.navigation.navigate('HomeScreen', {}) }}/>
                     </View>               
                 </View>  
         )

@@ -15,12 +15,25 @@ function HandleListOfQuestionStatsReducer(state = initialState, action) {
             return nextState
         case 'UPDATE-QUESTION-STATS' :   
             console.log("Reducer HandleListOfQuestionStatsReducer UPDATE-QUESTION-STATS")
-            list = state.QuestionStatsList.slice()
-            console.log('list[2]', list[2])
-            list[2].RightAnswersNb++
+            questionStatsList = state.QuestionStatsList.slice()
+            givenAnswersList = action.value
+            for (let i=0; i < givenAnswersList.length; i++) {
+                // console.log("givenAnswersList[", i, "]=", givenAnswersList[i])
+                askedCapital = givenAnswersList[i].rightAnswer.capital
+                isAnswerRight = givenAnswersList[i].isAnswerRight
+                console.log("askedCapital = ", askedCapital, " isAnswerRight=", isAnswerRight)
+                elt = questionStatsList.find(function(element) { 
+                    return askedCapital.localeCompare(element.QR.capital) == 0
+                  })
+                if (isAnswerRight)
+                    elt.RightAnswersNb++
+                else 
+                    elt.WrongAnswersNb++
+                console.log("après incrément : elt to be updated = ", elt)
+                }
             nextState = {
                 ...state,
-                    QuestionStatsList: list
+                    QuestionStatsList: questionStatsList
             }
             return nextState
         default:

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal, Alert, Image } from 'r
 import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import COLORS from './Styles'
+import { storeQuestionStats } from '../Helpers/StorageFunctions'
 
 
 
@@ -35,6 +36,12 @@ class SeriesScreen extends React.Component {
         }
         else {
             // console.log("> On arrête la série")
+            this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: this.props.GivenAnswersList })   // on met à jour la liste de stats de questions globale
+            console.log("PROOOOOOOOOPS = ", this.props)
+            storeQuestionStats(this.props.QuestionStatsList) // on sauvegarde cette liste sur le storage
+            .then(myList => {
+                console.log('fin de l\'écriture de la liste')
+            })
             this.props.navigation.navigate('SeriesResultsScreen', {})
         }
     }
@@ -241,7 +248,8 @@ const mapStateToProps = state => {
         AnswersList: state.HandleNextQuestionReducer.AnswersList,
         RightAnswer: state.HandleNextQuestionReducer.RightAnswer,
         QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
-        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList
+        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList,
+        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList
     }
 }
 

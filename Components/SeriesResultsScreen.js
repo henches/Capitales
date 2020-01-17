@@ -23,11 +23,11 @@ class SeriesResultsScreen extends React.Component {
     
     _goStatView = () => {
         console.log("On va à l'écran des stats du joueur")
-        this.props.navigation.navigate('GeneralStatisticsScreen', {})   
+       this.props.navigation.navigate('GlobalQuestionStatsScreen', {})   
     }
 
     _goHomeScreen = () => {
-        console.log("On va à l'écran des stats du joueur")
+        console.log("On va à l'écran Home")
         this.props.navigation.navigate('HomeScreen', {})   
     }
 
@@ -70,7 +70,7 @@ class SeriesResultsScreen extends React.Component {
                     </View>
                     <Divider/>
                     <View style={{ flex: 2 }}>
-                        <Button title='Go' onPress={() => { this._goHomeScreen() }}/>
+                        <Button title='Go' onPress={() => { this._goStatView() }}/>
                     </View>               
                 </View>  
         )
@@ -126,8 +126,9 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList
+        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList,
 //        SeriesQRList: state.InitiateQRSeriesReducer.SeriesQRList
+        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList
     }
 }
 

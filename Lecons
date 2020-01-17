@@ -29,3 +29,10 @@ git log : affiche la liste des commit réalisés.
 git checkout SHAducopmmit : revient à ce commit
 git checkout master : revient au dernier commit
 git reset --hard : annule toutes les modifs depuis le dernier commit
+
+
+
+5/01/2020
+POur lancer le simulateur Android.*Il faut d'abotrd lancer Android Studio
+Puis lancer AVD Manager depuis le menu "Configure".
+
