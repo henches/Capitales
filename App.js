@@ -14,7 +14,7 @@ export default class App extends React.Component {
     super()
     global.G_SeriesLength = 2
     global.G_WrongAnswersNumber = 7
-    global.G_SeriesQRList = []
+    global.G_QueResSeriesList = []
     global.G_StatesList = StatesList
     global.G_InitialQuestionStatsList = []
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(

@@ -23,7 +23,7 @@ function HandleListOfQuestionStatsReducer(state = initialState, action) {
                 isAnswerRight = givenAnswersList[i].isAnswerRight
                 console.log("askedCapital = ", askedCapital, " isAnswerRight=", isAnswerRight)
                 elt = questionStatsList.find(function(element) { 
-                    return askedCapital.localeCompare(element.QR.capital) == 0
+                    return askedCapital.localeCompare(element.QueRes.capital) == 0
                   })
                 if (isAnswerRight)
                     elt.RightAnswersNb++

@@ -72,7 +72,7 @@ class SeriesScreen extends React.Component {
 
         const popupAnswerIsOK = "BRAVO !"
         const popupAnswerIsKO = "ATTENTION !"
-        const answerList = this.props.AnswersList
+        const answerList = this.props.PossibleResponsesList
 
         let imageUrl = 'file:../Helpers/capital_images/' + this.props.RightAnswer.capital.toLowerCase() + '.jpeg'
         let progressWidth = ((this.props.QuestionsCounter+1) / G_SeriesLength)*100+'%'
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        AnswersList: state.HandleNextQuestionReducer.AnswersList,
+        PossibleResponsesList: state.HandleNextQuestionReducer.PossibleResponsesList,
         RightAnswer: state.HandleNextQuestionReducer.RightAnswer,
         QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
         GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList,

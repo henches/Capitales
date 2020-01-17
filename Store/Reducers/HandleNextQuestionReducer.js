@@ -1,4 +1,4 @@
-import { G_SerializeQRList } from '../../Helpers/GlobalFunctions'
+import { G_SerializeQueResList } from '../../Helpers/GlobalFunctions'
 
 const initialState = {
     AnswersList: [],
@@ -16,32 +16,32 @@ function HandleNextQuestionReducer(state = initialState, action) {
             console.log("Reducer HandleNextQuestionReducer / RAZ-SERIES")
             nextState = {
                 ...state,
-                        AnswersList: [],
+                        PossibleResponsesList: [],
                         RightAnswer: {},
                         QuestionsCounter: 0
             }
             return nextState
         case 'INITIATE-NEXT-QUESTION-OF-THE-SERIES' :   
-            let myAnswersList = [];
-            let myRightAnswer = G_SeriesQRList[myQuestionsCounter]
+            let myPossibleResponsesList = [];
+            let myRightAnswer = G_QueResSeriesList[myQuestionsCounter]
             cloneStatesList = [...StatesList];
             cloneStatesList.splice(cloneStatesList.indexOf(myRightAnswer),1); // on enlève la bonne question-réponse de la liste clone des questions-reponses
             for (var i = 0; i < G_WrongAnswersNumber; i++) {
                 index = Math.floor(Math.random()*cloneStatesList.length); // on choisit une question-réponse au hasard dans la liste des questions répon
-                myAnswersList.push(cloneStatesList[index]) // on ajoute la QR dans la liste des réponses qu'on va proposer
-                cloneStatesList.splice(index,1) // on supprime la QR de la liste clone
+                myPossibleResponsesList.push(cloneStatesList[index]) // on ajoute la QueRes dans la liste des réponses qu'on va proposer
+                cloneStatesList.splice(index,1) // on supprime la QueRes de la liste clone
             }
-            index = Math.floor(Math.random()*myAnswersList.length) // on choisit l'endroit de la liste où l'on va insérer la bonne réponse
-            myAnswersList.splice(index, 0, myRightAnswer) //on insère la bonne réponse dans la liste
+            index = Math.floor(Math.random()*myPossibleResponsesList.length) // on choisit l'endroit de la liste où l'on va insérer la bonne réponse
+            myPossibleResponsesList.splice(index, 0, myRightAnswer) //on insère la bonne réponse dans la liste
 
             nextState = {
                 ...state,
-                        AnswersList: myAnswersList,
+                        PossibleResponsesList: myPossibleResponsesList,
                         RightAnswer: myRightAnswer,
                         QuestionsCounter: myQuestionsCounter
             }
 //            console.log("Dans Reducer Initiate Next Question nextState = ", nextState)
-            console.log("Reducer HandleNextQuestionReducer / INITIATE-NEXT-QUESTION-OF-THE-SERIES AnswersList =", G_SerializeQRList(myAnswersList))
+            console.log("Reducer HandleNextQuestionReducer / INITIATE-NEXT-QUESTION-OF-THE-SERIES PossibleResponsesList =", G_SerializeQueResList(myPossibleResponsesList))
 
             return nextState
         default:

@@ -44,7 +44,7 @@ class SeriesResultsScreen extends React.Component {
     render() {
         // console.log("Serie de réponses [1] ", this.props.GivenAnswersList[1])
         nbRightAnswers = this._calculateNumberOfRightAnswers(this.props.GivenAnswersList)
-        console.log("nbre de bonnes répones / nombre total de réponses ", nbRightAnswers, " / ", this.props.GivenAnswersList.length)
+        console.log("nbre de bonnes réponses / nombre total de réponses ", nbRightAnswers, " / ", this.props.GivenAnswersList.length)
         return(
                 <View style={{ flex: 3, backgroundColor: COLORS.generalBackgroundColor }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList,
-//        SeriesQRList: state.InitiateQRSeriesReducer.SeriesQRList
+//        QueResSeriesList: state.InitiateQueResSeriesReducer.QueResSeriesList
         QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList
     }
 }

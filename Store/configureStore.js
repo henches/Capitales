@@ -1,5 +1,5 @@
 import { createStore, combineReducers } from 'redux'
-import InitiateQRSeriesReducer from './Reducers/InitiateQRSeriesReducer'
+import InitiateQueResSeriesReducer from './Reducers/InitiateQueResSeriesReducer'
 import HandleNextQuestionReducer from './Reducers/HandleNextQuestionReducer'
 import HandleAnswersListReducer from './Reducers/HandleAnswersListReducer'
 import HandleListOfQuestionStatsReducer from './Reducers/HandleListOfQuestionStatsReducer'
@@ -20,9 +20,9 @@ const rootPersistConfig = {
     storage: AsyncStorage
 }
 
-export default createStore(persistCombineReducers(rootPersistConfig, { HandleNextQuestionReducer, InitiateQRSeriesReducerReducerReducer }))
+export default createStore(persistCombineReducers(rootPersistConfig, { HandleNextQuestionReducer, InitiateQueResSeriesReducerReducerReducer }))
 */
 
 
 export default createStore(combineReducers({ HandleListOfQuestionStatsReducer, HandleNextQuestionReducer, 
-    HandleAnswersListReducer, InitiateQRSeriesReducer }))
+    HandleAnswersListReducer, InitiateQueResSeriesReducer }))

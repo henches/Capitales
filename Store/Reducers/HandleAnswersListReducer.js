@@ -1,7 +1,7 @@
 import { G_SerializeGivenAnswerList } from '../../Helpers/GlobalFunctions'
 
 const initialState = {
-    GivenAnswersList: []
+    GivenPossibleResponsesList: []
 }
 
 function HandleAnswersListReducer(state = initialState, action) {

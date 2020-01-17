@@ -38,7 +38,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                                                 backgroundColor: COLORS.okButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.id} </Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.QR.capital}</Text>
+                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.QueRes.capital}</Text>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.RightAnswersNb}</Text>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.WrongAnswersNb}</Text>
                                 </View>

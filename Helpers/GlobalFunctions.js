@@ -1,7 +1,7 @@
-export function G_SerializeQRList(aQRList) {
+export function G_SerializeQueResList(aQueResList) {
     s = ""
-    for (var i = 0; i < aQRList.length; i++) {
-        s = s + " " + aQRList[i].state;
+    for (var i = 0; i < aQueResList.length; i++) {
+        s = s + " " + aQueResList[i].state;
     }
     return s
 }

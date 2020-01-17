@@ -107,11 +107,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        AnswersList: state.HandleNextQuestionReducer.InitiateAnswersList,
+        PossibleResponsesList: state.HandleNextQuestionReducer.InitiatePossibleResponsesList,
         RightAnswer: state.HandleNextQuestionReducer.RightAnswer,       
         QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
 
-        SeriesQRList: state.InitiateQRSeriesReducer.SeriesQRList
+        QueResSeriesList: state.InitiateQueResSeriesReducer.QueResSeriesList
 
     }
 }
