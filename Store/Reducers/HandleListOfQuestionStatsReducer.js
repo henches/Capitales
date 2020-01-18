@@ -13,23 +13,24 @@ function HandleListOfQuestionStatsReducer(state = initialState, action) {
                     QuestionStatsList: G_InitialQuestionStatsList
             }
             return nextState
-        case 'UPDATE-QUESTION-STATS' :   
+        case 'UPDATE-QUESTION-STATS' :   // value : givenResponseList
             console.log("Reducer HandleListOfQuestionStatsReducer UPDATE-QUESTION-STATS")
+//            console.log("Reducer HandleListOfQuestionStatsReducer UPDATE-QUESTION-STATS value = ", action.value)
             questionStatsList = state.QuestionStatsList.slice()
-            givenAnswersList = action.value
-            for (let i=0; i < givenAnswersList.length; i++) {
-                // console.log("givenAnswersList[", i, "]=", givenAnswersList[i])
-                askedCapital = givenAnswersList[i].rightAnswer.capital
-                isAnswerRight = givenAnswersList[i].isAnswerRight
-                console.log("askedCapital = ", askedCapital, " isAnswerRight=", isAnswerRight)
+            givenResponsesList = action.value
+            for (let i=0; i < givenResponsesList.length; i++) {
+                // console.log("givenResponsesList[", i, "]=", givenResponsesList[i])
+                askedCapital = givenResponsesList[i].capital
+                isResponseRight = givenResponsesList[i].isResponseRight
+                console.log("askedCapital = ", askedCapital, " isResponseRight=", isResponseRight)
                 elt = questionStatsList.find(function(element) { 
-                    return askedCapital.localeCompare(element.QueRes.capital) == 0
+                    return askedCapital.localeCompare(element.Queres.capital) == 0
                   })
-                if (isAnswerRight)
-                    elt.RightAnswersNb++
+                if (isResponseRight)
+                    elt.RightResponsesNb++
                 else 
-                    elt.WrongAnswersNb++
-                console.log("après incrément : elt to be updated = ", elt)
+                    elt.WrongResponsesNb++
+//                console.log("après incrément : elt to be updated = ", elt)
                 }
             nextState = {
                 ...state,

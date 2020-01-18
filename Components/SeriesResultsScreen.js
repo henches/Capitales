@@ -31,10 +31,10 @@ class SeriesResultsScreen extends React.Component {
         this.props.navigation.navigate('HomeScreen', {})   
     }
 
-    _calculateNumberOfRightAnswers = (givenAnswersList) => {
+    _calculateNumberOfRightResponses = (queresSeries) => {
         let nb = 0
-        for (var i=0; i < givenAnswersList.length; i++) {
-            if (givenAnswersList[i].isAnswerRight)
+        for (var i=0; i < queresSeries.length; i++) {
+            if (queresSeries[i].isResponseRight)
                 nb++
         }
         return nb
@@ -42,26 +42,26 @@ class SeriesResultsScreen extends React.Component {
 
 
     render() {
-        // console.log("Serie de réponses [1] ", this.props.GivenAnswersList[1])
-        nbRightAnswers = this._calculateNumberOfRightAnswers(this.props.GivenAnswersList)
-        console.log("nbre de bonnes réponses / nombre total de réponses ", nbRightAnswers, " / ", this.props.GivenAnswersList.length)
+        // console.log("Serie de réponses [1] ", this.props.GivenResponsesList[1])
+        nbRightResponses = this._calculateNumberOfRightResponses(this.props.QueresSeries)
+        console.log("nbre de bonnes réponses / nombre total de réponses ", nbRightResponses, " / ", this.props.QueresSeries.length)
         return(
                 <View style={{ flex: 3, backgroundColor: COLORS.generalBackgroundColor }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 25 }}>BRAVO !!</Text>
-                        <Text style={{ fontSize: 20}}>{nbRightAnswers} bonnes réponses</Text>
+                        <Text style={{ fontSize: 20}}>{nbRightResponses} bonnes réponses</Text>
                     </View>
                     <Divider/>
                     <View style={{ flex: 5 }}>
                         <FlatList
-                            data={this.props.GivenAnswersList}
+                            data={this.props.QueresSeries}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
-                                                backgroundColor: item.isAnswerRight ? COLORS.okButtonBackgroundColor : COLORS.nokButtonBackgroundColor, 
+                                                backgroundColor: item.isResponseRight ? COLORS.okButtonBackgroundColor : COLORS.nokButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
-                                    <Emoji name={item.isAnswerRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: 30 }}/>
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}> {item.rightAnswer.state} </Text>
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}> {item.givenAnswer.capital}
+                                    <Emoji name={item.isResponseRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: 30 }}/>
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}> {item.state} </Text>
+                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}> {item.givenResponse}
                                     </Text>
                                 </View>
                             )}
@@ -126,9 +126,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList,
-//        QueResSeriesList: state.InitiateQueResSeriesReducer.QueResSeriesList
-        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList
+        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList,
+        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
     }
 }
 

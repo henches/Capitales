@@ -32,15 +32,15 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <View style={{ flex: 10 }}>
                         <FlatList
 //                            data={this.props.QuestionStatsList}
-                            data={this.props.QuestionStatsList.sort((a,b) => a.RightAnswersNb < b.RightAnswersNb)}
+                            data={this.props.QuestionStatsList.sort((a,b) => a.RightResponsesNb < b.RightResponsesNb)}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: COLORS.okButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.id} </Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.QueRes.capital}</Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.RightAnswersNb}</Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.WrongAnswersNb}</Text>
+                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.Queres.capital}</Text>
+                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.RightResponsesNb}</Text>
+                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.WrongResponsesNb}</Text>
                                 </View>
                             )}
                             keyExtractor={item => item.id}

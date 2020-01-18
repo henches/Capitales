@@ -9,17 +9,17 @@
     Date et Heure de la réponse
     Un tableau de QuestionResults:
         Question
-        GivenAnswer
-        RightAnswer
-        iSAnswerRight: booleen
+        GivenResponse
+        RightResponse
+        iSResponseRight: booleen
         // Date et heure de la reponse.
 3. Données persistantes du joueur :
 3.1 Log
     Liste de QuestionResults
 3.2 PerQuestionStats :
-    TotalAnswersNumber
-    BadAnswersNumber
-    RightAnswersNumber
+    TotalResponsesNumber
+    BadResponsesNumber
+    RightResponsesNumber
     IsQuestionKnown: booleen
 3.3 Synthèse :
     KnownQuestionsNumber

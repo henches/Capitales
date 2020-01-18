@@ -10,6 +10,15 @@ import { storeQuestionStats } from '../Helpers/StorageFunctions'
 
 
 class SeriesScreen extends React.Component {
+
+    constructor() {
+        console.log('*************************************************** Constructor Series Screen *************************************************************************************')
+        super()
+     }
+    
+    static popupResponseIsOK = "BRAVO !"
+    static popupResponseIsKO = "ATTENTION !"
+
     static navigationOptions = {
         headerTitle: "CAPITALES",
         headerStyle: {
@@ -22,22 +31,21 @@ class SeriesScreen extends React.Component {
 
     state = {
         modalVisible: false,
-        givenAnswer: {},
-        isAnswerRight: true
+        givenResponse: "",
+        isResponseRight: true
     }
 
     _goSeriesScreen = () => {
+
         // console.log("ON LANCE LA QUESTION SUIVANTE OU ON S'ARRETE SI ON ATTEINT LA FIN DE LA Series")
-        if (this.props.QuestionsCounter < G_SeriesLength - 1) {
+        if (this.props.navigation.state.params.indexInSeries < G_SeriesLength - 1) {
             // console.log("-> On continue la Series")
-            const action = { type: "INITIATE-NEXT-QUESTION-OF-THE-SERIES", value: this.props.QuestionsCounter + 1 }
-            this.props.dispatch(action)
-            this.props.navigation.push('SeriesScreen', {})
+            this.props.navigation.push('SeriesScreen', { indexInSeries: this.props.navigation.state.params.indexInSeries+1 })
         }
         else {
             // console.log("> On arrête la série")
-            this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: this.props.GivenAnswersList })   // on met à jour la liste de stats de questions globale
-            console.log("PROOOOOOOOOPS = ", this.props)
+            this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: this.props.QueresSeries })   // on met à jour la liste de stats de questions globale
+//            console.log("PROOOOOOOOOPS = ", this.props)
             storeQuestionStats(this.props.QuestionStatsList) // on sauvegarde cette liste sur le storage
             .then(myList => {
                 console.log('fin de l\'écriture de la liste')
@@ -46,46 +54,45 @@ class SeriesScreen extends React.Component {
         }
     }
 
-    _displayAnswerResults = (myAnswer) => {
+    _displayResponseResults = (qr, myResponse) => {
         // console.log('*****************************   go Popup ****************************')
-        // console.log('go Popup : myAnswer = ', myAnswer)
-        // console.log('go Popup : RightAnswer = ', this.props.RightAnswer)
-        isAnswerRight = (myAnswer.capital.localeCompare(this.props.RightAnswer.capital) == 0)
-        this.setState({ givenAnswer: myAnswer })
-        this.setState({ isAnswerRight: isAnswerRight })
+        // console.log('go Popup : myResponse = ', myResponse)
+        this.setState({ givenResponse: myResponse.capital })
+        isResponseRight = (myResponse.capital.localeCompare(qr.capital) == 0)
+        this.setState({ isResponseRight: isResponseRight })
         this.setState({ modalVisible: true })
     }
 
-    __hideAnswerResults = () => {
+    __hideResponseResults = () => {
         // console.log('*****************************   Quit Popup ****************************')
-        const action = { type: "ADD-ANSWERED-QUESTION", value: { isAnswerRight: this.state.isAnswerRight, rightAnswer: this.props.RightAnswer, givenAnswer: this.state.givenAnswer } }
+        const action = { type: 'QUERES-SERIES-ADD_ANSWER', value: { index : this.props.navigation.state.params.indexInSeries, isResponseRight: this.state.isResponseRight, givenResponse: this.state.givenResponse } }
         this.props.dispatch(action)
         this.setState({ modalVisible: false })
         this._goSeriesScreen();
     }
 
-
     render() {
-        //        console.log('state', this.state)
-        //        console.log('state.givenAnswer', this.state.givenAnswer)
-        //        console.log('Render props', this.props)
+        // console.log('SeriesScreen : state', this.state)
+        // console.log('SeriesScreen : Render props', this.props)
+        console.log('SeriesScreen : Render ')
+        // console.log('SeriesScreen : Render : this.props.navigation.state.params', this.props.navigation.state.params)
 
-        const popupAnswerIsOK = "BRAVO !"
-        const popupAnswerIsKO = "ATTENTION !"
-        const answerList = this.props.PossibleResponsesList
+        indexInSeries = this.props.navigation.state.params.indexInSeries
+        queres = this.props.QueresSeries[indexInSeries]
+        const responses = queres.proposedResponses
 
-        let imageUrl = 'file:../Helpers/capital_images/' + this.props.RightAnswer.capital.toLowerCase() + '.jpeg'
-        let progressWidth = ((this.props.QuestionsCounter+1) / G_SeriesLength)*100+'%'
-        popupAnswer = ''
-        if (this.state.isAnswerRight) {
-            popupAnswer = popupAnswerIsOK
+        // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
+        let progressWidth = ((indexInSeries+1) / G_SeriesLength)*100+'%'
+        popupResponse = ''
+        if (this.state.isResponseRight) {
+            popupResponse = this.popupResponseIsOK
             popupBackgroundColor = COLORS.okBackgroundColor
             popupTextColor = COLORS.okTextColor
             popupButtonBackgroundColor = COLORS.okButtonBackgroundColor
             popupButtonBorderBottomColor = COLORS.okButtonBorderBottomColor
         }
         else {
-            popupAnswer = popupAnswerIsKO
+            popupResponse = this.popupResponseIsKO
             popupBackgroundColor = COLORS.nokBackgroundColor
             popupTextColor = COLORS.nokTextColor
             popupButtonBackgroundColor = COLORS.nokButtonBackgroundColor
@@ -103,48 +110,45 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
-                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {this.props.RightAnswer.state} </Text>
+                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {queres.state} </Text>
                 </View>
                 <Divider/>
-                <View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image style={{ width: 220, height: 220 }} source={this.props.RightAnswer.image} />
-                </View>
                 <Divider/>
                 <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[0]) }}>
-                            <Text style={styles.button_text}> {answerList[0].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
+                            <Text style={styles.button_text}> {responses[0].capital} </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[1]) }}>
-                            <Text style={styles.button_text}> {answerList[1].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
+                            <Text style={styles.button_text}> {responses[1].capital} </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[2]) }}>
-                            <Text style={styles.button_text}> {answerList[2].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
+                            <Text style={styles.button_text}> {responses[2].capital} </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[3]) }}>
-                            <Text style={styles.button_text}> {answerList[3].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
+                            <Text style={styles.button_text}> {responses[3].capital} </Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[4]) }}>
-                            <Text style={styles.button_text}> {answerList[4].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[4]) }}>
+                            <Text style={styles.button_text}> {responses[4].capital} </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[5]) }}>
-                            <Text style={styles.button_text}> {answerList[5].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[5]) }}>
+                            <Text style={styles.button_text}> {responses[5].capital} </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[6]) }}>
-                            <Text style={styles.button_text}> {answerList[6].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[6]) }}>
+                            <Text style={styles.button_text}> {responses[6].capital} </Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayAnswerResults(answerList[7]) }}>
-                            <Text style={styles.button_text}> {answerList[7].capital} </Text>
+                            onPress={() => { this._displayResponseResults(queres, responses[7]) }}>
+                            <Text style={styles.button_text}> {responses[7].capital} </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -166,14 +170,14 @@ class SeriesScreen extends React.Component {
                         <View style={{ flex: 7 }}></View>
                         <View style={{ flex: 8, backgroundColor: popupBackgroundColor, padding: 10}}>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupAnswer}</Text>
+                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupResponse}</Text>
                             </View>
                             <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>La capitale de {this.props.RightAnswer.state} est</Text>
-                                <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{this.props.RightAnswer.capital}</Text>
+                                <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>La capitale de {queres.state} est</Text>
+                                <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
                             </View>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <TouchableOpacity style={[styles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideAnswerResults() }}>
+                                <TouchableOpacity style={[styles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideResponseResults() }}>
                                     <Text style={{ padding: 10, fontSize: 25, color: 'white' }}>OK</Text>
                                 </TouchableOpacity>
                             </View>
@@ -185,6 +189,11 @@ class SeriesScreen extends React.Component {
     }
 }
 
+/*
+<View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
+<Image style={{ width: 220, height: 220 }} source={this.props.RightResponse.image} />
+</View>
+*/
 
 const styles = StyleSheet.create({
     main_view: {
@@ -245,11 +254,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        PossibleResponsesList: state.HandleNextQuestionReducer.PossibleResponsesList,
-        RightAnswer: state.HandleNextQuestionReducer.RightAnswer,
-        QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
-        GivenAnswersList: state.HandleAnswersListReducer.GivenAnswersList,
-        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList
+        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList,
+        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
     }
 }
 

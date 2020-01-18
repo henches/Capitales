@@ -1,23 +1,23 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKey = 'QuestionStats2'
+const listKey = 'QuestionStats6'
 
 function initQuestionStats() {
     console.log("InitQuestionStats")
     myListOfQuestionStats = []
     for (let i = 0; i < G_StatesList.length; i++) {
-        myListOfQuestionStats.push({ id : i.toString(), QueRes: G_StatesList[i], RightAnswersNb: 0, WrongAnswersNb: 0 })
+        myListOfQuestionStats.push({ id : i.toString(), Queres: G_StatesList[i], RightResponsesNb: 0, WrongResponsesNb: 0 })
     }
     return myListOfQuestionStats
 }
 
 export async function storeQuestionStats (questionsStatsList) {
-    console.log("storeQuestionStats  1 questionsStatsList=", questionsStatsList)
+//    console.log("storeQuestionStats  1 questionsStatsList=", questionsStatsList)
     try {
         // console.log("storeQuestionStats 2, questionStatsList=", questionsStatsList)
         strQuestionsStatsList = JSON.stringify(questionsStatsList)
-        console.log("storeQuestionStats 2, questionStatsList=", strQuestionsStatsList)
+//        console.log("storeQuestionStats 2, questionStatsList=", strQuestionsStatsList)
         await AsyncStorage.setItem(listKey, strQuestionsStatsList)
         //await AsyncStorage.setItem('Table#1', 'table#1value');
         console.log("storeQuestionStats 3")

@@ -17,18 +17,14 @@ class HomeScreen extends React.Component {
     _goSeriesScreen = () => {
         console.log("Go Series");
 
-        this.props.dispatch({ type: "INITIATE-SERIES", value: 0 })
+        this.props.dispatch({ type: "QUERES_SERIES-INITIATE", value: 0 })
         
-        if (G_InitState)  // Horrible verrue
+        if (G_InitState) {  // Horrible verrue
           this.props.dispatch({ type: "INIT-QUESTION-STATS", value: 0 })
+          G_InitState = false
+        }
 
-        this.props.dispatch({ type: "RAZ-SERIES", value: 0 })
-
-        this.props.dispatch({ type: "RAZ-GIVEN-ANSWERS-LIST", value: 0 })
-        
-        this.props.dispatch({ type: "INITIATE-NEXT-QUESTION-OF-THE-SERIES", value: 0 })
-
-        this.props.navigation.navigate('SeriesScreen', {})   
+        this.props.navigation.navigate('SeriesScreen', { indexInSeries: 0 } )   
 //        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
     }
 
@@ -107,12 +103,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        PossibleResponsesList: state.HandleNextQuestionReducer.InitiatePossibleResponsesList,
-        RightAnswer: state.HandleNextQuestionReducer.RightAnswer,       
-        QuestionsCounter: state.HandleNextQuestionReducer.QuestionsCounter,
-
-        QueResSeriesList: state.InitiateQueResSeriesReducer.QueResSeriesList
-
+        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
     }
 }
 

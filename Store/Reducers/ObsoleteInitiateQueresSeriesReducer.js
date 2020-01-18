@@ -1,13 +1,13 @@
-import { G_SerializeQueResList } from '../../Helpers/GlobalFunctions'
+import { G_SerializeQueresList } from '../../Helpers/GlobalFunctions'
 
 
 
 const initialState = {
-    QueResSeriesList: []
+    QueresSeriesList: []
 }
 
 
-function InitiateQueResSeriesReducer(state = initialState, action) {
+function InitiateQueresSeriesReducer(state = initialState, action) {
     let nextState
     StatesList = global.G_StatesList;
     switch (action.type) {
@@ -19,11 +19,11 @@ function InitiateQueResSeriesReducer(state = initialState, action) {
                 queResSeriesList.push(cloneStatesList[index])
                 cloneStatesList.splice(index,1)
             }
-            G_QueResSeriesList = queResSeriesList;
-                console.log('Reducer InitiateQueResSeriesReducer INITIATE-SERIES : Liste de Questions Reponses = ', G_SerializeQueResList(queResSeriesList))
+            G_QueresSeriesList = queResSeriesList;
+                console.log('Reducer InitiateQueresSeriesReducer INITIATE-SERIES : Liste de Questions Reponses = ', G_SerializeQueresList(queResSeriesList))
             nextState = {
                 ...state,
-                QueResSeriesList : G_QueResSeriesList
+                QueresSeriesList : G_QueresSeriesList
            
             }
             return nextState || state
@@ -32,4 +32,4 @@ function InitiateQueResSeriesReducer(state = initialState, action) {
     }
 }
 
-export default InitiateQueResSeriesReducer
+export default InitiateQueresSeriesReducer
