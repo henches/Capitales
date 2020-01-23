@@ -2,7 +2,8 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
-import { AsyncStorage } from 'react-native'
+import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
+
 
 class HomeScreen extends React.Component {
     
@@ -16,19 +17,29 @@ class HomeScreen extends React.Component {
     
     _goSeriesScreen = () => {
         console.log("Go Series");
-
-        this.props.dispatch({ type: "QUERES_SERIES-INITIATE", value: 0 })
         
-        if (G_InitState) {  // Horrible verrue
-          this.props.dispatch({ type: "INIT-QUESTION-STATS", value: 0 })
-          G_InitState = false
-        }
+        this.props.dispatch({ type: "QUERES_SERIES-INITIATE", value: this.props.QuestionStatsList })
 
         this.props.navigation.navigate('SeriesScreen', { indexInSeries: 0 } )   
 //        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
     }
 
     render() {
+
+        if (G_InitState) {  // Horrible verrues
+            getStoredQuestionStats()  // Récupère la liste des Questions Stats
+            .then(myList => {
+              G_InitialQuestionStatsList = myList
+              this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
+            })
+            G_InitState = false
+        }
+
+//        console.log("Go Séries : Qthis.props = ", this.props)
+  //      console.log("Go Séries : QuestionStats List = ", this.props.QuestionStatsList)
+
+
+  
         return(
           <View style={styles.main_view}>
             <View style={styles.title_view}>
@@ -103,6 +114,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
+        QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
         QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
     }
 }

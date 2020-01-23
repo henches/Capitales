@@ -1,7 +1,4 @@
-Empêcher le back sur les écrans jeu
-Arrêter la série pour envoyer sur l'écran de fin de série
-faire un popup qui indique si la réponse est OK ou pas
-Choisir un pays au hasard
-proposer plusieurs payes en réponsefaure du grapĥisme
-vérifier la bonne déclaration du state dans jeu.
+- Empêcher le back sur les écrans jeu
+- QUERES_STATS-INITIATE : me parait pas appelé à bon escient -> on ne devrat pas revenir à la liste du début à chaque debut de série. Ne devrait être appelé qu'une seule fois à l'init.
+- vérifier la bonne déclaration du state dans jeu.
 

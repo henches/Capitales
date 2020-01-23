@@ -25,7 +25,7 @@ _createProposedResponsesList = (capital) => {
     indexOfRightQueres = this._findIndexInStateList(cloneStatesList, capital)
     rightQueres = cloneStatesList[indexOfRightQueres]
     cloneStatesList.splice(indexOfRightQueres,1); // on enlève la bonne question-réponse de la liste clone des questions-reponses
-    for (var i = 0; i < G_WrongResponsesNumber; i++) {
+    for (var i = 0; i < G_Config.Level0.ProposedResponsesNumber-1; i++) {
         randomIndex = Math.floor(Math.random()*cloneStatesList.length); // on choisit une question-réponse au hasard dans la liste des questions répon
         myPossibleResponsesList.push(cloneStatesList[randomIndex]) // on ajoute la Queres dans la liste des réponses qu'on va proposer
         cloneStatesList.splice(randomIndex,1) // on supprime la Queres de la liste clone
@@ -41,20 +41,40 @@ _createProposedResponsesList = (capital) => {
 function HandleQueresSeriesReducer(state = initialState, action) {
     let nextState
     switch (action.type) {
-        case 'QUERES_SERIES-INITIATE' :   // value = null
-            console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
+        case 'QUERES_SERIES-INITIATE' :   // value = queresStats
+            // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE value = ', action.value)
             let myQueresSeries = []
-            let cloneStatesList = [...G_StatesList]
-            for (var i = 0; i < G_SeriesLength; i++) {
-                index = Math.floor(Math.random()*cloneStatesList.length);
-                sl = cloneStatesList[index]
-                proposedResponsesList = this._createProposedResponsesList(sl.capital)
-                myQueresSeries.push( { id: myQueresSeries.length.toString(), state: sl.state, capital: sl.capital, image: sl.image, 
-                    proposedResponses: proposedResponsesList, isResponseRight: false, givenResponse: "" } )
-                cloneStatesList.splice(index,1)
+            
+            let cloneQueresStats = [...action.value] // Recopie de queresSTats
+            for (var i = 0; i < G_Config.SeriesLength; i++) {
+                // Cherche une question au hasard parmi toutes les queres possibles originelles.
+                index = Math.floor(Math.random()*cloneQueresStats.length);
+                sl = cloneQueresStats[index]
+                // en function du niveau de la queres : propose les listes de réponses adaptées
+                if (sl.level == 0) {
+                    proposedResponsesList = this._createProposedResponsesList(G_Config.level0.ProposedResponsesNumber, sl.Queres.capital)
+                }
+                else if (sl.level == 1) {
+                    proposedResponsesList = this._createProposedResponsesList(G_Config.level1.ProposedResponsesNumber, sl.Queres.capital)
+                }
+                else if (sl.level == 2) {
+                    proposedResponsesList = []
+                }
+                else if (sl.level == 3) {
+                    proposedResponsesList = []
+                }
+                // cherche les n réponses proposées au hasard
+                proposedResponsesList = this._createProposedResponsesList(sl.Queres.capital)
+                // Ajoute le test (question + les réponses proposées) à la série
+                myQueresSeries.push( { id: myQueresSeries.length.toString(), state: sl.Queres.state, capital: sl.Queres.capital, image: sl.Queres.image,
+                    level : sl.level, rightResponsesNb: sl.rightResponsesNb, proposedResponses: proposedResponsesList, isResponseRight: false, givenResponse: "" } )
+                // Supprime la question choisie au hasard pour qu'on le sélectionne plus par la suite
+                cloneQueresStats.splice(index,1)
             }
             // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE myQueresSeries = ', myQueresSeries)
             console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
+            console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE myQueresSeries', myQueresSeries)
+            
             nextState = {
                 ...state,
                     QueresSeries : myQueresSeries

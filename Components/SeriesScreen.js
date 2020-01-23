@@ -38,13 +38,13 @@ class SeriesScreen extends React.Component {
     _goSeriesScreen = () => {
 
         // console.log("ON LANCE LA QUESTION SUIVANTE OU ON S'ARRETE SI ON ATTEINT LA FIN DE LA Series")
-        if (this.props.navigation.state.params.indexInSeries < G_SeriesLength - 1) {
+        if (this.props.navigation.state.params.indexInSeries < G_Config.SeriesLength - 1) {
             // console.log("-> On continue la Series")
             this.props.navigation.push('SeriesScreen', { indexInSeries: this.props.navigation.state.params.indexInSeries+1 })
         }
         else {
             // console.log("> On arrête la série")
-            this.props.dispatch({ type: "UPDATE-QUESTION-STATS", value: this.props.QueresSeries })   // on met à jour la liste de stats de questions globale
+            this.props.dispatch({ type: "QUERES_STATS-UPDATE", value: this.props.QueresSeries })   // on met à jour la liste de stats de questions globale
 //            console.log("PROOOOOOOOOPS = ", this.props)
             storeQuestionStats(this.props.QuestionStatsList) // on sauvegarde cette liste sur le storage
             .then(myList => {
@@ -76,13 +76,17 @@ class SeriesScreen extends React.Component {
         // console.log('SeriesScreen : Render props', this.props)
         console.log('SeriesScreen : Render ')
         // console.log('SeriesScreen : Render : this.props.navigation.state.params', this.props.navigation.state.params)
+        // 
+        console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+        // console.log("this.props.QuestionStatsList", this.props.QuestionStatsList)
+
 
         indexInSeries = this.props.navigation.state.params.indexInSeries
         queres = this.props.QueresSeries[indexInSeries]
         const responses = queres.proposedResponses
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
-        let progressWidth = ((indexInSeries+1) / G_SeriesLength)*100+'%'
+        let progressWidth = ((indexInSeries+1) / G_Config.SeriesLength)*100+'%'
         popupResponse = ''
         if (this.state.isResponseRight) {
             popupResponse = this.popupResponseIsOK
@@ -99,6 +103,76 @@ class SeriesScreen extends React.Component {
             popupButtonBorderBottomColor = COLORS.nokButtonBorderBottomColor
         }
 
+        responseView = <View> 
+            <Text> fake </Text> 
+        </View>
+
+        if (queres.level == 0) { 
+            responseView = 
+            <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
+                        <Text style={styles.button_text}> {responses[0].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
+                        <Text style={styles.button_text}> {responses[1].capital} </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
+                        <Text style={styles.button_text}> {responses[4].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
+                        <Text style={styles.button_text}> {responses[5].capital} </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        }
+        else if (queres.level == 1) {
+            responseView = 
+            <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
+                        <Text style={styles.button_text}> {responses[0].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
+                        <Text style={styles.button_text}> {responses[1].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
+                        <Text style={styles.button_text}> {responses[2].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
+                        <Text style={styles.button_text}> {responses[3].capital} </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[4]) }}>
+                        <Text style={styles.button_text}> {responses[4].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[5]) }}>
+                        <Text style={styles.button_text}> {responses[5].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[6]) }}>
+                        <Text style={styles.button_text}> {responses[6].capital} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[7]) }}>
+                        <Text style={styles.button_text}> {responses[7].capital} </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        }
 
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor}}>
@@ -113,45 +187,12 @@ class SeriesScreen extends React.Component {
                     <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {queres.state} </Text>
                 </View>
                 <Divider/>
-                <Divider/>
-                <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
-                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
-                            <Text style={styles.button_text}> {responses[0].capital} </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
-                            <Text style={styles.button_text}> {responses[1].capital} </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
-                            <Text style={styles.button_text}> {responses[2].capital} </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
-                            <Text style={styles.button_text}> {responses[3].capital} </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 1, justifyContent: 'center' }}>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[4]) }}>
-                            <Text style={styles.button_text}> {responses[4].capital} </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[5]) }}>
-                            <Text style={styles.button_text}> {responses[5].capital} </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[6]) }}>
-                            <Text style={styles.button_text}> {responses[6].capital} </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}
-                            onPress={() => { this._displayResponseResults(queres, responses[7]) }}>
-                            <Text style={styles.button_text}> {responses[7].capital} </Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
+                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> nb de bnnes réponses : {queres.rightResponsesNb} </Text>
+                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> level : {queres.level} </Text>
                 </View>
+                <Divider/>
+                { responseView }
                 <Divider/>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <Text style={styles.title_text}></Text>
@@ -254,7 +295,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        QuestionStatsList: state.HandleListOfQuestionStatsReducer.QuestionStatsList,
+        QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
         QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
     }
 }
