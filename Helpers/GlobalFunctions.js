@@ -6,22 +6,39 @@ export function G_SerializeQueresList(aQueresList) {
     return s
 }
 
-export function G_GetLevelFromrightResponsesNb(rightResponsesNb) {
+export function G_GetLevelFromRightResponsesNb(rightResponsesNb) {
     rr = rightResponsesNb
     GC = G_Config
 
-    level = 0
+    lev = 0
+    respNb = 0
     
-    if (rr >= GC.Level0.QrNumber+GC.Level1.QrNumber+GC.Level2.QrNumber+GC.Level3.QrNumber)
-        level = 4
-    else if (rr >= GC.Level0.QrNumber+GC.Level1.QrNumber+GC.Level2.QrNumber)
-        level = 3
-    else if (rr >= GC.Level0.QrNumber+GC.Level1.QrNumber)
-        level = 2
-    else if (rr >= GC.Level0.QrNumber)
-        level = 1
-    else 
-        level = 0
+    if (rr >= GC.Level0.QrNb+GC.Level1.QrNb+GC.Level2.QrNb+GC.Level3.QrNb) {
+        lev = 4
+        respNb = 0
+        console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
+    }
+    else if (rr >= GC.Level0.QrNb+GC.Level1.QrNb+GC.Level2.QrNb) {
+        lev = 3
+        respNb = GC.Level3.QrNb-(rr-GC.Level0.QrNb-GC.Level1.QrNb-GC.Level2.QrNb)
+        console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
+    }
+    else if (rr >= GC.Level0.QrNb+GC.Level1.QrNb) {
+        lev = 2
+        respNb = GC.Level2.QrNb-(rr-GC.Level0.QrNb-GC.Level1.QrNb)
+        console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
+    }
+    else if (rr >= GC.Level0.QrNb) {
+        lev = 1
+        respNb = GC.Level1.QrNb-(rr-GC.Level0.QrNb)
+        console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
+    }
+    else {
+        lev = 0
+        respNb = GC.Level0.QrNb-rr
+        console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
+    }
 
-    return level
+    return { level: lev, responsesNbForNextLevel: respNb } 
 }
+

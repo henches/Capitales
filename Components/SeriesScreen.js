@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import COLORS from './Styles'
 import { storeQuestionStats } from '../Helpers/StorageFunctions'
+import { G_GetLevelFromRightResponsesNb } from '../Helpers/GlobalFunctions'
 
 
 
@@ -16,8 +17,6 @@ class SeriesScreen extends React.Component {
         super()
      }
     
-    static popupResponseIsOK = "BRAVO !"
-    static popupResponseIsKO = "ATTENTION !"
 
     static navigationOptions = {
         headerTitle: "CAPITALES",
@@ -75,39 +74,97 @@ class SeriesScreen extends React.Component {
         // console.log('SeriesScreen : state', this.state)
         // console.log('SeriesScreen : Render props', this.props)
         console.log('SeriesScreen : Render ')
-        // console.log('SeriesScreen : Render : this.props.navigation.state.params', this.props.navigation.state.params)
-        // 
         console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-        // console.log("this.props.QuestionStatsList", this.props.QuestionStatsList)
 
 
         indexInSeries = this.props.navigation.state.params.indexInSeries
         queres = this.props.QueresSeries[indexInSeries]
-        const responses = queres.proposedResponses
+        level = queres.level
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
+        // Progress bar for the series of tests
         let progressWidth = ((indexInSeries+1) / G_Config.SeriesLength)*100+'%'
+
+        // Popup writings
         popupResponse = ''
         if (this.state.isResponseRight) {
-            popupResponse = this.popupResponseIsOK
+            popupResponse = "BRAVO !"
             popupBackgroundColor = COLORS.okBackgroundColor
             popupTextColor = COLORS.okTextColor
             popupButtonBackgroundColor = COLORS.okButtonBackgroundColor
             popupButtonBorderBottomColor = COLORS.okButtonBorderBottomColor
         }
         else {
-            popupResponse = this.popupResponseIsKO
+            popupResponse = "ATTENTION !"
             popupBackgroundColor = COLORS.nokBackgroundColor
             popupTextColor = COLORS.nokTextColor
             popupButtonBackgroundColor = COLORS.nokButtonBackgroundColor
             popupButtonBorderBottomColor = COLORS.nokButtonBorderBottomColor
         }
+        
 
+        popupConfirmationText = "textconfirm à définir"
+        popupCheeringText = ""
+        rightRepNow = 0
+        if (this.state.isResponseRight)
+            rightRepNow = 1
+        r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+rightRepNow)
+        console.log("G_GetLevelFromRightResponsesNb r = ", r)
+        rNbForNextLevel = r.responsesNbForNextLevel
+        if (level == 0) {
+            popupConfirmationText = "La capitale de "
+            if (rNbForNextLevel == 0 && this.state.isResponseRight)
+                popupCheeringText = "Vous avez atteint le niveau " + level + "!"
+            else if (this.state.isResponseRight) {
+                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 1"
+            }
+        }
+        else if (level == 1) {
+            popupConfirmationText = "La capitale de "
+            if (rNbForNextLevel == 0 && this.state.isResponseRight)
+                popupCheeringText = "Vous avez atteint le niveau 1!"
+            else if (this.state.isResponseRight) {
+                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 2"
+            }
+        }
+        else if (level == 2) {
+            popupConfirmationText = "Le pays de "
+            if (rNbForNextLevel == 0  && this.state.isResponseRight)
+                popupCheeringText = "Vous avez atteint le niveau 2 !"
+            else if (this.state.isResponseRight) {
+                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 2"
+            }
+        }
+        else if (level == 3) {
+            popupConfirmationText = "La capitale de "
+            if (rNbForNextLevel == 0  && this.state.isResponseRight)
+                popupCheeringText = "Vous avez atteint le niveau 3 !"
+            else if (this.state.isResponseRight) {
+                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 2"
+            }
+        }
+        else if (level == 4) {
+            popupConfirmationText = "La capitale de "
+            if (rNbForNextLevel == 0  && this.state.isResponseRight)
+                popupCheeringText = "Vous avez atteint le niveau 4 !"
+            else if (this.state.isResponseRight) {
+                popupCheeringText = "Bravo (ne doit jamais arriver) !"
+            }
+        }
+
+        
+
+    
+
+
+        // Response View
+        responses = queres.proposedResponses
         responseView = <View> 
             <Text> fake </Text> 
         </View>
-
+        question  = ""
         if (queres.level == 0) { 
+            question = queres.state
             responseView = 
             <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
@@ -123,16 +180,17 @@ class SeriesScreen extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
-                        <Text style={styles.button_text}> {responses[4].capital} </Text>
+                        <Text style={styles.button_text}> {responses[2].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
-                        <Text style={styles.button_text}> {responses[5].capital} </Text>
+                        <Text style={styles.button_text}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
         }
         else if (queres.level == 1) {
+            question = queres.state
             responseView = 
             <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
@@ -173,6 +231,48 @@ class SeriesScreen extends React.Component {
                 </View>
             </View>
         }
+        else if (queres.level == 2) {
+            question = queres.capital
+            responseView = 
+            <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
+                        <Text style={styles.button_text}> {responses[0].state} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
+                        <Text style={styles.button_text}> {responses[1].state} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
+                        <Text style={styles.button_text}> {responses[2].state} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
+                        <Text style={styles.button_text}> {responses[3].state} </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[4]) }}>
+                        <Text style={styles.button_text}> {responses[4].state} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[5]) }}>
+                        <Text style={styles.button_text}> {responses[5].state} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[6]) }}>
+                        <Text style={styles.button_text}> {responses[6].state} </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._displayResponseResults(queres, responses[7]) }}>
+                        <Text style={styles.button_text}> {responses[7].state} </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        }
 
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor}}>
@@ -184,7 +284,7 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
-                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {queres.state} </Text>
+                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} </Text>
                 </View>
                 <Divider/>
                 <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
@@ -214,8 +314,11 @@ class SeriesScreen extends React.Component {
                                 <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupResponse}</Text>
                             </View>
                             <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>La capitale de {queres.state} est</Text>
+                                <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>{popupConfirmationText} {queres.state} est</Text>
                                 <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
+                            </View>
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupCheeringText}</Text>
                             </View>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                 <TouchableOpacity style={[styles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideResponseResults() }}>

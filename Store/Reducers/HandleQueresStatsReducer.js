@@ -1,5 +1,5 @@
 
-import { G_GetLevelFromrightResponsesNb } from '../../Helpers/GlobalFunctions'
+import { G_GetLevelFromRightResponsesNb } from '../../Helpers/GlobalFunctions'
 
 const initialState = {
     QuestionStatsList: []
@@ -30,7 +30,8 @@ function HandleQueresStatsReducer(state = initialState, action) {
                   })
                 if (isResponseRight) {
                     elt.rightResponsesNb++
-                    elt.level = G_GetLevelFromrightResponsesNb(elt.rightResponsesNb)
+                    r = G_GetLevelFromRightResponsesNb(elt.rightResponsesNb)
+                    elt.level = r.level
                 }
                 else 
                     elt.wrongResponsesNb++

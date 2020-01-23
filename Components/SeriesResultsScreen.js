@@ -31,7 +31,7 @@ class SeriesResultsScreen extends React.Component {
         this.props.navigation.navigate('HomeScreen', {})   
     }
 
-    _calculateNumberOfRightResponses = (queresSeries) => {
+    _calculateNbOfRightResponses = (queresSeries) => {
         let nb = 0
         for (var i=0; i < queresSeries.length; i++) {
             if (queresSeries[i].isResponseRight)
@@ -43,7 +43,7 @@ class SeriesResultsScreen extends React.Component {
 
     render() {
         // console.log("Serie de réponses [1] ", this.props.GivenResponsesList[1])
-        nbRightResponses = this._calculateNumberOfRightResponses(this.props.QueresSeries)
+        nbRightResponses = this._calculateNbOfRightResponses(this.props.QueresSeries)
         console.log("nbre de bonnes réponses / nombre total de réponses ", nbRightResponses, " / ", this.props.QueresSeries.length)
         return(
                 <View style={{ flex: 3, backgroundColor: COLORS.generalBackgroundColor }}>

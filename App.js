@@ -13,20 +13,20 @@ export default class App extends React.Component {
     super()
     global.G_Config = {
         SeriesLength: 2,
-        Level0 : {
-          QrNumber: 2,
-          ProposedResponsesNumber: 8,
+          Level0 : {
+          QrNb: 2,
+          ProposedResponsesNb: 4,
         },
         Level1 : {
-          QrNumber: 2,
-          ProposedResponsesNumber: 4,
+          QrNb: 2,
+          ProposedResponsesNb: 8,
         },
         Level2 : {
-          QrNumber: 2,
-          ProposedResponsesNumber: 8,
+          QrNb: 2,
+          ProposedResponsesNb: 8,
         },
         Level3 : {
-          QrNumber: 2,
+          QrNb: 2,
         }
     }
 
