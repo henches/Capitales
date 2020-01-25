@@ -31,7 +31,8 @@ class SeriesScreen extends React.Component {
     state = {
         modalVisible: false,
         givenResponse: "",
-        isResponseRight: true
+        isResponseRight: true,
+        levelImage: null
     }
 
     _goSeriesScreen = () => {
@@ -79,7 +80,6 @@ class SeriesScreen extends React.Component {
 
         indexInSeries = this.props.navigation.state.params.indexInSeries
         queres = this.props.QueresSeries[indexInSeries]
-        level = queres.level
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
         // Progress bar for the series of tests
@@ -105,56 +105,84 @@ class SeriesScreen extends React.Component {
 
         popupConfirmationText = "textconfirm à définir"
         popupCheeringText = ""
-        rightRepNow = 0
-        if (this.state.isResponseRight)
-            rightRepNow = 1
-        r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+rightRepNow)
+        r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb)
         console.log("G_GetLevelFromRightResponsesNb r = ", r)
+        level = r.level
         rNbForNextLevel = r.responsesNbForNextLevel
+        levelImage = r.image
+        console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
         if (level == 0) {
             popupConfirmationText = "La capitale de "
-            if (rNbForNextLevel == 0 && this.state.isResponseRight)
-                popupCheeringText = "Vous avez atteint le niveau " + level + "!"
+            if (rNbForNextLevel == 1 && this.state.isResponseRight) {
+                popupCheeringText = "Vous avez atteint le niveau"
+                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  r.image
+            }
             else if (this.state.isResponseRight) {
-                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 1"
+                popupCheeringText = "plus que " + (rNbForNextLevel-1)+ " bonnes réponses pour le niveau 1"
             }
         }
         else if (level == 1) {
             popupConfirmationText = "La capitale de "
-            if (rNbForNextLevel == 0 && this.state.isResponseRight)
-                popupCheeringText = "Vous avez atteint le niveau 1!"
+            if (rNbForNextLevel == 1 && this.state.isResponseRight) {
+                popupCheeringText = "Vous avez atteint le niveau"
+                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  r.image
+            }
             else if (this.state.isResponseRight) {
-                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 2"
+                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 2"
             }
         }
         else if (level == 2) {
             popupConfirmationText = "Le pays de "
-            if (rNbForNextLevel == 0  && this.state.isResponseRight)
-                popupCheeringText = "Vous avez atteint le niveau 2 !"
+            if (rNbForNextLevel == 1  && this.state.isResponseRight) {
+                popupCheeringText = "Vous avez atteint le niveau"
+                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  r.image
+            }
             else if (this.state.isResponseRight) {
-                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 2"
+                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 3"
             }
         }
         else if (level == 3) {
             popupConfirmationText = "La capitale de "
-            if (rNbForNextLevel == 0  && this.state.isResponseRight)
-                popupCheeringText = "Vous avez atteint le niveau 3 !"
+            if (rNbForNextLevel == 1  && this.state.isResponseRight) {
+                popupCheeringText = "Vous avez atteint le niveau"
+                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  r.image
+            }
             else if (this.state.isResponseRight) {
-                popupCheeringText = "plus que " + rNbForNextLevel + "bonnes réponses pour le niveau 2"
+                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 4"
             }
         }
-        else if (level == 4) {
-            popupConfirmationText = "La capitale de "
-            if (rNbForNextLevel == 0  && this.state.isResponseRight)
-                popupCheeringText = "Vous avez atteint le niveau 4 !"
+        else if (level == 4) { // Should Never Happen
+            popupConfirmationText = "Level4 : shoud never Happen"
+            if (rNbForNextLevel == 1  && this.state.isResponseRight)
+                popupCheeringText = "Level4 : shoud never Happen my dear"
             else if (this.state.isResponseRight) {
-                popupCheeringText = "Bravo (ne doit jamais arriver) !"
+                popupCheeringText = "Bravo mais ne doit jamais arriver !"
             }
         }
 
         
 
     
+        // Cheering View
+        cheeringView = 
+           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+               <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
+           </View>
+        if (rNbForNextLevel == 1  && this.state.isResponseRight)
+            cheeringView = 
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{  color: popupTextColor, fontSize: 20, fontWeight: 'bold' }}>{popupCheeringText} </Text>
+                    <Image style={{ width: 70, height: 70 }} source={popupLevelImage} />
+                </View>
+        else if (this.state.isResponseRight) 
+            cheeringView = 
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
+                </View>
 
 
         // Response View
@@ -285,11 +313,19 @@ class SeriesScreen extends React.Component {
                 <Divider/>
                 <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
                     <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} </Text>
+                    <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={queres.level}  </Text>
+
                 </View>
                 <Divider/>
-                <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
-                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> nb de bnnes réponses : {queres.rightResponsesNb} </Text>
-                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> level : {queres.level} </Text>
+                <View style={{ flex: 7, flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                    <View style={{ flex: 2, justifyContent: 'center' }}>
+                    </View>
+                    <View style={{ flex: 5, justifyContent: 'center' }}>
+                         <Image style={{ width: 220, height: 220 }} source={require('../Helpers/capital_images/paris.jpeg')} />
+                    </View>
+                    <View style={{ flex: 2, justifyContent: 'center' }}>
+                         <Image style={{ width: 70, height: 70 }} source={levelImage} />
+                    </View>
                 </View>
                 <Divider/>
                 { responseView }
@@ -317,9 +353,7 @@ class SeriesScreen extends React.Component {
                                 <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>{popupConfirmationText} {queres.state} est</Text>
                                 <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
                             </View>
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupCheeringText}</Text>
-                            </View>
+                            { cheeringView }
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                 <TouchableOpacity style={[styles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideResponseResults() }}>
                                     <Text style={{ padding: 10, fontSize: 25, color: 'white' }}>OK</Text>
@@ -333,11 +367,6 @@ class SeriesScreen extends React.Component {
     }
 }
 
-/*
-<View style={{ flex: 7, justifyContent: 'center', alignItems: 'center' }}>
-<Image style={{ width: 220, height: 220 }} source={this.props.RightResponse.image} />
-</View>
-*/
 
 const styles = StyleSheet.create({
     main_view: {

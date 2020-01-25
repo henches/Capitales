@@ -36,3 +36,7 @@ git reset --hard : annule toutes les modifs depuis le dernier commit
 POur lancer le simulateur Android.*Il faut d'abotrd lancer Android Studio
 Puis lancer AVD Manager depuis le menu "Configure".
 
+
+25/01 : comparer deux versions git d"un même fichier avec visual studio code
+pré-requis : git-hostory est installer dans visual studio code
+-> sur le fichier à comparer : taper (Fn)F1 puis taper git:View File History
