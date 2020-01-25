@@ -11,11 +11,11 @@ export default class App extends React.Component {
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
     super()
-    i0 = require('./Images/StarLevel_0.png')
-    i1 = require('./Images/StarLevel_1.png')
-    i2 = require('./Images/StarLevel_2.png')
-    i3 = require('./Images/StarLevel_3.png')
-    i4 = require('./Images/StarLevel_4.png')
+    i0 = require('./Images/StarLevel-0.png')
+    i1 = require('./Images/StarLevel-1.png')
+    i2 = require('./Images/StarLevel-2.png')
+    i3 = require('./Images/StarLevel-3.png')
+    i4 = require('./Images/StarLevel-4.png')
     
     global.G_Config = {
         SeriesLength: 2,
