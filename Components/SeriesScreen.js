@@ -5,6 +5,7 @@ import { Divider } from 'react-native-elements'
 import COLORS from './Styles'
 import { storeQuestionStats } from '../Helpers/StorageFunctions'
 import { G_GetLevelFromRightResponsesNb } from '../Helpers/GlobalFunctions'
+import { TextInput } from 'react-native';
 
 
 
@@ -30,7 +31,8 @@ class SeriesScreen extends React.Component {
 
     state = {
         modalVisible: false,
-        givenResponse: "",
+        chosenResponse: "",
+        inputResponse: "",
         isResponseRight: true,
         levelImage: null
     }
@@ -57,7 +59,7 @@ class SeriesScreen extends React.Component {
     _displayResponseResults = (qr, myResponse) => {
         // console.log('*****************************   go Popup ****************************')
         // console.log('go Popup : myResponse = ', myResponse)
-        this.setState({ givenResponse: myResponse.capital })
+        this.setState({ chosenResponse: myResponse.capital })
         isResponseRight = (myResponse.capital.localeCompare(qr.capital) == 0)
         this.setState({ isResponseRight: isResponseRight })
         this.setState({ modalVisible: true })
@@ -65,10 +67,17 @@ class SeriesScreen extends React.Component {
 
     __hideResponseResults = () => {
         // console.log('*****************************   Quit Popup ****************************')
-        const action = { type: 'QUERES-SERIES-ADD_ANSWER', value: { index : this.props.navigation.state.params.indexInSeries, isResponseRight: this.state.isResponseRight, givenResponse: this.state.givenResponse } }
+        const action = { type: 'QUERES-SERIES-ADD_ANSWER', value: { index : this.props.navigation.state.params.indexInSeries, isResponseRight: this.state.isResponseRight, chosenResponse: this.state.chosenResponse } }
         this.props.dispatch(action)
         this.setState({ modalVisible: false })
         this._goSeriesScreen();
+    }
+
+    _handleInputResponse = (question, response) => {
+        const levenshtein = require('js-levenshtein');
+        console.log("levenshtein('kitten', 'sitting')", levenshtein('kitten', 'sitting'));
+        
+        console.log("question= ", question, " response = ", response, " levensthtein=", levenshtein(question, response))
     }
 
     render() {
@@ -80,12 +89,22 @@ class SeriesScreen extends React.Component {
 
         indexInSeries = this.props.navigation.state.params.indexInSeries
         queres = this.props.QueresSeries[indexInSeries]
+        levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb)
+        console.log("G_GetLevelFromRightResponsesNb levelElements = ", levelElements)
+        // level = levelElements.level
+        // rNbForNextLevel = levelElements.responsesNbForNextLevel
+        level = 3 // A fins de test
+        rNbForNextLevel = 6 // A fins de test
+
+        levelImage = levelElements.image
+
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
         // Progress bar for the series of tests
         let progressWidth = ((indexInSeries+1) / G_Config.SeriesLength)*100+'%'
 
-        // Popup writings
+        // Popup Elements 
+        // Popup CSS
         popupResponse = ''
         if (this.state.isResponseRight) {
             popupResponse = "BRAVO !"
@@ -102,21 +121,16 @@ class SeriesScreen extends React.Component {
             popupButtonBorderBottomColor = COLORS.nokButtonBorderBottomColor
         }
         
-
+        // Popup Texts
         popupConfirmationText = "textconfirm à définir"
         popupCheeringText = ""
-        r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb)
-        console.log("G_GetLevelFromRightResponsesNb r = ", r)
-        level = r.level
-        rNbForNextLevel = r.responsesNbForNextLevel
-        levelImage = r.image
         console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
         if (level == 0) {
             popupConfirmationText = "La capitale de "
             if (rNbForNextLevel == 1 && this.state.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
-                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
-                popupLevelImage =  r.image
+                levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  levelElements.image
             }
             else if (this.state.isResponseRight) {
                 popupCheeringText = "plus que " + (rNbForNextLevel-1)+ " bonnes réponses pour le niveau 1"
@@ -126,8 +140,8 @@ class SeriesScreen extends React.Component {
             popupConfirmationText = "La capitale de "
             if (rNbForNextLevel == 1 && this.state.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
-                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
-                popupLevelImage =  r.image
+                levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  levelElements.image
             }
             else if (this.state.isResponseRight) {
                 popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 2"
@@ -137,8 +151,8 @@ class SeriesScreen extends React.Component {
             popupConfirmationText = "Le pays de "
             if (rNbForNextLevel == 1  && this.state.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
-                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
-                popupLevelImage =  r.image
+                levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  levelElements.image
             }
             else if (this.state.isResponseRight) {
                 popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 3"
@@ -148,8 +162,8 @@ class SeriesScreen extends React.Component {
             popupConfirmationText = "La capitale de "
             if (rNbForNextLevel == 1  && this.state.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
-                r = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
-                popupLevelImage =  r.image
+                levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
+                popupLevelImage =  levelElements.image
             }
             else if (this.state.isResponseRight) {
                 popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 4"
@@ -164,14 +178,12 @@ class SeriesScreen extends React.Component {
             }
         }
 
-        
-
     
-        // Cheering View
+        // Popup Cheering View
         cheeringView = 
-           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-               <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
-           </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
+        </View>
         if (rNbForNextLevel == 1  && this.state.isResponseRight)
             cheeringView = 
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -184,6 +196,7 @@ class SeriesScreen extends React.Component {
                     <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
                 </View>
 
+        // End of Popup View
 
         // Response View
         responses = queres.proposedResponses
@@ -191,10 +204,10 @@ class SeriesScreen extends React.Component {
             <Text> fake </Text> 
         </View>
         question  = ""
-        if (queres.level == 0) { 
+        if (level == 0) { 
             question = queres.state
             responseView = 
-            <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
@@ -217,10 +230,10 @@ class SeriesScreen extends React.Component {
                 </View>
             </View>
         }
-        else if (queres.level == 1) {
+        else if (level == 1) {
             question = queres.state
             responseView = 
-            <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
@@ -259,10 +272,10 @@ class SeriesScreen extends React.Component {
                 </View>
             </View>
         }
-        else if (queres.level == 2) {
+        else if (level == 2) {
             question = queres.capital
             responseView = 
-            <View style={{ flex: 8, flexDirection: 'row', justifyContent: 'center' }}>
+            <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
@@ -301,23 +314,43 @@ class SeriesScreen extends React.Component {
                 </View>
             </View>
         }
+        else if (level == 3) { // Text input
+            question = queres.state
+            if (this.state.inputResponse.localeCompare("") == 0)
+                checkButtonStyle = styles.button_text
+            else 
+                checkButtonStyle = styles.button_text_inactive
+            responseView = 
+            <View style={styles.response_view}>
+                    <TextInput
+                        style={{ fontSize:20, height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
+                        placeholder='Ecris la capitale'
+                        placeholderTextColor='dimgrey'
+                        onChangeText={(text) => this.setState({inputResponse: text})}
+                    />
+                    <TouchableOpacity style={styles.button}
+                        onPress={() => { this._handleInputResponse(queres.capital, this.state.inputResponse) }}>
+                        <Text style={checkButtonStyle}> Vérifier </Text>
+                    </TouchableOpacity>
+            </View>
+        }
 
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor}}>
-                <View style={{ flex: 1, justifyContent: 'center', paddingLeft: '3%', paddingRight: '3%' }}>
+                <View style={ styles.progressBar_view }>
                     <View style={{ flexDirection: 'row', backgroundColor: 'gainsboro', borderRadius: 10, height: 10 }}>
                         <View style={{ backgroundColor: '#78c800', borderRadius: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: progressWidth}}>
                         </View>        
                     </View>      
                 </View>
                 <Divider/>
-                <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'  }}>
+                <View style={ styles.question_view }>
                     <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} </Text>
-                    <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={queres.level}  </Text>
+                    <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>
 
                 </View>
                 <Divider/>
-                <View style={{ flex: 7, flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                <View style={styles.image_view}>
                     <View style={{ flex: 2, justifyContent: 'center' }}>
                     </View>
                     <View style={{ flex: 5, justifyContent: 'center' }}>
@@ -373,18 +406,38 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 30
     },
-    title_view: {
-        flex: 1
+    progressBar_view: {
+        flex: 1, 
+        justifyContent: 'center', 
+        paddingLeft: '3%', 
+        paddingRight: '3%' 
+    },
+    question_view: {
+        flex: 2, 
+        justifyContent: 'center', 
+        alignItems: 'center'  
+    },
+    image_view: {
+        flex: 6, 
+        flexDirection: 'row', 
+        justifyContent: 'space-evenly'
+    },
+    response_view: {
+        flex: 8, 
+        justifyContent: 'flex-start',
+        paddingTop: 15
     },
     title_text: {
         height: 50
     },
-    Series_infos_view: {
-        flex: 1
-    },
-    Series_info_text: {
-        height: 50
-    },
+    progressBar: {
+        position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, height: 20,
+        width: '40%',
+        borderColor: '#000',
+        borderWidth: 4,
+        borderRadius: 5,
+        backgroundColor: "#8BED4F"
+       },
     button: {
         height: 50,
         borderRadius: 10,
@@ -396,33 +449,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'dodgerblue',
         margin: 5
     },
-    progressBar: {
-     position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, height: 20,
-     width: '40%',
-     borderColor: '#000',
-     borderWidth: 4,
-     borderRadius: 5,
-     backgroundColor: "#8BED4F"
+    modal_view: {
+        backgroundColor: "#fff",
+        width: 300,
+        height: 300
     },
     button_text: {
         fontSize: 25,
         color: 'white',
         padding: 10
     },
-    question_view: {
-        flex: 2
+    button_text_inactive: {
+        fontSize: 25,
+        color: 'red',
+        padding: 10
     },
-    question_text: {
-        height: 50
-    },
-    choices_view: {
-        flex: 4
-    },
-    modal_view: {
-        backgroundColor: "#fff",
-        width: 300,
-        height: 300
-    }
 })
 
 const mapStateToProps = state => {
