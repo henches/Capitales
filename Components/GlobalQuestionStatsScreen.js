@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import COLORS from './Styles'
+import { COLORS, Gstyles } from './Styles'
 
 
 

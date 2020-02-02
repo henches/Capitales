@@ -2,10 +2,11 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Alert, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
-import COLORS from './Styles'
+import { COLORS, Gstyles } from './Styles'
 import { storeQuestionStats } from '../Helpers/StorageFunctions'
 import { G_GetLevelFromRightResponsesNb } from '../Helpers/GlobalFunctions'
 import { TextInput } from 'react-native';
+import { playSound } from '../Helpers/SoundFunctions'
 
 
 
@@ -18,15 +19,8 @@ class SeriesScreen extends React.Component {
         super()
      }
     
-
     static navigationOptions = {
-        headerTitle: "CAPITALES",
-        headerStyle: {
-            backgroundColor: 'whitesmoke',
-            fontWeight: 'bold',
-            fontSize: 35
-        },
-        headerLeft: null,
+        headerShown: false,
     }
 
     state = {
@@ -34,6 +28,7 @@ class SeriesScreen extends React.Component {
         chosenResponse: "",
         inputResponse: "",
         isResponseRight: true,
+        isTypo: false,
         levelImage: null
     }
 
@@ -56,11 +51,25 @@ class SeriesScreen extends React.Component {
         }
     }
 
-    _displayResponseResults = (qr, myResponse) => {
+    _displayResponseResults = (qr, myResponse, level) => {
         // console.log('*****************************   go Popup ****************************')
-        // console.log('go Popup : myResponse = ', myResponse)
         this.setState({ chosenResponse: myResponse.capital })
-        isResponseRight = (myResponse.capital.localeCompare(qr.capital) == 0)
+        if (level == 3) {
+            const levenshtein = require('js-levenshtein')
+            lev = levenshtein(qr.capital, myResponse.capital) 
+            if (lev <= 2) {
+                isResponseRight = true
+                this.setState({ isTypo: (lev != 0) })
+            }
+            else
+                isResponseRight = false
+        } 
+        else {
+            isResponseRight = (myResponse.capital.localeCompare(qr.capital) == 0)
+        }
+
+        playSound(isResponseRight)
+
         this.setState({ isResponseRight: isResponseRight })
         this.setState({ modalVisible: true })
     }
@@ -71,13 +80,6 @@ class SeriesScreen extends React.Component {
         this.props.dispatch(action)
         this.setState({ modalVisible: false })
         this._goSeriesScreen();
-    }
-
-    _handleInputResponse = (question, response) => {
-        const levenshtein = require('js-levenshtein');
-        console.log("levenshtein('kitten', 'sitting')", levenshtein('kitten', 'sitting'));
-        
-        console.log("question= ", question, " response = ", response, " levensthtein=", levenshtein(question, response))
     }
 
     render() {
@@ -91,30 +93,31 @@ class SeriesScreen extends React.Component {
         queres = this.props.QueresSeries[indexInSeries]
         levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb)
         console.log("G_GetLevelFromRightResponsesNb levelElements = ", levelElements)
-        // level = levelElements.level
-        // rNbForNextLevel = levelElements.responsesNbForNextLevel
-        level = 3 // A fins de test
-        rNbForNextLevel = 6 // A fins de test
+        level = levelElements.level
+        rNbForNextLevel = levelElements.responsesNbForNextLevel
+        // level = 3 // A fins de TEST du level 3
+        // rNbForNextLevel = 6 // A fins de TEST du level 3
 
         levelImage = levelElements.image
 
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
+
         // Progress bar for the series of tests
         let progressWidth = ((indexInSeries+1) / G_Config.SeriesLength)*100+'%'
 
         // Popup Elements 
         // Popup CSS
-        popupResponse = ''
+        popupVerdict = ''
         if (this.state.isResponseRight) {
-            popupResponse = "BRAVO !"
+            popupVerdict = "BRAVO !"
             popupBackgroundColor = COLORS.okBackgroundColor
             popupTextColor = COLORS.okTextColor
             popupButtonBackgroundColor = COLORS.okButtonBackgroundColor
             popupButtonBorderBottomColor = COLORS.okButtonBorderBottomColor
         }
         else {
-            popupResponse = "ATTENTION !"
+            popupVerdict = "ATTENTION !"
             popupBackgroundColor = COLORS.nokBackgroundColor
             popupTextColor = COLORS.nokTextColor
             popupButtonBackgroundColor = COLORS.nokButtonBackgroundColor
@@ -124,6 +127,8 @@ class SeriesScreen extends React.Component {
         // Popup Texts
         popupConfirmationText = "textconfirm à définir"
         popupCheeringText = ""
+        typoWarningText = ""
+        popupFlexSize = 7
         console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
         if (level == 0) {
             popupConfirmationText = "La capitale de "
@@ -159,7 +164,11 @@ class SeriesScreen extends React.Component {
             }
         }
         else if (level == 3) {
+            popupFlexSize = 5
             popupConfirmationText = "La capitale de "
+            if (this.state.isResponseRight && this.state.isTypo) {
+                typoWarningText = "(attention : il y a une faute de frappe)"
+            }
             if (rNbForNextLevel == 1  && this.state.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
@@ -200,9 +209,7 @@ class SeriesScreen extends React.Component {
 
         // Response View
         responses = queres.proposedResponses
-        responseView = <View> 
-            <Text> fake </Text> 
-        </View>
+        responseView = <View> <Text> fake </Text> </View> // juste pour intialiser la variable
         question  = ""
         if (level == 0) { 
             question = queres.state
@@ -210,22 +217,22 @@ class SeriesScreen extends React.Component {
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
-                        <Text style={styles.button_text}> {responses[0].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
+                        <Text style={styles.check_text_active}> {responses[0].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
-                        <Text style={styles.button_text}> {responses[1].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
+                        <Text style={styles.check_text_active}> {responses[1].capital} </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
-                        <Text style={styles.button_text}> {responses[2].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[2]), level }}>
+                        <Text style={styles.check_text_active}> {responses[2].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
-                        <Text style={styles.button_text}> {responses[3].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[3]), level }}>
+                        <Text style={styles.check_text_active}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -236,38 +243,38 @@ class SeriesScreen extends React.Component {
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
-                        <Text style={styles.button_text}> {responses[0].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
+                        <Text style={styles.check_text_active}> {responses[0].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
-                        <Text style={styles.button_text}> {responses[1].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
+                        <Text style={styles.check_text_active}> {responses[1].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
-                        <Text style={styles.button_text}> {responses[2].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[2], level) }}>
+                        <Text style={styles.check_text_active}> {responses[2].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
-                        <Text style={styles.button_text}> {responses[3].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[3], level) }}>
+                        <Text style={styles.check_text_active}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[4]) }}>
-                        <Text style={styles.button_text}> {responses[4].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[4], level) }}>
+                        <Text style={styles.check_text_active}> {responses[4].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[5]) }}>
-                        <Text style={styles.button_text}> {responses[5].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[5], level) }}>
+                        <Text style={styles.check_text_active}> {responses[5].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[6]) }}>
-                        <Text style={styles.button_text}> {responses[6].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[6], level) }}>
+                        <Text style={styles.check_text_active}> {responses[6].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[7]) }}>
-                        <Text style={styles.button_text}> {responses[7].capital} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[7], level) }}>
+                        <Text style={styles.check_text_active}> {responses[7].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -278,70 +285,79 @@ class SeriesScreen extends React.Component {
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[0]) }}>
-                        <Text style={styles.button_text}> {responses[0].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
+                        <Text style={styles.check_text_active}> {responses[0].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[1]) }}>
-                        <Text style={styles.button_text}> {responses[1].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
+                        <Text style={styles.check_text_active}> {responses[1].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[2]) }}>
-                        <Text style={styles.button_text}> {responses[2].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[2], level) }}>
+                        <Text style={styles.check_text_active}> {responses[2].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[3]) }}>
-                        <Text style={styles.button_text}> {responses[3].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[3], level) }}>
+                        <Text style={styles.check_text_active}> {responses[3].state} </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[4]) }}>
-                        <Text style={styles.button_text}> {responses[4].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[4], level) }}>
+                        <Text style={styles.check_text_active}> {responses[4].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[5]) }}>
-                        <Text style={styles.button_text}> {responses[5].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[5], level) }}>
+                        <Text style={styles.check_text_active}> {responses[5].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[6]) }}>
-                        <Text style={styles.button_text}> {responses[6].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[6], level) }}>
+                        <Text style={styles.check_text_active}> {responses[6].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[7]) }}>
-                        <Text style={styles.button_text}> {responses[7].state} </Text>
+                        onPress={() => { this._displayResponseResults(queres, responses[7], level) }}>
+                        <Text style={styles.check_text_active}> {responses[7].state} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
         }
         else if (level == 3) { // Text input
             question = queres.state
-            if (this.state.inputResponse.localeCompare("") == 0)
-                checkButtonStyle = styles.button_text
-            else 
-                checkButtonStyle = styles.button_text_inactive
+            if (this.state.inputResponse.localeCompare("") == 0) {
+                checkButtonStyle = styles.button_inactive
+                checkTextButtonStyle = styles.check_text_inactive
+            }
+            else {
+                checkButtonStyle = styles.button
+                checkTextButtonStyle = styles.check_text_active
+            }
             responseView = 
-            <View style={styles.response_view}>
+            <View style={styles.text_response_view}>
                     <TextInput
                         style={{ fontSize:20, height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
                         placeholder='Ecris la capitale'
                         placeholderTextColor='dimgrey'
                         onChangeText={(text) => this.setState({inputResponse: text})}
                     />
-                    <TouchableOpacity style={styles.button}
-                        onPress={() => { this._handleInputResponse(queres.capital, this.state.inputResponse) }}>
-                        <Text style={checkButtonStyle}> Vérifier </Text>
+                    <TouchableOpacity style={checkButtonStyle}
+                        onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
+                        <Text style={checkTextButtonStyle}> Vérifier </Text>
                     </TouchableOpacity>
             </View>
         }
 
         return (
-            <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor}}>
-                <View style={ styles.progressBar_view }>
-                    <View style={{ flexDirection: 'row', backgroundColor: 'gainsboro', borderRadius: 10, height: 10 }}>
-                        <View style={{ backgroundColor: '#78c800', borderRadius: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: progressWidth}}>
-                        </View>        
-                    </View>      
+            <View style={ Gstyles.main_view }>
+                <View style={ styles.quitAndProgressBar_view }>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                         <Image style={{ width: 35, height: 35 }} source={require('../Images/quit-screen.png')} />
+                    </View>
+                    <View style={ styles.progressBar_view }>
+                        <View style={{ flexDirection: 'row', backgroundColor: 'gainsboro', borderRadius: 10, height: 10 }}>
+                            <View style={{ backgroundColor: '#78c800', borderRadius: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: progressWidth}}>
+                            </View>        
+                        </View>      
+                    </View>
                 </View>
                 <Divider/>
                 <View style={ styles.question_view }>
@@ -363,7 +379,7 @@ class SeriesScreen extends React.Component {
                 <Divider/>
                 { responseView }
                 <Divider/>
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={styles.ad_view} >
                     <Text style={styles.title_text}></Text>
                 </View>
                 <Modal
@@ -376,15 +392,16 @@ class SeriesScreen extends React.Component {
                     <View style={{ flex: 1 }}>
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 1 }}></View>
-                        <View style={{ flex: 2 }}></View>
-                        <View style={{ flex: 7 }}></View>
-                        <View style={{ flex: 8, backgroundColor: popupBackgroundColor, padding: 10}}>
+                        <View style={{ flex: 1 }}></View>
+                        <View style={{ flex: 6 }}></View>
+                        <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: 10}}>
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupResponse}</Text>
+                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupVerdict}</Text>
                             </View>
                             <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>{popupConfirmationText} {queres.state} est</Text>
                                 <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
+                                <Text style={{ color: popupTextColor, fontSize: 14, fontWeight: 'bold' }}>{typoWarningText}</Text>
                             </View>
                             { cheeringView }
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -402,18 +419,15 @@ class SeriesScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-    main_view: {
+    quitAndProgressBar_view: {
         flex: 1,
-        marginTop: 30
-    },
-    progressBar_view: {
-        flex: 1, 
+        flexDirection: 'row', 
         justifyContent: 'center', 
         paddingLeft: '3%', 
         paddingRight: '3%' 
     },
     question_view: {
-        flex: 2, 
+        flex: 1, 
         justifyContent: 'center', 
         alignItems: 'center'  
     },
@@ -423,12 +437,24 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     response_view: {
-        flex: 8, 
-        justifyContent: 'flex-start',
+        flexDirection: 'row', 
+        flex: 7, 
+    },
+    text_response_view: {
+        flex: 7,
+        flexDirection: 'column', 
+        justifyContent: 'flex-start', 
         paddingTop: 15
+    },
+    ad_view: {
+        flex: 1, 
     },
     title_text: {
         height: 50
+    },
+    progressBar_view: {
+        flex: 6, 
+        justifyContent: 'center' 
     },
     progressBar: {
         position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, height: 20,
@@ -449,19 +475,28 @@ const styles = StyleSheet.create({
         backgroundColor: 'dodgerblue',
         margin: 5
     },
+    button_inactive: {
+        height: 50,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        backgroundColor: 'lightgrey',
+        margin: 5
+    },
     modal_view: {
         backgroundColor: "#fff",
         width: 300,
         height: 300
     },
-    button_text: {
+    check_text_active: {
         fontSize: 25,
         color: 'white',
         padding: 10
     },
-    button_text_inactive: {
+    check_text_inactive: {
         fontSize: 25,
-        color: 'red',
+        color: 'darkgrey',
         padding: 10
     },
 })

@@ -3,6 +3,7 @@ import Navigation from './Navigation/Navigation'
 import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesList from './Helpers/statesData' // A changer pour avoir les vraies données
+import { initSounds } from './Helpers/SoundFunctions'
 
 
 
@@ -47,6 +48,8 @@ export default class App extends React.Component {
     global.G_StatesList = StatesList   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
     global.G_InitialQuestionStatsList = []
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
+
+    initSounds()
   }
 
   render() {

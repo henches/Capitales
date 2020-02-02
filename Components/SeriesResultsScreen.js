@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
-import COLORS from './Styles'
+import { COLORS, Gstyles } from './Styles'
 
 
 class SeriesResultsScreen extends React.Component {

@@ -3,18 +3,22 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
+import { COLORS, Gstyles } from './Styles'
 
 
 class HomeScreen extends React.Component {
     
-  constructor() {
-      super();
-      this.state = {
-        questionsList: [],
-      };
-  }
+    constructor() {
+        super();
+        this.state = {
+            questionsList: [],
+        };
+    }
     
-    
+    static navigationOptions = {
+        headerShown: false,
+    }
+
     _goSeriesScreen = () => {
         console.log("Go Series");
         
@@ -23,6 +27,7 @@ class HomeScreen extends React.Component {
         this.props.navigation.navigate('SeriesScreen', { indexInSeries: 0 } )   
 //        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
     }
+
 
     render() {
 
@@ -37,37 +42,32 @@ class HomeScreen extends React.Component {
 
 //        console.log("Go Séries : Qthis.props = ", this.props)
   //      console.log("Go Séries : QuestionStats List = ", this.props.QuestionStatsList)
-
+//     <Emoji name='flushed' style={{ fontSize: 30 }}/>
 
   
         return(
-          <View style={styles.main_view}>
-            <View style={styles.title_view}>
-                <Text style={styles.title_text}>CAPITALES</Text>
+          <View style={Gstyles.main_view}>
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold'}}>CAPITALES</Text>
             </View>
-            <View style={styles.stats_view}>
-                <Text style={styles.stats_text}>Vous connaissez x capitales</Text>
-                <Emoji name='flushed' style={{ fontSize: 30 }}/>
+            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderWidth: '1px' }}>
+                <Text style={{ flex: 1, alignItems: 'flex-end', fontSize: 20, fontWeight: 'bold' }}>Score</Text>
+                <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%', borderWidth: '1px'}}>
+                        <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
+                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '30%'}}></View>         
+                        </View>      
+                </View>
+                <Text style={{ flex: 1, fontSize: 20, fontWeight: 'bold' }}>154</Text>
             </View>
-            <View style={styles.play_view}>
+            <View style={{ flex: 3 }}>  
                 <TouchableOpacity style={styles.button}
                         onPress={() => { this._goSeriesScreen() }}>
                         <Text style={styles.button_text}>JOUER</Text>
                 </TouchableOpacity>
             </View>
-            <View style={styles.play_view}>
-              <TouchableOpacity style={styles.button}
-                          onPress={() => { this._essaiAsyncStorage() }}>
-                          <Text style={styles.button_text}>Essai STore key value</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button}
-                      onPress={() => { this._getData() }}>
-                      <Text style={styles.button_text}>Get Data</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button}
-                      onPress={() => { this.props.navigation.navigate('GlobalQuestionStatsScreen', {}) }}>
-                      <Text style={styles.button_text}>Get All Keys</Text>
-              </TouchableOpacity>
+            <View style={{ flex: 4 }}>
+            </View>
+            <View style={{ flex: 4 }}> 
             </View>
           </View>  
         )
@@ -75,10 +75,6 @@ class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    main_view: {
-        flex: 1,
-        marginTop: 30
-    },
     title_view: {
         flex:1
     },
