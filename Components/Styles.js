@@ -17,7 +17,37 @@ export const Gstyles = StyleSheet.create({
         flex: 1, 
         marginTop: 20, 
         backgroundColor: COLORS.generalBackgroundColor
-    }
+    },
+    button: {
+        height: 50,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        borderBottomColor: 'steelblue',
+        borderBottomWidth: 5,
+        backgroundColor: 'dodgerblue',
+        margin: 5
+    },
+    button_inactive: {
+        height: 50,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold',
+        backgroundColor: 'lightgrey',
+        margin: 5
+    },
+    button_text: {
+        fontSize: 25,
+        color: 'white',
+        padding: 10
+    },
+    check_text_inactive: {
+        fontSize: 25,
+        color: 'darkgrey',
+        padding: 10
+    },
 })
 
 

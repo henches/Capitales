@@ -216,23 +216,23 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={styles.check_text_active}> {responses[0].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[0].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={styles.check_text_active}> {responses[1].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[1].capital} </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2]), level }}>
-                        <Text style={styles.check_text_active}> {responses[2].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[2].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3]), level }}>
-                        <Text style={styles.check_text_active}> {responses[3].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -242,39 +242,39 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={styles.check_text_active}> {responses[0].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[0].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={styles.check_text_active}> {responses[1].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[1].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2], level) }}>
-                        <Text style={styles.check_text_active}> {responses[2].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[2].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3], level) }}>
-                        <Text style={styles.check_text_active}> {responses[3].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[4], level) }}>
-                        <Text style={styles.check_text_active}> {responses[4].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[4].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[5], level) }}>
-                        <Text style={styles.check_text_active}> {responses[5].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[5].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[6], level) }}>
-                        <Text style={styles.check_text_active}> {responses[6].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[6].capital} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[7], level) }}>
-                        <Text style={styles.check_text_active}> {responses[7].capital} </Text>
+                        <Text style={Gstyles.button_text}> {responses[7].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -284,39 +284,39 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={styles.check_text_active}> {responses[0].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[0].state} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={styles.check_text_active}> {responses[1].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[1].state} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2], level) }}>
-                        <Text style={styles.check_text_active}> {responses[2].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[2].state} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3], level) }}>
-                        <Text style={styles.check_text_active}> {responses[3].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[3].state} </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[4], level) }}>
-                        <Text style={styles.check_text_active}> {responses[4].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[4].state} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[5], level) }}>
-                        <Text style={styles.check_text_active}> {responses[5].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[5].state} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[6], level) }}>
-                        <Text style={styles.check_text_active}> {responses[6].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[6].state} </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[7], level) }}>
-                        <Text style={styles.check_text_active}> {responses[7].state} </Text>
+                        <Text style={Gstyles.button_text}> {responses[7].state} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -324,12 +324,12 @@ class SeriesScreen extends React.Component {
         else if (level == 3) { // Text input
             question = queres.state
             if (this.state.inputResponse.localeCompare("") == 0) {
-                checkButtonStyle = styles.button_inactive
-                checkTextButtonStyle = styles.check_text_inactive
+                checkButtonStyle = Gstyles.button_inactive
+                checkTextButtonStyle = Gstyles.check_text_inactive
             }
             else {
-                checkButtonStyle = styles.button
-                checkTextButtonStyle = styles.check_text_active
+                checkButtonStyle = Gstyles.button
+                checkTextButtonStyle = Gstyles.button_text
             }
             responseView = 
             <View style={styles.text_response_view}>
@@ -405,8 +405,8 @@ class SeriesScreen extends React.Component {
                             </View>
                             { cheeringView }
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <TouchableOpacity style={[styles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideResponseResults() }}>
-                                    <Text style={{ padding: 10, fontSize: 25, color: 'white' }}>OK</Text>
+                                <TouchableOpacity style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideResponseResults() }}>
+                                    <Text style={Gstyles.button_text}>OK</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -464,40 +464,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: "#8BED4F"
        },
-    button: {
-        height: 50,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontWeight: 'bold',
-        borderBottomColor: 'steelblue',
-        borderBottomWidth: 5,
-        backgroundColor: 'dodgerblue',
-        margin: 5
-    },
-    button_inactive: {
-        height: 50,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontWeight: 'bold',
-        backgroundColor: 'lightgrey',
-        margin: 5
-    },
     modal_view: {
         backgroundColor: "#fff",
         width: 300,
         height: 300
-    },
-    check_text_active: {
-        fontSize: 25,
-        color: 'white',
-        padding: 10
-    },
-    check_text_inactive: {
-        fontSize: 25,
-        color: 'darkgrey',
-        padding: 10
     },
 })
 
