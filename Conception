@@ -1,0 +1,37 @@
+Queres :
+- state
+- capital
+- image
+
+
+
+QueresStats :
+- id
+
+- queres : Queres
+
+- level
+- totalPoints
+- rightResponsesNb
+- wrongResponsesNb
+
+
+
+QueresSeries
+- id
+
+- state
+- capital
+- image
+
+- level
+- totalPoints
+- rightResponsesNb
+- wrongResponsesNb
+
+- proposedResponsesList
+
+- isResponseRight
+- givenResponse
+- rNbForNextLevel
+- pointsWon

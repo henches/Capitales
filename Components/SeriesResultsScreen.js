@@ -56,13 +56,14 @@ class SeriesResultsScreen extends React.Component {
                         <FlatList
                             data={this.props.QueresSeries}
                             renderItem={({ item }) => (
-                                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
+                                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
                                                 backgroundColor: item.isResponseRight ? COLORS.okButtonBackgroundColor : COLORS.nokButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
-                                    <Emoji name={item.isResponseRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: 30 }}/>
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}> {item.state} </Text>
-                                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}> {item.givenResponse}
-                                    </Text>
+                                    <Emoji name={item.isResponseRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: 20 }}/>
+                                    <Text style={{ fontSize: 15, color: 'white' }}> {item.state} </Text>
+                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.givenResponse}</Text>
+                                    <Text style={{ fontSize: 15, color: 'white' }}> {item.pointsWon}</Text>
+                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.totalPoints}</Text>
                                 </View>
                             )}
                             keyExtractor={item => item.id}

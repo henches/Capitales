@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesList from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
+import { initPoints } from './Helpers/GlobalFunctions'
 
 
 
@@ -22,35 +23,43 @@ export default class App extends React.Component {
         SeriesLength: 2,
         Level0 : {
           QrNb: 2,
+          Points : 1,
           ProposedResponsesNb: 4,
           Image: i0
         },
         Level1 : {
           QrNb: 2,
+          Points: 2,
           ProposedResponsesNb: 8,
           Image: i1
         },
         Level2 : {
           QrNb: 2,
+          Points: 3,
           ProposedResponsesNb: 8,
           Image: i2
         },
         Level3 : {
           QrNb: 2,
+          Points: 5,
           Image: i3
         },
         Level4 : {
           Image: i4
         }
+
     }
 
     // Variables globales
     global.G_StatesList = StatesList   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
     global.G_InitialQuestionStatsList = []
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
+    global.G_Points = []
 
+    initPoints()
     initSounds()
   }
+
 
   render() {
 
