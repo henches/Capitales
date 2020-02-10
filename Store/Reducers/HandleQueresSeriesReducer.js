@@ -25,7 +25,7 @@ _findIndexInStateList = (normalDirection, statesList, question) => {
 }
 
 _createProposedResponsesList = (normalDirection, responsesNb, question) => { // normalDirection : booleen = le sens dans lequel on pose la question : true : "quelle est la capitale du pays", false: "l'inverse"
-    console.log("Reducer HandleQueresSeriesReducer / QUERES_SERIES-INITIATE _createProposedResponsesList  normalDirection = ", normalDirection, "responsesNb = ", responsesNb, " question = ", question)
+    // console.log("Reducer HandleQueresSeriesReducer / QUERES_SERIES-INITIATE _createProposedResponsesList  normalDirection = ", normalDirection, "responsesNb = ", responsesNb, " question = ", question)
     
     let myPossibleResponsesList = [];
     
@@ -58,7 +58,7 @@ function HandleQueresSeriesReducer(state = initialState, action) {
                 // Cherche une question au hasard parmi toutes les queres possibles originelles.
                 index = Math.floor(Math.random()*cloneQueresStats.length);
                 sl = cloneQueresStats[index]
-                console.log("sl = ", sl)
+                // console.log("sl = ", sl)
                 // en function du niveau de la queres : propose les listes de réponses adaptées
                 if (sl.level == 0) {
                     proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level0.ProposedResponsesNb, sl.Queres.capital)
@@ -74,9 +74,11 @@ function HandleQueresSeriesReducer(state = initialState, action) {
                 }
                 // Ajoute le test (question + les réponses proposées) à la série
                 myQueresSeries.push( { id: myQueresSeries.length.toString(), 
-                    state: sl.Queres.state, capital: sl.Queres.capital, image: sl.Queres.image, level: sl.level, rightResponsesNb: sl.rightResponsesNb, wrongResponsesNb: sl.levelwrongResponsesNb, totalPoints: sl.totalPoints, 
+                    state: sl.Queres.state, capital: sl.Queres.capital, image: sl.Queres.image, 
                     proposedResponses: proposedResponsesList, 
-                    isResponseRight: false, givenResponse: "", pointsWon: 0,  } )
+                    level: sl.level, rightResponsesNb: sl.rightResponsesNb, wrongResponsesNb: sl.wrongResponsesNb, totalPoints: sl.totalPoints, 
+                    isResponseRight: false, givenResponse: "", isTypo: false, pointsWon: 0, 
+                    afterResponseLevel: sl.level, afterResponseRightResponsesNb: 0,  afterResponseWrongResponsesNb: 0, afterResponseTotalPoints: 0 })
                 // Supprime la question choisie au hasard pour qu'on le sélectionne plus par la suite
                 cloneQueresStats.splice(index,1)
             }
@@ -86,30 +88,35 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             
             nextState = {
                 ...state,
-                    QueresSeries : myQueresSeries
+                QueresSeries : myQueresSeries
             }
             return nextState || state
-        case 'QUERES_SERIES-ADD_ANSWER' :   // value = { index = index de la queresSerie en cours,  isResponseRight, givenResponse }
+        case 'QUERES_SERIES-ADD_ANSWER' :   // value = { index = index de la queresSerie en cours,  isResponseRight, givenResponse, isTypo }
             console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER value = ", action.value)
             let queresSeries = [...state.QueresSeries]
-            const eltOfSeries = queresSeries[action.value.index]
-            const levelElements = G_GetLevelFromRightResponsesNb(queres.rightResponsesNb+1)
-            
-            eltOfSeries.level = levelElements.level
-            eltOfSeries.rNbForNextLevel = levelElements.rNbForNextLevel
-            eltOfSeries.image = levelElements.image
+            const queres = queresSeries[action.value.index]
 
-            eltOfSeries.totalPoints = eltOfSeries.isResponseRight ? G_GetTotalPointsForRightResponseNb(eltOfSeries.rightResponsesNb+1) : eltOfSeries.totalPoints
+            queres.isResponseRight = action.value.isResponseRight
+            queres.givenResponse = action.value.givenResponse 
+            queres.isTypo = action.value.isTypo 
+            queres.pointsWon = queres.isResponseRight ? G_GetAdditionalPointsForRightResponseNb(queres.rightResponsesNb+1) : 0
 
-            eltOfSeries.isResponseRight = action.value.isResponseRight
-            eltOfSeries.givenResponse = action.value.givenResponse 
-            eltOfSeries.pointsWon = eltOfSeries.isResponseRight ? G_GetAdditionalPointsForRightResponseNb(eltOfSeries.rightResponsesNb+1) : 0
+            const afterResponseRightResponsesNb = queres.rightResponsesNb + (queres.isResponseRight ? 1 : 0)
+            const afterResponseWrongResponsesNb = queres.wrongResponsesNb + (queres.isResponseRight ? 0 : 1)
+            const afterResponseElts = G_GetLevelFromRightResponsesNb(afterResponseRightResponsesNb)
+
+            queres.afterResponseLevel = afterResponseElts.level
+            queres.afterResponseRightResponsesNb = afterResponseRightResponsesNb 
+            queres.afterResponseWrongResponsesNb = afterResponseWrongResponsesNb 
+            //            queres.afterResponseRNbForNextLevel = levelElements.rNbForNextLevel
+            queres.afterResponseTotalPoints = G_GetTotalPointsForRightResponseNb(afterResponseRightResponsesNb)
+
 
 //            console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER elt = ", elt)
             console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER queresSeries = ", G_SerializeQueresList(queresSeries))
             nextState = {
                 ...state,
-                    QueresSeries: queresSeries
+                   QueresSeries: queresSeries
             }
             return nextState || state
         default:

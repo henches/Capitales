@@ -31,5 +31,6 @@
   "devDependencies": {
     "babel-preset-expo": "^7.1.0"
   },
+  "type": "module",
   "private": true
 }

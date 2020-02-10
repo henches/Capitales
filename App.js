@@ -20,34 +20,35 @@ export default class App extends React.Component {
     i4 = require('./Images/StarLevel-4.png')
     
     global.G_Config = {
-        SeriesLength: 2,
-        Level0 : {
+      SeriesLength: 2,
+      Level: [
+        {
           QrNb: 2,
           Points : 1,
           ProposedResponsesNb: 4,
           Image: i0
         },
-        Level1 : {
+        {
           QrNb: 2,
           Points: 2,
           ProposedResponsesNb: 8,
           Image: i1
         },
-        Level2 : {
+        {
           QrNb: 2,
           Points: 3,
           ProposedResponsesNb: 8,
           Image: i2
         },
-        Level3 : {
+        {
           QrNb: 2,
           Points: 5,
           Image: i3
         },
-        Level4 : {
+        {
           Image: i4
         }
-
+      ]
     }
 
     // Variables globales

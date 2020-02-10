@@ -63,7 +63,7 @@ class SeriesResultsScreen extends React.Component {
                                     <Text style={{ fontSize: 15, color: 'white' }}> {item.state} </Text>
                                     <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.givenResponse}</Text>
                                     <Text style={{ fontSize: 15, color: 'white' }}> {item.pointsWon}</Text>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.totalPoints}</Text>
+                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.afterResponseTotalPoints}</Text>
                                 </View>
                             )}
                             keyExtractor={item => item.id}

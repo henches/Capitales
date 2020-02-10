@@ -32,13 +32,14 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <View style={{ flex: 10 }}>
                         <FlatList
 //                            data={this.props.QuestionStatsList}
-                            data={this.props.QuestionStatsList.sort((a,b) => a.rightResponsesNb < b.rightResponsesNb)}
+                            data={this.props.QuestionStatsList.sort((a,b) => { return (b.totalPoints - a.totalPoints)})}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: COLORS.okButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.id} </Text>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.Queres.capital}</Text>
+                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.totalPoints}</Text>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.rightResponsesNb}</Text>
                                     <Text style={{ fontSize: 20, color: 'white' }}> {item.wrongResponsesNb}</Text>
                                 </View>

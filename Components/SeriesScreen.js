@@ -25,11 +25,7 @@ class SeriesScreen extends React.Component {
 
     state = {
         modalVisible: false,
-        chosenResponse: "",
-        inputResponse: "",
-        isResponseRight: true,
-        isTypo: false,
-        levelImage: null
+        inputResponse: "",   // Réponse saisie au clavier
     }
 
     _goSeriesScreen = () => {
@@ -53,34 +49,36 @@ class SeriesScreen extends React.Component {
 
     _displayResponseResults = (qr, myResponse, level) => {
         // console.log('*****************************   go Popup ****************************')
-        this.setState({ chosenResponse: myResponse.capital })
+        isMyResponseRight = false
+        myIsTypo = false
         if (level == 3) {
             const levenshtein = require('js-levenshtein')
             lev = levenshtein(qr.capital, myResponse.capital) 
             if (lev <= 2) {
-                isResponseRight = true
-                this.setState({ isTypo: (lev != 0) })
+                isMyResponseRight = true
+                myIsTypo =  (lev != 0)
             }
             else
-                isResponseRight = false
+                isMyResponseRight = false
         } 
         else {
-            isResponseRight = (myResponse.capital.localeCompare(qr.capital) == 0)
+            isMyResponseRight = (myResponse.capital.localeCompare(qr.capital) == 0)
         }
 
-        const action = { type: 'QUERES_SERIES-ADD_ANSWER', value: { index : this.props.navigation.state.params.indexInSeries, isResponseRight: this.state.isResponseRight, givenResponse: this.state.chosenResponse } }
-        this.props.dispatch(action)
- 
-        playSound(isResponseRight)
+       const action = { type: 'QUERES_SERIES-ADD_ANSWER', value: { index : this.props.navigation.state.params.indexInSeries, isResponseRight: isMyResponseRight, givenResponse: myResponse.capital, isTypo: myIsTypo } }
+       this.props.dispatch(action)
 
-        this.setState({ isResponseRight: isResponseRight })
+
+        playSound(isMyResponseRight)
+
         this.setState({ modalVisible: true })
     }
 
     __hideResponseResults = () => {
         // console.log('*****************************   Quit Popup ****************************')
+ 
        this.setState({ modalVisible: false })
-        this._goSeriesScreen();
+       this._goSeriesScreen();
     }
 
     render() {
@@ -95,17 +93,26 @@ class SeriesScreen extends React.Component {
         rNbForNextLevel = queres.rNbForNextLevel
         // level = 3 // A fins de TEST du level 3
         // rNbForNextLevel = 6 // A fins de TEST du level 3
-        levelImage = G_GetImageForLevel(level)
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
+
+
 
         // Progress bar for the series of tests
         let progressWidth = ((indexInSeries+1) / G_Config.SeriesLength)*100+'%'
 
         // Popup Elements 
         // Popup CSS
+
+
+        
+        const afterResponseLevel = queres.afterResponseLevel
+        const levelChanged = (afterResponseLevel != level)
+        // const afterResponseRNbForNextLevel = queres.afterResponseRNbForNextLevel
+        const levelImage = levelChanged ? G_GetImageForLevel(afterResponseLevel) : G_GetImageForLevel(level) // l'image du niveau pour le popup ET pour la queres affichée (le nouveau niveau doit être mis à jour)
+
         popupVerdict = ''
-        if (this.state.isResponseRight) {
+        if (queres.isResponseRight) {
             popupVerdict = "BRAVO !"
             pointsWon = queres.pointsWon
             popupPointsWon = "+ "+pointsWon+" pt"+(pointsWon>1?"s":"")+" !"
@@ -131,51 +138,51 @@ class SeriesScreen extends React.Component {
         // console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
         if (level == 0) {
             popupConfirmationText = "La capitale de "
-            if (rNbForNextLevel == 1 && this.state.isResponseRight) {
+            if (levelChanged && queres.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 popupLevelImage = levelImage
             }
-            else if (this.state.isResponseRight) {
+            else if (queres.isResponseRight) {
 //                popupCheeringText = "plus que " + (rNbForNextLevel-1)+ " bonnes réponses pour le niveau 1"
             }
         }
         else if (level == 1) {
             popupConfirmationText = "La capitale de "
-            if (rNbForNextLevel == 1 && this.state.isResponseRight) {
+            if (levelChanged && queres.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 popupLevelImage = levelImage
             }
-            else if (this.state.isResponseRight) {
+            else if (queres.isResponseRight) {
 //                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 2"
             }
         }
         else if (level == 2) {
             popupConfirmationText = "Le pays de "
-            if (rNbForNextLevel == 1  && this.state.isResponseRight) {
+            if (levelChanged && queres.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 popupLevelImage = levelImage
             }
-            else if (this.state.isResponseRight) {
+            else if (queres.isResponseRight) {
 //                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 3"
             }
         }
         else if (level == 3) {
             popupFlexSize = 5
             popupConfirmationText = "La capitale de "
-            if (this.state.isResponseRight && this.state.isTypo) {
+            if (queres.isResponseRight && queres.isTypo) {
                 typoWarningText = "(attention : il y a une faute de frappe)"
             }
-            if (rNbForNextLevel == 1  && this.state.isResponseRight) {
+            if (levelChanged  && queres.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 popupLevelImage = levelImage
             }
-            else if (this.state.isResponseRight) {
+            else if (queres.isResponseRight) {
 //                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 4"
             }
         }
         else if (level == 4) { // Should Never Happen
             popupConfirmationText = "Level4 : shoud never Happen"
-            if (rNbForNextLevel == 1  && this.state.isResponseRight)
+            if (levelChanged && queres.isResponseRight)
                 popupCheeringText = "Level4 : shoud never Happen my dear"
             else if (this.state.isResponseRight) {
                 popupCheeringText = "Bravo mais ne doit jamais arriver !"
@@ -188,13 +195,13 @@ class SeriesScreen extends React.Component {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
         </View>
-        if (rNbForNextLevel == 1  && this.state.isResponseRight)
+        if (levelChanged && queres.isResponseRight)
             cheeringView = 
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{  color: popupTextColor, fontSize: 20, fontWeight: 'bold' }}>{popupCheeringText} </Text>
                     <Image style={{ width: 70, height: 70 }} source={popupLevelImage} />
                 </View>
-        else if (this.state.isResponseRight) 
+        else if (queres.isResponseRight) 
             cheeringView = 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>

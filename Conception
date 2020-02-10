@@ -24,14 +24,22 @@ QueresSeries
 - capital
 - image
 
+- proposedResponsesList
+
 - level
-- totalPoints
 - rightResponsesNb
 - wrongResponsesNb
+// - rNbForNextLevel
+- totalPoints
 
-- proposedResponsesList
 
 - isResponseRight
 - givenResponse
-- rNbForNextLevel
+- isTypo
 - pointsWon
+
+- afterResponseLevel
+- afterResponseRightResponsesNb
+- afterResponseWrongResponsesNb
+// - afterResponseRNbForNextLevel
+- afterResponseTotalPoints

@@ -1,4 +1,0 @@
-- Empêcher le back sur les écrans jeu
-- QUERES_STATS-INITIATE : me parait pas appelé à bon escient -> on ne devrat pas revenir à la liste du début à chaque debut de série. Ne devrait être appelé qu'une seule fois à l'init.
-- vérifier la bonne déclaration du state dans jeu.
-
