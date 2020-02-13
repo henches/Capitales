@@ -67,10 +67,10 @@ class HomeScreen extends React.Component {
                         <Text style={{ fontSize: 12 }}>0</Text>
                     </View>
                     <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>680</Text>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{G_TotalPoints}</Text>
                     </View>
                     <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
-                        <Text style={{ fontSize: 12 }}>5400</Text>
+                        <Text style={{ fontSize: 12 }}>{G_MaxPoints}</Text>
                     </View>
                 </View>
             </View>

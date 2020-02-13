@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesList from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
-import { initPoints } from './Helpers/GlobalFunctions'
+import { G_InitPoints } from './Helpers/GlobalFunctions'
 
 
 
@@ -46,6 +46,7 @@ export default class App extends React.Component {
           Image: i3
         },
         {
+          Points: 0,
           Image: i4
         }
       ]
@@ -55,9 +56,12 @@ export default class App extends React.Component {
     global.G_StatesList = StatesList   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
     global.G_InitialQuestionStatsList = []
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
-    global.G_Points = []
+    global.G_TotalPoints = 0
 
-    initPoints()
+    global.G_Points = []
+    G_InitPoints()
+    global.G_MaxPoints = G_Points[G_Points.length-1]*G_StatesList.length
+
     initSounds()
   }
 

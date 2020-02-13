@@ -23,6 +23,7 @@ export function G_GetLevelFromRightResponsesNb(rightResponsesNb) {
 
     lev = 0
     respNb = 0
+
     
     if (rr >= n0+n1+n2+n3) {
         lev = 4
@@ -64,7 +65,7 @@ export function G_GetAdditionalPointsForRightResponseNb(rightResponsesNb) {
     return G_Config.Level[r.level].Points
 }
 
-export function initPoints() {
+export function G_InitPoints() {
     points = 0
     G_Points.push(points)
     for (l = 0; l < 4; l++) {
@@ -78,12 +79,20 @@ export function initPoints() {
     console.log("POINTS")
     for (i = 0; i < G_Points.length; i++)
       console.log(G_Points[i], " ")
-      */
+    */
 }
 
-
+export function G_CalculateTotalPoints(QuestionStatsList) {
+    totalPoints = 0
+    for (i = 0; i < QuestionStatsList.length; i++) {
+        totalPoints += QuestionStatsList[i].totalPoints
+    }
+    return totalPoints
+}
 
 export function G_GetTotalPointsForRightResponseNb(rightResponsesNb) {
+    if (rightResponsesNb >= G_Points.length-1)
+        rightResponsesNb = G_Points.length-1
     points = G_Points[rightResponsesNb]
     console.log("rightResponsesNb  :", rightResponsesNb, " points : ", points)
     return points

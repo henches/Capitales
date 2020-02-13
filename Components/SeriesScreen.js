@@ -181,11 +181,10 @@ class SeriesScreen extends React.Component {
             }
         }
         else if (level == 4) { // Should Never Happen
-            popupConfirmationText = "Level4 : shoud never Happen"
-            if (levelChanged && queres.isResponseRight)
-                popupCheeringText = "Level4 : shoud never Happen my dear"
-            else if (this.state.isResponseRight) {
-                popupCheeringText = "Bravo mais ne doit jamais arriver !"
+            popupFlexSize = 5
+            popupConfirmationText = "La capitale de "
+            if (queres.isResponseRight && queres.isTypo) {
+                typoWarningText = "(attention : il y a une faute de frappe)"
             }
         }
 
@@ -322,6 +321,30 @@ class SeriesScreen extends React.Component {
             </View>
         }
         else if (level == 3) { // Text input
+            question = queres.state
+            if (this.state.inputResponse.localeCompare("") == 0) {
+                checkButtonStyle = Gstyles.button_inactive
+                checkTextButtonStyle = Gstyles.check_text_inactive
+            }
+            else {
+                checkButtonStyle = Gstyles.button
+                checkTextButtonStyle = Gstyles.button_text
+            }
+            responseView = 
+            <View style={styles.text_response_view}>
+                    <TextInput
+                        style={{ fontSize:20, height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
+                        placeholder='Ecris la capitale'
+                        placeholderTextColor='dimgrey'
+                        onChangeText={(text) => this.setState({inputResponse: text})}
+                    />
+                    <TouchableOpacity style={checkButtonStyle}
+                        onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
+                        <Text style={checkTextButtonStyle}> Vérifier </Text>
+                    </TouchableOpacity>
+            </View>
+        }
+        else if (level == 4) { // Text input  (idem niveau 3)
             question = queres.state
             if (this.state.inputResponse.localeCompare("") == 0) {
                 checkButtonStyle = Gstyles.button_inactive

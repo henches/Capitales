@@ -10,22 +10,6 @@
             "type": "reactnative",
             "request": "launch",
             "platform": "exponent"
-        },
-        {
-            "name": "Debug iOS",
-            "cwd": "${workspaceFolder}",
-            "type": "reactnative",
-            "request": "launch",
-            "platform": "ios"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/node_modules/expo/AppEntry.js"
         }
     ]
 }

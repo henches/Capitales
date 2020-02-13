@@ -29,16 +29,16 @@ _createProposedResponsesList = (normalDirection, responsesNb, question) => { // 
     
     let myPossibleResponsesList = [];
     
-    cloneStatesList = [...G_StatesList];
-    indexOfRightQueres = this._findIndexInStateList(normalDirection, cloneStatesList, question)
-    rightQueres = cloneStatesList[indexOfRightQueres]
+    let cloneStatesList = [...G_StatesList];
+    const indexOfRightQueres = this._findIndexInStateList(normalDirection, cloneStatesList, question)
+    const rightQueres = cloneStatesList[indexOfRightQueres]
     cloneStatesList.splice(indexOfRightQueres,1); // on enlève la bonne question-réponse de la liste clone des questions-reponses
-    for (var i = 0; i < responsesNb-1; i++) {
+    for (let i = 0; i < responsesNb-1; i++) {
         randomIndex = Math.floor(Math.random()*cloneStatesList.length); // on choisit une question-réponse au hasard dans la liste des questions répon
         myPossibleResponsesList.push(cloneStatesList[randomIndex]) // on ajoute la Queres dans la liste des réponses qu'on va proposer
         cloneStatesList.splice(randomIndex,1) // on supprime la Queres de la liste clone
     }
-    index = Math.floor(Math.random()*myPossibleResponsesList.length) // on choisit l'endroit de la liste où l'on va insérer la bonne réponse
+    let index = Math.floor(Math.random()*myPossibleResponsesList.length) // on choisit l'endroit de la liste où l'on va insérer la bonne réponse
     myPossibleResponsesList.splice(index, 0, rightQueres) //on insère la bonne réponse dans la liste
 
 
@@ -54,22 +54,25 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             let myQueresSeries = []
             
             let cloneQueresStats = [...action.value] // Recopie de queresSTats
-            for (var i = 0; i < G_Config.SeriesLength; i++) {
+            for (let i = 0; i < G_Config.SeriesLength; i++) {
                 // Cherche une question au hasard parmi toutes les queres possibles originelles.
-                index = Math.floor(Math.random()*cloneQueresStats.length);
-                sl = cloneQueresStats[index]
+                let index = Math.floor(Math.random()*cloneQueresStats.length);
+                let sl = cloneQueresStats[index]
                 // console.log("sl = ", sl)
                 // en function du niveau de la queres : propose les listes de réponses adaptées
                 if (sl.level == 0) {
-                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level0.ProposedResponsesNb, sl.Queres.capital)
+                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level[0].ProposedResponsesNb, sl.Queres.capital)
                 }
                 else if (sl.level == 1) {
-                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level1.ProposedResponsesNb, sl.Queres.capital)
+                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level[1].ProposedResponsesNb, sl.Queres.capital)
                 }
                 else if (sl.level == 2) {
-                    proposedResponsesList = this._createProposedResponsesList(false, G_Config.Level2.ProposedResponsesNb, sl.Queres.state)
+                    proposedResponsesList = this._createProposedResponsesList(false, G_Config.Level[2].ProposedResponsesNb, sl.Queres.state)
                 }
                 else if (sl.level == 3) {
+                    proposedResponsesList = []
+                }
+                else if (sl.level == 4) {
                     proposedResponsesList = []
                 }
                 // Ajoute le test (question + les réponses proposées) à la série
@@ -97,9 +100,9 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             const queres = queresSeries[action.value.index]
 
             queres.isResponseRight = action.value.isResponseRight
-            queres.givenResponse = action.value.givenResponse 
-            queres.isTypo = action.value.isTypo 
-            queres.pointsWon = queres.isResponseRight ? G_GetAdditionalPointsForRightResponseNb(queres.rightResponsesNb+1) : 0
+            queres.givenResponse = action.value.givenResponse
+            queres.isTypo = action.value.isTypo
+            queres.pointsWon = queres.isResponseRight ? G_GetAdditionalPointsForRightResponseNb(queres.rightResponsesNb) : 0
 
             const afterResponseRightResponsesNb = queres.rightResponsesNb + (queres.isResponseRight ? 1 : 0)
             const afterResponseWrongResponsesNb = queres.wrongResponsesNb + (queres.isResponseRight ? 0 : 1)
