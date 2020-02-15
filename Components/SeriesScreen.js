@@ -51,7 +51,7 @@ class SeriesScreen extends React.Component {
         // console.log('*****************************   go Popup ****************************')
         isMyResponseRight = false
         myIsTypo = false
-        if (level == 3) {
+        if (level == 3 || level == 4) {
             const levenshtein = require('js-levenshtein')
             lev = levenshtein(qr.capital, myResponse.capital) 
             if (lev <= 2) {

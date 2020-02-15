@@ -34,7 +34,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 elt.totalPoints = queres.afterResponseTotalPoints
                 elt.rightResponsesNb = queres.afterResponseRightResponsesNb
                 elt.wrongResponsesNb = queres.afterResponseWrongResponsesNb
-                G_TotalPoints += elt.totalPoints
+                G_TotalPoints += queres.pointsWon
             }
             nextState = {
                 ...state,

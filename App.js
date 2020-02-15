@@ -20,7 +20,7 @@ export default class App extends React.Component {
     i4 = require('./Images/StarLevel-4.png')
     
     global.G_Config = {
-      SeriesLength: 2,
+      SeriesLength: 6,
       Level: [
         {
           QrNb: 2,
@@ -63,6 +63,7 @@ export default class App extends React.Component {
     global.G_MaxPoints = G_Points[G_Points.length-1]*G_StatesList.length
 
     initSounds()
+    console.log("STAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAART")
   }
 
 

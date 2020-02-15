@@ -10,9 +10,6 @@ class HomeScreen extends React.Component {
     
     constructor() {
         super();
-        this.state = {
-            questionsList: [],
-        };
     }
     
     static navigationOptions = {
@@ -59,7 +56,7 @@ class HomeScreen extends React.Component {
                 <Text style={{ fontSize: 20 }}>Score</Text>
                 <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
                         <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '30%'}}></View>         
+                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '50%'}}></View>         
                         </View>      
                 </View>
                 <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
