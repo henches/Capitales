@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
@@ -70,9 +70,12 @@ class SeriesResultsScreen extends React.Component {
                         />
                     </View>
                     <Divider/>
-                    <View style={{ flex: 2 }}>
-                        <Button title='Go' onPress={() => { this._goStatView() }}/>
-                    </View>               
+                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
+                        <TouchableOpacity style={Gstyles.button}
+                                onPress={() => { this._goHomeScreen() }}>
+                                <Text style={Gstyles.button_text}>HOME</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>  
         )
     }

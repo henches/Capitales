@@ -46,17 +46,24 @@ class HomeScreen extends React.Component {
   //      console.log("Go Séries : QuestionStats List = ", this.props.QuestionStatsList)
 //     <Emoji name='flushed' style={{ fontSize: 30 }}/>
 
-  
+        const largeur = G_TotalPoints/G_MaxPoints*100+"%"
+        progress = function(larg) {
+            return {
+                width: larg
+            }
+        }
+           
+
         return(
           <View style={Gstyles.main_view}>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
             </View>
-            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 20 }}>Score</Text>
                 <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
                         <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: '50%'}}></View>         
+                            <View style={[{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }, progress(largeur)]}></View>         
                         </View>      
                 </View>
                 <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
@@ -71,18 +78,16 @@ class HomeScreen extends React.Component {
                     </View>
                 </View>
             </View>
-            <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center' }}>  
+            <View style={{ flex: 8, flexDirection: 'column', justifyContent: 'center' }}>  
                 <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._goSeriesScreen() }}>
                         <Text style={Gstyles.button_text}>JOUER</Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 4 }}>
-            </View>
-            <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}> 
+            <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}> 
                 <TouchableOpacity style={Gstyles.button}
                             onPress={() => { this._goStatView() }}>
-                            <Text style={[Gstyles.button_text, { fontSize: 20, color:'black' }]}>Statistiques</Text>
+                            <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Statistiques</Text>
                 </TouchableOpacity>
             </View>
           </View>  

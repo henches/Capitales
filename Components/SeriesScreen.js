@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Alert, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Alert, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import { COLORS, Gstyles } from './Styles'
@@ -82,6 +82,10 @@ class SeriesScreen extends React.Component {
     }
 
     render() {
+       //  <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
+
+
+
         // console.log('SeriesScreen : state', this.state)
         // console.log('SeriesScreen : Render props', this.props)
         console.log('SeriesScreen : Render SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
@@ -385,8 +389,6 @@ class SeriesScreen extends React.Component {
                 <Divider/>
                 <View style={ styles.question_view }>
                     <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} </Text>
-                    <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>
-
                 </View>
                 <Divider/>
                 <View style={styles.image_view}>
@@ -417,23 +419,25 @@ class SeriesScreen extends React.Component {
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 6 }}></View>
-                        <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: 10}}>
-                            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupVerdict}</Text>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupPointsWon}</Text>
+                        <TouchableWithoutFeedback onPress={() => { this.__hideResponseResults() }}>
+                            <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: 10}}>
+                                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                        <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupVerdict}</Text>
+                                        <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupPointsWon}</Text>
+                                    </View>
+                                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
+                                        <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>{popupConfirmationText} {queres.state} est</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: 14, fontWeight: 'bold' }}>{typoWarningText}</Text>
+                                    </View>
+                                    { cheeringView }
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                        <TouchableOpacity style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} >
+                                            <Text style={Gstyles.button_text}>OK</Text>
+                                        </TouchableOpacity>
+                                    </View>
                             </View>
-                            <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>{popupConfirmationText} {queres.state} est</Text>
-                                <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
-                                <Text style={{ color: popupTextColor, fontSize: 14, fontWeight: 'bold' }}>{typoWarningText}</Text>
-                            </View>
-                            { cheeringView }
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <TouchableOpacity style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} onPress={() => { this.__hideResponseResults() }}>
-                                    <Text style={Gstyles.button_text}>OK</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </Modal>
             </View>

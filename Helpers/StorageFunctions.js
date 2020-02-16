@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKey = 'QuestionStats23'
+const listKey = 'QuestionStats24'
 
 function initQuestionStats() {
     console.log("InitQuestionStats")

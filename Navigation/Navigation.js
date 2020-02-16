@@ -30,7 +30,7 @@ const SearchStackNavigator = createStackNavigator({
   GlobalQuestionStatsScreen: { 
     screen: GlobalQuestionStatsScreen,
     navigationOptions: {
-      title: 'Stats générales'
+      title: 'Statistiques'
     }
   }
 })

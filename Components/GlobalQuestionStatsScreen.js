@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
@@ -25,11 +25,9 @@ class GlobalQuestionStatsScreen extends React.Component {
     render() {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 25 }}>Stats Générales !!</Text>
+                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
                     </View>
-                    <Divider/>
-                    <View style={{ flex: 10 }}>
+                    <View style={{ flex: 10, justifyContent: 'center' }}>
                         <FlatList
 //                            data={this.props.QuestionStatsList}
                             data={this.props.QuestionStatsList.sort((a,b) => { return (b.totalPoints - a.totalPoints)})}
@@ -37,20 +35,24 @@ class GlobalQuestionStatsScreen extends React.Component {
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: COLORS.okButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.id} </Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.Queres.capital}</Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.totalPoints}</Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.rightResponsesNb}</Text>
-                                    <Text style={{ fontSize: 20, color: 'white' }}> {item.wrongResponsesNb}</Text>
+                                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 20, color: 'white' }}> {item.Queres.state}</Text>
+                                        <Text style={{ fontSize: 20, color: 'white' }}> {item.Queres.capital}</Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 20, color: 'white' }}> {item.level}</Text>
+                                    </View>
                                 </View>
                             )}
                             keyExtractor={item => item.id}
                         />
                     </View>
-                    <Divider/>
-                    <View style={{ flex: 1 }}>
-                        <Button title='Marge' onPress={() => { this.props.navigation.navigate('HomeScreen', {}) }}/>
-                    </View>               
+                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
+                        <TouchableOpacity style={Gstyles.button}
+                                onPress={() => { this.props.navigation.navigate('HomeScreen', {}) }}>
+                                <Text style={Gstyles.button_text}>HOME</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>  
         )
     }
