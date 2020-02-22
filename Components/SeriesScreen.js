@@ -103,7 +103,7 @@ class SeriesScreen extends React.Component {
 
 
         // Progress bar for the series of tests
-        let progressWidth = ((indexInSeries+1) / G_Config.SeriesLength)*100+'%'
+        let progressWidth = ((indexInSeries) / G_Config.SeriesLength)*100+'%'
 
         // Popup Elements 
         // Popup CSS
@@ -432,7 +432,7 @@ class SeriesScreen extends React.Component {
                                     </View>
                                     { cheeringView }
                                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                        <TouchableOpacity style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]} >
+                                        <TouchableOpacity onPress={() => { this.__hideResponseResults() }} style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]}  >
                                             <Text style={Gstyles.button_text}>OK</Text>
                                         </TouchableOpacity>
                                     </View>

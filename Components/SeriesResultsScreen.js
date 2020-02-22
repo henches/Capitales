@@ -40,19 +40,44 @@ class SeriesResultsScreen extends React.Component {
         return nb
     }
 
+    _calculatePointsWon = (queresSeries) => {
+        let pointsWon = 0
+        for (var i=0; i < queresSeries.length; i++) {
+            pointsWon += queresSeries[i].pointsWon
+        }
+        return pointsWon
+    }
+
 
     render() {
         // console.log("Serie de réponses [1] ", this.props.GivenResponsesList[1])
         nbRightResponses = this._calculateNbOfRightResponses(this.props.QueresSeries)
+        ratio = nbRightResponses / this.props.QueresSeries.length
+        pointsWon = this._calculatePointsWon(this.props.QueresSeries)
+        cheeringText = ""
+        scoreProgressText = "Votre score s'améliore de "+pointsWon+" points !"
+        if (ratio == 0) {
+            cheeringText = "Aucune bonne réponse : essayez encore !"
+            scoreProgressText = "Pas d'amélioration du score"
+        } 
+        else if (ratio < 0,5) {
+            cheeringText = "C'est encourageant !"
+        }
+        else if (ratio >= 0,5) {
+            if (ratio == 1)
+                cheeringText = "Carton plein !! BRAVO !!!"
+            else
+                cheeringText = "Super résultat ! Bravo !!"
+        }
         console.log("nbre de bonnes réponses / nombre total de réponses ", nbRightResponses, " / ", this.props.QueresSeries.length)
         return(
-                <View style={{ flex: 3, backgroundColor: COLORS.generalBackgroundColor }}>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 25 }}>BRAVO !!</Text>
+                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
+                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 20}}>{nbRightResponses} bonnes réponses</Text>
+                        <Text style={{ fontSize: 20 }}>{cheeringText}</Text>
                     </View>
                     <Divider/>
-                    <View style={{ flex: 5 }}>
+                    <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'center'}}>
                         <FlatList
                             data={this.props.QueresSeries}
                             renderItem={({ item }) => (
@@ -70,6 +95,10 @@ class SeriesResultsScreen extends React.Component {
                         />
                     </View>
                     <Divider/>
+                    <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>  
+                        <Text style={{ fontSize: 20}}>{scoreProgressText}</Text>
+                    </View>
+                   <Divider/>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}
                                 onPress={() => { this._goHomeScreen() }}>

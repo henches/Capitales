@@ -33,7 +33,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                             data={this.props.QuestionStatsList.sort((a,b) => { return (b.totalPoints - a.totalPoints)})}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
-                                                backgroundColor: COLORS.okButtonBackgroundColor, 
+                                                backgroundColor: '#2F4F4F', 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <Text style={{ fontSize: 20, color: 'white' }}> {item.Queres.state}</Text>

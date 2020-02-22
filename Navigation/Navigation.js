@@ -33,6 +33,14 @@ const SearchStackNavigator = createStackNavigator({
       title: 'Statistiques'
     }
   }
+},
+{
+  defaultNavigationOptions: {
+    gesturesEnabled: false,
+  },
 })
+
+
+
 
 export default createAppContainer(SearchStackNavigator)
