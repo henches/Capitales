@@ -7,6 +7,7 @@ import { storeQuestionStats } from '../Helpers/StorageFunctions'
 import { G_GetImageForLevel } from '../Helpers/GlobalFunctions'
 import { TextInput } from 'react-native';
 import { playSound } from '../Helpers/SoundFunctions'
+import { QrLevelSymbol } from './QrLevelSymbol'
 
 
 
@@ -49,11 +50,11 @@ class SeriesScreen extends React.Component {
 
     _displayResponseResults = (qr, myResponse, level) => {
         // console.log('*****************************   go Popup ****************************')
-        isMyResponseRight = false
-        myIsTypo = false
+        let isMyResponseRight = false
+        let myIsTypo = false
         if (level == 3 || level == 4) {
             const levenshtein = require('js-levenshtein')
-            lev = levenshtein(qr.capital, myResponse.capital) 
+            let lev = levenshtein(qr.capital, myResponse.capital) 
             if (lev <= 2) {
                 isMyResponseRight = true
                 myIsTypo =  (lev != 0)
@@ -91,10 +92,19 @@ class SeriesScreen extends React.Component {
         console.log('SeriesScreen : Render SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
 
 
-        indexInSeries = this.props.navigation.state.params.indexInSeries
-        queres = this.props.QueresSeries[indexInSeries]
-        level = queres.level
-        rNbForNextLevel = queres.rNbForNextLevel
+        const indexInSeries = this.props.navigation.state.params.indexInSeries
+        const queres = this.props.QueresSeries[indexInSeries]
+
+        const level = queres.level
+        const afterResponseLevel = queres.afterResponseLevel
+        const levelChanged = (afterResponseLevel != level)
+
+        const rightResponsesNb = queres.rightResponsesNb
+        const afterResponseRightResponsesNb = queres.afterResponseRightResponsesNb
+        const rightResponsesNbDisplay = afterResponseRightResponsesNb  > rightResponsesNb ? afterResponseRightResponsesNb : rightResponsesNb
+
+        
+        const rNbForNextLevel = queres.rNbForNextLevel
         // level = 3 // A fins de TEST du level 3
         // rNbForNextLevel = 6 // A fins de TEST du level 3
 
@@ -110,12 +120,12 @@ class SeriesScreen extends React.Component {
 
 
         
-        const afterResponseLevel = queres.afterResponseLevel
-        const levelChanged = (afterResponseLevel != level)
         // const afterResponseRNbForNextLevel = queres.afterResponseRNbForNextLevel
         const levelImage = levelChanged ? G_GetImageForLevel(afterResponseLevel) : G_GetImageForLevel(level) // l'image du niveau pour le popup ET pour la queres affichée (le nouveau niveau doit être mis à jour)
 
-        popupVerdict = ''
+        let popupVerdict = ''
+        let pointsWon = 0
+
         if (queres.isResponseRight) {
             popupVerdict = "BRAVO !"
             pointsWon = queres.pointsWon
@@ -135,10 +145,10 @@ class SeriesScreen extends React.Component {
         }
         
         // Popup Texts
-        popupConfirmationText = "textconfirm à définir"
-        popupCheeringText = ""
-        typoWarningText = ""
-        popupFlexSize = 7
+        let popupConfirmationText = "textconfirm à définir"
+        let popupCheeringText = ""
+        let typoWarningText = ""
+        let popupFlexSize = 7
         // console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
         if (level == 0) {
             popupConfirmationText = "La capitale de "
@@ -194,7 +204,7 @@ class SeriesScreen extends React.Component {
 
     
         // Popup Cheering View
-        cheeringView = 
+        let cheeringView = 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
         </View>
@@ -213,9 +223,9 @@ class SeriesScreen extends React.Component {
         // End of Popup View
 
         // Response View
-        responses = queres.proposedResponses
-        responseView = <View> <Text> fake </Text> </View> // juste pour intialiser la variable
-        question  = ""
+        let responses = queres.proposedResponses
+        let responseView = <View> <Text> fake </Text> </View> // juste pour intialiser la variable
+        let question  = ""
         if (level == 0) { 
             question = queres.state
             responseView = 
@@ -392,13 +402,13 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={styles.image_view}>
-                    <View style={{ flex: 2, justifyContent: 'center' }}>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
                     </View>
-                    <View style={{ flex: 5, justifyContent: 'center' }}>
-                         <Image style={{ width: 220, height: 220 }} source={require('../Helpers/capital_images/paris.jpeg')} />
+                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
+                        <Image style={{ width: 220, height: 220 }} source={require('../Helpers/capital_images/paris.jpeg')} />
                     </View>
-                    <View style={{ flex: 2, justifyContent: 'center' }}>
-                         <Image style={{ width: 70, height: 70 }} source={levelImage} />
+                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+                        <QrLevelSymbol maxRightResponses={ 8 } rightResponsesNb={ rightResponsesNbDisplay } symbolHeight= { 180 }/>
                     </View>
                 </View>
                 <Divider/>
@@ -462,7 +472,7 @@ const styles = StyleSheet.create({
     image_view: {
         flex: 6, 
         flexDirection: 'row', 
-        justifyContent: 'space-evenly'
+        justifyContent: 'center'
     },
     response_view: {
         flexDirection: 'row', 

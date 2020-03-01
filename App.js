@@ -13,14 +13,18 @@ export default class App extends React.Component {
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
     super()
-    i0 = require('./Images/StarLevel-0.png')
-    i1 = require('./Images/StarLevel-1.png')
-    i2 = require('./Images/StarLevel-2.png')
-    i3 = require('./Images/StarLevel-3.png')
-    i4 = require('./Images/StarLevel-4.png')
+    let i0 = require('./Images/StarLevel-0.png')
+    let i1 = require('./Images/ImageLevel-1-atteint.png')
+    let nri1 = require('./Images/ImageLevel-1-non-atteint.png')
+    let i2 = require('./Images/ImageLevel-2-atteint.png')
+    let nri2 = require('./Images/ImageLevel-2-non-atteint.png')
+    let i3 = require('./Images/ImageLevel-3-atteint.png')
+    let nri3 = require('./Images/ImageLevel-3-non-atteint.png')
+    let i4 = require('./Images/ImageLevel-4-atteint.png')
+    let nri4 = require('./Images/ImageLevel-4-non-atteint.png')
     
     global.G_Config = {
-      SeriesLength: 2,
+      SeriesLength: 6,
       Level: [
         {
           QrNb: 2,
@@ -32,22 +36,26 @@ export default class App extends React.Component {
           QrNb: 2,
           Points: 2,
           ProposedResponsesNb: 8,
-          Image: i1
+          Image: i1,
+          NotReachedImage:nri1
         },
         {
           QrNb: 2,
           Points: 3,
           ProposedResponsesNb: 8,
-          Image: i2
+          Image: i2,
+          NotReachedImage:nri2
         },
         {
           QrNb: 2,
           Points: 5,
-          Image: i3
+          Image: i3,
+          NotReachedImage:nri3
         },
         {
           Points: 0,
-          Image: i4
+          Image: i4,
+          NotReachedImage:nri4
         }
       ]
     }

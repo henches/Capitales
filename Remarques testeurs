@@ -30,3 +30,34 @@ Suyggestion : donner plus d epoints pour les v=capitales difficiles.
 COnditions de tests :
 - explique qu'il s'agit d'un jeu de tests reduit
 
+
+Leo le 1er mars
+
+Pour les poits, tu vas faire un système de niveau au début tu as lne niveau 9 
+Patrtitionner le secore en niveau
+
+-il ne comprend pas que l niveau est associé à la capitales
+lr=es resultats de la serie ne sot pas alignés : c'erst un problè -> mettre un cadre autour du nom, de la photo et du niveau associé
+- la progression dans la série est supposé&e;
+
+Il a gagné 4 ppoits sur 220 : il n'a pas la satisfaction d'avoir gagné un niveau
+mettre des niveaux plus faciles au début.
+La barre de progression ne doit aller que po==sur e niveau dr'après.
+Ne mettre ne nombre de niveaux que dans les statistqieus
+
+Bug sur les statistiques : manque le nombre d'erreurs aussi
+
+il pourrai choisir une zone qui l'inersse plus que les autres
+Metre des propositions de capitales qui n'existent pas
+
+Serie resulyt ne mette=re que les points gg=agnés dans la série (ou pas du tout) ?
+
+Dans le niveau dr'un pauys : le 1 a disparu : le laisser (en cvert ?)
+C'rest pas très clair que c'est devenu l'inverse
+QUnad on est au niveau 4 : deja probabilite devrazut etre plus faibe puis le niveau vert ne devrait pas dépasser.
+Le testeur s'attend tout de même à gagner des pointsMessage à la fin quand il a tout reussi
+
+Dans la home page : mettre juste le resumé des choix, genre : monde et normal ou afrique, nquestions difficiles pour le joueruret et mettre le choix dans une zone de paramètres.
+
+
+Prendre en compte le temps qui passe et perdre des points

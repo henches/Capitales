@@ -60,10 +60,10 @@ class SeriesResultsScreen extends React.Component {
             cheeringText = "Aucune bonne réponse : essayez encore !"
             scoreProgressText = "Pas d'amélioration du score"
         } 
-        else if (ratio < 0,5) {
+        else if (ratio < 0.5) {
             cheeringText = "C'est encourageant !"
         }
-        else if (ratio >= 0,5) {
+        else {
             if (ratio == 1)
                 cheeringText = "Carton plein !! BRAVO !!!"
             else

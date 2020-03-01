@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
+import { QrLevelSymbol } from './QrLevelSymbol'
 
 
 class HomeScreen extends React.Component {
@@ -78,7 +79,7 @@ class HomeScreen extends React.Component {
                     </View>
                 </View>
             </View>
-            <View style={{ flex: 8, flexDirection: 'column', justifyContent: 'center' }}>  
+            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                 <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._goSeriesScreen() }}>
                         <Text style={Gstyles.button_text}>JOUER</Text>
@@ -94,6 +95,7 @@ class HomeScreen extends React.Component {
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     title_view: {

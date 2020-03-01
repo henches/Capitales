@@ -1,53 +1,62 @@
 export default data = [
-    {
-        state: 'FRANCE',
-        capital: 'Paris',
-        zone : 'Europe',
-        image: require('../Helpers/capital_images/paris.jpeg')
-    },
-    {
-        state: 'ITALIE',
-        capital: 'Rome',
-        image: require('../Helpers/capital_images/rome.jpeg')
-    },
-    {
-        state: 'ALLEMAGNE',
-        capital: 'Berlin',
-        image: require('../Helpers/capital_images/berlin.jpeg')
-    },
-    {
-        state: 'ESPAGNE',
-        capital: 'Madrid',
-        image: require('../Helpers/capital_images/madrid.jpeg')
-    },
-    {
-        state: 'PORTUGAL',
-        capital: 'Lisbonne',
-        image: require('../Helpers/capital_images/lisbonne.jpeg')
-    },
-    {
-        state: 'SUISSE',
-        capital: 'Genève',
-        image: require('../Helpers/capital_images/geneve.jpeg')
-    },
-    {
-        state: 'SUEDE',
-        capital: 'Stockholm',
-        image: require('../Helpers/capital_images/stockholm.jpeg')
-    },
-    {
-        state: 'POLOGNE',
-        capital: 'Varsovie',
-        image: require('../Helpers/capital_images/varsovie.jpeg')
-    },
-    {
-        state: 'CAMEROUN',
-        capital: 'Yaoundé',
-        image: require('../Helpers/capital_images/yaounde.jpeg')
-    },
-    {
-        state: 'CHINE',
-        capital: 'Pékin',
-        image: require('../Helpers/capital_images/paris.jpeg')
-    }
+   {
+      state: 'Afghanistan',
+      capital: 'Kaboul',
+      image: require('../Helpers/capital_images/kaboul.jpeg'),
+      continent: 'Asie',
+   },
+   {
+      state: 'Albanie',
+      capital: 'Tirana',
+      image: require('../Helpers/capital_images/tirana.jpeg'),
+      continent: 'Europe',
+   },
+     {
+      state: 'Azerbaïdjan',
+      capital: 'Bakou',
+      image: require('../Helpers/capital_images/bakou.jpeg'),
+      continent: 'Europe',
+   },
+   {
+      state: 'Gabon',
+      capital: 'Libreville',
+      image: require('../Helpers/capital_images/libreville.jpeg'),
+      continent: 'Afrique',
+   },
+   {
+      state: 'Gambie',
+      capital: 'Banjul',
+      image: require('../Helpers/capital_images/banjul.jpeg'),
+      continent: 'Afrique',
+   },
+   {
+      state: 'Kirghizstan',
+      capital: 'Bichkek',
+      image: require('../Helpers/capital_images/bichkek.jpeg'),
+      continent: 'Asie',
+   },
+  {
+      state: 'Madagascar',
+      capital: 'Antananarivo',
+      image: require('../Helpers/capital_images/antananarivo.jpeg'),
+      continent: 'Afrique',
+   },
+   {
+      state: 'Malawi',
+      capital: 'Lilongwé',
+      image: require('../Helpers/capital_images/lilongwe.jpeg'),
+      continent: 'Afrique',
+   },
+   {
+      state: 'Namibie',
+      capital: 'Windhoek',
+      image: require('../Helpers/capital_images/windhoek.jpeg'),
+      continent: 'Afrique',
+   },
+   {
+      state: 'Rwanda',
+      image: require('../Helpers/capital_images/kigali.jpeg'),
+      capital: 'Kigali',
+      continent: 'Afrique',
+   },
 ]
