@@ -2,7 +2,7 @@ import React from 'react'
 import Navigation from './Navigation/Navigation'
 import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
-import StatesList from './Helpers/statesData' // A changer pour avoir les vraies données
+import StatesListFromFile from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
 import { G_InitPoints } from './Helpers/GlobalFunctions'
 
@@ -34,21 +34,21 @@ export default class App extends React.Component {
         },
         {
           QrNb: 2,
-          Points: 2,
+          Points: 1,
           ProposedResponsesNb: 8,
           Image: i1,
           NotReachedImage:nri1
         },
         {
           QrNb: 2,
-          Points: 3,
+          Points: 1,
           ProposedResponsesNb: 8,
           Image: i2,
           NotReachedImage:nri2
         },
         {
           QrNb: 2,
-          Points: 5,
+          Points: 1,
           Image: i3,
           NotReachedImage:nri3
         },
@@ -60,11 +60,14 @@ export default class App extends React.Component {
       ]
     }
 
+
     // Variables globales
-    global.G_StatesList = StatesList   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
-    global.G_InitialQuestionStatsList = []
+    global.G_StatesList = StatesListFromFile   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
+    global.G_InitialQuestionStatsList = []  // Va contenir la liste initiale : soit G_StatesListe, soit celle récupérée sur le disque
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
     global.G_TotalPoints = 0
+
+    global.G_Zones = ['Monde', 'Europe', 'Afrique', 'AsiePacif', 'Ameriques' ]
 
     global.G_Points = []
     G_InitPoints()

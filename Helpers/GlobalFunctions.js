@@ -65,6 +65,43 @@ export function G_GetAdditionalPointsForRightResponseNb(rightResponsesNb) {
     return G_Config.Level[r.level].Points
 }
 
+
+export function InitZonesData(QuestionStatsList) {
+    
+    const zonesData = []
+    for (i = 0; i < G_Zones.length; i++) {
+            let zD = {
+                zone: G_Zones[i],
+                nb: 0,
+                oldPoints: 0,
+                points: 0,
+                maxPoints: 0
+            }
+            zonesData.push(zD)
+    }
+
+
+    zonesData[0].nb = QuestionStatsList.length
+    for (i = 0; i < QuestionStatsList.length; i++) {
+        if (QuestionStatsList[i].zone.localCompare('Europe') == 0)
+            zonesData[1].nb++
+        else if (QuestionStatsList[i].zone.localCompare('Afrique') == 0)
+            zonesData[2].nb++
+        else if (QuestionStatsList[i].zone.localCompare('AsiePacif') == 0)
+            zonesData[3].nb++
+        else if (QuestionStatsList[i].zone.localCompare('Ameriques') == 0)
+            zonesData[4].nb++
+        else 
+            console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].zone)
+    }
+
+    for (i = 0; i < G_Zones.length; i++) 
+        zonesData[i].maxPoints = zonesData[i].nb*G_Points[G_Points.length-1]
+
+
+    return zonesData
+}
+
 export function G_InitPoints() {
     points = 0
     G_Points.push(points)

@@ -1,8 +1,9 @@
 
-import { G_CalculateTotalPoints } from '../../Helpers/GlobalFunctions'
+import { G_CalculateTotalPoints, InitZonesData } from '../../Helpers/GlobalFunctions'
 
 const initialState = {
-    QuestionStatsList: []
+    QuestionStatsList: [],
+    ZonesData: [],
 }
 
 function HandleQueresStatsReducer(state = initialState, action) {
@@ -12,7 +13,8 @@ function HandleQueresStatsReducer(state = initialState, action) {
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE")
             nextState = {
                 ...state,
-                    QuestionStatsList: G_InitialQuestionStatsList
+                    QuestionStatsList: G_InitialQuestionStatsList,
+                    ZonesData: InitZonesData(G_InitialQuestionStatsList)
             }
             G_TotalPoints = G_CalculateTotalPoints(G_InitialQuestionStatsList)
             return nextState

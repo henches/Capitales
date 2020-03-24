@@ -1,0 +1,28 @@
+Objectif : rendre le jeu attrayant en récompensant les efforts du joueur.
+Il faut récompenser l'apprentissage.
+
+Pas seulement à chaque bonne réponse, mais il faut définir des étapes.
+A chaque atteinte d'une étape, il faut le féliciter.
+
+A. Les étapes pourraient être :
+
+1. Pourcentage par niveau par zone
+- 10% du niveau 1 par zone
+- 20%, 
+- etc ...
+Idem pour le niveau 2
+- etc ...
+
+2. Pourcentage par niveau (toutes zones)
+
+3. Pourcentage de points par zone
+
+4. Pourcentage de points global
+
+A chque niveau atteint -> une médaille.
+
+
+
+COmment représenter les médailles statiquement ?
+
+Un parcours 

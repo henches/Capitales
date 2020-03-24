@@ -1,43 +1,64 @@
 Queres :
 - state
 - capital
+- zone
 - image
+
+
+
+Statistics :
+QuestionStatList : list de QueresStats (toutes les questions du jeu, quelque soit la zone)
+ZoneStat : list of DataPerZone
+
+
+DataPerZone : 
+- Monde, points, oldPoints, totalPoints
+- Europe, , ,
+- AsiePacif, , ,
+- Afrique, , ,
+- Amerique, , ,
+
+
+Quand on revient de la série vers Home -> animation -> oldPoints vers Points
+Quand on revient d'autres écrans -> Affichage sans animation de Points
+(AUtres écrans : Stats, Paramètres, etc ...)
+Comment distinguer les deux : 
+- présence de OldPoints ?
+- booleen : pointsDisplayed  dans Statistics ?
+
+
+
 
 
 
 QueresStats :
 - id
-
 - queres : Queres
-
 - level
 - totalPoints
 - rightResponsesNb
 - wrongResponsesNb
+
+
+
 
 
 
 QueresSeries
 - id
-
 - state
 - capital
 - image
-
 - proposedResponsesList
-
 - level
 - rightResponsesNb
 - wrongResponsesNb
 // - rNbForNextLevel
 - totalPoints
-
-
 - isResponseRight
 - givenResponse
 - isTypo
 - pointsWon
-
 - afterResponseLevel
 - afterResponseRightResponsesNb
 - afterResponseWrongResponsesNb
