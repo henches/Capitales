@@ -65,7 +65,6 @@ export default class App extends React.Component {
     global.G_StatesList = StatesListFromFile   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
     global.G_InitialQuestionStatsList = []  // Va contenir la liste initiale : soit G_StatesListe, soit celle récupérée sur le disque
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
-    global.G_TotalPoints = 0
 
     global.G_Zones = ['Monde', 'Europe', 'Afrique', 'AsiePacif', 'Ameriques' ]
 

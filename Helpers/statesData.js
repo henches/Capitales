@@ -27,17 +27,17 @@ export default data = [
    {
       state: 'Anguilla',
       capital: 'The Valley',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Antigua et Barbuda',
       capital: 'Saint-Jean',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Argentine',
       capital: 'Buenos Aires',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Arménie',
@@ -47,7 +47,7 @@ export default data = [
    {
       state: 'Aruba',
       capital: 'Oranjestad',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Australie',
@@ -72,7 +72,7 @@ export default data = [
    {
       state: 'Bahamas',
       capital: 'Nassau',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Bahreïn',
@@ -87,7 +87,7 @@ export default data = [
    {
       state: 'Barbade',
       capital: 'Bridgetown',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Belgique',
@@ -97,7 +97,7 @@ export default data = [
    {
       state: 'Bélize',
       capital: 'Belmopan',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Bénin',
@@ -107,7 +107,7 @@ export default data = [
    {
       state: 'Iles Bermudes',
       capital: 'Hamilton',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Bhoutan',
@@ -117,7 +117,7 @@ export default data = [
    {
       state: 'Bolivie',
       capital: 'La Paz',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Bosnie-Herzégovine',
@@ -132,12 +132,12 @@ export default data = [
    {
       state: 'Brésil',
       capital: 'Brasilia',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Iles Vierges Britanniques',
       capital: 'Road Town',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Bulgarie',
@@ -167,7 +167,7 @@ export default data = [
    {
       state: 'Canada',
       capital: 'Ottawa',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Cap Vert',
@@ -177,7 +177,7 @@ export default data = [
    {
       state: 'Iles Cayman',
       capital: 'Georgetown',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Centre-Afrique',
@@ -192,7 +192,7 @@ export default data = [
    {
       state: 'Chili',
       capital: 'Santiago',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Chine',
@@ -202,7 +202,7 @@ export default data = [
    {
       state: 'Colombie',
       capital: 'Bogota',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Comoros',
@@ -222,7 +222,7 @@ export default data = [
    {
       state: 'Costa Rica',
       capital: 'San José',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Croatie',
@@ -232,7 +232,7 @@ export default data = [
    {
       state: 'Cuba',
       capital: 'La Havane',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Chypre',
@@ -257,17 +257,17 @@ export default data = [
    {
       state: 'Dominique',
       capital: 'Roseau',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'République Dominicaine',
       capital: 'Saint-Domingue',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Equateur',
       capital: 'Quito',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Egypte',
@@ -277,7 +277,7 @@ export default data = [
    {
       state: 'El Salvador',
       capital: 'San Salvador',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Guinée Equatoriale',
@@ -302,7 +302,7 @@ export default data = [
    {
       state: 'Iles Falkland',
       capital: 'Stanley',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Fidji',
@@ -327,7 +327,7 @@ export default data = [
    {
       state: 'Guyane Française',
       capital: 'Cayenne',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Polynésie Française',
@@ -377,12 +377,12 @@ export default data = [
    {
       state: 'Grenade',
       capital: 'Saint-George',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Guadeloupe',
       capital: 'Basse-Terre',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Guam',
@@ -392,7 +392,7 @@ export default data = [
    {
       state: 'Guatémala',
       capital: 'Guatémala',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Guinée',
@@ -407,17 +407,17 @@ export default data = [
    {
       state: 'Guyana',
       capital: 'Georgetown',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Haïti',
       capital: 'Port-au-Prince',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Honduras',
       capital: 'Tegucigalpa',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Chine',
@@ -477,7 +477,7 @@ export default data = [
    {
       state: 'Jamaïque',
       capital: 'Kingston',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Japon',
@@ -607,7 +607,7 @@ export default data = [
    {
       state: 'Martinique',
       capital: 'Fort-de-France',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Mauritanie',
@@ -622,7 +622,7 @@ export default data = [
    {
       state: 'Mexique',
       capital: 'Mexico',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Moldavie',
@@ -687,7 +687,7 @@ export default data = [
    {
       state: 'Nicaragua',
       capital: 'Managua',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Niger',
@@ -732,7 +732,7 @@ export default data = [
    {
       state: 'Panama',
       capital: 'Panama',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'PapouAsiePacif-Nouvelle-Guinée',
@@ -742,12 +742,12 @@ export default data = [
    {
       state: 'Paraguay',
       capital: 'Asuncion',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Pérou',
       capital: 'Lima',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Philippines',
@@ -762,7 +762,7 @@ export default data = [
    {
       state: 'Porto Rico',
       capital: 'San Juan',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Qatar',
@@ -792,7 +792,7 @@ export default data = [
    {
       state: 'Sainte-Lucie',
       capital: 'Castries',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Saint-Marin',
@@ -867,12 +867,12 @@ export default data = [
    {
       state: 'Saint Kitts et Nevis',
       capital: 'Basse Terre',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Saint-Vincent',
       capital: 'Kingstown',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Soudan',
@@ -882,7 +882,7 @@ export default data = [
    {
       state: 'Surinam',
       capital: 'Paramaribo',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Swaziland',
@@ -937,7 +937,7 @@ export default data = [
    {
       state: 'Trinidad et Tobago',
       capital: 'Port d Espagne',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Tunisie',
@@ -957,7 +957,7 @@ export default data = [
    {
       state: 'Turks et Caicos',
       capital: 'Grand Turk',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Tuvalu',
@@ -987,12 +987,12 @@ export default data = [
    {
       state: 'Etats-Unis',
       capital: 'Washington',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Uruguay',
       capital: 'Montevideo',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Ouzbékistan',
@@ -1012,7 +1012,7 @@ export default data = [
    {
       state: 'Vénézuela',
       capital: 'Caracas',
-      continent: 'Amériques',
+      continent: 'Ameriques',
    },
    {
       state: 'Vietnam',

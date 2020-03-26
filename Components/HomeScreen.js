@@ -43,7 +43,7 @@ class HomeScreen extends React.Component {
         Animated.timing(
             this.state.horizontalPosition,
             {
-              toValue: G_TotalPoints/G_MaxPoints*100+100,
+              toValue: this.state.ZonesData[0].points/this.state.ZonesData[0].maxPoints*100+100,
               duration: 500, // Le temps est en milliseconds ici (3000ms = 3sec)
               easing: Easing.bounce
             }
@@ -93,7 +93,7 @@ class HomeScreen extends React.Component {
                 <Text style={{ fontSize: 20 }}>Score</Text>
                 <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
                         <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: G_TotalPoints/G_MaxPoints*100+"%" }}></View>         
+                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: this.state.ZonesData[0].points/this.state.ZonesData[0].maxPoints*100+"%" }}></View>         
                         </View>      
                 </View>
                 <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
@@ -101,7 +101,7 @@ class HomeScreen extends React.Component {
                         <Text style={{ fontSize: 12 }}>0</Text>
                     </View>
                     <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{G_TotalPoints}</Text>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{this.state.ZonesData[0].maxPoints}</Text>
                     </View>
                     <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
                         <Text style={{ fontSize: 12 }}>{G_MaxPoints}</Text>
@@ -120,7 +120,7 @@ class HomeScreen extends React.Component {
                         <Text style={{ fontSize: 12 }}>0</Text>
                     </View>
                     <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{G_TotalPoints}</Text>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{this.state.ZonesData[0].maxPoints}</Text>
                     </View>
                     <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
                         <Text style={{ fontSize: 12 }}>{G_MaxPoints}</Text>

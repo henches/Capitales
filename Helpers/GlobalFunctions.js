@@ -80,26 +80,45 @@ export function InitZonesData(QuestionStatsList) {
             zonesData.push(zD)
     }
 
+    // console.log(" zonesData = ", zonesData)
+
+    // console.log(" QuestionStatsList = ", QuestionStatsList)
 
     zonesData[0].nb = QuestionStatsList.length
     for (i = 0; i < QuestionStatsList.length; i++) {
-        if (QuestionStatsList[i].zone.localCompare('Europe') == 0)
+        // console.log(" QuestionStatsList[i] = ", QuestionStatsList[i])
+        // console.log("QuestionStatsList[i].Queres.continent = ", QuestionStatsList[i].Queres.continent)
+        if (QuestionStatsList[i].Queres.continent.localeCompare("Europe") == 0)
             zonesData[1].nb++
-        else if (QuestionStatsList[i].zone.localCompare('Afrique') == 0)
+        else if (QuestionStatsList[i].Queres.continent.localeCompare("Afrique") == 0)
             zonesData[2].nb++
-        else if (QuestionStatsList[i].zone.localCompare('AsiePacif') == 0)
+        else if (QuestionStatsList[i].Queres.continent.localeCompare("AsiePacif") == 0)
             zonesData[3].nb++
-        else if (QuestionStatsList[i].zone.localCompare('Ameriques') == 0)
+        else if (QuestionStatsList[i].Queres.continent.localeCompare("Ameriques") == 0)
             zonesData[4].nb++
         else 
-            console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].zone)
+            console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].Queres.state, QuestionStatsList[i].Queres.continent)
     }
 
     for (i = 0; i < G_Zones.length; i++) 
         zonesData[i].maxPoints = zonesData[i].nb*G_Points[G_Points.length-1]
 
+    console.log(" zonesData = ", zonesData)
 
     return zonesData
+}
+
+export function AddPointsForZone(continent, points) {
+    if (continent.localeCompare("Europe") == 0)
+        zonesData[1].points += points
+    else if (continent.localeCompare("Afrique") == 0)
+        zonesData[2].points += points
+    else if (continent.localeCompare("AsiePacif") == 0)
+        zonesData[3].points += points
+    else if (continent.localeCompare("Ameriques") == 0)
+        zonesData[4].points += points
+    else 
+        console.log("Continent inconnu", continent)
 }
 
 export function G_InitPoints() {

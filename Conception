@@ -11,23 +11,6 @@ QuestionStatList : list de QueresStats (toutes les questions du jeu, quelque soi
 ZoneStat : list of DataPerZone
 
 
-DataPerZone : 
-- Monde, points, oldPoints, totalPoints
-- Europe, , ,
-- AsiePacif, , ,
-- Afrique, , ,
-- Amerique, , ,
-
-
-Quand on revient de la série vers Home -> animation -> oldPoints vers Points
-Quand on revient d'autres écrans -> Affichage sans animation de Points
-(AUtres écrans : Stats, Paramètres, etc ...)
-Comment distinguer les deux : 
-- présence de OldPoints ?
-- booleen : pointsDisplayed  dans Statistics ?
-
-
-
 
 
 
@@ -64,3 +47,28 @@ QueresSeries
 - afterResponseWrongResponsesNb
 // - afterResponseRNbForNextLevel
 - afterResponseTotalPoints
+
+
+Points Management :
+
+PointsManager = {
+    pointsProgressDisplayed: boolean
+    zone = liste of {
+                zone: PM_MONDE, PM_AFRIQUE,...,
+                nb: 0,
+                oldPoints: 0,
+                points: 0,
+                maxPoints: 0
+    }
+}
+Functions 
+    InitPointsManager() -> Returns PM
+    PointsForZone(zone:integer) -> points
+    MaxPointsForZone(zone:integer) -> points
+    ProgressForZone(zone: integer) -> %age 
+    AddPointsForZone(zone: integer) : Adds the points won for the zone
+    OldPointsForZone(zone: integer) -> points
+    SetPointsProgressDisplayed(boolean) -> met le flag à TRUE/FALSE (True : après affichage, false, après mise à jour des stats suite à série)
+
+
+

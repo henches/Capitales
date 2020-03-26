@@ -1,5 +1,5 @@
 
-import { G_CalculateTotalPoints, InitZonesData } from '../../Helpers/GlobalFunctions'
+import { InitZonesData, AddPointsForZone } from '../../Helpers/GlobalFunctions'
 
 const initialState = {
     QuestionStatsList: [],
@@ -16,7 +16,6 @@ function HandleQueresStatsReducer(state = initialState, action) {
                     QuestionStatsList: G_InitialQuestionStatsList,
                     ZonesData: InitZonesData(G_InitialQuestionStatsList)
             }
-            G_TotalPoints = G_CalculateTotalPoints(G_InitialQuestionStatsList)
             return nextState
         case 'QUERES_STATS-UPDATE' :   // value : queresSeries
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-UPDATE")
@@ -36,7 +35,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 elt.totalPoints = queres.afterResponseTotalPoints
                 elt.rightResponsesNb = queres.afterResponseRightResponsesNb
                 elt.wrongResponsesNb = queres.afterResponseWrongResponsesNb
-                G_TotalPoints += queres.pointsWon
+                AddPointsForZone(elt.Queres.continent, queres.pointsWon)
             }
             nextState = {
                 ...state,
