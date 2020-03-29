@@ -5,6 +5,8 @@ import Emoji from 'react-native-emoji'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
 import { QrLevelSymbol } from './QrLevelSymbol'
+import { GetMaxPointsForZone, GetPointsForZone } from '../Helpers/PointsManager'
+
 
 
 class HomeScreen extends React.Component {
@@ -14,6 +16,18 @@ class HomeScreen extends React.Component {
         this.state = {
             horizontalPosition: new Animated.Value(0)
         }
+        if (G_InitState) {  // Horrible verrue
+              console.log("HOME SCREEN CONSTRUCTOR")
+              getStoredQuestionStats()  // Récupère la liste des Questions Stats
+            .then(myList => {
+              console.log("HOME SCREEN CONSTRUCTOR APRES GetSTORED")
+              G_InitialQuestionStatsList = myList
+              this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
+            })
+            G_InitState = false // Horrible verrue
+            return null
+        }
+
     }
     
     componentDidMount() {
@@ -70,88 +84,94 @@ class HomeScreen extends React.Component {
 
     render() {
 
-        if (G_InitState) {  // Horrible verrues
-            getStoredQuestionStats()  // Récupère la liste des Questions Stats
-            .then(myList => {
-              G_InitialQuestionStatsList = myList
-              this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
-            })
-            G_InitState = false // Horrible verrue
+    //        console.log("Go Séries : Qthis.props = ", this.props)
+    //      console.log("Go Séries : QuestionStats List = ", this.props.QuestionStatsList)
+    //     <Emoji name='flushed' style={{ fontSize: 30 }}/>
+
+        // console.log("this.props = ", this.props)  
+        console.log("HOME SCREEN RENDER - DEBUT ")  
+        console.log("this.props.pM = ", this.props.pM)  
+        console.log("this.props.QuestionStatsList = ", this.props.QuestionStatsList)  
+        // console.log("GetMaxPointsForZone(this.state.pm, G_Monde) = ", GetMaxPointsForZone(this.state.pM, G_Monde))  
+        let maxPointsWorld
+        let pointsWorld
+        if (this.props.pM == null) {  // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
+                maxPointsWorld = 0
+                pointsWorld = 0
         }
-
-//        console.log("Go Séries : Qthis.props = ", this.props)
-  //      console.log("Go Séries : QuestionStats List = ", this.props.QuestionStatsList)
-//     <Emoji name='flushed' style={{ fontSize: 30 }}/>
-
-
-        return(
-          <View style={Gstyles.main_view}>
-            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
-            </View>
-            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 20 }}>Score</Text>
-                <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
-                        <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                            <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: this.state.ZonesData[0].points/this.state.ZonesData[0].maxPoints*100+"%" }}></View>         
-                        </View>      
+        else {
+            maxPointsWorld = GetMaxPointsForZone(this.props.pM, G_Monde)
+            pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
+        }
+        return (
+            <View style={Gstyles.main_view}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
                 </View>
-                <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
-                    <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-start'}}>
-                        <Text style={{ fontSize: 12 }}>0</Text>
+                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 20 }}>Score</Text>
+                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
+                            <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
+                                <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: 0 }}></View>         
+                            </View>      
                     </View>
-                    <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{this.state.ZonesData[0].maxPoints}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
-                        <Text style={{ fontSize: 12 }}>{G_MaxPoints}</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{ fontSize: 20 }}>Score</Text>
-                <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
-                        <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                            <Animated.View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: this.state.horizontalPosition }}></Animated.View>         
-                        </View>      
-                </View>
-                <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
-                    <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-start'}}>
-                        <Text style={{ fontSize: 12 }}>0</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{this.state.ZonesData[0].maxPoints}</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
-                        <Text style={{ fontSize: 12 }}>{G_MaxPoints}</Text>
+                    <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
+                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-start'}}>
+                            <Text style={{ fontSize: 12 }}>0</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{pointsWorld}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
+                            <Text style={{ fontSize: 12 }}>{maxPointsWorld}</Text>
+                        </View>
                     </View>
                 </View>
-            </View>
-            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
-                <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._goSeriesScreen() }}>
-                        <Text style={Gstyles.button_text}>JOUER</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
-                <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._testAnim() }}>
-                        <Text style={Gstyles.button_text}>Tester</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
-                <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._testAnim2() }}>
-                        <Text style={Gstyles.button_text}>Tester2</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}> 
-                <TouchableOpacity style={Gstyles.button}
-                            onPress={() => { this._goStatView() }}>
-                            <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Statistiques</Text>
-                </TouchableOpacity>
-            </View>
-          </View>  
+                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 20 }}>Score</Text>
+                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
+                            <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
+                                <Animated.View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, 
+                                    width: this.state.horizontalPosition }}></Animated.View>         
+                            </View>      
+                    </View>
+                    <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
+                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-start'}}>
+                            <Text style={{ fontSize: 12 }}>0</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>150</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
+                            <Text style={{ fontSize: 12 }}>{maxPointsWorld}</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
+                    <TouchableOpacity style={Gstyles.button}
+                            onPress={() => { this._goSeriesScreen() }}>
+                            <Text style={Gstyles.button_text}>JOUER</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
+                    <TouchableOpacity style={Gstyles.button}
+                            onPress={() => { this._testAnim() }}>
+                            <Text style={Gstyles.button_text}>Tester</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
+                    <TouchableOpacity style={Gstyles.button}
+                            onPress={() => { this._testAnim2() }}>
+                            <Text style={Gstyles.button_text}>Tester2</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}> 
+                    <TouchableOpacity style={Gstyles.button}
+                                onPress={() => { this._goStatView() }}>
+                                <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Statistiques</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>  
         )
     }
 }
@@ -182,7 +202,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
-        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
+        pM: state.HandleQueresStatsReducer.pM,
+        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries,
     }
 }
 
