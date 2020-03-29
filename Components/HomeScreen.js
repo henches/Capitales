@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
-import { QrLevelSymbol } from './QrLevelSymbol'
 import { GetMaxPointsForZone, GetPointsForZone } from '../Helpers/PointsManager'
+import { ProgressSymbol } from './ProgressSymbol'
 
 
 
@@ -93,40 +93,38 @@ class HomeScreen extends React.Component {
         console.log("this.props.pM = ", this.props.pM)  
         console.log("this.props.QuestionStatsList = ", this.props.QuestionStatsList)  
         // console.log("GetMaxPointsForZone(this.state.pm, G_Monde) = ", GetMaxPointsForZone(this.state.pM, G_Monde))  
-        let maxPointsWorld
-        let pointsWorld
-        if (this.props.pM == null) {  // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
-                maxPointsWorld = 0
-                pointsWorld = 0
-        }
-        else {
+        let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
+        let pointsWorld = 0
+        let maxPointsEurope = 0 
+        let pointsEurope = 0
+        let maxPointsAfrique = 0 
+        let pointsAfrique = 0
+        let maxPointsAmeriques = 0 
+        let pointsAmeriques = 0
+        let maxPointsAsiePacif = 0 
+        let pointsAsiePacif = 0
+        if (this.props.pM != null) {  
             maxPointsWorld = GetMaxPointsForZone(this.props.pM, G_Monde)
             pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
+            maxPointsEurope = GetMaxPointsForZone(this.props.pM, G_Europe)
+            pointsEurope = GetPointsForZone(this.props.pM, G_Europe)
+            maxPointsAfrique = GetMaxPointsForZone(this.props.pM, G_Afrique)
+            pointsAfrique = GetPointsForZone(this.props.pM, G_Afrique)
+            maxPointsAmeriques = GetMaxPointsForZone(this.props.pM, G_Ameriques)
+            pointsAmeriques = GetPointsForZone(this.props.pM, G_Ameriques)
+            maxPointsAsiePacif = GetMaxPointsForZone(this.props.pM, G_AsiePacif)
+            pointsAsiePacif = GetPointsForZone(this.props.pM, G_AsiePacif)
         }
         return (
             <View style={Gstyles.main_view}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
                 </View>
-                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20 }}>Score</Text>
-                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
-                            <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                                <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: 0 }}></View>         
-                            </View>      
-                    </View>
-                    <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
-                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-start'}}>
-                            <Text style={{ fontSize: 12 }}>0</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{pointsWorld}</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
-                            <Text style={{ fontSize: 12 }}>{maxPointsWorld}</Text>
-                        </View>
-                    </View>
-                </View>
+                <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } maxPoints={ maxPointsEurope }/>
+                <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique} maxPoints={ maxPointsAfrique}/>
+                <ProgressSymbol myFlex={ 1 } zone={ "Ameriques" } points={ pointsAmeriques } maxPoints={ maxPointsAmeriques }/>
+                <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } maxPoints={ maxPointsAsiePacif }/>
+                <ProgressSymbol myFlex={ 1 } zone={ "MONDE" } points={ pointsWorld } maxPoints={ maxPointsWorld }/>
                 <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 20 }}>Score</Text>
                     <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
