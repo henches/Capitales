@@ -47,3 +47,6 @@ arreter /relancer Vsc
 Arreter relancer Expo sur liphone
 lancer le debugguer sur vsx (dans la colonne de droite de l'écran)
 s'assurer que l'iphone expo est en mode start remote debugging
+(pas besoin de lancer Expo Start)
+(pas besoin que l'autre ? debugguer soit ouvert sur le browser)
+

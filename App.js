@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesListFromFile from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
-import { G_InitPoints, InitPointsManager } from './Helpers/PointsManager'
+import { InitPoints, InitPointsManager } from './Helpers/PointsManager'
 
 
 
@@ -24,7 +24,7 @@ export default class App extends React.Component {
     let nri4 = require('./Images/ImageLevel-4-non-atteint.png')
     
     global.G_Config = {
-      SeriesLength: 6,
+      SeriesLength: 3,
       Level: [
         {
           QrNb: 2,
@@ -66,9 +66,7 @@ export default class App extends React.Component {
     global.G_InitialQuestionStatsList = []  // Va contenir la liste initiale : soit G_StatesListe, soit celle récupérée sur le disque
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
 
-    global.G_Points = []
-    G_InitPoints()
-
+    
     initSounds()
   }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image, View } from 'react-native'
-import { G_GetLevelFromRightResponsesNb } from '../Helpers/GlobalFunctions'
+import { G_GetLevelFromRightResponsesNb } from '../Helpers/PointsManager'
 import { COLORS, Gstyles } from './Styles'
 
 
@@ -74,8 +74,8 @@ export class QrLevelSymbol extends React.Component {
 
 
 
-        console.log("status = " + level + " rightResponsesNb : " + rightResponsesNb + " symbolHeight : ", symbolHeight, " progress : ", progress, " levelSize: ",  levelSize, " yFirstImageLevelPos : ", yFirstImageLevelPos)
-        console.log(" G_Config.Level[0] : ", G_Config.Level[0])
+        // console.log("status = " + level + " rightResponsesNb : " + rightResponsesNb + " symbolHeight : ", symbolHeight, " progress : ", progress, " levelSize: ",  levelSize, " yFirstImageLevelPos : ", yFirstImageLevelPos)
+        // console.log(" G_Config.Level[0] : ", G_Config.Level[0])
         return(
             <View style={{ backgroundColor: 'lightgrey', marginTop: 0, borderRadius: 10, height: symbolHeight, width:11, alignSelf: 'center'}}>
                     <View style={[{ backgroundColor: 'lawngreen', borderRadius: 10, position: 'absolute', left: 0, right: 0, top: symbolHeight-progress, bottom: 0 }, { height: progress }]}>

@@ -1,5 +1,5 @@
-
-import { InitPointsManager, AddPointsForZone } from '../../Helpers/PointsManager'
+import { storeQuestionStats } from '../../Helpers/StorageFunctions'
+import { InitPointsManager, AddPointsForZone, SetPointsProgressDisplayed, GetIntegerZoneFromStringZone, SetOldPointsForZone } from '../../Helpers/PointsManager'
 
 
 const initialState = {
@@ -8,8 +8,8 @@ const initialState = {
 }
 
 function HandleQueresStatsReducer(state = initialState, action) {
-    let nextState
-    let myPM
+    let nextState = null
+    let myPM = null
     switch (action.type) {
         case 'QUERES_STATS-INITIATE' :   
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE")
@@ -18,7 +18,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
             nextState = {
                 ...state,
                     QuestionStatsList: G_InitialQuestionStatsList,
-                    pM: InitPointsManager(G_InitialQuestionStatsList) 
+                    pM: myPM
             }
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE nextState = ", nextState )
             return nextState
@@ -28,6 +28,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
             let questionStatsList = state.QuestionStatsList.slice()
             myPM = state.pM
             const queresSeries = action.value
+            SetOldPointsForZone(myPM) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
             for (let i=0; i < queresSeries.length; i++) {
                 const queres = queresSeries[i]
                 // console.log("queresSeries[", i, "]=", queresSeries[i])
@@ -41,14 +42,30 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 elt.totalPoints = queres.afterResponseTotalPoints
                 elt.rightResponsesNb = queres.afterResponseRightResponsesNb
                 elt.wrongResponsesNb = queres.afterResponseWrongResponsesNb
-                AddPointsForZone(myPM, 0, queres.pointsWon)
+                const integerZone = GetIntegerZoneFromStringZone(myPM, queres.continent)
+                AddPointsForZone(myPM, integerZone, queres.pointsWon)
+                AddPointsForZone(myPM, G_Monde, queres.pointsWon)
             }
+            SetPointsProgressDisplayed(myPM, false)
+
+            storeQuestionStats(questionStatsList) // on sauvegarde cette liste sur le storage
+            .then(myList => {
+                console.log('fin de l\'écriture de la liste')
+            })
+
             nextState = {
                 ...state,
                     QuestionStatsList: questionStatsList,
-                    pM: myPM,
-                    titi: 30,
-                    toto: 40
+                    pM: myPM
+            } 
+            return nextState
+        case 'QUERES_STATS-DISPLAYED' :   // value : null
+            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-DISPLAYED")
+            myPM = state.pM
+            SetPointsProgressDisplayed(myPM, true)
+            nextState = {
+                ...state,
+                    pM: myPM
             } 
             return nextState
         default:

@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Mod
 import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import { COLORS, Gstyles } from './Styles'
-import { storeQuestionStats } from '../Helpers/StorageFunctions'
-import { G_GetImageForLevel } from '../Helpers/GlobalFunctions'
+import { G_GetImageForLevel } from '../Helpers/PointsManager'
 import { TextInput } from 'react-native';
 import { playSound } from '../Helpers/SoundFunctions'
 import { QrLevelSymbol } from './QrLevelSymbol'
@@ -40,10 +39,6 @@ class SeriesScreen extends React.Component {
             // console.log("> On arrête la série")
             this.props.dispatch({ type: "QUERES_STATS-UPDATE", value: this.props.QueresSeries })   // on met à jour la liste de stats de questions globale
 //            console.log("PROOOOOOOOOPS = ", this.props)
-            storeQuestionStats(this.props.QuestionStatsList) // on sauvegarde cette liste sur le storage
-            .then(myList => {
-                console.log('fin de l\'écriture de la liste')
-            })
             this.props.navigation.navigate('SeriesResultsScreen', {})
         }
     }

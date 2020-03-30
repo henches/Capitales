@@ -1,5 +1,5 @@
 import { G_SerializeQueresList } from '../../Helpers/GlobalFunctions'
-import { G_GetLevelFromRightResponsesNb, G_GetAdditionalPointsForRightResponseNb , G_GetTotalPointsForRightResponseNb} from '../../Helpers/GlobalFunctions'
+import { G_GetLevelFromRightResponsesNb, G_GetAdditionalPointsForRightResponseNb , G_GetTotalPointsForRightResponseNb} from '../../Helpers/PointsManager'
 
 
 const initialState = {
@@ -140,7 +140,7 @@ function HandleQueresSeriesReducer(state = initialState, action) {
                 }
                 // Ajoute le test (question + les réponses proposées) à la série
                 myQueresSeries.push( { id: myQueresSeries.length.toString(), 
-                    state: sl.Queres.state, capital: sl.Queres.capital, image: sl.Queres.image, 
+                    state: sl.Queres.state, capital: sl.Queres.capital, continent: sl.Queres.continent, image: sl.Queres.image, 
                     proposedResponses: proposedResponsesList, 
                     level: sl.level, rightResponsesNb: sl.rightResponsesNb, wrongResponsesNb: sl.wrongResponsesNb, totalPoints: sl.totalPoints, 
                     isResponseRight: false, givenResponse: "", isTypo: false, pointsWon: 0, 
