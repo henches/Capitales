@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Animated } from 'react-native'
+
 
 
 
@@ -8,39 +9,14 @@ import { Text, View } from 'react-native'
 
 export class ProgressSymbol extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
- //           progressPosition: new Animated.Value(0)
-        }
-    }
-
-    _animateProgress = () => {
-        console.log("_testAnim");
-/*
-        Animated.timing(
-            this.state.progressPosition,
-            {
-              toValue: this.props.points/this.props.maxPoints,
-              duration: 500, 
-              easing: Easing.bounce
-            }
-          ).start() 
-          */
-    }
-
 
     render() {
 
         const myFlex = this.props.myFlex // chaine de caractères
-        const animate = this.props.animate // boolen qui indique s'il faut animer ou pas la progression
         const points = this.props.points  // points : nombre de points actuels pour la zone
-        const oldPoints = this.props.oldPoints  // points : nombre de points actuels pour la zone
         const maxPoints = this.props.maxPoints // maxPoints : nombre maximal de points pour la zone
-        const percent = points / maxPoints * 100
         const zone = this.props.zone // chaine de caractères
 
-        console.log("PROGRESS SYMBOL : oldPoints ", oldPoints, " points = ", points)
         return(
             <View style={{ flex: myFlex, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 20 }}>{zone}</Text>
@@ -57,7 +33,9 @@ export class ProgressSymbol extends React.Component {
                                 <Text style={{ fontSize: 12 }}>{maxPoints}</Text>
                             </View>
                         </View>
-                        <View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 16, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: percent+"%" }}></View>         
+                            <Animated.View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 16, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, 
+                                width: this.props.myWidth }}>
+                            </Animated.View>         
                         </View>      
                 </View>
             </View>

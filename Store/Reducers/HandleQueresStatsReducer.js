@@ -20,7 +20,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
                     QuestionStatsList: G_InitialQuestionStatsList,
                     pM: myPM
             }
-            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE nextState = ", nextState )
+//            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE nextState = ", nextState )
             return nextState
         case 'QUERES_STATS-UPDATE' :   // value : queresSeries
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-UPDATE")
