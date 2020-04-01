@@ -23,7 +23,8 @@ class HomeScreen extends React.Component {
         
 
         this.state = {
-            progressAnimForZone: myProgressAnimForZone 
+            progressAnimForZone: myProgressAnimForZone,
+            shouldAnimate: false 
         }
 
         // console.log("HOME SCREEN CONSTRUCTOR : myProgressAnimForZone = ", myProgressAnimForZone )
@@ -52,6 +53,7 @@ class HomeScreen extends React.Component {
         const { navigation } = this.props;
         this.focusListener = navigation.addListener("didFocus", () => { 
             console.log("HOME SCREEN DIDFOCUS WORKS GREATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+
             this._animateProgress()
         });
 
@@ -77,32 +79,42 @@ class HomeScreen extends React.Component {
     }
 
     _animateProgress = () => {
-        console.log("_animateProgress this.props = ", this.props);
+        console.log("_animateProgress ");
 
-
-        for (i = 0; i < 5; i++) {
+        let pM = this.props.pM 
+        if (pM != null) {
+            for (let z = 0; z < 5; z++) {
+                console.log ("animateProgress start = ", pM[z].points/pM[z].maxPoints*100)
+                this.state.progressAnimForZone[z].setValue(pM[z].oldPoints/pM[z].maxPoints*100)
+            }
+    
         }
 
-        pM = this.props.pM 
-
-        if (pM == null) 
+        if (this.props.navigation.state.params == null) // Il n'y a pas de paramètres de navigation : c'est la première fois qu'on affiche Homme Screen -> pas besoin d'animation
             return
 
-        
-        this.state.progressAnimForZone[0].setValue(pM.zones[0].oldPointsWorld/pM.zones[0].maxPointsWorld*100)
+        if (this.props.navigation.state.params.lastScreen == null) // Le paramètre LastScreen n' pas été positionné : erreur dans le code
+            return
+
+        if (this.props.navigation.state.params.lastScreen.localeCompare("SeriesResultsScreen") != 0) // On revient d'un screen différent de SeriesResultsScreen
+            return
+
+        // Si on est arrivé jusqu'ici, c'est que l'on vient bien de l'écran SeriesResultsScreen
+        console.log("_animateProgress - on vient bien de l'écran SeriesResultsScreen");
 
 
-        Animated.timing(
-            this.state.progressAnimForZone[0],
-            {
-//              toValue: pointsWorld/maxPointsWorld*100,
-              toValue: pM.zones[0].pointsWorld/pM.zones[0].maxPointsWorld*100,
-              duration: 2000, // Le temps est en milliseconds ici (3000ms = 3sec)
-              easing: Easing.bounce
-            }
-          ).start() // N'oubliez pas de lancer votre animation avec la fonction start()
-  
+        for (let z = 0; z < 5; z++) {
+            Animated.timing(
+                this.state.progressAnimForZone[z],
+                {
+                  toValue: pM[z].points/pM[z].maxPoints*100,
+                  duration: 2000, // Le temps est en milliseconds ici (3000ms = 3sec)
+                  easing: Easing.bounce
+                }
+              ).start() 
+        }
 
+        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
     }
 
 
@@ -129,6 +141,7 @@ class HomeScreen extends React.Component {
         let maxPointsAsiePacif = 0 
         let pointsAsiePacif = 0
         if (this.props.pM != null) {  
+            let pM = this.props.pM
             maxPointsWorld = GetMaxPointsForZone(this.props.pM, G_Monde)
             pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
             maxPointsEurope = GetMaxPointsForZone(this.props.pM, G_Europe)
@@ -139,38 +152,29 @@ class HomeScreen extends React.Component {
             pointsAmeriques = GetPointsForZone(this.props.pM, G_Ameriques)
             maxPointsAsiePacif = GetMaxPointsForZone(this.props.pM, G_AsiePacif)
             pointsAsiePacif = GetPointsForZone(this.props.pM, G_AsiePacif)
-            // this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // Met le flag à true indiquant que le premier affichage a été fait (et donc que l'animation a été réalisée)
-        }
+            for (let z = 0; z < 5; z++) {
+                console.log ("animateProgress start = ", pM[z].oldPoints/pM[z].maxPoints*100)
+                this.state.progressAnimForZone[z].setValue(pM[z].oldPoints/pM[z].maxPoints*100)
+            }
+ 
 
-        //<ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[0].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'],})  } zone={ "MONDE" } points={ pointsWorld } maxPoints={ maxPointsWorld }/>
-       
+        }
 
         return (
             <View style={Gstyles.main_view}>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
                 </View>
-                <ProgressSymbol myFlex={ 1 } myWidth={ pointsWorld/maxPointsWorld*100+"%" } points={ pointsWorld } maxPoints={ maxPointsWorld }/>
-                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20 }}>Score</Text>
-                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width:'100%', paddingTop: 0, paddingBottom: 0, paddingRight: '5%', paddingLeft: '5%'}}>
-                            <View style={{ backgroundColor: 'aqua', marginTop: 0, borderRadius: 10, height: 11, width:"100%", alignSelf: 'center'}}>
-                                <Animated.View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, 
-                                    width: this.state.progressAnimForZone[0] }}></Animated.View>         
-                            </View>      
-                    </View>
-                    <View style={{ flexDirection: 'row', paddingRight: '5%', paddingLeft: '5%' }}>
-                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-start'}}>
-                            <Text style={{ fontSize: 12 }}>0</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'center'}}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>150</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
-                            <Text style={{ fontSize: 12 }}>{maxPointsWorld}</Text>
-                        </View>
-                    </View>
-                </View>
+                <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Monde].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
+                            zone={ "Monde" } points={ pointsWorld } maxPoints={ maxPointsWorld }/>
+                <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Europe].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
+                            zone={ "Europe" } points={ pointsEurope } maxPoints={ maxPointsEurope }/>
+                <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Afrique].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
+                            zone={ "Afrique" } points={ pointsAfrique } maxPoints={ maxPointsAfrique }/>
+                <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_AsiePacif].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
+                            zone={ "Asie/Pacif" } points={ pointsAsiePacif } maxPoints={ maxPointsAsiePacif }/>
+                <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Ameriques].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
+                            zone={ "Amériques" } points={ pointsAmeriques } maxPoints={ maxPointsAmeriques }/>
                 <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                     <TouchableOpacity style={Gstyles.button}
                             onPress={() => { this._goSeriesScreen() }}>

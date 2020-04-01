@@ -26,7 +26,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-UPDATE")
 //            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-UPDATE value = ", action.value)
             let questionStatsList = state.QuestionStatsList.slice()
-            myPM = state.pM
+            myPM = state.pM.slice()
             const queresSeries = action.value
             SetOldPointsForZone(myPM) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
             for (let i=0; i < queresSeries.length; i++) {
@@ -46,8 +46,6 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 AddPointsForZone(myPM, integerZone, queres.pointsWon)
                 AddPointsForZone(myPM, G_Monde, queres.pointsWon)
             }
-            SetPointsProgressDisplayed(myPM, false)
-
             storeQuestionStats(questionStatsList) // on sauvegarde cette liste sur le storage
             .then(myList => {
                 console.log('fin de l\'écriture de la liste')
@@ -61,8 +59,12 @@ function HandleQueresStatsReducer(state = initialState, action) {
             return nextState
         case 'QUERES_STATS-DISPLAYED' :   // value : null
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-DISPLAYED")
-            myPM = state.pM
-            SetPointsProgressDisplayed(myPM, true)
+            myPM = state.pM.slice()
+            for (let z = 0; z < 5; z++) {
+                myPM[z].oldPoints = myPM[z].points
+            }
+  
+
             nextState = {
                 ...state,
                     pM: myPM

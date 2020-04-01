@@ -52,7 +52,7 @@ function createProbaAdaptedQueresStats(queresStats) {
     for (var i in queresStats) {
         if (queresStats[i].level == 4) nbLevel4++
     }
-    console.log("nbLevel4", nbLevel4)
+    // console.log("nbLevel4", nbLevel4)
     let probaAdaptedQueresPointer = []
     if (nbLevel4 == 0 || nbLevel4 == queresStats.length) { // Aucun Level 4 dans la liste = on rretourne une liste qui pointe sur la liste (donc sans changement d'occurences)
         for (var index = 0; index < queresStats.length; index++) 
@@ -61,8 +61,8 @@ function createProbaAdaptedQueresStats(queresStats) {
     else {
         let otherLevelLength = ((1-G_CoefLevel4)/G_CoefLevel4)*nbLevel4 // nombre total d'éléménts de level autres que 4
         let otherLevelNumber = otherLevelLength/(queresStats.length-nbLevel4) // nombre de fois ou il faut positionner les queres différents de level4 dans la probaListe 
-        console.log("otherLevelLength :", otherLevelLength)
-        console.log("otherLevelNumber :", otherLevelNumber)
+        // console.log("otherLevelLength :", otherLevelLength)
+        // console.log("otherLevelNumber :", otherLevelNumber)
         for (var index = 0; index < queresStats.length; index++) {
             if (queresStats[index].level == 4) {
                 probaAdaptedQueresPointer.push(index)
@@ -102,19 +102,19 @@ function supressIndexFormProbaAdaptedQueresStats(list, index) {
 function printProbaAdaptedList(list) {
     let aff = ""
     list.forEach(elt => aff += elt+" ")
-    console.log(aff)
+    // console.log(aff)
 }
 
 function HandleQueresSeriesReducer(state = initialState, action) {
     let nextState
     switch (action.type) {
         case 'QUERES_SERIES-INITIATE' :   // value = queresStats
-            // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE value = ', action.value)
+            console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
             let myQueresSeries = []
             
             let cloneQueresStats = [...action.value] // Recopie de queresSTats*
             let probaAdaptedQueresStats = createProbaAdaptedQueresStats(cloneQueresStats) // Adapte la liste pour minimiser les chances de choisir une niveau 4
-            console.log('probaAdaptedQueresStats : ')
+            // console.log('probaAdaptedQueresStats : ')
             printProbaAdaptedList(probaAdaptedQueresStats)
             for (let i = 0; i < G_Config.SeriesLength; i++) {
                 // Cherche une question au hasard parmi toutes les queres possibles originelles.
@@ -147,14 +147,14 @@ function HandleQueresSeriesReducer(state = initialState, action) {
                     afterResponseLevel: sl.level, afterResponseRightResponsesNb: 0,  afterResponseWrongResponsesNb: 0, afterResponseTotalPoints: 0 })
                 // Supprime toutes les question du type de cele choisie au hasard pour qu'on ne les sélectionne plus par la suite
                 supressIndexFormProbaAdaptedQueresStats(probaAdaptedQueresStats, indexInQueresStatList) 
-                console.log('probaAdaptedQueresStats apres suppression: ')
+                // console.log('probaAdaptedQueresStats apres suppression: ')
                 printProbaAdaptedList(probaAdaptedQueresStats)
                 cloneQueresStats.splice(indexInQueresStatList,1)
 
             }
             // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE myQueresSeries = ', myQueresSeries)
-            console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
-            console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE myQueresSeries', myQueresSeries)
+            // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
+            // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE myQueresSeries', myQueresSeries)
             
             nextState = {
                 ...state,
@@ -162,7 +162,7 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             }
             return nextState || state
         case 'QUERES_SERIES-ADD_ANSWER' :   // value = { index = index de la queresSerie en cours,  isResponseRight, givenResponse, isTypo }
-            console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER value = ", action.value)
+            console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER ")
             let queresSeries = [...state.QueresSeries]
             const queres = queresSeries[action.value.index]
 
@@ -183,7 +183,7 @@ function HandleQueresSeriesReducer(state = initialState, action) {
 
 
 //            console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER elt = ", elt)
-            console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER queresSeries = ", G_SerializeQueresList(queresSeries))
+            // console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER queresSeries = ", G_SerializeQueresList(queresSeries))
             nextState = {
                 ...state,
                    QueresSeries: queresSeries

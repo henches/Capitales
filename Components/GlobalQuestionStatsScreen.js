@@ -20,8 +20,23 @@ class GlobalQuestionStatsScreen extends React.Component {
         )
     }
     
+    constructor() {
+        console.log('GLOBAL QUESTION STATS CONSTRUCTOR *************************************************************************************')
+        super()
+     }
+
+    componentDidMount() {
+        console.log("GLOBAL QUESTION STATS SCREEN DID MOUNT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
+
+    }
+
+    _goHomeScreen = () => {
+        let { routeName } = this.props.navigation.state;      
+        console.log("On va à l'écran Home routeName = ", routeName)
+        this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })   
+    }
+
    
-    
     render() {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
@@ -49,7 +64,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}
-                                onPress={() => { this.props.navigation.navigate('HomeScreen', {}) }}>
+                                onPress={() => { this._goHomeScreen() }}>
                                 <Text style={Gstyles.button_text}>HOME</Text>
                         </TouchableOpacity>
                     </View>

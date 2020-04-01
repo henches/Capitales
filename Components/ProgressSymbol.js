@@ -30,7 +30,7 @@ export class ProgressSymbol extends React.Component {
                                 <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{points}</Text>
                             </View>
                             <View style={{ flexDirection: 'row',  flex: 1, justifyContent: 'flex-end'}}>
-                                <Text style={{ fontSize: 12 }}>{maxPoints}</Text>
+                                <Text style={{ fontSize: 12 }}>{this.props.myPoints}</Text>
                             </View>
                         </View>
                             <Animated.View style={{ backgroundColor: 'dodgerblue', borderRadius: 10, height: 16, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, 

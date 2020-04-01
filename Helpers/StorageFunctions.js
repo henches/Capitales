@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKey = 'QuestionStats38'
+const listKey = 'QuestionStats39'
 
 function initQuestionStats() {
     console.log("InitQuestionStats")
@@ -28,9 +28,9 @@ export async function storeQuestionStats (questionsStatsList) {
 
 export async function getStoredQuestionStats () {
     try {
-      console.log("juste avant getStoredQuestionStatsItem")
+      // console.log("juste avant getStoredQuestionStatsItem")
       strList = await AsyncStorage.getItem(listKey)
-      console.log("juste après getStoredQuestionStatsItem strList= ", strList)
+      // console.log("juste après getStoredQuestionStatsItem strList= ", strList)
       if (strList !== null) {
         list = JSON.parse(strList)
         console.log("la key existe bien : Les QuestionsStats existent bien en base")

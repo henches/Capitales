@@ -12,16 +12,10 @@ export function InitPointsManager(QuestionStatsList) {
   
     InitPoints()
 
-
-    pointsManager = {
-        alreadyDisplayed: false,
-        zones: []
-    }
-    
-    let zonesList = []
+    let pM = []
     
     for (i = 0; i < Zones.length; i++) {
-        zonesList.push({
+        pM.push({
                 zone: Zones[i],
                 nb: 0,
                 oldPoints: 0,
@@ -29,19 +23,19 @@ export function InitPointsManager(QuestionStatsList) {
                 maxPoints: 0
         })
     }
-    // console.log(" zonesList = ", zonesList)
-    // console.log(" QuestionStatsList = ", QuestionStatsList)
 
-    zonesList[G_Monde].nb = QuestionStatsList.length
+    pM[G_Monde].nb = QuestionStatsList.length
     for (i = 0; i < QuestionStatsList.length; i++) {
         // console.log(" QuestionStatsList[i] = ", QuestionStatsList[i])
         // console.log("QuestionStatsList[i].Queres.continent = ", QuestionStatsList[i].Queres.continent)
         let found = false
-        for (let z = 1; z < zonesList.length; z++) {
+        for (let z = 1; z < pM.length; z++) {
             if (QuestionStatsList[i].Queres.continent.localeCompare(Zones[z]) == 0) {
-                zonesList[z].nb++
-                zonesList[z].points += QuestionStatsList[i].totalPoints
-                zonesList[0].points += QuestionStatsList[i].totalPoints
+                pM[z].nb++
+                pM[z].points += QuestionStatsList[i].totalPoints
+                pM[z].oldPoints = pM[z].points
+                pM[G_Monde].points += QuestionStatsList[i].totalPoints
+                pM[G_Monde].oldPoints = pM[G_Monde].points
                 found = true
                 break
             }
@@ -50,19 +44,17 @@ export function InitPointsManager(QuestionStatsList) {
             console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].Queres.state, QuestionStatsList[i].Queres.continent)
     }
 
-    for (i = 0; i < zonesList.length; i++) 
-        zonesList[i].maxPoints = zonesList[i].nb*Points[Points.length-1]
+    for (i = 0; i < pM.length; i++) 
+        pM[i].maxPoints = pM[i].nb*Points[Points.length-1]
 
-    // console.log(" zonesList = ", zonesList)
 
-    pointsManager.zones = zonesList
 
-    return pointsManager
+    return pM
 }
 
 export function GetIntegerZoneFromStringZone(pM, stringZone) {
-    for (let z = 1; z < pM.zones.length; z++) {
-        if (pM.zones[z].zone.localeCompare(stringZone) == 0) {
+    for (let z = 1; z < pM.length; z++) {
+        if (pM[z].zone.localeCompare(stringZone) == 0) {
             return z
         }
     }
@@ -70,43 +62,40 @@ export function GetIntegerZoneFromStringZone(pM, stringZone) {
 }
 
 export function GetPointsForZone(pM, zone) {
-    return pM.zones[zone].points
+    return pM[zone].points
 }
 
 export function GetOldPointsForZone(pM, zone) {
-    return pM.zones[zone].oldPoints
+    return pM[zone].oldPoints
 }
 
 export function GetMaxPointsForZone(pM, zone) {
-    return pM.zones[zone].maxPoints
+    return pM[zone].maxPoints
 }
 
 export function GetProgressForZone(pM, zone) {
-    console.log("GetProgressForZone(zone) zone = ", zone)
-    return pM.zones[zone].points/GetMaxPointsForZone(pM, zone)
+    // console.log("GetProgressForZone(zone) zone = ", zone)
+    return pM[zone].points/GetMaxPointsForZone(pM, zone)
 }
 
 export function AddPointsForZone(pM, zone, points) {
-    pM.zones[zone].points += points
+    pM[zone].points += points
 
 }
 
 export function SetOldPointsForZone(pM) {
-    for (let z = 0; z < pM.zones.length; z++)
-        pM.zones[z].oldPoints = pM.zones[z].points
+    for (let z = 0; z < pM.length; z++)
+        pM[z].oldPoints = pM[z].points
 
 }
 
-export function SetPointsProgressDisplayed(pM, alreadyDisplayed) {
-    pM.alreadyDisplayed = alreadyDisplayed
-}
 
 
 export function InitPoints() {
     points = 0
     Points.push(points)
     for (l = 0; l < 4; l++) {
-        console.log(l)
+        // console.log(l)
         for (n = 0; n < G_Config.Level[l].QrNb; n++) {
             points += G_Config.Level[l].Points
             Points.push(points)

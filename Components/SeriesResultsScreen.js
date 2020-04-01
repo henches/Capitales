@@ -20,6 +20,17 @@ class SeriesResultsScreen extends React.Component {
         )
     }
     
+    constructor() {
+        console.log('SERIES RESULTS SCREEN CONSTRUCTOR')
+        super()
+     }
+
+    componentDidMount() {
+        console.log("SERIES RESULTS SCREEN DID MOUNT !!!!!!!!)")
+
+    }
+
+
     
     _goStatView = () => {
         console.log("On va à l'écran des stats du joueur")
@@ -27,8 +38,9 @@ class SeriesResultsScreen extends React.Component {
     }
 
     _goHomeScreen = () => {
-        console.log("On va à l'écran Home")
-        this.props.navigation.navigate('HomeScreen', {})   
+        let { routeName } = this.props.navigation.state;      
+        console.log("On va à l'écran Home routeName = ", routeName)
+        this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })   
     }
 
     _calculateNbOfRightResponses = (queresSeries) => {

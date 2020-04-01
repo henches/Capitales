@@ -15,9 +15,16 @@ import { QrLevelSymbol } from './QrLevelSymbol'
 class SeriesScreen extends React.Component {
 
     constructor() {
-        console.log('*************************************************** Constructor Series Screen *************************************************************************************')
+        console.log('SERIES SCREEN CONSTRUCTOR ')
         super()
      }
+
+     componentDidMount() {
+        console.log("SERIES SCREEN DID MOUNT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
+
+
+    }
+
     
     static navigationOptions = {
         headerShown: false,
