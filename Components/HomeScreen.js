@@ -24,7 +24,8 @@ class HomeScreen extends React.Component {
 
         this.state = {
             progressAnimForZone: myProgressAnimForZone,
-            shouldAnimate: false 
+            shouldAnimate: false ,
+            myCounter: 0
         }
 
         // console.log("HOME SCREEN CONSTRUCTOR : myProgressAnimForZone = ", myProgressAnimForZone )
@@ -58,6 +59,10 @@ class HomeScreen extends React.Component {
         });
 
     }
+          
+    componentWillUnmount() {
+            clearInterval(this._interval);
+    }
 
     static navigationOptions = {
         headerShown: false,
@@ -84,7 +89,7 @@ class HomeScreen extends React.Component {
         let pM = this.props.pM 
         if (pM != null) {
             for (let z = 0; z < 5; z++) {
-                console.log ("animateProgress start = ", pM[z].points/pM[z].maxPoints*100)
+                //console.log ("animateProgress start = ", pM[z].points/pM[z].maxPoints*100)
                 this.state.progressAnimForZone[z].setValue(pM[z].oldPoints/pM[z].maxPoints*100)
             }
     
@@ -102,21 +107,32 @@ class HomeScreen extends React.Component {
         // Si on est arrivé jusqu'ici, c'est que l'on vient bien de l'écran SeriesResultsScreen
         console.log("_animateProgress - on vient bien de l'écran SeriesResultsScreen");
 
+        const animationDuration = 5000
 
         for (let z = 0; z < 5; z++) {
             Animated.timing(
                 this.state.progressAnimForZone[z],
                 {
                   toValue: pM[z].points/pM[z].maxPoints*100,
-                  duration: 2000, // Le temps est en milliseconds ici (3000ms = 3sec)
-                  easing: Easing.bounce
+                  duration: animationDuration, // Le temps est en milliseconds ici (3000ms = 3sec)
+                  easing: Easing.linear
                 }
-              ).start() 
+              ).start( ) 
         }
+        
 
-        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
+        
+        this.setState( { myCounter : pM[0].oldPoints } )
+        this._interval = setInterval(() => {
+            this.setState({ myCounter: this.state.myCounter+1 })
+            if (this.state.myCounter == pM[0].points)
+                clearInterval(this._interval)
+          }, animationDuration/(pM[0].points-pM[0].oldPoints));
+
+        
+
+        // this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
     }
-
 
 
     render() {
@@ -153,7 +169,7 @@ class HomeScreen extends React.Component {
             maxPointsAsiePacif = GetMaxPointsForZone(this.props.pM, G_AsiePacif)
             pointsAsiePacif = GetPointsForZone(this.props.pM, G_AsiePacif)
             for (let z = 0; z < 5; z++) {
-                console.log ("animateProgress start = ", pM[z].oldPoints/pM[z].maxPoints*100)
+                //console.log ("animateProgress start = ", pM[z].oldPoints/pM[z].maxPoints*100)
                 this.state.progressAnimForZone[z].setValue(pM[z].oldPoints/pM[z].maxPoints*100)
             }
  
@@ -166,7 +182,7 @@ class HomeScreen extends React.Component {
                     <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
                 </View>
                 <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Monde].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
-                            zone={ "Monde" } points={ pointsWorld } maxPoints={ maxPointsWorld }/>
+                            zone={ "Monde" } points={ this.state.myCounter } maxPoints={ maxPointsWorld }/>
                 <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Europe].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
                             zone={ "Europe" } points={ pointsEurope } maxPoints={ maxPointsEurope }/>
                 <ProgressSymbol myFlex={ 1 } myWidth={ this.state.progressAnimForZone[G_Afrique].interpolate({ inputRange: [0, 100], outputRange: ['0%', '100%'] }) } 
@@ -193,6 +209,9 @@ class HomeScreen extends React.Component {
                             <Text style={Gstyles.button_text}>Tester2</Text>
                     </TouchableOpacity>
                 </View>
+                <View>
+                    <Text>TOTO {this.state.myCounter} </Text>
+                </View> 
                 <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}> 
                     <TouchableOpacity style={Gstyles.button}
                                 onPress={() => { this._goStatView() }}>

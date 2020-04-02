@@ -14,7 +14,6 @@ export class ProgressSymbol extends React.Component {
 
         const myFlex = this.props.myFlex // chaine de caractères
         const points = this.props.points  // points : nombre de points actuels pour la zone
-        const maxPoints = this.props.maxPoints // maxPoints : nombre maximal de points pour la zone
         const zone = this.props.zone // chaine de caractères
 
         return(
