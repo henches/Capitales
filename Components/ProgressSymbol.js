@@ -22,6 +22,11 @@ export class ProgressSymbol extends React.Component {
         }
     }
 
+    _initProgressAnimation = (oldPoints, maxPoints) => {
+        this.state.pBsizeX.setValue(oldPoints/maxPoints)
+        this.state.pBfadeProgress.setValue(0)
+    }
+
     _animateProgress  = () => {
         // console.log("progress Symbol : _animateProgress ")
         // console.log("progress Symbol : _animateProgress Zone = ", this.props.zone)
@@ -30,8 +35,6 @@ export class ProgressSymbol extends React.Component {
         // console.log("progress Symbol : _animateProgress maxPoints = ", this.props.maxPoints)
 
 
-        this.state.pBsizeX.setValue(this.props.oldPoints/this.props.maxPoints*0.8)
-        this.state.pBfadeProgress.setValue(0)
 
         if (this.props.oldPoints == this.props.points) { // Pas d'animation si pas de d'augmentation de points
             this.props.onEndAnim1()

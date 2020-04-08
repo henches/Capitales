@@ -17,16 +17,7 @@ class HomeScreen extends React.Component {
         this._animateProgress = this._animateProgress.bind(this)
 
 
-        let myProgressAnimForZone = []
-        for (i = 0; i < 5; i++) 
-            myProgressAnimForZone.push(new Animated.Value(0))
-        
-
         this.state = {
-            progressAnimForZone: myProgressAnimForZone,
-            pBsizeX : new Animated.Value(0),
-            pBsizeY : new Animated.Value(0),
-            shouldAnimate: false,
         }
 
         // console.log("HOME SCREEN CONSTRUCTOR : myProgressAnimForZone = ", myProgressAnimForZone )
@@ -87,13 +78,8 @@ class HomeScreen extends React.Component {
         if (pM == null) 
             return
 
-        if (test) {
-            let pM = this.props.pM
-            pM[0].maxPoints = 144
-            pM[0].points = 40
-            pM[0].oldPoints = 45
-        }
-        
+        console.log("_animateProgress PM is not null ");
+
 
         this.pS1._animateProgress()
 
@@ -108,70 +94,8 @@ class HomeScreen extends React.Component {
             return
 
 
-        // this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
     }
 
- /* 1er anim de chaque coponent, puis deuxième, puis troisième 
-    _onEndAnim11 =() => {
-        this.pS2._animateProgress()
-    }
-
-    _onEndAnim21 =() => {
-        this.pS3._animateProgress()
-    }
-
-    _onEndAnim31 =() => {
-        this.pS4._animateProgress()
-    }
-
-    _onEndAnim41 =() => {
-        this.pS0._animateProgress()
-    }
-
-    _onEndAnim01 =() => {
-        this.pS1._animateProgress2()
-    }
-
-    _onEndAnim12 =() => {
-        this.pS2._animateProgress2()
-    }
-
-    _onEndAnim22 =() => {
-        this.pS3._animateProgress2()
-    }
-
-    _onEndAnim32 =() => {
-        this.pS4._animateProgress2()
-    }
-
-    _onEndAnim42 =() => {
-        this.pS0._animateProgress2()
-    }
-
-    _onEndAnim02 =() => {
-        this.pS1._animateProgress3()
-    }
-
-    _onEndAnim13 =() => {
-        this.pS2._animateProgress3()
-    }
-
-    _onEndAnim23 =() => {
-        this.pS3._animateProgress3()
-    }
-
-    _onEndAnim33 =() => {
-        this.pS4._animateProgress3()
-    }
-
-    _onEndAnim43 =() => {
-        this.pS0._animateProgress3()
-    }
-
-    _onEndAnim03 =() => {
-        // End of animations
-    }
-*/
 
     _onEndAnim11 =() => {
         this.pS1._animateProgress2()
@@ -229,8 +153,8 @@ class HomeScreen extends React.Component {
         this.pS0._animateProgress3()
     }
 
-    _onEndAnim03 =() => {
-        // End of animations
+    _onEndAnim03 =() => { // End of animations
+        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
     }
 
 
@@ -244,7 +168,7 @@ class HomeScreen extends React.Component {
     //     <Emoji name='flushed' style={{ fontSize: 30 }}/>
 
         // console.log("this.props = ", this.props)  
-        console.log("HOME SCREEN RENDER - DEBUT ")  
+        console.log("HOME SCREEN RENDER ")  
         // console.log("this.props.pM = ", this.props.pM)  
         // console.log("this.props.QuestionStatsList = ", this.props.QuestionStatsList)  
         // console.log("GetMaxPointsForZone(this.state.pm, G_Monde) = ", GetMaxPointsForZone(this.state.pM, G_Monde))  
@@ -263,7 +187,8 @@ class HomeScreen extends React.Component {
         let maxPointsAsiePacif = 0 
         let pointsAsiePacif = 0
         let oldPointsAsiePacif = 0
-        if (this.props.pM != null) {  
+        if (this.props.pM != null) {
+            console.log("HOME SCREEN RENDER PM is not NULL")
             let pM = this.props.pM
             /*
             pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
@@ -299,10 +224,13 @@ class HomeScreen extends React.Component {
             //pointsAsiePacif = 5
             //oldPointsAsiePacif = 3
 
-           for (let z = 0; z < 5; z++) {
-                //console.log ("animateProgress start = ", pM[z].oldPoints/pM[z].maxPoints*100)
-                this.state.progressAnimForZone[z].setValue(pM[z].oldPoints/pM[z].maxPoints*100)
-            }
+            this.pS1._initProgressAnimation(oldPointsEurope, maxPointsEurope)
+            this.pS2._initProgressAnimation(oldPointsAfrique, maxPointsAfrique)
+            this.pS3._initProgressAnimation(oldPointsAmeriques, maxPointsAmeriques)
+            this.pS4._initProgressAnimation(oldPointsAsiePacif, maxPointsAsiePacif)
+            this.pS0._initProgressAnimation(oldPointsWorld, maxPointsWorld)
+
+
         }
 
         /*
