@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Alert, Image } from 'react-native'
+import { Alert, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import { COLORS, Gstyles } from './Styles'
@@ -50,6 +50,13 @@ class SeriesScreen extends React.Component {
         }
     }
 
+    _goHomeScreen = () => {
+        let { routeName } = this.props.navigation.state;      
+        console.log("On va à l'écran Home routeName = ", routeName)
+        this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })   
+    }
+
+
     _displayResponseResults = (qr, myResponse, level) => {
         // console.log('*****************************   go Popup ****************************')
         let isMyResponseRight = false
@@ -82,6 +89,21 @@ class SeriesScreen extends React.Component {
  
        this.setState({ modalVisible: false })
        this._goSeriesScreen();
+    }
+
+    _showAlertQuitSeries() {  
+        Alert.alert(  
+            'Es-tu sûr de vouloir quitter ?',  
+            'Tous les progès dans cette session seront perdus',  
+            [  
+                {  
+                    text: 'Annuler',  
+                    onPress: () => console.log('Annuler Pressed'),  
+                    style: 'cancel',  
+                },  
+                {text: 'Quitter', onPress: () => this._goHomeScreen()},  
+            ]  
+        )
     }
 
     render() {
@@ -147,13 +169,12 @@ class SeriesScreen extends React.Component {
         }
         
         // Popup Texts
-        let popupConfirmationText = "textconfirm à définir"
+        let popupConfirmationText = "La capitale de "
         let popupCheeringText = ""
         let typoWarningText = ""
         let popupFlexSize = 7
         // console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
         if (level == 0) {
-            popupConfirmationText = "La capitale de "
             if (levelChanged && queres.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 popupLevelImage = levelImage
@@ -163,7 +184,6 @@ class SeriesScreen extends React.Component {
             }
         }
         else if (level == 1) {
-            popupConfirmationText = "La capitale de "
             if (levelChanged && queres.isResponseRight) {
                 popupCheeringText = "Vous avez atteint le niveau"
                 popupLevelImage = levelImage
@@ -184,7 +204,6 @@ class SeriesScreen extends React.Component {
         }
         else if (level == 3) {
             popupFlexSize = 5
-            popupConfirmationText = "La capitale de "
             if (queres.isResponseRight && queres.isTypo) {
                 typoWarningText = "(attention : il y a une faute de frappe)"
             }
@@ -198,7 +217,6 @@ class SeriesScreen extends React.Component {
         }
         else if (level == 4) { // Should Never Happen
             popupFlexSize = 5
-            popupConfirmationText = "La capitale de "
             if (queres.isResponseRight && queres.isTypo) {
                 typoWarningText = "(attention : il y a une faute de frappe)"
             }
@@ -227,9 +245,10 @@ class SeriesScreen extends React.Component {
         // Response View
         let responses = queres.proposedResponses
         let responseView = <View> <Text> fake </Text> </View> // juste pour intialiser la variable
-        let question  = ""
+        let question  = queres.state
+        let questionIntro = "Capitale de"
+        let answer = queres.capital
         if (level == 0) { 
-            question = queres.state
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
@@ -253,7 +272,6 @@ class SeriesScreen extends React.Component {
             </View>
         }
         else if (level == 1) {
-            question = queres.state
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
@@ -296,6 +314,8 @@ class SeriesScreen extends React.Component {
         }
         else if (level == 2) {
             question = queres.capital
+            questionIntro = "Quel est le pays dont la capitale est "
+            answer = queres.state
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
@@ -337,7 +357,6 @@ class SeriesScreen extends React.Component {
             </View>
         }
         else if (level == 3) { // Text input
-            question = queres.state
             if (this.state.inputResponse.localeCompare("") == 0) {
                 checkButtonStyle = Gstyles.button_inactive
                 checkTextButtonStyle = Gstyles.check_text_inactive
@@ -361,7 +380,6 @@ class SeriesScreen extends React.Component {
             </View>
         }
         else if (level == 4) { // Text input  (idem niveau 3)
-            question = queres.state
             if (this.state.inputResponse.localeCompare("") == 0) {
                 checkButtonStyle = Gstyles.button_inactive
                 checkTextButtonStyle = Gstyles.check_text_inactive
@@ -389,7 +407,9 @@ class SeriesScreen extends React.Component {
             <View style={ Gstyles.main_view }>
                 <View style={ styles.quitAndProgressBar_view }>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
-                         <Image style={{ width: 35, height: 35 }} source={require('../Images/quit-screen.png')} />
+                        <TouchableOpacity onPress={()=> this._showAlertQuitSeries() }>
+                            <Image style={{ width: 35, height: 35 }} source={require('../Images/quit-screen.png')} />
+                        </TouchableOpacity>
                     </View>
                     <View style={ styles.progressBar_view }>
                         <View style={{ flexDirection: 'row', backgroundColor: 'gainsboro', borderRadius: 10, height: 10 }}>
@@ -400,7 +420,8 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={ styles.question_view }>
-                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} </Text>
+                    <Text style={{ fontSize: 16, fontWeight: 'bold'}}> {questionIntro} </Text>
+                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} ? </Text>
                 </View>
                 <Divider/>
                 <View style={styles.image_view}>
@@ -424,7 +445,7 @@ class SeriesScreen extends React.Component {
                     transparent={true}
                     visible={this.state.modalVisible}
                     onRequestClose={() => {
-                        Alert.alert('Modal has been closed')
+                        console.log('Modal has been closed')
                     }}>
                     <View style={{ flex: 1 }}>
                         <View style={{ flex: 1 }}></View>
@@ -438,8 +459,8 @@ class SeriesScreen extends React.Component {
                                         <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupPointsWon}</Text>
                                     </View>
                                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 10 }}>{popupConfirmationText} {queres.state} est</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{queres.capital}</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 9 }}>{popupConfirmationText} {question} est</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{answer}</Text>
                                         <Text style={{ color: popupTextColor, fontSize: 14, fontWeight: 'bold' }}>{typoWarningText}</Text>
                                     </View>
                                     { cheeringView }
@@ -467,7 +488,7 @@ const styles = StyleSheet.create({
         paddingRight: '3%' 
     },
     question_view: {
-        flex: 1, 
+        flex: 3, 
         justifyContent: 'center', 
         alignItems: 'center'  
     },

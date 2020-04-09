@@ -1,16 +1,24 @@
 Bug / backlog
-- Empêcher le back sur les écrans jeu
-- vérifier la bonne déclaration du state dans jeu
 - typer TOUTES les variables
-- changer le texte de la popup du niveau 3 (captales - pays)
 - changer les couleurs pour ne pas trop ressmbler à DuoLinguo
-- choix des non 4 beaucou plus probables
 - remplacer la fonction largeur dans HomeScreen
+- améliorer l'animation des stats home page
+    - indiquer visuellement quand l'animation est finie
+    - mettre un petit bruit pour chaque animation unitaire
+- mettre les bonnes photos
+
 
 
 
 
 Progresser dans le dev react natvie
 - voir typeScript
-- comprendre et savoir utiliser le debugguer
+- Améliorer l'utilisation du débugguer 
+
+Réalisé :
+- (09/04) empêcher le dépassement du niveau 4 dans les questions de la séie
+- (09/04) changer le texte de la popup du niveau 3 (captales - pays)
+- (09/04) permettre l'arrêt de la série quand on appuie sur la croix
+- (09/04) supprimer le bouton de test de l'animation
+
 

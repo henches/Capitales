@@ -190,7 +190,7 @@ class HomeScreen extends React.Component {
         if (this.props.pM != null) {
             console.log("HOME SCREEN RENDER PM is not NULL")
             let pM = this.props.pM
-            /*
+            /* POur tester l'animation
             pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
             oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
             */
@@ -233,9 +233,15 @@ class HomeScreen extends React.Component {
 
         }
 
-        /*
-        <ProgressSymbol onEndAnim1={ this._onEndAnim1 } ref={ ProgressSymbol => { this.ProgressSymbol2 = ProgressSymbol }} myFlex={ 3 } zone={ "Monde" } points={ this.state.myCounter } maxPoints={ maxPointsWorld }/>
-        <ProgressSymbol onEndAnim1={ this._onEndAnim1 } myFlex={ 3 } zone={ "Child-> parent" } points={ this.state.myCounter } maxPoints={ maxPointsWorld }/>
+
+        /* Pour tester l'animation
+                        <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
+                    <TouchableOpacity style={Gstyles.button}
+                            onPress={() => { this.pS1._animateProgress() }}>
+                            <Text style={Gstyles.button_text}>Appel vers le component 1</Text>
+                    </TouchableOpacity>
+                </View>
+
         */
 
         return (
@@ -257,12 +263,6 @@ class HomeScreen extends React.Component {
                     <TouchableOpacity style={Gstyles.button}
                             onPress={() => { this._goSeriesScreen() }}>
                             <Text style={Gstyles.button_text}>JOUER</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
-                    <TouchableOpacity style={Gstyles.button}
-                            onPress={() => { this.pS1._animateProgress() }}>
-                            <Text style={Gstyles.button_text}>Appel vers le component 1</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}> 

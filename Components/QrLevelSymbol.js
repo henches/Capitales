@@ -33,7 +33,7 @@ export class QrLevelSymbol extends React.Component {
         const levelSize = symbolHeight/maxRightResponses
 
         const levelImageSize = levelSize*1.2
-        const progress = levelSize*rightResponsesNb
+        const progress = levelSize*Math.min(rightResponsesNb, maxRightResponses)
 
         const decX = 5
         const decY = -2
