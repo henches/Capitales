@@ -190,46 +190,46 @@ class HomeScreen extends React.Component {
         if (this.props.pM != null) {
             console.log("HOME SCREEN RENDER PM is not NULL")
             let pM = this.props.pM
-            /* POur tester l'animation
-            pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
-            oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
-            */
+            
             maxPointsWorld = GetMaxPointsForZone(pM, G_Monde)
             pointsWorld = GetPointsForZone(pM, G_Monde)
             oldPointsWorld = GetOldPointsForZone(pM, G_Monde)
-            // pointsWorld = 45
-            // oldPointsWorld = 40
 
             maxPointsEurope = GetMaxPointsForZone(pM, G_Europe)
             pointsEurope = GetPointsForZone(pM, G_Europe)
             oldPointsEurope = GetOldPointsForZone(pM, G_Europe)
-            //pointsEurope = 12
-            //oldPointsEurope = 10
 
             maxPointsAfrique = GetMaxPointsForZone(pM, G_Afrique)
             pointsAfrique = GetPointsForZone(pM, G_Afrique)
             oldPointsAfrique = GetOldPointsForZone(pM, G_Afrique)
-            //pointsAfrique = 16
-            //oldPointsAfrique = 16
 
             maxPointsAmeriques = GetMaxPointsForZone(pM, G_Ameriques)
             pointsAmeriques = GetPointsForZone(pM, G_Ameriques)
             oldPointsAmeriques = GetOldPointsForZone(pM, G_Ameriques)
-            //pointsAmeriques = 20
-            //oldPointsAmeriques = 18
 
             maxPointsAsiePacif = GetMaxPointsForZone(pM, G_AsiePacif)
             pointsAsiePacif = GetPointsForZone(pM, G_AsiePacif)
             oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif)
-            //pointsAsiePacif = 5
-            //oldPointsAsiePacif = 3
 
-            this.pS1._initProgressAnimation(oldPointsEurope, maxPointsEurope)
+            // Pour tester l'animation
+            pointsWorld = 45
+            oldPointsWorld = 25
+            pointsEurope = 12
+            oldPointsEurope = 10
+            pointsAfrique = 16
+            oldPointsAfrique = 16
+            pointsAmeriques = 20
+            oldPointsAmeriques = 18
+            pointsAsiePacif = 5
+            oldPointsAsiePacif = 3
+
+            this.pS0._initProgressAnimation(oldPointsEurope, maxPointsEurope)
+            /*
             this.pS2._initProgressAnimation(oldPointsAfrique, maxPointsAfrique)
             this.pS3._initProgressAnimation(oldPointsAmeriques, maxPointsAmeriques)
             this.pS4._initProgressAnimation(oldPointsAsiePacif, maxPointsAsiePacif)
             this.pS0._initProgressAnimation(oldPointsWorld, maxPointsWorld)
-
+            */
 
         }
 
@@ -243,13 +243,8 @@ class HomeScreen extends React.Component {
                 </View>
 
         */
-
-        return (
-            <View style={Gstyles.main_view}>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
-                </View>
-                <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
+       /*
+                       <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                             onEndAnim1={ this._onEndAnim11 } onEndAnim2={ this._onEndAnim12 } onEndAnim3={ this._onEndAnim13 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
                 <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique } oldPoints={ oldPointsAfrique }  maxPoints={ maxPointsAfrique }
                             onEndAnim1={ this._onEndAnim21 } onEndAnim2={ this._onEndAnim22 } onEndAnim3={ this._onEndAnim23 } ref={ ProgressSymbol => { this.pS2 = ProgressSymbol }} />
@@ -257,6 +252,16 @@ class HomeScreen extends React.Component {
                             onEndAnim1={ this._onEndAnim31 } onEndAnim2={ this._onEndAnim32 } onEndAnim3={ this._onEndAnim33 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
                 <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
                             onEndAnim1={ this._onEndAnim41 } onEndAnim2={ this._onEndAnim42 } onEndAnim3={ this._onEndAnim43 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
+
+       */
+
+       // onPress={() => { this._goStatView() }}>
+
+        return (
+            <View style={Gstyles.main_view}>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
+                </View>
                 <ProgressSymbol myFlex={ 1 } zone={ "MONDE" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                             onEndAnim1={ this._onEndAnim01 } onEndAnim2={ this._onEndAnim02 } onEndAnim3={ this._onEndAnim03 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                 <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>   
@@ -267,7 +272,7 @@ class HomeScreen extends React.Component {
                 </View>
                 <View style={{ flex: 3, justifyContent: 'center', alignItems: 'center' }}> 
                     <TouchableOpacity style={Gstyles.button}
-                                onPress={() => { this._goStatView() }}>
+                                onPress={() => { this.pS0._animateProgress() }}>
                                 <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Statistiques</Text>
                     </TouchableOpacity>
                 </View>

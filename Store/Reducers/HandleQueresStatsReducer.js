@@ -1,5 +1,5 @@
 import { storeQuestionStats } from '../../Helpers/StorageFunctions'
-import { InitPointsManager, AddPointsForZone, SetPointsProgressDisplayed, GetIntegerZoneFromStringZone, SetOldPointsForZone } from '../../Helpers/PointsManager'
+import { InitPointsManager, AddPointsForZone, GetIntegerZoneFromStringZone, SetOldPointsForZone } from '../../Helpers/PointsManager'
 
 
 const initialState = {

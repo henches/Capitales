@@ -3,7 +3,7 @@ import { Text, View, Animated, TouchableOpacity, Easing, Bounce } from 'react-na
 import { COLORS, Gstyles } from './Styles'
 
 
-const barHeight = 16
+const barHeight = 25
 
 
 // Affiche la progression en cours pour une zone
@@ -23,7 +23,7 @@ export class ProgressSymbol extends React.Component {
     }
 
     _initProgressAnimation = (oldPoints, maxPoints) => {
-        this.state.pBsizeX.setValue(oldPoints/maxPoints)
+        this.state.pBsizeX.setValue(0)
         this.state.pBfadeProgress.setValue(0)
     }
 
@@ -44,7 +44,7 @@ export class ProgressSymbol extends React.Component {
 
         Animated.parallel([
             Animated.timing(this.state.pBsizeX, {
-                toValue: this.props.oldPoints/this.props.maxPoints+0.05,
+                toValue: 1,
                 duration: 200, 
                 easing: Easing.linear
             }),
@@ -56,9 +56,9 @@ export class ProgressSymbol extends React.Component {
         ).start( () =>  {
             Animated.parallel([
                 Animated.timing(this.state.pBsizeX, {
-                    toValue: this.props.oldPoints/this.props.maxPoints,
+                    toValue: 0,
                     duration: 200, 
-                    easing: Easing.bounce
+                    easing: Easing.linear
                 }),
                 Animated.timing(                  
                     this.state.pBfadeProgress,{
@@ -73,6 +73,7 @@ export class ProgressSymbol extends React.Component {
     }
     
     _animateProgress2  = () => {
+        return
         console.log("progress Symbol : _animateProgress2 ")
     
         if (this.props.oldPoints == this.props.points) { // Pas d'animation si pas de d'augmentation de points
@@ -132,23 +133,9 @@ export class ProgressSymbol extends React.Component {
         //console.log("oldPoints = ", oldPoints)
         //console.log("maxPoints = ", maxPoints)
 
-/*
-                            <Animated.View style={{ zIndex:1, alignSelf: 'flex-end', opacity: this.state.pBfadeProgress.interpolate({ inputRange: [0, 1], outputRange: ['100%', '0%'] })  }}>
-                                <Text style={{ fontSize: 13, color: 'white' }}> { '+'+(points-oldPoints) } </Text>
-                            </Animated.View>
-                            <Animated.View style={{ sIndex:2, alignSelf: 'flex-end', opacity: this.state.pBfadeProgress  }}>
-                                <Text style={{ fontSize: 13, color: 'white' }}> { points } </Text>
-                            </Animated.View>
-                        </Animated.View>    
 
-*/
-/*
-<Animated.View style={{ zIndex:1, position:'absolute', alignSelf: 'flex-end', 
-opacity: this.state.pBfadeProgress.interpolate({ inputRange: [0, 0.29, 0.31, 0.59, 0.60, 1], outputRange: [0, 1, 1, 1, 0, 0] }) }}>
-<Text style={{ fontSize: 13, color: 'white' }}> { '+'+(points-oldPoints) } </Text>
-</Animated.View>
-*/
-        return(
+
+        /*
             <View style={{ flex: myFlex, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: '5%', marginLeft: '5%' }}>
                 <Text style={{ fontSize: 20 }}>{zone}</Text>
                 <View style={{ width:'100%', marginRight: '5%', marginLeft: '5%'}}>
@@ -169,6 +156,18 @@ opacity: this.state.pBfadeProgress.interpolate({ inputRange: [0, 0.29, 0.31, 0.5
                         <Text style={{ fontSize: 10, color: 'black', opacity: 0.5 }}> { maxPoints } </Text>
                     </View>
                 </View>
+            </View>
+*/
+
+        return(
+            <View style={{ flex: myFlex, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: '5%', marginLeft: '5%' }}>
+                <Text style={{ fontSize: 20 }}>{zone}</Text>
+                <Animated.View style={{ flexDirection: 'row', justifyContent: 'center', width:'100%', marginRight: '5%', marginLeft: '5%',
+                        transform: [{ scale: this.state.pBsizeX.interpolate({ inputRange: [0, 1], outputRange: [1, 3] }) }] }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', alignItem: 'center', backgroundColor: 'dodgerblue', borderRadius: '50%', height: barHeight, width: barHeight }}>
+                        <Text style={{ fontSize: 12, fontWeight: 'bold', color: 'white' }}> 4 </Text>
+                    </View>      
+                </Animated.View>
             </View>
       )
     }  

@@ -48,22 +48,22 @@ _createProposedResponsesList = (normalDirection, responsesNb, question) => { // 
 function createProbaAdaptedQueresStats(queresStats) {
     G_CoefLevel4 = 0.1  // pourcentage de probabilité de choisir un queres de level4
 
-    let nbLevel4 = 0 // nombre de queres de level4
+    let nbLevel4 = 0 // portera le nombre de queres de level4
     for (var i in queresStats) {
         if (queresStats[i].level == 4) nbLevel4++
     }
     // console.log("nbLevel4", nbLevel4)
     let probaAdaptedQueresPointer = []
-    if (nbLevel4 == 0 || nbLevel4 == queresStats.length) { // Aucun Level 4 dans la liste = on rretourne une liste qui pointe sur la liste (donc sans changement d'occurences)
+    if (nbLevel4 == 0 || nbLevel4 == queresStats.length) { // Aucun Level 4 ou que des Level4 dans la statlist : on retourne une liste qui pointe vers la statlist
         for (var index = 0; index < queresStats.length; index++) 
                 probaAdaptedQueresPointer.push(index)
     }
-    else {
+    else { // sinon, on va consitue une 
         let otherLevelLength = ((1-G_CoefLevel4)/G_CoefLevel4)*nbLevel4 // nombre total d'éléménts de level autres que 4
         let otherLevelNumber = otherLevelLength/(queresStats.length-nbLevel4) // nombre de fois ou il faut positionner les queres différents de level4 dans la probaListe 
         // console.log("otherLevelLength :", otherLevelLength)
         // console.log("otherLevelNumber :", otherLevelNumber)
-        for (var index = 0; index < queresStats.length; index++) {
+        for (var index = 0; index < queresStats.length; index++) { // On crée une liste qui pointe plein de fois vers des éléments de stat list différents de level 4
             if (queresStats[index].level == 4) {
                 probaAdaptedQueresPointer.push(index)
             }
@@ -113,11 +113,26 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             let myQueresSeries = []
             
             let cloneQueresStats = [...action.value] // Recopie de queresSTats*
-            let probaAdaptedQueresStats = createProbaAdaptedQueresStats(cloneQueresStats) // Adapte la liste pour minimiser les chances de choisir une niveau 4
+
+           
+
+
+            /* Evol ListSpec 
+            createProbaAdaptedQueresStats va renvoyer uen liste de liste de queres
+            la liste extérieure aura : le Monde et les 4 continents
+            - la liste Monde va pointer sur la liste entière (l'ancienne probaAdaptedQueresStats)
+            - les autres listes pointeront chacune sur une sous-liste avec uniquement les queres du continent
+            */
+
+           let probaAdaptedQueresStats = createProbaAdaptedQueresStats(cloneQueresStats) // créée une liste qui duplique les queres non level4 pour diminuer les chances d'en trouver.
             // console.log('probaAdaptedQueresStats : ')
-            printProbaAdaptedList(probaAdaptedQueresStats)
+            printProbaAdaptedList(probaAdaptedQueresStats)  // Une liste de pointeurs vers statlist qui minimise les chances de tomber sur du level4
+
+
+
             for (let i = 0; i < G_Config.SeriesLength; i++) {
                 // Cherche une question au hasard parmi toutes les queres possibles originelles.
+                // Evol ListSpec : en fonction du choix du continent : on tape dans la bonne liste
                 const indexInProbaList = Math.floor(Math.random()*probaAdaptedQueresStats.length);
                 const indexInQueresStatList = probaAdaptedQueresStats[indexInProbaList]
                 const sl = cloneQueresStats[indexInQueresStatList]
