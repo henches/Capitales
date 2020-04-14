@@ -1,4 +1,4 @@
-const Zones = ["Monde", "Europe", "Afrique", "AsiePacif", "Ameriques" ]
+global.Zones = ["Monde", "Europe", "Afrique", "AsiePacif", "Ameriques" ]
 global.G_Monde = 0
 global.G_Europe = 1
 global.G_Afrique = 2

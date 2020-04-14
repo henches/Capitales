@@ -99,6 +99,17 @@ function supressIndexFormProbaAdaptedQueresStats(list, index) {
         list.splice(start, stop-start+1)
 }
 
+function filterList(queresStatList, zone) {
+    var i = queresStatList.length
+    while (i--) {
+        console.log("filterList: zone = ", zone, " queresStatList[i].queres.zone = ", queresStatList[i].Queres.continent)
+        if (queresStatList[i].Queres.continent.localeCompare(Zones[zone]) != 0) {
+            console.log("filterList: suppression de ", queresStatList[i].Queres.state)
+            queresStatList.splice(i, 1);
+        }
+    } 
+}
+
 function printProbaAdaptedList(list) {
     let aff = ""
     list.forEach(elt => aff += elt+" ")
@@ -112,30 +123,25 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
             let myQueresSeries = []
             
-            let cloneQueresStats = [...action.value] // Recopie de queresSTats*
+            let queresStatList = [...action.value] // Recopie de queresSTats*
 
            
 
+            filterList(queresStatList, G_Afrique) // Supprime les éléments de la liste qui ne sont pas de la zone choisie par l'utilisateur
 
-            /* Evol ListSpec 
-            createProbaAdaptedQueresStats va renvoyer uen liste de liste de queres
-            la liste extérieure aura : le Monde et les 4 continents
-            - la liste Monde va pointer sur la liste entière (l'ancienne probaAdaptedQueresStats)
-            - les autres listes pointeront chacune sur une sous-liste avec uniquement les queres du continent
-            */
 
-           let probaAdaptedQueresStats = createProbaAdaptedQueresStats(cloneQueresStats) // créée une liste qui duplique les queres non level4 pour diminuer les chances d'en trouver.
+            let probaAdaptedQueresStats = createProbaAdaptedQueresStats(queresStatList) // créée une liste qui duplique les queres non level4 pour diminuer les chances d'en trouver.
             // console.log('probaAdaptedQueresStats : ')
             printProbaAdaptedList(probaAdaptedQueresStats)  // Une liste de pointeurs vers statlist qui minimise les chances de tomber sur du level4
-
 
 
             for (let i = 0; i < G_Config.SeriesLength; i++) {
                 // Cherche une question au hasard parmi toutes les queres possibles originelles.
                 // Evol ListSpec : en fonction du choix du continent : on tape dans la bonne liste
                 const indexInProbaList = Math.floor(Math.random()*probaAdaptedQueresStats.length);
+
                 const indexInQueresStatList = probaAdaptedQueresStats[indexInProbaList]
-                const sl = cloneQueresStats[indexInQueresStatList]
+                const sl = queresStatList[indexInQueresStatList]
                 // console.log("sl = ", sl)
                 // en function du niveau de la queres : propose les listes de réponses adaptées
                 if (sl.level == 0) {
@@ -160,11 +166,11 @@ function HandleQueresSeriesReducer(state = initialState, action) {
                     level: sl.level, rightResponsesNb: sl.rightResponsesNb, wrongResponsesNb: sl.wrongResponsesNb, totalPoints: sl.totalPoints, 
                     isResponseRight: false, givenResponse: "", isTypo: false, pointsWon: 0, 
                     afterResponseLevel: sl.level, afterResponseRightResponsesNb: 0,  afterResponseWrongResponsesNb: 0, afterResponseTotalPoints: 0 })
-                // Supprime toutes les question du type de cele choisie au hasard pour qu'on ne les sélectionne plus par la suite
+                // Supprime toutes les question du type de celle choisie au hasard pour qu'on ne les sélectionne plus par la suite
                 supressIndexFormProbaAdaptedQueresStats(probaAdaptedQueresStats, indexInQueresStatList) 
                 // console.log('probaAdaptedQueresStats apres suppression: ')
                 printProbaAdaptedList(probaAdaptedQueresStats)
-                cloneQueresStats.splice(indexInQueresStatList,1)
+                queresStatList.splice(indexInQueresStatList,1)
 
             }
             // console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE myQueresSeries = ', myQueresSeries)

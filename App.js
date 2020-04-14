@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesListFromFile from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
-import { InitPoints, InitPointsManager } from './Helpers/PointsManager'
 
 
 

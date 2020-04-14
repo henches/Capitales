@@ -3,7 +3,8 @@ import { Text, View, Animated, TouchableOpacity, Easing, Bounce } from 'react-na
 
 
 const barHeight = 18
-progressDuration = 1000
+progressDuration = 300
+progressCountDuration = 500
 
 
 // Affiche la progression en cours pour une zone
@@ -36,16 +37,22 @@ export class ProgressSymbol extends React.Component {
           }))
     }
 
+    _initProgressAnimation = (oldPoints, maxPoints) => {
+        this.setState({ counter: oldPoints })
+        this.state.progress.setValue(oldPoints/maxPoints)
+    }
+
+
    _animateProgress  = () => {
-    console.log("progress Symbol : _animateProgress ")
-    Animated.timing(this.state.circleSize, {
-            toValue: 2,
-            duration: 500, 
-            easing: Easing.linear
-    }).start( () =>  {     
-        this._animateProgress2()
-    })
-}
+        console.log("progress Symbol : _animateProgress ")
+        Animated.timing(this.state.circleSize, {
+                toValue: 2,
+                duration: progressDuration, 
+                easing: Easing.linear
+        }).start( () =>  {     
+            this._animateProgress2()
+        })
+    }
 
     
     _animateProgress2  = () => {
@@ -69,7 +76,7 @@ export class ProgressSymbol extends React.Component {
         console.log("progress Symbol : _animateProgress3 ")
         Animated.timing(this.state.circleSize, {
                 toValue: 1,
-                duration: 500, 
+                duration: progressCountDuration, 
                 easing: Easing.linear
         }).start( () =>  {      
             this.props.onEndAnim3()           
@@ -87,8 +94,6 @@ export class ProgressSymbol extends React.Component {
         console.log("render ProgressSymbol oldPoints = ", this.props.oldPoints)
         console.log("render ProgressSymbol points = ", this.props.points)
         console.log("render ProgressSymbol maxPoints = ", this.props.maxPoints)
-        let justify = 'flex-end'
-        // if (this.props.oldPoints/this.props.maxPoints < 0.05) justify = 'flex-start'
 
 
         return(
@@ -96,7 +101,7 @@ export class ProgressSymbol extends React.Component {
                 <Text style={{ fontSize: 20 }}>{ zone }</Text>
                 <View style={{ flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: '100%' }}>
                     <Text style={{ position: 'absolute', left: '95%', fontSize: 10, color: 'black' }}> { this.props.maxPoints } </Text>
-                    <Animated.View style={{ flexDirection: 'row', justifyContent: justify, backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
+                    <Animated.View style={{ flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
                             width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>      
                         <Animated.View style={{ transform: [{ scale: this.state.circleSize }] }}>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue', borderRadius: '50%', height: barHeight, width: barHeight, marginRight: '0.5%' }}>

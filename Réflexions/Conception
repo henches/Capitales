@@ -1,7 +1,7 @@
 Queres :
 - state
 - capital
-- zone
+- continent
 - image
 
 
@@ -16,7 +16,7 @@ ZoneStat : list of DataPerZone
 
 QueresStats :
 - id
-- queres : Queres
+- Queres : Queres
 - level
 - totalPoints
 - rightResponsesNb

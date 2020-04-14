@@ -5,3 +5,6 @@ export function G_SerializeQueresList(aQueresList) {
     }
     return s
 }
+
+
+export const QuestionTypes = Object.freeze({ NORMAL:1, LESS_ASKED:2, TO_WORK:3 })
