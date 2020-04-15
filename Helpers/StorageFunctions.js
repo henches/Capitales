@@ -1,13 +1,13 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKey = 'QuestionStats41'
+const listKey = 'QuestionStats50'
 
 function initQuestionStats() {
     console.log("InitQuestionStats")
     myQueresStats = []
     for (let i = 0; i < G_StatesList.length; i++) {
-        myQueresStats.push({ id : i.toString(), Queres: G_StatesList[i], level: 0, levelImage: null, rightResponsesNb: 0, wrongResponsesNb: 0, totalPoints: 0  })
+        myQueresStats.push({ id: i.toString(), Queres: G_StatesList[i], level: 0, levelImage: null, rightResponsesNb: 0, wrongResponsesNb: 0, totalPoints: 0  })
     }
     return myQueresStats
 }

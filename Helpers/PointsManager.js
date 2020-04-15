@@ -5,37 +5,49 @@ global.G_Afrique = 2
 global.G_AsiePacif = 3
 global.G_Ameriques = 4
 
+const LevelNumber = 8
+const TempoLevelNumber = 2  // Nombre de niveaux pendant le test des niveaux
 
 let Points = []
+
 
 export function InitPointsManager(QuestionStatsList) {
   
     InitPoints()
 
-    let pM = []
+    let pM = new Array(LevelNumber)
     
-    for (i = 0; i < Zones.length; i++) {
-        pM.push({
-                zone: Zones[i],
+    for (l = 0; l < LevelNumber; l++) {
+        pM[l] = new Array(Zones.length)
+        for (z = 0; z < Zones.length; z++) {
+            pM[l][z] = {
+                zone: Zones[z],
                 nb: 0,
                 oldPoints: 0,
                 points: 0,
                 maxPoints: 0
-        })
+            }
+        }
     }
 
-    pM[G_Monde].nb = QuestionStatsList.length
+    let level
     for (i = 0; i < QuestionStatsList.length; i++) {
         // console.log(" QuestionStatsList[i] = ", QuestionStatsList[i])
         // console.log("QuestionStatsList[i].Queres.continent = ", QuestionStatsList[i].Queres.continent)
         let found = false
         for (let z = 1; z < pM.length; z++) {
             if (QuestionStatsList[i].Queres.continent.localeCompare(Zones[z]) == 0) {
-                pM[z].nb++
-                pM[z].points += QuestionStatsList[i].totalPoints
-                pM[z].oldPoints = pM[z].points
-                pM[G_Monde].points += QuestionStatsList[i].totalPoints
-                pM[G_Monde].oldPoints = pM[G_Monde].points
+                level = QuestionStatsList[i].Queres.niveau
+                level--  // En attendant de commencer les niveaux à 0
+                if (level > TempoLevelNumber) 
+                    level  = TempoLevelNumber
+                console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
+                pM[level][z].nb++
+                pM[level][z].points += QuestionStatsList[i].totalPoints
+                pM[level][z].oldPoints = pM[level][z].points
+                pM[level][G_Monde].nb++
+                pM[level][G_Monde].points += QuestionStatsList[i].totalPoints
+                pM[level][G_Monde].oldPoints = pM[level][G_Monde].points
                 found = true
                 break
             }
@@ -44,48 +56,56 @@ export function InitPointsManager(QuestionStatsList) {
             console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].Queres.state, QuestionStatsList[i].Queres.continent)
     }
 
-    for (i = 0; i < pM.length; i++) 
-        pM[i].maxPoints = pM[i].nb*Points[Points.length-1]
+    for (let l = 0; l < pM.length; l++) {
+        for (let z = 0; z < pM[l].length; z++) 
+            pM[l][z].maxPoints = pM[l][z].nb*Points[Points.length-1]
+    }
 
+    for (let l = 0; l < pM.length; l++) {
+        for (let z = 0; z < pM[l].length; z++) {
+            p = pM[l][z]
+            console.log("pM level = ", l, " / zone = ", p.zone, " / nb = ", p.nb, " / points = ", p.points, " / oldPoints = ", p.oldPoints, " / maxPoints = ", p.maxPoints)
+        }
+    }
 
 
     return pM
 }
 
-export function GetIntegerZoneFromStringZone(pM, stringZone) {
-    for (let z = 1; z < pM.length; z++) {
-        if (pM[z].zone.localeCompare(stringZone) == 0) {
+export function GetIntegerZoneFromStringZone(stringZone) {
+    for (let z = 1; z < Zones.length; z++) {
+        if (Zones[z].localeCompare(stringZone) == 0) {
             return z
         }
     }
 
 }
 
-export function GetPointsForZone(pM, zone) {
-    return pM[zone].points
+export function GetPointsForZone(pM, zone, level) {
+    return pM[level][zone].points
 }
 
-export function GetOldPointsForZone(pM, zone) {
-    return pM[zone].oldPoints
+export function GetOldPointsForZone(pM, zone, level) {
+    return pM[level][zone].oldPoints
 }
 
-export function GetMaxPointsForZone(pM, zone) {
-    return pM[zone].maxPoints
+export function GetMaxPointsForZone(pM, zone, level) {
+    return pM[level][zone].maxPoints
 }
 
-export function GetProgressForZone(pM, zone) {
+export function GetProgressForZone(pM, zone, level) {
     // console.log("GetProgressForZone(zone) zone = ", zone)
     return pM[zone].points/GetMaxPointsForZone(pM, zone)
 }
 
-export function AddPointsForZone(pM, zone, points) {
-    pM[zone].points += points
+export function AddPointsForZone(pM, zone, points, level) {
+    pM[level][zone].points += points
 
 }
 
-export function SetOldPointsForZone(pM) {
-    for (let z = 0; z < pM.length; z++)
-        pM[z].oldPoints = pM[z].points
+export function SetOldPointsForZone(pM, level) {
+    for (let z = 0; z < pM[level].length; z++)
+        pM[level][z].oldPoints = pM[level][z].points
 
 }
 

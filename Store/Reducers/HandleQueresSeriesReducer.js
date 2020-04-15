@@ -99,11 +99,11 @@ function supressIndexFormProbaAdaptedQueresStats(list, index) {
         list.splice(start, stop-start+1)
 }
 
-function filterList(queresStatList, zone) {
+function filterList(queresStatList, level) {
     var i = queresStatList.length
     while (i--) {
-        console.log("filterList: zone = ", zone, " queresStatList[i].queres.zone = ", queresStatList[i].Queres.continent)
-        if (queresStatList[i].Queres.continent.localeCompare(Zones[zone]) != 0) {
+        console.log("filterList: level = ", level, " queresStatList[i].queres.level = ", queresStatList[i].Queres.niveau)
+        if (queresStatList[i].Queres.niveau != level) {
             console.log("filterList: suppression de ", queresStatList[i].Queres.state)
             queresStatList.splice(i, 1);
         }
@@ -127,7 +127,7 @@ function HandleQueresSeriesReducer(state = initialState, action) {
 
            
 
-            filterList(queresStatList, G_Afrique) // Supprime les éléments de la liste qui ne sont pas de la zone choisie par l'utilisateur
+            filterList(queresStatList, 1) // Supprime les éléments de la liste qui ne sont pas du niveau actuel
 
 
             let probaAdaptedQueresStats = createProbaAdaptedQueresStats(queresStatList) // créée une liste qui duplique les queres non level4 pour diminuer les chances d'en trouver.

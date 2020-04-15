@@ -28,7 +28,8 @@ function HandleQueresStatsReducer(state = initialState, action) {
             let questionStatsList = state.QuestionStatsList.slice()
             myPM = state.pM.slice()
             const queresSeries = action.value
-            SetOldPointsForZone(myPM) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
+            let tempoLevel = 0
+            SetOldPointsForZone(myPM, tempoLevel) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
             for (let i=0; i < queresSeries.length; i++) {
                 const queres = queresSeries[i]
                 // console.log("queresSeries[", i, "]=", queresSeries[i])
@@ -42,9 +43,9 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 elt.totalPoints = queres.afterResponseTotalPoints
                 elt.rightResponsesNb = queres.afterResponseRightResponsesNb
                 elt.wrongResponsesNb = queres.afterResponseWrongResponsesNb
-                const integerZone = GetIntegerZoneFromStringZone(myPM, queres.continent)
-                AddPointsForZone(myPM, integerZone, queres.pointsWon)
-                AddPointsForZone(myPM, G_Monde, queres.pointsWon)
+                const integerZone = GetIntegerZoneFromStringZone(queres.continent)
+                AddPointsForZone(myPM, integerZone, queres.pointsWon, tempoLevel)
+                AddPointsForZone(myPM, G_Monde, queres.pointsWon, tempoLevel)
             }
             storeQuestionStats(questionStatsList) // on sauvegarde cette liste sur le storage
             .then(myList => {
@@ -59,10 +60,9 @@ function HandleQueresStatsReducer(state = initialState, action) {
             return nextState
         case 'QUERES_STATS-DISPLAYED' :   // value : null
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-DISPLAYED")
+            tempoLevel = 0
             myPM = state.pM.slice()
-            for (let z = 0; z < 5; z++) {
-                myPM[z].oldPoints = myPM[z].points
-            }
+            SetOldPointsForZone(myPM, tempoLevel) // recopie les points dans OldPoints (l'animation est finie)
   
 
             nextState = {

@@ -44,7 +44,11 @@ export class ProgressSymbol extends React.Component {
 
 
    _animateProgress  = () => {
-        console.log("progress Symbol : _animateProgress ")
+        console.log("progress Symbol : _animateProgress zone = ", this.props.zone)
+        if (this.props.oldPoints == this.props.points) {
+            this.props.onEndAnim3()
+            return
+        }
         Animated.timing(this.state.circleSize, {
                 toValue: 2,
                 duration: progressDuration, 
@@ -56,7 +60,7 @@ export class ProgressSymbol extends React.Component {
 
     
     _animateProgress2  = () => {
-        console.log("progress Symbol : _animateProgress2 ")
+        console.log("progress Symbol : _animateProgress2  zone = ", this.props.zone)
 
         this.setState({ counter: this.props.oldPoints })
         this.interval = setInterval(() => this._tick(), progressDuration/(this.props.points-this.props.oldPoints+1));
@@ -73,7 +77,7 @@ export class ProgressSymbol extends React.Component {
     }
 
     _animateProgress3  = () => {
-        console.log("progress Symbol : _animateProgress3 ")
+        console.log("progress Symbol : _animateProgress3  zone = ", this.props.zone)
         Animated.timing(this.state.circleSize, {
                 toValue: 1,
                 duration: progressCountDuration, 
@@ -91,9 +95,9 @@ export class ProgressSymbol extends React.Component {
 
         const myFlex = this.props.myFlex // chaine de caractères
         const zone = this.props.zone // chaine de caractères
-        console.log("render ProgressSymbol oldPoints = ", this.props.oldPoints)
-        console.log("render ProgressSymbol points = ", this.props.points)
-        console.log("render ProgressSymbol maxPoints = ", this.props.maxPoints)
+        console.log("render ProgressSymbol Zone = ", zone, " oldPoints = ", this.props.oldPoints)
+        console.log("render ProgressSymbol Zone = ", zone, " points = ", this.props.points)
+        console.log("render ProgressSymbol Zone = ", zone, " maxPoints = ", this.props.maxPoints)
 
 
         return(

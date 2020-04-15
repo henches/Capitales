@@ -34,11 +34,13 @@ class HomeScreen extends React.Component {
     }
 
     _initProgressAnimation() {
-          this.pS1._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Europe), GetMaxPointsForZone(this.props.pM, G_Europe))
-          this.pS2._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Afrique), GetMaxPointsForZone(this.props.pM, G_Afrique))
-          this.pS3._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Ameriques), GetMaxPointsForZone(this.props.pM, G_Ameriques))
-          this.pS4._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_AsiePacif), GetMaxPointsForZone(this.props.pM, G_AsiePacif))
-          this.pS0._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Monde), GetMaxPointsForZone(this.props.pM, G_Monde))
+        let tempoLevel = 0
+
+        this.pS1._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Europe, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Europe, tempoLevel))
+        this.pS2._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Afrique, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Afrique, tempoLevel))
+        this.pS3._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Ameriques, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Ameriques, tempoLevel))
+        this.pS4._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_AsiePacif, tempoLevel), GetMaxPointsForZone(this.props.pM, G_AsiePacif, tempoLevel))
+        this.pS0._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Monde, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Monde, tempoLevel))
     }
 
 
@@ -99,26 +101,26 @@ class HomeScreen extends React.Component {
     }
 
 
-    _onEndAnim11 =() => { this.pS1._animateProgress2() }
-    _onEndAnim12 =() => { this.pS1._animateProgress3() }
-    _onEndAnim13 =() => { this.pS2._animateProgress() }
+    //_onEndAnim11 =() => { this.pS1._animateProgress2() }
+    //_onEndAnim12 =() => { this.pS1._animateProgress3() }
+    _onEndAnim1 =() => { this.pS2._animateProgress() }
 
-    _onEndAnim21 =() => { this.pS2._animateProgress2() }
-    _onEndAnim22 =() => { this.pS2._animateProgress3() }
-    _onEndAnim23 =() => { this.pS3._animateProgress() }
+    //_onEndAnim21 =() => { this.pS2._animateProgress2() }
+    //_onEndAnim22 =() => { this.pS2._animateProgress3() }
+    _onEndAnim2 =() => { this.pS3._animateProgress() }
 
-    _onEndAnim21 =() => { this.pS3._animateProgress2() }
-    _onEndAnim22 =() => { this.pS3._animateProgress3() }
-    _onEndAnim23 =() => { this.pS4._animateProgress() }
+    //_onEndAnim31 =() => { this.pS3._animateProgress2() }
+    //_onEndAnim32 =() => { this.pS3._animateProgress3() }
+    _onEndAnim3 =() => { this.pS4._animateProgress() }
 
-    _onEndAnim21 =() => { this.pS4._animateProgress2() }
-    _onEndAnim22 =() => { this.pS4._animateProgress3() }
-    _onEndAnim23 =() => { this.pS0._animateProgress() }
+    //_onEndAnim41 =() => { this.pS4._animateProgress2() }
+    //_onEndAnim42 =() => { this.pS4._animateProgress3() }
+    _onEndAnim4 =() => { this.pS0._animateProgress() }
 
-    _onEndAnim01 =() => { this.pS0._animateProgress2() }
-    _onEndAnim02 =() => { this.pS0._animateProgress3() }
-    _onEndAnim03 =() => { // End of animations
-        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
+    //_onEndAnim01 =() => { this.pS0._animateProgress2() }
+    //_onEndAnim02 =() => { this.pS0._animateProgress3() }
+    _onEndAnim0 =() => { // End of animations
+        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
     }
 
 
@@ -133,6 +135,9 @@ class HomeScreen extends React.Component {
             // console.log("this.props.pM = ", this.props.pM)  
             // console.log("this.props.QuestionStatsList = ", this.props.QuestionStatsList)  
             // console.log("GetMaxPointsForZone(this.state.pm, G_Monde) = ", GetMaxPointsForZone(this.state.pM, G_Monde))  
+
+            let tempoLevel = 0
+
             let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
             let pointsWorld = 0
             let oldPointsWorld = 0
@@ -155,33 +160,33 @@ class HomeScreen extends React.Component {
                 pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
                 oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
                 */
-                maxPointsWorld = GetMaxPointsForZone(pM, G_Monde)
-                pointsWorld = GetPointsForZone(pM, G_Monde)
-                oldPointsWorld = GetOldPointsForZone(pM, G_Monde)
+                maxPointsWorld = GetMaxPointsForZone(pM, G_Monde, tempoLevel)
+                pointsWorld = GetPointsForZone(pM, G_Monde, tempoLevel)
+                oldPointsWorld = GetOldPointsForZone(pM, G_Monde, tempoLevel)
                 // pointsWorld = 45
                 // oldPointsWorld = 40
     
-                maxPointsEurope = GetMaxPointsForZone(pM, G_Europe)
-                pointsEurope = GetPointsForZone(pM, G_Europe)
-                oldPointsEurope = GetOldPointsForZone(pM, G_Europe)
+                maxPointsEurope = GetMaxPointsForZone(pM, G_Europe, tempoLevel)
+                pointsEurope = GetPointsForZone(pM, G_Europe, tempoLevel)
+                oldPointsEurope = GetOldPointsForZone(pM, G_Europe, tempoLevel)
                 //pointsEurope = 12
                 //oldPointsEurope = 10
     
-                maxPointsAfrique = GetMaxPointsForZone(pM, G_Afrique)
-                pointsAfrique = GetPointsForZone(pM, G_Afrique)
-                oldPointsAfrique = GetOldPointsForZone(pM, G_Afrique)
+                maxPointsAfrique = GetMaxPointsForZone(pM, G_Afrique, tempoLevel)
+                pointsAfrique = GetPointsForZone(pM, G_Afrique, tempoLevel)
+                oldPointsAfrique = GetOldPointsForZone(pM, G_Afrique, tempoLevel)
                 //pointsAfrique = 16
                 //oldPointsAfrique = 16
     
-                maxPointsAmeriques = GetMaxPointsForZone(pM, G_Ameriques)
-                pointsAmeriques = GetPointsForZone(pM, G_Ameriques)
-                oldPointsAmeriques = GetOldPointsForZone(pM, G_Ameriques)
+                maxPointsAmeriques = GetMaxPointsForZone(pM, G_Ameriques, tempoLevel)
+                pointsAmeriques = GetPointsForZone(pM, G_Ameriques, tempoLevel)
+                oldPointsAmeriques = GetOldPointsForZone(pM, G_Ameriques, tempoLevel)
                 //pointsAmeriques = 20
                 //oldPointsAmeriques = 18
     
-                maxPointsAsiePacif = GetMaxPointsForZone(pM, G_AsiePacif)
-                pointsAsiePacif = GetPointsForZone(pM, G_AsiePacif)
-                oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif)
+                maxPointsAsiePacif = GetMaxPointsForZone(pM, G_AsiePacif, tempoLevel)
+                pointsAsiePacif = GetPointsForZone(pM, G_AsiePacif, tempoLevel)
+                oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif, tempoLevel)
                 //pointsAsiePacif = 5
                 //oldPointsAsiePacif = 3
     
@@ -205,15 +210,15 @@ class HomeScreen extends React.Component {
                         <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
                     </View>
                     <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
-                                onEndAnim1={ this._onEndAnim11 } onEndAnim2={ this._onEndAnim12 } onEndAnim3={ this._onEndAnim13 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
+                                onEndAnim1={ this._onEndAnim11 } onEndAnim2={ this._onEndAnim12 } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
                     <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique } oldPoints={ oldPointsAfrique }  maxPoints={ maxPointsAfrique }
-                                onEndAnim1={ this._onEndAnim21 } onEndAnim2={ this._onEndAnim22 } onEndAnim3={ this._onEndAnim23 } ref={ ProgressSymbol => { this.pS2 = ProgressSymbol }} />
+                                onEndAnim1={ this._onEndAnim21 } onEndAnim2={ this._onEndAnim22 } onEndAnim3={ this._onEndAnim2 } ref={ ProgressSymbol => { this.pS2 = ProgressSymbol }} />
                     <ProgressSymbol myFlex={ 1 } zone={ "Ameriques" } points={ pointsAmeriques } oldPoints={ oldPointsAmeriques }  maxPoints={ maxPointsAmeriques }
-                                onEndAnim1={ this._onEndAnim31 } onEndAnim2={ this._onEndAnim32 } onEndAnim3={ this._onEndAnim33 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
+                                onEndAnim1={ this._onEndAnim31 } onEndAnim2={ this._onEndAnim32 } onEndAnim3={ this._onEndAnim3 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
                     <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
-                                onEndAnim1={ this._onEndAnim41 } onEndAnim2={ this._onEndAnim42 } onEndAnim3={ this._onEndAnim43 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
+                                onEndAnim1={ this._onEndAnim41 } onEndAnim2={ this._onEndAnim42 } onEndAnim3={ this._onEndAnim4 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
                     <ProgressSymbol myFlex={ 2 } zone={ "MONDE" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
-                                onEndAnim1={ this._onEndAnim01 } onEndAnim2={ this._onEndAnim02 } onEndAnim3={ this._onEndAnim03 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
+                                onEndAnim1={ this._onEndAnim01 } onEndAnim2={ this._onEndAnim02 } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'center' }}>   
                         <TouchableOpacity style={Gstyles.button}
                                 onPress={() => { this._goSeriesScreen() }}>
