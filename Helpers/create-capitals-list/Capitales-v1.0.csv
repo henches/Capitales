@@ -1,212 +1,213 @@
-PAYS,CAPITALE,Niveau,CONTINENT
-Afghanistan,Kaboul,2,AsiePacif
-Albanie,Tirana,10,Europe
-Alg?rie,Alger,1,Afrique
-Andorre,Andorre La Vella,10,Europe
-Angola,Luanda,10,Afrique
-Anguilla,The Valley,10,Ameriques
-Antigua et Barbuda,Saint-Jean,10,Ameriques
-Argentine,Buenos Aires,1,Ameriques
-Arm?nie,Erevan,10,Europe
-Aruba,Oranjestad,10,Ameriques
-Australie,Canberra,1,AsiePacif
-Autriche,Vienne,1,Europe
-Azerba?djan,Bakou,10,Europe
-Iles des A?ores,Ponta Delgada,10,Europe
-Bahamas,Nassau,10,Ameriques
-Bahre?n,Manama,10,AsiePacif
-Bangladesh,Dhaka,10,AsiePacif
-Barbade,Bridgetown,10,Ameriques
-Belgique,Bruxelles,10,Europe
-B?lize,Belmopan,10,Ameriques
-B?nin,Porto Novo,10,Afrique
-Iles Bermudes,Hamilton,10,Ameriques
-Bhoutan,Thimbou,10,AsiePacif
-Bolivie,La Paz,2,Ameriques
-Bosnie-Herz?govine,Sarajevo,10,Europe
-Botswana,Gaborone,10,Afrique
-Br?sil,Brasilia,1,Ameriques
-Iles Vierges Britanniques,Road Town,10,Ameriques
-Bulgarie,Sofia,10,Europe
-Burkina Faso,Ouagadougou,2,Afrique
-Burundi,Bujumbura,10,Afrique
-Cambodge,Phnom Penh,10,AsiePacif
-Cameroun,Yaound?,2,Afrique
-Canada,Ottawa,10,Ameriques
-Cap Vert,Pra?a,10,Afrique
-Iles Cayman,Georgetown,10,Ameriques
-Centre-Afrique,Bangui,10,Afrique
-Tchad,N'Djamena,2,Afrique
-Chili,Santiago,1,Ameriques
-Chine,P?kin,1,AsiePacif
-Colombie,Bogota,2,Ameriques
-Comoros,Moroni,10,Afrique
-Congo,Brazzaville,10,Afrique
-Iles Cook,Avarua,10,AsiePacif
-Costa Rica,San Jos?,10,Ameriques
-Croatie,Zagreb,10,Europe
-Cuba,La Havane,2,Ameriques
-Chypre,Nicosie,2,Europe
-R?publique Tch?que,Prague,10,Europe
-Danemark,Copenhage,10,Europe
-Djibouti,Djibouti,10,Afrique
-Dominique,Roseau,10,Ameriques
-R?publique Dominicaine,Saint-Domingue,10,Ameriques
-Equateur,Quito,2,Ameriques
-Egypte,Le Caire,1,Afrique
-El Salvador,San Salvador,10,Ameriques
-Guin?e Equatoriale,Malabo,10,Afrique
-Erythr?e,Asmera,10,Afrique
-Estonie,Tallinn,10,Europe
-Ethiopie,Addis-Ab?ba,10,Afrique
-Iles Falkland,Stanley,10,Ameriques
-Fidji,Suva,10,AsiePacif
-Finlande,Helsinki,10,Europe
-Mac?doine,Skopje,10,Europe
-France,Paris,1,Europe
-Guyane Fran?aise,Cayenne,2,Ameriques
-Polyn?sie Fran?aise,Papeete,10,AsiePacif
-Gabon,Libreville,10,Afrique
-Gambie,Banjul,10,Afrique
-Georgie,Tbilissi,10,AsiePacif
-Allemagne,Berlin,1,Europe
-Ghana,Accra,10,Afrique
-Gibraltar,Gibraltar,10,Europe
-Gr?ce,Ath?nes,1,Europe
-Groenland,Nuuk,10,Europe
-Grenade,Saint-George,10,Ameriques
-Guadeloupe,Basse-Terre,10,Ameriques
-Guam,Agana,10,AsiePacif
-Guat?mala,Guat?mala,10,Ameriques
-Guin?e,Conakry,10,Afrique
-Guin?e Bissau,Bissao,10,Afrique
-Guyana,Georgetown,10,Ameriques
-Ha?ti,Port-au-Prince,10,Ameriques
-Honduras,Tegucigalpa,10,Ameriques
-Hongrie,Budapest,2,Europe
-Islande,Reykjavik,10,Europe
-Inde,New Delhi,1,AsiePacif
-Indon?sie,Jakarta,10,AsiePacif
-Iran,T?h?ran,2,AsiePacif
-Irak,Bagdad,2,AsiePacif
-Irlande,Dublin,2,Europe
-Isra?l,J?rusalem,1,AsiePacif
-Italie,Rome,1,Europe
-C?te d'Ivoire,Abidjan,1,Afrique
-Jama?que,Kingston,10,Ameriques
-Japon,Tokyo,1,AsiePacif
-Jordanie,Amman,10,AsiePacif
-Kazakhstan,Alma-Ata,10,AsiePacif
-K?nya,Nairobi,2,Afrique
-Kiribati,Tarawa,10,AsiePacif
-Cor?e du Nord,Pyongyang,2,AsiePacif
-Cor?e du Sud,S?oul,2,AsiePacif
-Kowe?t,Kowe?t,10,AsiePacif
-Kirghizstan,Bichkek,10,AsiePacif
-Laos,Vientiane,10,AsiePacif
-Lettonie,Riga,10,Europe
-Liban,Beyrouth,2,AsiePacif
-L?sotho,Maseru,10,Afrique
-Lib?ria,Monrovia,10,Afrique
-Libye,Tripoli,2,Afrique
-Liechtenstein,Vaduz,10,Europe
-Lituanie,Vilnius,10,Europe
-Luxembourg,Luxembourg,1,Europe
-Madagascar,Antananarivo,10,Afrique
-Malawi,Lilongw?,10,Afrique
-Malaisie,Kuala Lumpur,10,AsiePacif
-Maldives,Male,10,AsiePacif
-Mali,Bamako,10,Afrique
-Malte,La Vallette,10,Europe
-Iles Marshall,Majuro,10,AsiePacif
-Martinique,Fort-de-France,10,Ameriques
-Mauritanie,Nouakchott,10,Afrique
-Maurice,Port-Louis,10,Afrique
-Mexique,Mexico,10,Ameriques
-Moldavie,Chisinau,10,Europe
-Monaco,Monaco,2,Europe
-Mongolie,Oulan-Bator,10,AsiePacif
-Maroc,Rabat,10,Afrique
-Mozambique,Maputo,10,Afrique
-Myanmar,Rangoon,10,AsiePacif
-Namibie,Windhoek,10,Afrique
-Nauru,Yaren,10,AsiePacif
-N?pal,Katmandou,10,AsiePacif
-Pays-Bas,Amsterdam,2,Europe
-Nouvelle Cal?donie,Noum?a,10,AsiePacif
-Nouvelle Z?lande,Wellington,10,AsiePacif
-Nicaragua,Managua,10,Ameriques
-Niger,Niamey,10,Afrique
-Nig?ria,Lagos,10,Afrique
-Niue,Alofi,10,AsiePacif
-Iles Mariannes du Nord,Capitol Hill,10,AsiePacif
-Norv?ge,Oslo,2,Europe
-Oman,Mascate,10,AsiePacif
-Pakistan,Islamabad,10,AsiePacif
-Iles Palau,Koror,10,AsiePacif
-Panama,Panama,10,Ameriques
-Papouasie-Nouvelle-Guin?e,Port Moresby,10,AsiePacif
-Paraguay,Asuncion,10,Ameriques
-P?rou,Lima,1,Ameriques
-Philippines,Manille,10,AsiePacif
-Portugal,Lisbonne,2,Europe
-Porto Rico,San Juan,10,Ameriques
-Qatar,Doha,10,AsiePacif
-R?union,Saint-Denis,10,Afrique
-Roumanie,Bucarest,10,Europe
-Russie,Moscou,1,AsiePacif
-Rwanda,Kigali,10,Afrique
-Sainte-Lucie,Castries,10,Ameriques
-Saint-Marin,Saint-Marin,10,Europe
-Sao Tom?,Sao Tom?,10,Afrique
-Arabie Saoudite,Riyad,10,AsiePacif
-S?n?gal,Dakar,2,Afrique
-Seychelles,Victoria,10,Afrique
-Sierra L?one,Freetown,10,Afrique
-Singapour,Singapour,1,AsiePacif
-Slovaquie,Bratislava,10,Europe
-Slov?nie,Ljubljana,10,Europe
-Iles Salomon,Honiara,10,AsiePacif
-Somalie,Mogadiscio,10,Afrique
-Afrique du sud,Pr?toria,10,Afrique
-Espagne,Madrid,1,Europe
-Sri Lanka,Colombo,10,AsiePacif
-Saint Kitts et Nevis,Basse Terre,10,Ameriques
-Saint-Vincent,Kingstown,10,Ameriques
-Soudan,Khartoum,10,Afrique
-Surinam,Paramaribo,10,Ameriques
-Swaziland,Mbabane,10,Afrique
-Su?de,Stockholm,2,Europe
-Suisse,Berne,2,Europe
-Syrie,Damas,1,AsiePacif
-Ta?wan,Taipei,10,AsiePacif
-Tadjikistan,Douchanb?,10,AsiePacif
-Tanzanie,Dodoma,10,Afrique
-Tha?lande,Bangkok,10,AsiePacif
-Togo,Lom?,10,Afrique
-Tonga,Nuku'Alofa,10,AsiePacif
-Trinidad et Tobago,Port d'Espagne,10,Ameriques
-Tunisie,Tunis,1,Afrique
-Turquie,Ankara,2,Europe
-Turkm?nistan,Achkhabad,10,AsiePacif
-Turks et Caicos,Grand Turk,10,Ameriques
-Tuvalu,Funafuti,10,AsiePacif
-Ouganda,Kampala,10,Afrique
-Ukraine,Kiev,10,Europe
-Emirats arabes unis,Abu Dhabi,10,AsiePacif
-Royaume-Uni,Londres,1,Europe
-Etats-Unis,Washington,10,Ameriques
-Uruguay,Montevideo,10,Ameriques
-Ouzb?kistan,Tachkent,10,AsiePacif
-Vanuatu,Port-Vila,10,AsiePacif
-Vatican,Vatican,2,Europe
-V?n?zuela,Caracas,10,Ameriques
-Vietnam,Hanoi,1,AsiePacif
-Samoa Orientale,Apia,10,AsiePacif
-Yemen,Sanaa,10,AsiePacif
-Serbie,Belgrade,10,Europe
-R?publique d?mocratique du Congo,Kinshasa,10,Afrique
-Zambie,Lusaka,10,Afrique
-Zimbabw?,Harar?,10,Afrique
-Pologne,Varsovie,10,Europe
-Bi?lorussie,Minsk,10,Europe
+PAYS;CAPITALE;CONTINENT
+Afghanistan;Kaboul;Asie
+Albanie;Tirana;Europe
+Algérie;Alger;Afrique
+Andorre;Andorre La Vella;Europe
+Angola;Luanda;Afrique
+Anguilla;The Valley;Amérique du Nord
+Antigua et Barbuda;Saint-Jean;Amérique du Nord
+Argentine;Buenos Aires;Amérique du Sud
+Arménie;Erevan;Europe
+Aruba;Oranjestad;Amérique du Nord
+Australie;Canberra;Australie
+Autriche;Vienne;Europe
+Azerbaïdjan;Bakou;Europe
+Iles des Açores;Ponta Delgada;Europe
+Bahamas;Nassau;Amérique du Nord
+Bahreïn;Manama;Asie
+Bangladesh;Dhaka;Asie
+Barbade;Bridgetown;Amérique du Nord
+Belgique;Bruxelles;Europe
+Bélize;Belmopan;Amérique du Nord
+Bénin;Porto Novo;Afrique
+Iles Bermudes;Hamilton;Amérique du Nord
+Bhoutan;Thimbou;Asie
+Bolivie;La Paz;Amérique du Sud
+Bosnie-Herzégovine;Sarajevo;Europe
+Botswana;Gaborone;Afrique
+Brésil;Brasilia;Amérique du Sud
+Iles Vierges Britanniques;Road Town;Amérique du Nord
+Bulgarie;Sofia;Europe
+Burkina Faso;Ouagadougou;Afrique
+Burundi;Bujumbura;Afrique
+Cambodge;Phnom Penh;Asie
+Cameroun;Yaoundé;Afrique
+Canada;Ottawa;Amérique du Nord
+Cap Vert;Praïa;Afrique
+Iles Cayman;Georgetown;Amérique du Nord
+Centre-Afrique;Bangui;Afrique
+Tchad;N'Djamena;Afrique
+Chili;Santiago;Amérique du Sud
+Chine;Pékin;Asie
+Colombie;Bogota;Amérique du Sud
+Comoros;Moroni;Afrique
+Congo;Brazzaville;Afrique
+Iles Cook;Avarua;Océanie
+Costa Rica;San José;Amérique du Nord
+Croatie;Zagreb;Europe
+Cuba;La Havane;Amérique du Nord
+Chypre;Nicosie;Europe
+République Tchèque;Prague;Europe
+Danemark;Copenhage;Europe
+Djibouti;Djibouti;Afrique
+Dominique;Roseau;Amérique du Nord
+République Dominicaine;Saint-Domingue;Amérique du Nord
+Equateur;Quito;Amérique du Sud
+Egypte;Le Caire;Afrique
+El Salvador;San Salvador;Amérique du Nord
+Guinée Equatoriale;Malabo;Afrique
+Erythrée;Asmera;Afrique
+Estonie;Tallinn;Europe
+Ethiopie;Addis-Abéba;Afrique
+Iles Falkland;Stanley;Amérique du Sud
+Fidji;Suva;Océanie
+Finlande;Helsinki;Europe
+Macédoine;Skopje;Europe
+France;Paris;Europe
+Guyane Française;Cayenne;Amérique du Sud
+Polynésie Française;Papeete;Océanie
+Gabon;Libreville;Afrique
+Gambie;Banjul;Afrique
+Georgie;Tbilissi;Asie
+Allemagne;Bonn-Berlin;Europe
+Ghana;Accra;Afrique
+Gibraltar;Gibraltar;Europe
+Grèce;Athènes;Europe
+Groenland;Nuuk;Europe
+Grenade;Saint-George;Amérique du Nord
+Guadeloupe;Basse-Terre;Amérique du Nord
+Guam;Agana;Océanie
+Guatémala;Guatémala;Amérique du Nord
+Guinée;Conakry;Afrique
+Guinée Bissau;Bissao;Afrique
+Guyana;Georgetown;Amérique du Sud
+Haïti;Port-au-Prince;Amérique du Nord
+Honduras;Tegucigalpa;Amérique du Nord
+Chine;Pékin;Asie
+Hongrie;Budapest;Europe
+Islande;Reykjavik;Europe
+Inde;New Delhi;Asie
+Indonésie;Jakarta;Asie
+Iran;Téhéran;Asie
+Irak;Bagdad;Asie
+Irlande;Dublin;Europe
+Israël;Jérusalem;Asie
+Italie;Rome;Europe
+Côte d'Ivoire;Abidjan;Afrique
+Jamaïque;Kingston;Amérique du Nord
+Japon;Tokyo;Asie
+Jordanie;Amman;Asie
+Kazakhstan;Alma-Ata;Asie
+Kénya;Nairobi;Afrique
+Kiribati;Tarawa;Océanie
+Corée du Nord;Pyongyang;Asie
+Corée du Sud;Séoul;Asie
+Koweït;Koweït;Asie
+Kirghizstan;Bichkek;Asie
+Laos;Vientiane;Asie
+Lettonie;Riga;Europe
+Liban;Beyrouth;Asie
+Lésotho;Maseru;Afrique
+Libéria;Monrovia;Afrique
+Libye;Tripoli;Afrique
+Liechtenstein;Vaduz;Europe
+Lituanie;Vilnius;Europe
+Luxembourg;Luxembourg;Europe
+Madagascar;Antananarivo;Afrique
+Malawi;Lilongwé;Afrique
+Malaisie;Kuala Lumpur;Asie
+Maldives;Male;Asie
+Mali;Bamako;Afrique
+Malte;La Vallette;Europe
+Iles Marshall;Majuro;Océanie
+Martinique;Fort-de-France;Amérique du Nord
+Mauritanie;Nouakchott;Afrique
+Maurice;Port-Louis;Afrique
+Mexique;Mexico;Amérique du Nord
+Moldavie;Chisinau;Europe
+Monaco;Monaco;Europe
+Mongolie;Oulan-Bator;Asie
+Maroc;Rabat;Afrique
+Mozambique;Maputo;Afrique
+Myanmar;Rangoon;Asie
+Namibie;Windhoek;Afrique
+Nauru;Yaren;Océanie
+Népal;Katmandou;Asie
+Pays-Bas;Amsterdam;Europe
+Nouvelle Calédonie;Nouméa;Océanie
+Nouvelle Zélande;Wellington;Australie
+Nicaragua;Managua;Amérique du Nord
+Niger;Niamey;Afrique
+Nigéria;Lagos;Afrique
+Niue;Alofi;Océanie
+Iles Mariannes du Nord;Capitol Hill;Océanie
+Norvège;Oslo;Europe
+Oman;Mascate;Asie
+Pakistan;Islamabad;Asie
+Iles Palau;Koror;Océanie
+Panama;Panama;Amérique du Nord
+Papouasie-Nouvelle-Guinée;Port Moresby;Asie
+Paraguay;Asuncion;Amérique du Sud
+Pérou;Lima;Amérique du Sud
+Philippines;Manille;Asie
+Portugal;Lisbonne;Europe
+Porto Rico;San Juan;Amérique du Nord
+Qatar;Doha;Asie
+Réunion;Saint-Denis;Afrique
+Roumanie;Bucarest;Europe
+Russie;Moscou;Asie
+Rwanda;Kigali;Afrique
+Sainte-Lucie;Castries;Amérique du Nord
+Saint-Marin;Saint-Marin;Europe
+Sao Tomé;Sao Tomé;Afrique
+Arabie Saoudite;Riyad;Asie
+Sénégal;Dakar;Afrique
+Seychelles;Victoria;Afrique
+Sierra Léone;Freetown;Afrique
+Singapour;Singapour;Asie
+Slovaquie;Bratislava;Europe
+Slovénie;Ljubljana;Europe
+Iles Salomon;Honiara;Océanie
+Somalie;Mogadiscio;Afrique
+Afrique du sud;Prétoria;Afrique
+Espagne;Madrid;Europe
+Sri Lanka;Colombo;Asie
+Saint Kitts et Nevis;Basse Terre;Amérique du Nord
+Saint-Vincent;Kingstown;Amérique du Nord
+Soudan;Khartoum;Afrique
+Surinam;Paramaribo;Amérique du Sud
+Swaziland;Mbabane;Afrique
+Suède;Stockholm;Europe
+Suisse;Berne;Europe
+Syrie;Damas;Asie
+Taïwan;Taipei;Asie
+Tadjikistan;Douchanbé;Asie
+Tanzanie;Dodoma;Afrique
+Thaïlande;Bangkok;Asie
+Togo;Lomé;Afrique
+Tonga;Nuku'Alofa;Océanie
+Trinidad et Tobago;Port d'Espagne;Amérique du Nord
+Tunisie;Tunis;Afrique
+Turquie;Ankara;Europe
+Turkménistan;Achkhabad;Asie
+Turks et Caicos;Grand Turk;Amérique du Nord
+Tuvalu;Funafuti;Océanie
+Ouganda;Kampala;Afrique
+Ukraine;Kiev;Europe
+Emirats arabes unis;Abu Dhabi;Asie
+Royaume-Uni;Londres;Europe
+Etats-Unis;Washington;Amérique du Nord
+Uruguay;Montevideo;Amérique du Sud
+Ouzbékistan;Tachkent;Asie
+Vanuatu;Port-Vila;Océanie
+Vatican;Vatican;Europe
+Vénézuela;Caracas;Amérique du Sud
+Vietnam;Hanoi;Asie
+Samoa Orientale;Apia;Océanie
+Yemen;Sanaa;Asie
+Serbie;Belgrade;Europe
+République démocratique du Congo;Kinshasa;Afrique
+Zambie;Lusaka;Afrique
+Zimbabwé;Hararé;Afrique
+Pologne;Varsovie;Europe
+Biélorussie;Minsk;Europe

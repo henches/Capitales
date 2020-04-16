@@ -11,7 +11,7 @@ print(args.fichier_js)
 
 # traitement du fichier csv
 
-with open(args.fichier_csv, newline='\n', encoding='latin-1') as csvfile:
+with open(args.fichier_csv, newline='\n', encoding='UTF-16') as csvfile:
     csv_reader = csv.DictReader(csvfile, delimiter=',')
     line_count = 0
     with open(args.fichier_js, 'w') as js:
@@ -22,7 +22,7 @@ with open(args.fichier_csv, newline='\n', encoding='latin-1') as csvfile:
             pays = row['PAYS']
             pays = pays.replace("\'", " ")
             continent = row['CONTINENT']
-            niveau = row['Niveau']
+            niveau = row['NIVEAU']
             js.write('   {'+"\n")
             js.write("      state: \'"+pays+"\',\n")
             js.write("      capital: \'"+capitale+"\',\n")
