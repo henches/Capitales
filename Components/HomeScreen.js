@@ -70,7 +70,7 @@ class HomeScreen extends React.Component {
     _goSeriesScreen = () => {
         console.log("Go Series");
         
-        this.props.dispatch({ type: "QUERES_SERIES-INITIATE", value: this.props.QuestionStatsList })
+        this.props.dispatch({ type: "QUERES_SERIES-INITIATE", value: { questionStatList: this.props.QuestionStatsList, pM: this.props.pM, playerLevel: this.props.PlayerLevel }})
 
         this.props.navigation.navigate('SeriesScreen', { indexInSeries: 0 })   
 //        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
@@ -206,8 +206,9 @@ class HomeScreen extends React.Component {
     
             return (
                 <View style={Gstyles.main_view}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold'}}>Niveau {this.props.PlayerLevel}</Text>
                     </View>
                     <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                                 onEndAnim1={ this._onEndAnim11 } onEndAnim2={ this._onEndAnim12 } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
@@ -262,7 +263,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
-        pM: state.HandleQueresStatsReducer.pM
+        pM: state.HandleQueresStatsReducer.pM,
+        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel
     }
 }
 

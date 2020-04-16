@@ -6,6 +6,7 @@ Bug / backlog
     - indiquer visuellement quand l'animation est finie
     - mettre un petit bruit pour chaque animation unitaire
 - mettre les bonnes photos
+- slice pM (dans le reducer Stats) -> faire une deep copy
 
 
 

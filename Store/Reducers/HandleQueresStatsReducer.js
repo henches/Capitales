@@ -1,24 +1,28 @@
 import { storeQuestionStats } from '../../Helpers/StorageFunctions'
-import { InitPointsManager, AddPointsForZone, GetIntegerZoneFromStringZone, SetOldPointsForZone } from '../../Helpers/PointsManager'
+import { GetPlayerLevel, InitPointsManager, AddPointsForZone, GetIntegerZoneFromStringZone, SetOldPointsForZone } from '../../Helpers/PointsManager'
 
 
 const initialState = {
     pM: null, // PointsManager
-    QuestionStatsList: []
+    QuestionStatsList: [],
+    PlayerLevel: 0
 }
 
 function HandleQueresStatsReducer(state = initialState, action) {
     let nextState = null
     let myPM = null
+    let myPlayerLevel = null
     switch (action.type) {
         case 'QUERES_STATS-INITIATE' :   
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE")
             myPM = InitPointsManager(G_InitialQuestionStatsList)
+            myPlayerLevel = GetPlayerLevel(myPM)
             // console.log("Reducer HandleQueresStatsReducer myPM= ", myPM)
             nextState = {
                 ...state,
                     QuestionStatsList: G_InitialQuestionStatsList,
-                    pM: myPM
+                    pM: myPM,
+                    PlayerLevel: myPlayerLevel
             }
 //            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE nextState = ", nextState )
             return nextState
@@ -36,7 +40,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 let askedCapital = queres.capital
                 let isResponseRight = queres.isResponseRight
                 console.log("askedCapital = ", askedCapital, " isResponseRight=", isResponseRight)
-                let elt = questionStatsList.find(function(element) { // Trouve l'élément correspondand dans la QueresStatList
+                let elt = questionStatsList.find(function(element) { // Trouve l'élément correspondant dans la QueresStatList
                     return askedCapital.localeCompare(element.Queres.capital) == 0
                   })
                 elt.level = queres.afterResponseLevel
@@ -46,6 +50,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 const integerZone = GetIntegerZoneFromStringZone(queres.continent)
                 AddPointsForZone(myPM, integerZone, queres.pointsWon, tempoLevel)
                 AddPointsForZone(myPM, G_Monde, queres.pointsWon, tempoLevel)
+                myPlayerLevel = GetPlayerLevel(myPM)
             }
             storeQuestionStats(questionStatsList) // on sauvegarde cette liste sur le storage
             .then(myList => {
@@ -55,7 +60,8 @@ function HandleQueresStatsReducer(state = initialState, action) {
             nextState = {
                 ...state,
                     QuestionStatsList: questionStatsList,
-                    pM: myPM
+                    pM: myPM,
+                    PlayerLevel: myPlayerLevel
             } 
             return nextState
         case 'QUERES_STATS-DISPLAYED' :   // value : null

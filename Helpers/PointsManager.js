@@ -5,8 +5,8 @@ global.G_Afrique = 2
 global.G_AsiePacif = 3
 global.G_Ameriques = 4
 
-const LevelNumber = 8
-const TempoLevelNumber = 2  // Nombre de niveaux pendant le test des niveaux
+const MaxPlayerLevelNumber = 8
+const TempoMaxPlayerLevelNumber = 2  // Nombre de niveaux pendant le test des niveaux
 
 let Points = []
 
@@ -15,9 +15,9 @@ export function InitPointsManager(QuestionStatsList) {
   
     InitPoints()
 
-    let pM = new Array(LevelNumber)
+    let pM = new Array(MaxPlayerLevelNumber)
     
-    for (l = 0; l < LevelNumber; l++) {
+    for (l = 0; l < MaxPlayerLevelNumber; l++) {
         pM[l] = new Array(Zones.length)
         for (z = 0; z < Zones.length; z++) {
             pM[l][z] = {
@@ -38,9 +38,8 @@ export function InitPointsManager(QuestionStatsList) {
         for (let z = 1; z < pM.length; z++) {
             if (QuestionStatsList[i].Queres.continent.localeCompare(Zones[z]) == 0) {
                 level = QuestionStatsList[i].Queres.niveau
-                level--  // En attendant de commencer les niveaux à 0
-                if (level > TempoLevelNumber) 
-                    level  = TempoLevelNumber
+                if (level >= TempoMaxPlayerLevelNumber) // Pour le cas des questions de niveau 10 (que je n'ai pas encore rangés en niveau) 
+                    level  = TempoMaxPlayerLevelNumber // on met ces questions au niveau juste au-dessus de ceux qu'on a rempli
                 console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
                 pM[level][z].nb++
                 pM[level][z].points += QuestionStatsList[i].totalPoints
@@ -199,3 +198,27 @@ export function G_GetAdditionalPointsForRightResponseNb(rightResponsesNb) {
 
     return G_Config.Level[r.level].Points
 }
+
+
+export function GetPlayerLevel(pM) {
+    let level = MaxPlayerLevelNumber-1 
+    
+    do {
+        let p = pM[level][G_Monde]
+        if (p.maxPoints == 0) { // Situation temporaire où tous les niveaux ne sont pas mentionnés dans le fichiers des questions (statesData)
+        }
+        else {
+            if (p.points == p.maxPoints)
+                break
+        }
+        level--
+    } while (level > 0)
+
+    return level
+}
+
+export function GetNumberOfRemainingQuestionsToBeAsked(pM, level) {
+    let p = pM[level][G_Monde]
+    return p.maxPoints - p.points
+}
+

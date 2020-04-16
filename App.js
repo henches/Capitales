@@ -26,27 +26,27 @@ export default class App extends React.Component {
       SeriesLength: 3,
       Level: [
         {
-          QrNb: 2,
+          QrNb: 1,
           Points : 1,
           ProposedResponsesNb: 4,
           Image: i0
         },
         {
-          QrNb: 2,
+          QrNb: 1,
           Points: 1,
           ProposedResponsesNb: 8,
           Image: i1,
           NotReachedImage:nri1
         },
         {
-          QrNb: 2,
+          QrNb: 1,
           Points: 1,
           ProposedResponsesNb: 8,
           Image: i2,
           NotReachedImage:nri2
         },
         {
-          QrNb: 2,
+          QrNb: 1,
           Points: 1,
           Image: i3,
           NotReachedImage:nri3
