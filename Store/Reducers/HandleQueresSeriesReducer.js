@@ -45,6 +45,31 @@ _createProposedResponsesList = (normalDirection, responsesNb, question) => { // 
     return myPossibleResponsesList
 }
 
+
+function filterListByPlayerLevel(queresStatList, level) {
+    let i = queresStatList.length
+    while (i--) {
+        console.log("filterListByPlayerLevel: level = ", level, " queresStatList[i].Queres.niveau = ", queresStatList[i].Queres.niveau)
+        if (queresStatList[i].Queres.niveau != level) {
+            console.log("filterListByPlayerLevel: suppression de ", queresStatList[i].Queres.state)
+            queresStatList.splice(i, 1);
+        }
+    } 
+}
+
+function filterListByQueresLevel(queresStatList, level) {
+    let i = queresStatList.length
+    while (i--) {
+        console.log("filterListByPlayerLevel: level = ", level, " queresStatList[i].level = ", queresStatList[i].level)
+        if (queresStatList[i].level == level) {
+            console.log("filterListByPlayerLevel: suppression de ", queresStatList[i].Queres.state)
+            queresStatList.splice(i, 1);
+        }
+    } 
+}
+
+
+
 function HandleQueresSeriesReducer(state = initialState, action) {
     let nextState
     switch (action.type) {
@@ -53,12 +78,12 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             console.log('Reducer HandleQueresSeries QUERES_SERIES-INITIATE ')
             let myQueresSeries = []
             let queresStatList = [...action.value.questionStatList] // Recopie de queresStats
-            let pM = action.value.pM
             let playerLevel = action.value.playerLevel
 
-            filterList(queresStatList, playerLevel) // Supprime les éléments de la liste qui ne sont pas du niveau actuel
+            filterListByPlayerLevel(queresStatList, playerLevel) // Supprime les éléments de la liste qui ne sont pas du niveau actuel du joueur
+            filterListByQueresLevel(queresStatList, 4) // Supprime les éléments de la liste qui sont de niveau 4 (donc les questions pour lesquelles le joueur a prouvé qu'il les connait)
 
-            numberOfRemainingQuestionsToBeAsked = GetNumberOfRemainingQuestionsToBeAsked(pM, playerLevel)
+            numberOfRemainingQuestionsToBeAsked = Math.min(G_Config.SeriesLength, queresStatList.length)
 
             for (let i = 0; i < numberOfRemainingQuestionsToBeAsked; i++) {
                 // Cherche une question au hasard parmi toutes les queres possibles originelles.

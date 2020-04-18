@@ -38,7 +38,7 @@ class SeriesScreen extends React.Component {
     _goSeriesScreen = () => {
 
         // console.log("ON LANCE LA QUESTION SUIVANTE OU ON S'ARRETE SI ON ATTEINT LA FIN DE LA Series")
-        if (this.props.navigation.state.params.indexInSeries < G_Config.SeriesLength - 1) {
+        if (this.props.navigation.state.params.indexInSeries < this.props.QueresSeries.length - 1) {
             // console.log("-> On continue la Series")
             this.props.navigation.push('SeriesScreen', { indexInSeries: this.props.navigation.state.params.indexInSeries+1 })
         }

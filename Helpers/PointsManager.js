@@ -97,7 +97,7 @@ export function GetProgressForZone(pM, zone, level) {
     return pM[zone].points/GetMaxPointsForZone(pM, zone)
 }
 
-export function AddPointsForZone(pM, zone, points, level) {
+export function g(pM, zone, points, level) {
     pM[level][zone].points += points
 
 }
