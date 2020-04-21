@@ -20,6 +20,7 @@ export class ProgressSymbol extends React.Component {
         this.state = {
             circleSize : new Animated.Value(1),
             progress : new Animated.Value(0),
+            width: 0,
             counter : 0
         }
     }
@@ -27,7 +28,7 @@ export class ProgressSymbol extends React.Component {
     componentDidMount() {
         console.log("ComponentDidmount")
         this.setState({ counter: this.props.oldPoints })
-        this.state.progress.setValue(Math.max(this.props.oldPoints/this.props.maxPoints, 0.05))
+        this.state.progress.setValue(0)
     }
 
 
@@ -39,7 +40,9 @@ export class ProgressSymbol extends React.Component {
 
     _initProgressAnimation = (oldPoints, maxPoints) => {
         this.setState({ counter: oldPoints })
-        this.state.progress.setValue(oldPoints/maxPoints)
+        console.log('Progress Symbol _initProgressAnimation : this.state.width = ', this.state.width)
+        console.log('Progress Symbol _initProgressAnimation : % = ', barHeight/this.state.width)
+        this.state.progress.setValue(Math.max(oldPoints/maxPoints, barHeight/this.state.width ))
     }
 
 
@@ -91,6 +94,15 @@ export class ProgressSymbol extends React.Component {
         console.log("progress Symbol : closeAnimations")
     }
 
+    _onLayout = (e) => {
+        this.setState({
+          width: e.nativeEvent.layout.width
+        })
+        console.log('Progress Symbol _onLayout : width = ', e.nativeEvent.layout.width)
+        console.log('Progress Symbol _onLayout : % = ', barHeight/e.nativeEvent.layout.width)
+      }
+  
+
     render() {
 
         const myFlex = this.props.myFlex // chaine de caractères
@@ -103,12 +115,12 @@ export class ProgressSymbol extends React.Component {
         return(
             <View style={{ flex: myFlex, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginRight: '5%', marginLeft: '5%' }}>
                 <Text style={{ fontSize: 20 }}>{ zone }</Text>
-                <View style={{ flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: '100%' }}>
+                <View onLayout={ this._onLayout } style={{ flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: '90%' }}>
                     <Text style={{ position: 'absolute', left: '95%', fontSize: 10, color: 'black' }}> { this.props.maxPoints } </Text>
                     <Animated.View style={{ flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
                             width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>      
                         <Animated.View style={{ transform: [{ scale: this.state.circleSize }] }}>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue', borderRadius: '50%', height: barHeight, width: barHeight, marginRight: '0.5%' }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue', borderRadius: 50, height: barHeight, width: barHeight }}>
                                 <Text style={{ fontSize: 11, fontWeight: 'bold', color: 'white' }}> { this.state.counter } </Text>
                             </View>   
                         </Animated.View>

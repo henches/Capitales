@@ -11,7 +11,6 @@ const initialState = {
 function HandleQueresStatsReducer(state = initialState, action) {
     let nextState = null
     let myPM = null
-    let myPlayerLevel = null
     switch (action.type) {
         case 'QUERES_STATS-INITIATE' :   
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE")
@@ -32,8 +31,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
             let questionStatsList = state.QuestionStatsList.slice()
             myPM = state.pM.slice()
             const queresSeries = action.value
-            let tempoLevel = 0
-            SetOldPointsForZone(myPM, tempoLevel) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
+            SetOldPointsForZone(myPM, state.PlayerLevel) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
             for (let i=0; i < queresSeries.length; i++) {
                 const queres = queresSeries[i]
                 // console.log("queresSeries[", i, "]=", queresSeries[i])
@@ -48,9 +46,9 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 elt.rightResponsesNb = queres.afterResponseRightResponsesNb
                 elt.wrongResponsesNb = queres.afterResponseWrongResponsesNb
                 const integerZone = GetIntegerZoneFromStringZone(queres.continent)
-                AddPointsForZone(myPM, integerZone, queres.pointsWon, tempoLevel)
-                AddPointsForZone(myPM, G_Monde, queres.pointsWon, tempoLevel)
-                myPlayerLevel = GetPlayerLevel(myPM)
+                
+                AddPointsForZone(myPM, integerZone, queres.pointsWon, state.PlayerLevel)
+                AddPointsForZone(myPM, G_Monde, queres.pointsWon, state.PlayerLevel)
             }
             storeQuestionStats(questionStatsList) // on sauvegarde cette liste sur le storage
             .then(myList => {
@@ -61,20 +59,25 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 ...state,
                     QuestionStatsList: questionStatsList,
                     pM: myPM,
-                    PlayerLevel: myPlayerLevel
             } 
             return nextState
         case 'QUERES_STATS-DISPLAYED' :   // value : null
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-DISPLAYED")
-            tempoLevel = 0
             myPM = state.pM.slice()
-            SetOldPointsForZone(myPM, tempoLevel) // recopie les points dans OldPoints (l'animation est finie)
-  
-
+            SetOldPointsForZone(myPM, state.PlayerLevel) // recopie les points dans OldPoints (l'animation est finie)
             nextState = {
                 ...state,
                     pM: myPM
             } 
+            return nextState
+        case 'QUERES_STATS-INCREMENT_PLAYER_LEVEL' :   
+            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INCREMENT_PLAYER_LEVEL")
+            let myPlayerLevel = state.PlayerLevel+1
+            // console.log("Reducer HandleQueresStatsReducer myPM= ", myPM)
+            nextState = {
+                ...state,
+                    PlayerLevel: myPlayerLevel
+            }
             return nextState
         default:
             return state;

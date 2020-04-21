@@ -1,10 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Easing } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TouchableWithoutFeedback, Animated, Easing } from 'react-native'
 import { connect } from 'react-redux'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
-import { GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone } from '../Helpers/PointsManager'
+import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone } from '../Helpers/PointsManager'
 import { ProgressSymbol } from './ProgressSymbol'
+import { LevelSymbol } from './LevelSymbol'
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warnig de React Native
 
 
 
@@ -14,10 +17,13 @@ class HomeScreen extends React.Component {
         console.log("HOME SCREEN CONSTRUCTOR DEBUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
         super();
 
+    
         this._animateProgress = this._animateProgress.bind(this)
-
-        // console.log("HOME SCREEN CONSTRUCTOR : myProgressAnimForZone = ", myProgressAnimForZone )
-        // console.log("HOME SCREEN CONSTRUCTOR : state = ", this.state )
+        this._onEndAnim1 = this._onEndAnim1.bind(this)
+        this._onEndAnim2 = this._onEndAnim2.bind(this)
+        this._onEndAnim3 = this._onEndAnim3.bind(this)
+        this._onEndAnim4 = this._onEndAnim4.bind(this)
+        this._onEndAnim0 = this._onEndAnim0.bind(this)
 
         if (G_InitState) {  // Horrible verrue
               console.log("HOME SCREEN CONSTRUCTOR")
@@ -26,21 +32,22 @@ class HomeScreen extends React.Component {
               console.log("HOME SCREEN CONSTRUCTOR APRES GetSTORED")
               G_InitialQuestionStatsList = myList
               this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
-              this._initProgressAnimation()
             })
             G_InitState = false // Horrible verrue
             return null
         }
     }
 
-    _initProgressAnimation() {
-        let tempoLevel = 0
+    state = {
+        modalVisible: false // popup pour indiquer le passage d'un niveau a un autre
+    }
 
-        this.pS1._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Europe, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Europe, tempoLevel))
-        this.pS2._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Afrique, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Afrique, tempoLevel))
-        this.pS3._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Ameriques, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Ameriques, tempoLevel))
-        this.pS4._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_AsiePacif, tempoLevel), GetMaxPointsForZone(this.props.pM, G_AsiePacif, tempoLevel))
-        this.pS0._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Monde, tempoLevel), GetMaxPointsForZone(this.props.pM, G_Monde, tempoLevel))
+    _initProgressAnimation() {
+        this.pS1._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Europe, this.props.PlayerLevel))
+        this.pS2._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Afrique, this.props.PlayerLevel))
+        this.pS3._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Ameriques, this.props.PlayerLevel))
+        this.pS4._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_AsiePacif, this.props.PlayerLevel))
+        this.pS0._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Monde, this.props.PlayerLevel))
     }
 
 
@@ -52,7 +59,8 @@ class HomeScreen extends React.Component {
         const { navigation } = this.props;
         this.focusListener = navigation.addListener("didFocus", () => { 
             console.log("HOME SCREEN DIDFOCUS WORKS GREATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
-            this._animateProgress()
+              this._initProgressAnimation()
+              this._animateProgress()
         });
 
     }
@@ -64,6 +72,11 @@ class HomeScreen extends React.Component {
     _goStatView = () => {
         console.log("On va à l'écran des stats du joueur")
        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})   
+    }
+
+    _goLevelView = () => {
+        console.log("On va à l'écran des niveaux du joueur")
+       this.props.navigation.navigate('LevelScreen', {})   
     }
 
 
@@ -101,27 +114,27 @@ class HomeScreen extends React.Component {
     }
 
 
-    //_onEndAnim11 =() => { this.pS1._animateProgress2() }
-    //_onEndAnim12 =() => { this.pS1._animateProgress3() }
-    _onEndAnim1 =() => { this.pS2._animateProgress() }
-
-    //_onEndAnim21 =() => { this.pS2._animateProgress2() }
-    //_onEndAnim22 =() => { this.pS2._animateProgress3() }
-    _onEndAnim2 =() => { this.pS3._animateProgress() }
-
-    //_onEndAnim31 =() => { this.pS3._animateProgress2() }
-    //_onEndAnim32 =() => { this.pS3._animateProgress3() }
-    _onEndAnim3 =() => { this.pS4._animateProgress() }
-
-    //_onEndAnim41 =() => { this.pS4._animateProgress2() }
-    //_onEndAnim42 =() => { this.pS4._animateProgress3() }
-    _onEndAnim4 =() => { this.pS0._animateProgress() }
-
-    //_onEndAnim01 =() => { this.pS0._animateProgress2() }
-    //_onEndAnim02 =() => { this.pS0._animateProgress3() }
-    _onEndAnim0 =() => { // End of animations
-        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
+    _onEndAnim1 =() => { 
+        this.pS2._animateProgress() 
     }
+    
+    _onEndAnim2 =() => { this.pS3._animateProgress() }
+    _onEndAnim3 =() => { this.pS4._animateProgress() }
+    _onEndAnim4 =() => { this.pS0._animateProgress() }
+    _onEndAnim0 =() => { // End of animations
+        if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
+            this.setState({ modalVisible: true })
+            this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
+            this._initProgressAnimation()
+
+        }
+    }
+
+    _hideNextPlayerLevelPopup = () => {
+       this.setState({ modalVisible: false })
+    }
+
+
 
 
     render() {
@@ -135,8 +148,6 @@ class HomeScreen extends React.Component {
             // console.log("this.props.pM = ", this.props.pM)  
             // console.log("this.props.QuestionStatsList = ", this.props.QuestionStatsList)  
             // console.log("GetMaxPointsForZone(this.state.pm, G_Monde) = ", GetMaxPointsForZone(this.state.pM, G_Monde))  
-
-            let tempoLevel = 0
 
             let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
             let pointsWorld = 0
@@ -160,33 +171,33 @@ class HomeScreen extends React.Component {
                 pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
                 oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
                 */
-                maxPointsWorld = GetMaxPointsForZone(pM, G_Monde, tempoLevel)
-                pointsWorld = GetPointsForZone(pM, G_Monde, tempoLevel)
-                oldPointsWorld = GetOldPointsForZone(pM, G_Monde, tempoLevel)
+                maxPointsWorld = GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel)
+                pointsWorld = GetPointsForZone(pM, G_Monde, this.props.PlayerLevel)
+                oldPointsWorld = GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 // pointsWorld = 45
                 // oldPointsWorld = 40
     
-                maxPointsEurope = GetMaxPointsForZone(pM, G_Europe, tempoLevel)
-                pointsEurope = GetPointsForZone(pM, G_Europe, tempoLevel)
-                oldPointsEurope = GetOldPointsForZone(pM, G_Europe, tempoLevel)
+                maxPointsEurope = GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel)
+                pointsEurope = GetPointsForZone(pM, G_Europe, this.props.PlayerLevel)
+                oldPointsEurope = GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel)
                 //pointsEurope = 12
                 //oldPointsEurope = 10
     
-                maxPointsAfrique = GetMaxPointsForZone(pM, G_Afrique, tempoLevel)
-                pointsAfrique = GetPointsForZone(pM, G_Afrique, tempoLevel)
-                oldPointsAfrique = GetOldPointsForZone(pM, G_Afrique, tempoLevel)
+                maxPointsAfrique = GetMaxPointsForZone(pM, G_Afrique, this.props.PlayerLevel)
+                pointsAfrique = GetPointsForZone(pM, G_Afrique, this.props.PlayerLevel)
+                oldPointsAfrique = GetOldPointsForZone(pM, G_Afrique, this.props.PlayerLevel)
                 //pointsAfrique = 16
                 //oldPointsAfrique = 16
     
-                maxPointsAmeriques = GetMaxPointsForZone(pM, G_Ameriques, tempoLevel)
-                pointsAmeriques = GetPointsForZone(pM, G_Ameriques, tempoLevel)
-                oldPointsAmeriques = GetOldPointsForZone(pM, G_Ameriques, tempoLevel)
+                maxPointsAmeriques = GetMaxPointsForZone(pM, G_Ameriques, this.props.PlayerLevel)
+                pointsAmeriques = GetPointsForZone(pM, G_Ameriques, this.props.PlayerLevel)
+                oldPointsAmeriques = GetOldPointsForZone(pM, G_Ameriques, this.props.PlayerLevel)
                 //pointsAmeriques = 20
                 //oldPointsAmeriques = 18
     
-                maxPointsAsiePacif = GetMaxPointsForZone(pM, G_AsiePacif, tempoLevel)
-                pointsAsiePacif = GetPointsForZone(pM, G_AsiePacif, tempoLevel)
-                oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif, tempoLevel)
+                maxPointsAsiePacif = GetMaxPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel)
+                pointsAsiePacif = GetPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel)
+                oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel)
                 //pointsAsiePacif = 5
                 //oldPointsAsiePacif = 3
     
@@ -204,11 +215,21 @@ class HomeScreen extends React.Component {
     
             */
     
+            popupBackgroundColor = COLORS.okBackgroundColor
+            popupTextColor = COLORS.okTextColor
+            popupButtonBackgroundColor = COLORS.okButtonBackgroundColor
+            popupButtonBorderBottomColor = COLORS.okButtonBorderBottomColor
+
+            playerLevel = this.props.PlayerLevel
+
             return (
                 <View style={Gstyles.main_view}>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold'}}>Niveau {this.props.PlayerLevel}</Text>
+                        <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: 25, justifyContent: 'center', 
+                                        alignItems: 'center', borderStyle: 'solid', borderColor : 'black', borderWidth: 2, borderRadius: 5, width: '60%' }}>
+                            <Text style={{ fontSize: 20, color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>
+                        </View>
                     </View>
                     <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                                 onEndAnim1={ this._onEndAnim11 } onEndAnim2={ this._onEndAnim12 } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
@@ -227,11 +248,36 @@ class HomeScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 6, justifyContent: 'center', alignItems: 'center' }}> 
-                        <TouchableOpacity style={Gstyles.button}
+                    <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goStatView() }}>
                                     <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Statistiques</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity style={Gstyles.button}
+                                    onPress={() => { this._goLevelView() }}>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Niveau</Text>
+                        </TouchableOpacity>
                     </View>
+                    <Modal
+                        animationType="slide"
+                        transparent={ true }
+                        visible={ this.state.modalVisible }
+                        onRequestClose={() => {
+                            console.log('Modal has been closed')
+                        }}>
+                        <View style={{ flex: 1, backgroundColor: COLORS.okBackgroundColor, padding: 10}}>
+                            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
+                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
+                            </View>
+                            <LevelSymbol playerLevel = { this.props.PlayerLevel } />
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => { this._hideNextPlayerLevelPopup() }} 
+                                    style={[Gstyles.button, { backgroundColor: popupButtonBackgroundColor, borderBottomColor: popupButtonBorderBottomColor }]}  >
+                                    <Text style={Gstyles.button_text}>OK</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
                 </View>  
             )
         }

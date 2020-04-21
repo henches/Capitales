@@ -535,7 +535,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
-        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries
+        QueresSeries: state.HandleQueresSeriesReducer.QueresSeries,
+        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel
     }
 }
 

@@ -22,7 +22,18 @@ export default class App extends React.Component {
     let i4 = require('./Images/ImageLevel-4-atteint.png')
     let nri4 = require('./Images/ImageLevel-4-non-atteint.png')
     
+    global.PlayerLevelStyle = [
+      { text: "Débutant", backgroundColor: 'white', textColor: 'black'},
+      { text: "Débutant+", backgroundColor: 'yellow', textColor: 'black'},
+      { text: "Intermédiaire", backgroundColor: 'orange', textColor: 'black'},
+      { text: "Intérmédiaire+", backgroundColor: 'green', textColor: 'white'},
+      { text: "Expérimenté", backgroundColor: 'red', textColor: 'white'},
+      { text: "Expérimenté+", backgroundColor: 'brown', textColor: 'white'},
+      { text: "Expert", backgroundColor: 'black', textColor: 'white'}
+  ]
+  
     global.G_Config = {
+      MaxPlayerLevelNumber: 7,
       SeriesLength: 3,
       Level: [
         {
