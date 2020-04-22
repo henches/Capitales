@@ -43,11 +43,15 @@ class HomeScreen extends React.Component {
     }
 
     _initProgressAnimation() {
-        this.pS1._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Europe, this.props.PlayerLevel))
-        this.pS2._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Afrique, this.props.PlayerLevel))
-        this.pS3._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Ameriques, this.props.PlayerLevel))
-        this.pS4._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_AsiePacif, this.props.PlayerLevel))
-        this.pS0._initProgressAnimation(GetOldPointsForZone(this.props.pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(this.props.pM, G_Monde, this.props.PlayerLevel))
+        let pM = this.props.pM
+        if (pM == null) 
+            return
+
+        this.pS1._initProgressAnimation(GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel))
+        this.pS2._initProgressAnimation(GetOldPointsForZone(pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Afrique, this.props.PlayerLevel))
+        this.pS3._initProgressAnimation(GetOldPointsForZone(pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Ameriques, this.props.PlayerLevel))
+        this.pS4._initProgressAnimation(GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel))
+        this.pS0._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
     }
 
 
@@ -224,23 +228,25 @@ class HomeScreen extends React.Component {
 
             return (
                 <View style={Gstyles.main_view}>
-                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
-                        <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: 25, justifyContent: 'center', 
+                        <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: 35, justifyContent: 'center', 
                                         alignItems: 'center', borderStyle: 'solid', borderColor : 'black', borderWidth: 2, borderRadius: 5, width: '60%' }}>
                             <Text style={{ fontSize: 20, color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>
                         </View>
                     </View>
-                    <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
-                                onEndAnim1={ this._onEndAnim11 } onEndAnim2={ this._onEndAnim12 } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
-                    <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique } oldPoints={ oldPointsAfrique }  maxPoints={ maxPointsAfrique }
-                                onEndAnim1={ this._onEndAnim21 } onEndAnim2={ this._onEndAnim22 } onEndAnim3={ this._onEndAnim2 } ref={ ProgressSymbol => { this.pS2 = ProgressSymbol }} />
-                    <ProgressSymbol myFlex={ 1 } zone={ "Ameriques" } points={ pointsAmeriques } oldPoints={ oldPointsAmeriques }  maxPoints={ maxPointsAmeriques }
-                                onEndAnim1={ this._onEndAnim31 } onEndAnim2={ this._onEndAnim32 } onEndAnim3={ this._onEndAnim3 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
-                    <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
-                                onEndAnim1={ this._onEndAnim41 } onEndAnim2={ this._onEndAnim42 } onEndAnim3={ this._onEndAnim4 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
-                    <ProgressSymbol myFlex={ 2 } zone={ "MONDE" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
-                                onEndAnim1={ this._onEndAnim01 } onEndAnim2={ this._onEndAnim02 } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
+                    <View style={{ flex: 6, borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 5, marginLeft: '3%', marginRight: '3%' }}>
+                        <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
+                                    isTypeFull={ false } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
+                        <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique } oldPoints={ oldPointsAfrique }  maxPoints={ maxPointsAfrique }
+                                    isTypeFull={ false } onEndAnim3={ this._onEndAnim2 } ref={ ProgressSymbol => { this.pS2 = ProgressSymbol }} />
+                        <ProgressSymbol myFlex={ 1 } zone={ "Ameriques" } points={ pointsAmeriques } oldPoints={ oldPointsAmeriques }  maxPoints={ maxPointsAmeriques }
+                                    isTypeFull={ false } onEndAnim3={ this._onEndAnim3 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
+                        <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
+                                    isTypeFull={ false } onEndAnim3={ this._onEndAnim4 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
+                        <ProgressSymbol myFlex={ 2 } zone={ "MONDE" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
+                                    isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
+                    </View>
                     <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'center' }}>   
                         <TouchableOpacity style={Gstyles.button}
                                 onPress={() => { this._goSeriesScreen() }}>

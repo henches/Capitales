@@ -428,10 +428,10 @@ class SeriesScreen extends React.Component {
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image style={{ width: 220, height: 220 }} source={require('../Helpers/capital_images/paris.jpeg')} />
+                        <Image style={{ width: 220, height: 220 }} source={ require('../Helpers/capital_images/paris.jpeg') } />
                     </View>
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                        <QrLevelSymbol maxRightResponses={ 8 } rightResponsesNb={ rightResponsesNbDisplay } symbolHeight= { 180 }/>
+                        <Image  source={ G_Config.Level[level].Image } />
                     </View>
                 </View>
                 <Divider/>

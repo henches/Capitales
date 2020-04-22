@@ -111,11 +111,29 @@ export class ProgressSymbol extends React.Component {
         console.log("render ProgressSymbol Zone = ", zone, " points = ", this.props.points)
         console.log("render ProgressSymbol Zone = ", zone, " maxPoints = ", this.props.maxPoints)
 
+        let myViewMarginLeft = '3%'
+        let myViewMarginRight = '3%'
+        let myProgressMarginLeft = '3%'
+        let myProgressWidth = '75%'
+        let myFlexDirection = 'row'
+        let myJustifyContent = 'flex-end'
+        let myFontSize = 16
+        let myFontWeight = 'normal'
+            if (this.props.isTypeFull) {
+            myViewMarginLeft = '3%'
+            myViewMarginRight = '3%'
+            myProgressMarginLeft = '0%'
+            myProgressWidth = '100%'
+            myFlexDirection = 'column-reverse'
+            myJustifyContent = 'center'
+            myFontSize = 20
+            myFontWeight = 'bold'
+        }
 
         return(
-            <View style={{ flex: myFlex, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginRight: '5%', marginLeft: '5%' }}>
-                <Text style={{ fontSize: 20 }}>{ zone }</Text>
-                <View onLayout={ this._onLayout } style={{ flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: '90%' }}>
+            <View style={{ flex: myFlex, flexDirection: myFlexDirection, justifyContent: myJustifyContent, alignItems: 'center', marginRight: myViewMarginRight, marginLeft: myViewMarginLeft }}>
+                <Text style={{ fontSize: myFontSize, fontWeight: myFontWeight }}>{ zone }</Text>
+                <View onLayout={ this._onLayout } style={{ marginLeft:myProgressMarginLeft, flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: myProgressWidth }}>
                     <Text style={{ position: 'absolute', left: '95%', fontSize: 10, color: 'black' }}> { this.props.maxPoints } </Text>
                     <Animated.View style={{ flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
                             width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>      

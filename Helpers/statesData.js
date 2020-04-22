@@ -8,49 +8,49 @@ export default data = [
    {
       state: 'Albanie',
       capital: 'Tirana',
-      niveau : 0,
+      niveau : 3,
       continent: 'Europe',
    },
    {
       state: 'Algérie',
       capital: 'Alger',
-      niveau : 1,
+      niveau : 0,
       continent: 'Afrique',
    },
    {
       state: 'Andorre',
       capital: 'Andorre La Vella',
-      niveau : 10,
+      niveau : 4,
       continent: 'Europe',
    },
    {
       state: 'Angola',
       capital: 'Luanda',
-      niveau : 2,
+      niveau : 10,
       continent: 'Afrique',
    },
    {
       state: 'Anguilla',
       capital: 'The Valley',
-      niveau : 3,
+      niveau : 10,
       continent: 'Ameriques',
    },
    {
       state: 'Antigua et Barbuda',
       capital: 'Saint-Jean',
-      niveau : 4,
+      niveau : 10,
       continent: 'Ameriques',
    },
    {
       state: 'Argentine',
       capital: 'Buenos Aires',
-      niveau : 10,
+      niveau : 0,
       continent: 'Ameriques',
    },
    {
       state: 'Arménie',
       capital: 'Erevan',
-      niveau : 10,
+      niveau : 3,
       continent: 'Europe',
    },
    {
@@ -62,13 +62,13 @@ export default data = [
    {
       state: 'Australie',
       capital: 'Canberra',
-      niveau : 10,
+      niveau : 1,
       continent: 'AsiePacif',
    },
    {
       state: 'Autriche',
       capital: 'Vienne',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
@@ -86,7 +86,7 @@ export default data = [
    {
       state: 'Bahamas',
       capital: 'Nassau',
-      niveau : 10,
+      niveau : 2,
       continent: 'Ameriques',
    },
    {
@@ -110,7 +110,7 @@ export default data = [
    {
       state: 'Belgique',
       capital: 'Bruxelles',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
@@ -158,7 +158,7 @@ export default data = [
    {
       state: 'Brésil',
       capital: 'Brasilia',
-      niveau : 10,
+      niveau : 0,
       continent: 'Ameriques',
    },
    {
@@ -194,7 +194,7 @@ export default data = [
    {
       state: 'Cameroun',
       capital: 'Yaoundé',
-      niveau : 10,
+      niveau : 1,
       continent: 'Afrique',
    },
    {
@@ -224,19 +224,19 @@ export default data = [
    {
       state: 'Tchad',
       capital: 'N Djamena',
-      niveau : 10,
+      niveau : 3,
       continent: 'Afrique',
    },
    {
       state: 'Chili',
       capital: 'Santiago',
-      niveau : 10,
+      niveau : 0,
       continent: 'Ameriques',
    },
    {
       state: 'Chine',
       capital: 'Pékin',
-      niveau : 10,
+      niveau : 0,
       continent: 'AsiePacif',
    },
    {
@@ -254,7 +254,7 @@ export default data = [
    {
       state: 'Congo',
       capital: 'Brazzaville',
-      niveau : 10,
+      niveau : 1,
       continent: 'Afrique',
    },
    {
@@ -272,37 +272,37 @@ export default data = [
    {
       state: 'Croatie',
       capital: 'Zagreb',
-      niveau : 10,
+      niveau : 3,
       continent: 'Europe',
    },
    {
       state: 'Cuba',
       capital: 'La Havane',
-      niveau : 10,
+      niveau : 1,
       continent: 'Ameriques',
    },
    {
       state: 'Chypre',
       capital: 'Nicosie',
-      niveau : 10,
+      niveau : 4,
       continent: 'Europe',
    },
    {
       state: 'République Tchèque',
       capital: 'Prague',
-      niveau : 10,
+      niveau : 2,
       continent: 'Europe',
    },
    {
       state: 'Danemark',
       capital: 'Copenhage',
-      niveau : 10,
+      niveau : 2,
       continent: 'Europe',
    },
    {
       state: 'Djibouti',
       capital: 'Djibouti',
-      niveau : 10,
+      niveau : 0,
       continent: 'Afrique',
    },
    {
@@ -320,13 +320,13 @@ export default data = [
    {
       state: 'Equateur',
       capital: 'Quito',
-      niveau : 10,
+      niveau : 2,
       continent: 'Ameriques',
    },
    {
       state: 'Egypte',
       capital: 'Le Caire',
-      niveau : 10,
+      niveau : 0,
       continent: 'Afrique',
    },
    {
@@ -386,7 +386,7 @@ export default data = [
    {
       state: 'France',
       capital: 'Paris',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
@@ -404,7 +404,7 @@ export default data = [
    {
       state: 'Gabon',
       capital: 'Libreville',
-      niveau : 10,
+      niveau : 2,
       continent: 'Afrique',
    },
    {
@@ -422,7 +422,7 @@ export default data = [
    {
       state: 'Allemagne',
       capital: 'Berlin',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
@@ -434,13 +434,13 @@ export default data = [
    {
       state: 'Gibraltar',
       capital: 'Gibraltar',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
       state: 'Grèce',
       capital: 'Athènes',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
@@ -470,13 +470,13 @@ export default data = [
    {
       state: 'Guatémala',
       capital: 'Guatémala',
-      niveau : 10,
+      niveau : 2,
       continent: 'Ameriques',
    },
    {
       state: 'Guinée',
       capital: 'Conakry',
-      niveau : 10,
+      niveau : 3,
       continent: 'Afrique',
    },
    {
@@ -500,13 +500,13 @@ export default data = [
    {
       state: 'Honduras',
       capital: 'Tegucigalpa',
-      niveau : 10,
+      niveau : 3,
       continent: 'Ameriques',
    },
    {
       state: 'Hongrie',
       capital: 'Budapest',
-      niveau : 10,
+      niveau : 3,
       continent: 'Europe',
    },
    {
@@ -518,7 +518,7 @@ export default data = [
    {
       state: 'Inde',
       capital: 'New Delhi',
-      niveau : 10,
+      niveau : 1,
       continent: 'AsiePacif',
    },
    {
@@ -542,25 +542,25 @@ export default data = [
    {
       state: 'Irlande',
       capital: 'Dublin',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
       state: 'Israël',
       capital: 'Jérusalem',
-      niveau : 10,
+      niveau : 1,
       continent: 'AsiePacif',
    },
    {
       state: 'Italie',
       capital: 'Rome',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
       state: 'Côte d Ivoire',
       capital: 'Abidjan',
-      niveau : 10,
+      niveau : 1,
       continent: 'Afrique',
    },
    {
@@ -572,7 +572,7 @@ export default data = [
    {
       state: 'Japon',
       capital: 'Tokyo',
-      niveau : 10,
+      niveau : 0,
       continent: 'AsiePacif',
    },
    {
@@ -590,7 +590,7 @@ export default data = [
    {
       state: 'Kénya',
       capital: 'Nairobi',
-      niveau : 10,
+      niveau : 2,
       continent: 'Afrique',
    },
    {
@@ -614,7 +614,7 @@ export default data = [
    {
       state: 'Koweït',
       capital: 'Koweït',
-      niveau : 10,
+      niveau : 2,
       continent: 'AsiePacif',
    },
    {
@@ -632,13 +632,13 @@ export default data = [
    {
       state: 'Lettonie',
       capital: 'Riga',
-      niveau : 10,
+      niveau : 4,
       continent: 'Europe',
    },
    {
       state: 'Liban',
       capital: 'Beyrouth',
-      niveau : 10,
+      niveau : 2,
       continent: 'AsiePacif',
    },
    {
@@ -656,7 +656,7 @@ export default data = [
    {
       state: 'Libye',
       capital: 'Tripoli',
-      niveau : 10,
+      niveau : 1,
       continent: 'Afrique',
    },
    {
@@ -668,19 +668,19 @@ export default data = [
    {
       state: 'Lituanie',
       capital: 'Vilnius',
-      niveau : 10,
+      niveau : 4,
       continent: 'Europe',
    },
    {
       state: 'Luxembourg',
       capital: 'Luxembourg',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
       state: 'Madagascar',
       capital: 'Antananarivo',
-      niveau : 10,
+      niveau : 3,
       continent: 'Afrique',
    },
    {
@@ -704,7 +704,7 @@ export default data = [
    {
       state: 'Mali',
       capital: 'Bamako',
-      niveau : 10,
+      niveau : 2,
       continent: 'Afrique',
    },
    {
@@ -740,7 +740,7 @@ export default data = [
    {
       state: 'Mexique',
       capital: 'Mexico',
-      niveau : 10,
+      niveau : 0,
       continent: 'Ameriques',
    },
    {
@@ -752,7 +752,7 @@ export default data = [
    {
       state: 'Monaco',
       capital: 'Monaco',
-      niveau : 10,
+      niveau : 3,
       continent: 'Europe',
    },
    {
@@ -764,7 +764,7 @@ export default data = [
    {
       state: 'Maroc',
       capital: 'Rabat',
-      niveau : 10,
+      niveau : 1,
       continent: 'Afrique',
    },
    {
@@ -782,7 +782,7 @@ export default data = [
    {
       state: 'Namibie',
       capital: 'Windhoek',
-      niveau : 10,
+      niveau : 3,
       continent: 'Afrique',
    },
    {
@@ -800,7 +800,7 @@ export default data = [
    {
       state: 'Pays-Bas',
       capital: 'Amsterdam',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
@@ -830,7 +830,7 @@ export default data = [
    {
       state: 'Nigéria',
       capital: 'Lagos',
-      niveau : 10,
+      niveau : 4,
       continent: 'Afrique',
    },
    {
@@ -848,7 +848,7 @@ export default data = [
    {
       state: 'Norvège',
       capital: 'Oslo',
-      niveau : 10,
+      niveau : 2,
       continent: 'Europe',
    },
    {
@@ -872,7 +872,7 @@ export default data = [
    {
       state: 'Panama',
       capital: 'Panama',
-      niveau : 10,
+      niveau : 0,
       continent: 'Ameriques',
    },
    {
@@ -890,19 +890,19 @@ export default data = [
    {
       state: 'Pérou',
       capital: 'Lima',
-      niveau : 10,
+      niveau : 1,
       continent: 'Ameriques',
    },
    {
       state: 'Philippines',
       capital: 'Manille',
-      niveau : 10,
+      niveau : 3,
       continent: 'AsiePacif',
    },
    {
       state: 'Portugal',
       capital: 'Lisbonne',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
@@ -932,13 +932,13 @@ export default data = [
    {
       state: 'Russie',
       capital: 'Moscou',
-      niveau : 10,
+      niveau : 0,
       continent: 'AsiePacif',
    },
    {
       state: 'Rwanda',
       capital: 'Kigali',
-      niveau : 10,
+      niveau : 5,
       continent: 'Afrique',
    },
    {
@@ -968,7 +968,7 @@ export default data = [
    {
       state: 'Sénégal',
       capital: 'Dakar',
-      niveau : 10,
+      niveau : 0,
       continent: 'Afrique',
    },
    {
@@ -986,19 +986,19 @@ export default data = [
    {
       state: 'Singapour',
       capital: 'Singapour',
-      niveau : 10,
+      niveau : 1,
       continent: 'AsiePacif',
    },
    {
       state: 'Slovaquie',
       capital: 'Bratislava',
-      niveau : 10,
+      niveau : 5,
       continent: 'Europe',
    },
    {
       state: 'Slovénie',
       capital: 'Ljubljana',
-      niveau : 10,
+      niveau : 3,
       continent: 'Europe',
    },
    {
@@ -1010,7 +1010,7 @@ export default data = [
    {
       state: 'Somalie',
       capital: 'Mogadiscio',
-      niveau : 10,
+      niveau : 4,
       continent: 'Afrique',
    },
    {
@@ -1022,7 +1022,7 @@ export default data = [
    {
       state: 'Espagne',
       capital: 'Madrid',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
@@ -1046,7 +1046,7 @@ export default data = [
    {
       state: 'Soudan',
       capital: 'Khartoum',
-      niveau : 10,
+      niveau : 3,
       continent: 'Afrique',
    },
    {
@@ -1064,13 +1064,13 @@ export default data = [
    {
       state: 'Suède',
       capital: 'Stockholm',
-      niveau : 10,
+      niveau : 2,
       continent: 'Europe',
    },
    {
       state: 'Suisse',
       capital: 'Berne',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
@@ -1100,7 +1100,7 @@ export default data = [
    {
       state: 'Thaïlande',
       capital: 'Bangkok',
-      niveau : 10,
+      niveau : 2,
       continent: 'AsiePacif',
    },
    {
@@ -1124,13 +1124,13 @@ export default data = [
    {
       state: 'Tunisie',
       capital: 'Tunis',
-      niveau : 10,
+      niveau : 0,
       continent: 'Afrique',
    },
    {
       state: 'Turquie',
       capital: 'Ankara',
-      niveau : 10,
+      niveau : 2,
       continent: 'Europe',
    },
    {
@@ -1160,7 +1160,7 @@ export default data = [
    {
       state: 'Ukraine',
       capital: 'Kiev',
-      niveau : 10,
+      niveau : 5,
       continent: 'Europe',
    },
    {
@@ -1172,19 +1172,19 @@ export default data = [
    {
       state: 'Royaume-Uni',
       capital: 'Londres',
-      niveau : 10,
+      niveau : 0,
       continent: 'Europe',
    },
    {
       state: 'Etats-Unis',
       capital: 'Washington',
-      niveau : 10,
+      niveau : 0,
       continent: 'Ameriques',
    },
    {
       state: 'Uruguay',
       capital: 'Montevideo',
-      niveau : 10,
+      niveau : 1,
       continent: 'Ameriques',
    },
    {
@@ -1202,19 +1202,19 @@ export default data = [
    {
       state: 'Vatican',
       capital: 'Vatican',
-      niveau : 10,
+      niveau : 3,
       continent: 'Europe',
    },
    {
       state: 'Vénézuela',
       capital: 'Caracas',
-      niveau : 10,
+      niveau : 1,
       continent: 'Ameriques',
    },
    {
       state: 'Vietnam',
       capital: 'Hanoi',
-      niveau : 10,
+      niveau : 2,
       continent: 'AsiePacif',
    },
    {
@@ -1232,13 +1232,13 @@ export default data = [
    {
       state: 'Serbie',
       capital: 'Belgrade',
-      niveau : 10,
+      niveau : 5,
       continent: 'Europe',
    },
    {
       state: 'République démocratique du Congo',
       capital: 'Kinshasa',
-      niveau : 10,
+      niveau : 3,
       continent: 'Afrique',
    },
    {
@@ -1256,13 +1256,13 @@ export default data = [
    {
       state: 'Pologne',
       capital: 'Varsovie',
-      niveau : 10,
+      niveau : 1,
       continent: 'Europe',
    },
    {
       state: 'Biélorussie',
       capital: 'Minsk',
-      niveau : 10,
+      niveau : 5,
       continent: 'Europe',
    },
 ]

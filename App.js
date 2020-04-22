@@ -12,15 +12,10 @@ export default class App extends React.Component {
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
     super()
-    let i0 = require('./Images/StarLevel-0.png')
-    let i1 = require('./Images/ImageLevel-1-atteint.png')
-    let nri1 = require('./Images/ImageLevel-1-non-atteint.png')
-    let i2 = require('./Images/ImageLevel-2-atteint.png')
-    let nri2 = require('./Images/ImageLevel-2-non-atteint.png')
-    let i3 = require('./Images/ImageLevel-3-atteint.png')
-    let nri3 = require('./Images/ImageLevel-3-non-atteint.png')
-    let i4 = require('./Images/ImageLevel-4-atteint.png')
-    let nri4 = require('./Images/ImageLevel-4-non-atteint.png')
+    let i1 = require('./Images/ImageLevel1.png')
+    let i2 = require('./Images/ImageLevel2.png')
+    let i3 = require('./Images/ImageLevel3.png')
+    let i4 = require('./Images/ImageLevel4.png')
     
     global.PlayerLevelStyle = [
       { text: "Débutant", backgroundColor: 'white', textColor: 'black'},
@@ -40,32 +35,27 @@ export default class App extends React.Component {
           QrNb: 1,
           Points : 1,
           ProposedResponsesNb: 4,
-          Image: i0
         },
         {
           QrNb: 1,
           Points: 1,
           ProposedResponsesNb: 8,
           Image: i1,
-          NotReachedImage:nri1
         },
         {
           QrNb: 1,
           Points: 1,
           ProposedResponsesNb: 8,
           Image: i2,
-          NotReachedImage:nri2
         },
         {
           QrNb: 1,
           Points: 1,
           Image: i3,
-          NotReachedImage:nri3
         },
         {
           Points: 0,
           Image: i4,
-          NotReachedImage:nri4
         }
       ]
     }
