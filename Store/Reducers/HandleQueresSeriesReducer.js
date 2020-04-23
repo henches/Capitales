@@ -49,9 +49,9 @@ _createProposedResponsesList = (normalDirection, responsesNb, question) => { // 
 function filterListByPlayerLevel(queresStatList, level) {
     let i = queresStatList.length
     while (i--) {
-        console.log("filterListByPlayerLevel: level = ", level, " queresStatList[i].Queres.niveau = ", queresStatList[i].Queres.niveau)
+        //console.log("filterListByPlayerLevel: level = ", level, " queresStatList[i].Queres.niveau = ", queresStatList[i].Queres.niveau)
         if (queresStatList[i].Queres.niveau != level) {
-            console.log("filterListByPlayerLevel: suppression de ", queresStatList[i].Queres.state)
+            //console.log("filterListByPlayerLevel: suppression de ", queresStatList[i].Queres.state)
             queresStatList.splice(i, 1);
         }
     } 

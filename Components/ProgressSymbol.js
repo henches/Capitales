@@ -20,7 +20,7 @@ export class ProgressSymbol extends React.Component {
         this.state = {
             circleSize : new Animated.Value(1),
             progress : new Animated.Value(0),
-            width: 0,
+            minWidth: 0,
             counter : 0
         }
     }
@@ -40,9 +40,10 @@ export class ProgressSymbol extends React.Component {
 
     _initProgressAnimation = (oldPoints, maxPoints) => {
         this.setState({ counter: oldPoints })
-        console.log('Progress Symbol _initProgressAnimation : this.state.width = ', this.state.width)
-        console.log('Progress Symbol _initProgressAnimation : % = ', barHeight/this.state.width)
-        this.state.progress.setValue(Math.max(oldPoints/maxPoints, barHeight/this.state.width ))
+        console.log('Progress Symbol _initProgressAnimation : minWidth = ', this.state.minWidth)
+        console.log('Progress Symbol oldPoints  = ', oldPoints)
+        console.log('Progress Symbol maxPoints  = ', maxPoints)
+        this.state.progress.setValue(Math.max(oldPoints/maxPoints, this.state.minWidth ))
     }
 
 
@@ -69,7 +70,7 @@ export class ProgressSymbol extends React.Component {
         this.interval = setInterval(() => this._tick(), progressDuration/(this.props.points-this.props.oldPoints+1));
 
         Animated.timing(this.state.progress, {
-                toValue: this.props.points/this.props.maxPoints,
+                toValue: Math.max(this.props.points/this.props.maxPoints, this.state.minWidth),
                 duration: progressDuration, 
                 easing: Easing.linear
         }).start( () =>  {                
@@ -95,11 +96,15 @@ export class ProgressSymbol extends React.Component {
     }
 
     _onLayout = (e) => {
-        this.setState({
-          width: e.nativeEvent.layout.width
-        })
-        console.log('Progress Symbol _onLayout : width = ', e.nativeEvent.layout.width)
-        console.log('Progress Symbol _onLayout : % = ', barHeight/e.nativeEvent.layout.width)
+        if (e.nativeEvent.layout.width != 0) {
+            let myMinWidth = barHeight/e.nativeEvent.layout.width
+            this.setState({ minWidth: myMinWidth })
+            console.log('Progress Symbol _onLayout : e.nativeEvent.layout.width = ', e.nativeEvent.layout.width)
+            console.log('Progress Symbol _onLayout : % = ', myMinWidth)
+        }
+        else 
+            console.log('Progress Symbol _onLayout : e.nativeEvent.layout.width = 0')
+
       }
   
 
@@ -107,9 +112,9 @@ export class ProgressSymbol extends React.Component {
 
         const myFlex = this.props.myFlex // chaine de caractères
         const zone = this.props.zone // chaine de caractères
-        console.log("render ProgressSymbol Zone = ", zone, " oldPoints = ", this.props.oldPoints)
-        console.log("render ProgressSymbol Zone = ", zone, " points = ", this.props.points)
-        console.log("render ProgressSymbol Zone = ", zone, " maxPoints = ", this.props.maxPoints)
+        // console.log("render ProgressSymbol Zone = ", zone, " oldPoints = ", this.props.oldPoints)
+        // console.log("render ProgressSymbol Zone = ", zone, " points = ", this.props.points)
+        // console.log("render ProgressSymbol Zone = ", zone, " maxPoints = ", this.props.maxPoints)
 
         let myViewMarginLeft = '3%'
         let myViewMarginRight = '3%'

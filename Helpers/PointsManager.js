@@ -37,7 +37,7 @@ export function InitPointsManager(QuestionStatsList) {
             if (QuestionStatsList[i].Queres.niveau < G_Config.MaxPlayerLevelNumber)
                 if (QuestionStatsList[i].Queres.continent.localeCompare(Zones[z]) == 0) {
                     level = QuestionStatsList[i].Queres.niveau
-                    console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
+                    // console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
                     pM[level][z].nb++
                     pM[level][z].points += QuestionStatsList[i].totalPoints
                     pM[level][z].oldPoints = pM[level][z].points
@@ -48,8 +48,8 @@ export function InitPointsManager(QuestionStatsList) {
                     break
                 }
         }
-        if (!found) 
-            console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].Queres.state, QuestionStatsList[i].Queres.continent)
+        //if (!found) 
+            //console.log("Il y a un pays In-continent ! Vite une couche !!", QuestionStatsList[i].Queres.state, QuestionStatsList[i].Queres.continent)
     }
 
     for (let l = 0; l < pM.length; l++) {
@@ -60,7 +60,7 @@ export function InitPointsManager(QuestionStatsList) {
     for (let l = 0; l < pM.length; l++) {
         for (let z = 0; z < pM[l].length; z++) {
             p = pM[l][z]
-            console.log("pM level = ", l, " / zone = ", p.zone, " / nb = ", p.nb, " / points = ", p.points, " / oldPoints = ", p.oldPoints, " / maxPoints = ", p.maxPoints)
+            // console.log("pM level = ", l, " / zone = ", p.zone, " / nb = ", p.nb, " / points = ", p.points, " / oldPoints = ", p.oldPoints, " / maxPoints = ", p.maxPoints)
         }
     }
 

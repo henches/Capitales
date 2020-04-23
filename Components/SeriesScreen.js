@@ -123,14 +123,7 @@ class SeriesScreen extends React.Component {
         const afterResponseLevel = queres.afterResponseLevel
         const levelChanged = (afterResponseLevel != level)
 
-        const rightResponsesNb = queres.rightResponsesNb
-        const afterResponseRightResponsesNb = queres.afterResponseRightResponsesNb
-        const rightResponsesNbDisplay = afterResponseRightResponsesNb  > rightResponsesNb ? afterResponseRightResponsesNb : rightResponsesNb
 
-        
-        const rNbForNextLevel = queres.rNbForNextLevel
-        // level = 3 // A fins de TEST du level 3
-        // rNbForNextLevel = 6 // A fins de TEST du level 3
 
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
 
@@ -431,7 +424,7 @@ class SeriesScreen extends React.Component {
                         <Image style={{ width: 220, height: 220 }} source={ require('../Helpers/capital_images/paris.jpeg') } />
                     </View>
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image  source={ G_Config.Level[level].Image } />
+                        <Image  source={ levelImage } />
                     </View>
                 </View>
                 <Divider/>

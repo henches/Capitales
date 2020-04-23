@@ -32,6 +32,7 @@ class HomeScreen extends React.Component {
               console.log("HOME SCREEN CONSTRUCTOR APRES GetSTORED")
               G_InitialQuestionStatsList = myList
               this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
+              this._initProgressAnimation()
             })
             G_InitState = false // Horrible verrue
             return null
@@ -42,17 +43,10 @@ class HomeScreen extends React.Component {
         modalVisible: false // popup pour indiquer le passage d'un niveau a un autre
     }
 
-    _initProgressAnimation() {
-        let pM = this.props.pM
-        if (pM == null) 
-            return
-
-        this.pS1._initProgressAnimation(GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel))
-        this.pS2._initProgressAnimation(GetOldPointsForZone(pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Afrique, this.props.PlayerLevel))
-        this.pS3._initProgressAnimation(GetOldPointsForZone(pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Ameriques, this.props.PlayerLevel))
-        this.pS4._initProgressAnimation(GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel))
-        this.pS0._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
+    static navigationOptions = {
+        headerShown: false,
     }
+
 
 
     
@@ -69,9 +63,6 @@ class HomeScreen extends React.Component {
 
     }
           
-    static navigationOptions = {
-        headerShown: false,
-    }
 
     _goStatView = () => {
         console.log("On va à l'écran des stats du joueur")
@@ -93,7 +84,20 @@ class HomeScreen extends React.Component {
 //        this.props.navigation.navigate('GlobalQuestionStatsScreen', {})
     }
 
-     _animateProgress = (test) => {
+    _initProgressAnimation() {
+        console.log("_initProgressAnimation ");
+        let pM = this.props.pM
+        if (pM == null) 
+            return
+
+        this.pS1._initProgressAnimation(GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel))
+        this.pS2._initProgressAnimation(GetOldPointsForZone(pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Afrique, this.props.PlayerLevel))
+        this.pS3._initProgressAnimation(GetOldPointsForZone(pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Ameriques, this.props.PlayerLevel))
+        this.pS4._initProgressAnimation(GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel))
+        this.pS0._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
+    }
+
+    _animateProgress = () => {
         console.log("_animateProgress ");
 
         let pM = this.props.pM
@@ -126,11 +130,11 @@ class HomeScreen extends React.Component {
     _onEndAnim3 =() => { this.pS4._animateProgress() }
     _onEndAnim4 =() => { this.pS0._animateProgress() }
     _onEndAnim0 =() => { // End of animations
+        this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
             this.setState({ modalVisible: true })
             this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
             this._initProgressAnimation()
-
         }
     }
 
