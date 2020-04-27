@@ -37,15 +37,17 @@ export function InitPointsManager(QuestionStatsList) {
             if (QuestionStatsList[i].Queres.niveau < G_Config.MaxPlayerLevelNumber)
                 if (QuestionStatsList[i].Queres.continent.localeCompare(Zones[z]) == 0) {
                     level = QuestionStatsList[i].Queres.niveau
-                    // console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
-                    pM[level][z].nb++
-                    pM[level][z].points += QuestionStatsList[i].totalPoints
-                    pM[level][z].oldPoints = pM[level][z].points
-                    pM[level][G_Monde].nb++
-                    pM[level][G_Monde].points += QuestionStatsList[i].totalPoints
-                    pM[level][G_Monde].oldPoints = pM[level][G_Monde].points
-                    found = true
-                    break
+                    if (level >= 0) {
+                        // console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
+                        pM[level][z].nb++
+                        pM[level][z].points += QuestionStatsList[i].totalPoints
+                        pM[level][z].oldPoints = pM[level][z].points
+                        pM[level][G_Monde].nb++
+                        pM[level][G_Monde].points += QuestionStatsList[i].totalPoints
+                        pM[level][G_Monde].oldPoints = pM[level][G_Monde].points
+                        found = true
+                        break
+                    }
                 }
         }
         //if (!found) 
