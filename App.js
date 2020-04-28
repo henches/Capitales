@@ -18,13 +18,17 @@ export default class App extends React.Component {
     let i4 = require('./Images/ImageLevel4.png')
     
     global.PlayerLevelStyle = [
-      { text: "Débutant", backgroundColor: 'white', textColor: 'black'},
-      { text: "Débutant+", backgroundColor: 'yellow', textColor: 'black'},
-      { text: "Intermédiaire", backgroundColor: 'orange', textColor: 'black'},
-      { text: "Intérmédiaire+", backgroundColor: 'green', textColor: 'white'},
-      { text: "Expérimenté", backgroundColor: 'red', textColor: 'white'},
-      { text: "Expérimenté+", backgroundColor: 'brown', textColor: 'white'},
-      { text: "Expert", backgroundColor: 'black', textColor: 'white'}
+      { text: "Débutant", backgroundColor: 'lightGrey', textColor: 'black'},
+      { text: "Débutant+", backgroundColor: 'darkgrey', textColor: 'black'},
+      { text: "Débutant avancé", backgroundColor: 'lemonchiffon', textColor: 'black'},
+      { text: "Intermédiaire", backgroundColor: 'yellow', textColor: 'black'},
+      { text: "Intérmédiaire+", backgroundColor: 'gold', textColor: 'black'},
+      { text: "Intermédiaire avancé", backgroundColor: 'greenyellow', textColor: 'black'},
+      { text: "Expérimenté", backgroundColor: 'yellowgreen', textColor: 'white'},
+      { text: "Expérimenté+", backgroundColor: 'darkolivegreen', textColor: 'white'},
+      { text: "Expérimenté avancé", backgroundColor: 'red', textColor: 'white'},
+      { text: "Maitre", backgroundColor: 'brown', textColor: 'white'},
+      { text: "Dieu", backgroundColor: 'black', textColor: 'white'}
   ]
   
     global.G_Config = {

@@ -10,18 +10,9 @@ import { LevelSymbol } from './LevelSymbol'
 
 class GlobalQuestionStatsScreen extends React.Component {
     static navigationOptions = {
-        title: "Home",
-        headerLeft: (
-          <Icon
-            containerStyle={{ marginLeft: 10 }}
-            type='ionicon'
-            name='ios-home'
-            color='blue'
-  //          onPress={() => navigation.navigate('HomeScreen', {}) }
-          />
-        )
+        headerShown: false,
     }
-    
+   
     constructor() {
         console.log('LEVEL SCREEN CONSTRUCTOR *************************************************************************************')
         super()
@@ -36,16 +27,22 @@ class GlobalQuestionStatsScreen extends React.Component {
    
     render() {
         return(
-                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
-                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
+                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: 20 }}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 30, fontWeight: 'bold'}}>NIVEAU</Text>
                     </View>
-                    <View style={{ flex: 10, justifyContent: 'center' }}>
+                    <View style={{ flex: 8, justifyContent: 'center' }}>
                         <LevelSymbol playerLevel = { this.props.PlayerLevel } />
                     </View>
-                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
-                        <TouchableOpacity style={Gstyles.button}
-                                onPress={() => { this._goHomeScreen() }}>
-                                <Text style={Gstyles.button_text}>HOME</Text>
+                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>  
+                        <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
+                                <Icon
+                                    containerStyle={{ marginLeft: 10 }}
+                                    size={ 30 }
+                                    type='ionicon'
+                                    name='ios-home'
+                                    color='white'
+                                />
                         </TouchableOpacity>
                     </View>
                 </View>  

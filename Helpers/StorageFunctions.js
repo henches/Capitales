@@ -7,7 +7,8 @@ function initQuestionStats() {
     console.log("InitQuestionStats")
     myQueresStats = []
     for (let i = 0; i < G_StatesList.length; i++) {
-        myQueresStats.push({ id: i.toString(), Queres: G_StatesList[i], level: 0, levelImage: null, rightResponsesNb: 0, wrongResponsesNb: 0, totalPoints: 0  })
+        if (G_StatesList[i].niveau != -1)
+          myQueresStats.push({ id: i.toString(), Queres: G_StatesList[i], level: 0, levelImage: null, rightResponsesNb: 0, wrongResponsesNb: 0, totalPoints: 0  })
     }
     return myQueresStats
 }
