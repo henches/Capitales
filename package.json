@@ -11,6 +11,8 @@
     "@react-native-community/async-storage": "^1.7.1",
     "expo": "^35.0.0",
     "expo-av": "~7.0.1",
+    "file-exists": "^5.0.1",
+    "image-exists": "^1.1.0",
     "js-levenshtein": "^1.1.6",
     "prop-types": "^15.7.2",
     "react": "16.8.3",

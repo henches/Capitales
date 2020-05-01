@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Image } from 'react-native'
+import { Alert, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Image, ImageEditor } from 'react-native'
 import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import { COLORS, Gstyles } from './Styles'
@@ -7,6 +7,8 @@ import { G_GetImageForLevel } from '../Helpers/PointsManager'
 import { TextInput } from 'react-native';
 import { playSound } from '../Helpers/SoundFunctions'
 import { QrLevelSymbol } from './QrLevelSymbol'
+import imageExists from 'image-exists'
+
 
 
 
@@ -106,8 +108,12 @@ class SeriesScreen extends React.Component {
         )
     }
 
+
     render() {
        //  <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
+
+
+
 
 
 
@@ -122,6 +128,7 @@ class SeriesScreen extends React.Component {
         const level = queres.level
         const afterResponseLevel = queres.afterResponseLevel
         const levelChanged = (afterResponseLevel != level)
+        const capitalImage = queres.image
 
 
 
@@ -396,6 +403,7 @@ class SeriesScreen extends React.Component {
             </View>
         }
 
+        
         return (
             <View style={ Gstyles.main_view }>
                 <View style={ styles.quitAndProgressBar_view }>
@@ -421,7 +429,7 @@ class SeriesScreen extends React.Component {
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image style={{ width: 220, height: 220 }} source={ require('../Helpers/capital_images/paris.jpeg') } />
+                        <Image style={{ width: 220, height: 220 }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
                         <Image  source={ levelImage } />

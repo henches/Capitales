@@ -1,1 +1,1 @@
-python3 ./translate_csv.py Capitales-v2.1.test.unPaysParNiveau.csv ../statesData.js
+python3 ./translate_csv.py Capitales-v2.1.csv ../statesData.js
