@@ -1,12 +1,25 @@
 Bug / backlog
 - typer TOUTES les variables
-- changer les couleurs pour ne pas trop ressmbler à DuoLinguo
+- changer les couleurs de la popup (pour ne pas trop ressembler à DuoLinguo :-))
 - remplacer la fonction largeur dans HomeScreen
-- améliorer l'animation des stats home page
-    - indiquer visuellement quand l'animation est finie
-    - mettre un petit bruit pour chaque animation unitaire
-- mettre les bonnes photos
-- slice pM (dans le reducer Stats) -> faire une deep copy
+- mettre toutes les bonnes photos
+- progressBar des séries plus courtes que la norme
+- supprimer les espaces dans les réponses proposées
+- supprimer les capitales non pertinentes (Gibraltar)
+- débrayabilité des sons
+- Remise à zéro des points (de l'avancement du joueur)
+- ajouter un menu options (pour les deux features précédentes)
+- dans la popup : "ATTENTION" en minuscule
+- que des blancs dans une réponse doit être OK (pour Tarik)
+- adapter les tailles de polices et boutons aux différents écrans possibles
+- supprimer "passe à la difficulté" dans le popup des séries
+- mettre plus de points quand il répond vite ? -> à étudier ...
+- prévoir le bandeau de pub
+- confirmation de sortie de l'app
+
+
+
+
 
 
 
@@ -21,5 +34,6 @@ Réalisé :
 - (09/04) changer le texte de la popup du niveau 3 (captales - pays)
 - (09/04) permettre l'arrêt de la série quand on appuie sur la croix
 - (09/04) supprimer le bouton de test de l'animation
+- (xx/04) slice pM (dans le reducer Stats) -> faire une deep copy
 
 

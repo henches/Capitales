@@ -12,10 +12,11 @@ export default class App extends React.Component {
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
     super()
-    let i1 = require('./Images/ImageLevel1.png')
-    let i2 = require('./Images/ImageLevel2.png')
-    let i3 = require('./Images/ImageLevel3.png')
-    let i4 = require('./Images/ImageLevel4.png')
+    let i0 = require('./Images/star1.png')
+    let i1 = require('./Images/star2.png')
+    let i2 = require('./Images/star3.png')
+    let i3 = require('./Images/star4.png')
+    let i4 = require('./Images/couronne.png')
     
     global.PlayerLevelStyle = [
       { text: "Débutant", backgroundColor: 'lightGrey', textColor: 'black'},
@@ -39,6 +40,7 @@ export default class App extends React.Component {
           QrNb: 1,
           Points : 1,
           ProposedResponsesNb: 4,
+          Image: i0,
         },
         {
           QrNb: 1,

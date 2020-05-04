@@ -65,7 +65,7 @@ class SeriesScreen extends React.Component {
         let myIsTypo = false
         if (level == 3 || level == 4) {
             const levenshtein = require('js-levenshtein')
-            let lev = levenshtein(qr.capital, myResponse.capital) 
+            let lev = levenshtein(qr.capital, myResponse.capital.trim()) 
             if (lev <= 2) {
                 isMyResponseRight = true
                 myIsTypo =  (lev != 0)
@@ -110,13 +110,7 @@ class SeriesScreen extends React.Component {
 
 
     render() {
-       //  <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
-
-
-
-
-
-
+        //  <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
         // console.log('SeriesScreen : state', this.state)
         // console.log('SeriesScreen : Render props', this.props)
         console.log('SeriesScreen : Render SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
@@ -130,19 +124,13 @@ class SeriesScreen extends React.Component {
         const levelChanged = (afterResponseLevel != level)
         const capitalImage = queres.image
 
-
-
         // let imageUrl = 'file:../Helpers/capital_images/' + this.props.QueresSeries[this.props.QuestionsCounter].capital.toLowerCase() + '.jpeg'
-
-
 
         // Progress bar for the series of tests
         let progressWidth = ((indexInSeries) / G_Config.SeriesLength)*100+'%'
 
         // Popup Elements 
         // Popup CSS
-
-
         
         // const afterResponseRNbForNextLevel = queres.afterResponseRNbForNextLevel
         const levelImage = levelChanged ? G_GetImageForLevel(afterResponseLevel) : G_GetImageForLevel(level) // l'image du niveau pour le popup ET pour la queres affichée (le nouveau niveau doit être mis à jour)
@@ -169,59 +157,34 @@ class SeriesScreen extends React.Component {
         }
         
         // Popup Texts
+        let imageLevelHeight = 25
+        let imageLevelWidth = (imageLevelHeight+3)*(level+1)
         let popupConfirmationText = "La capitale de "
-        let popupCheeringText = ""
         let typoWarningText = ""
         let popupFlexSize = 7
-        // console.log("level= ", level, " rNbForNextLevel=", rNbForNextLevel)
-        if (level == 0) {
-            if (levelChanged && queres.isResponseRight) {
-                popupCheeringText = "Vous avez atteint le niveau"
-                popupLevelImage = levelImage
-            }
-            else if (queres.isResponseRight) {
-//                popupCheeringText = "plus que " + (rNbForNextLevel-1)+ " bonnes réponses pour le niveau 1"
-            }
-        }
-        else if (level == 1) {
-            if (levelChanged && queres.isResponseRight) {
-                popupCheeringText = "Vous avez atteint le niveau"
-                popupLevelImage = levelImage
-            }
-            else if (queres.isResponseRight) {
-//                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 2"
-            }
-        }
-        else if (level == 2) {
-            popupConfirmationText = "Le pays de "
-            if (levelChanged && queres.isResponseRight) {
-                popupCheeringText = "Vous avez atteint le niveau"
-                popupLevelImage = levelImage
-            }
-            else if (queres.isResponseRight) {
-//                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 3"
-            }
-        }
-        else if (level == 3) {
+        if (level >= 3) {
             popupFlexSize = 5
-            if (queres.isResponseRight && queres.isTypo) {
-                typoWarningText = "(attention : il y a une faute de frappe)"
-            }
-            if (levelChanged  && queres.isResponseRight) {
-                popupCheeringText = "Vous avez atteint le niveau"
-                popupLevelImage = levelImage
-            }
-            else if (queres.isResponseRight) {
-//                popupCheeringText = "plus que " + (rNbForNextLevel-1) + " bonnes réponses pour le niveau 4"
-            }
         }
-        else if (level == 4) { // Should Never Happen
-            popupFlexSize = 5
-            if (queres.isResponseRight && queres.isTypo) {
-                typoWarningText = "(attention : il y a une faute de frappe)"
-            }
-        }
+        let popupCheeringText = "La question passe à la difficulté "
+        let complexityText = "Difficulté"
 
+        if (queres.isResponseRight) {
+            if (queres.isTypo) 
+                typoWarningText = "(attention : il y a une faute de frappe)"
+            if (levelChanged)
+                popupLevelImage = levelImage
+             if (level == 3) {
+                popupCheeringText = "Cette capitale est maîtrisée  !"
+                imageLevelHeight = imageLevelHeight*4
+                imageLevelWidth = imageLevelHeight
+                complexityText = ""
+            }
+        }
+        else {
+            popupCheeringText = ""
+            popupLevelImage = null
+        }
+         
     
         // Popup Cheering View
         let cheeringView = 
@@ -232,7 +195,7 @@ class SeriesScreen extends React.Component {
             cheeringView = 
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{  color: popupTextColor, fontSize: 20, fontWeight: 'bold' }}>{popupCheeringText} </Text>
-                    <Image style={{ width: 70, height: 70 }} source={popupLevelImage} />
+                    <Image style={{ width: imageLevelWidth, height: imageLevelHeight }} resizeMode="contain" source={ popupLevelImage } />
                 </View>
         else if (queres.isResponseRight) 
             cheeringView = 
@@ -431,8 +394,9 @@ class SeriesScreen extends React.Component {
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
                         <Image style={{ width: 220, height: 220 }} source={ capitalImage } />
                     </View>
-                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image  source={ levelImage } />
+                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <Text>{ complexityText }</Text>
+                        <Image  style={{ width: imageLevelWidth, height: imageLevelHeight }} source={ levelImage } resizeMode= 'contain' />
                     </View>
                 </View>
                 <Divider/>
