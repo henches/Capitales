@@ -6,8 +6,9 @@ import { COLORS, Gstyles } from './Styles'
 import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone } from '../Helpers/PointsManager'
 import { ProgressSymbol } from './ProgressSymbol'
 import { LevelSymbol } from './LevelSymbol'
-import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warnig de React Native
+import { YellowBox } from 'react-native'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warning de React Native
 
 
 
@@ -233,10 +234,10 @@ class HomeScreen extends React.Component {
             return (
                 <View style={Gstyles.main_view}>
                     <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 30, fontWeight: 'bold'}}>CAPITALES</Text>
+                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>CAPITALES</Text>
                         <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: 35, justifyContent: 'center', 
                                         alignItems: 'center', borderStyle: 'solid', borderColor : 'black', borderWidth: 2, borderRadius: 5, width: '60%' }}>
-                            <Text style={{ fontSize: 20, color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>
+                            <Text style={{ fontSize: scale(20), color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>
                         </View>
                     </View>
                     <View style={{ flex: 6, borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 5, marginLeft: '3%', marginRight: '3%' }}>
@@ -260,11 +261,11 @@ class HomeScreen extends React.Component {
                     <View style={{ flex: 6, justifyContent: 'center', alignItems: 'center' }}> 
                     <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goStatView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Statistiques</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: scale(20), color:'white' }]}>Statistiques</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goLevelView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: 20, color:'white' }]}>Niveau</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: scale(20), color:'white' }]}>Niveau</Text>
                         </TouchableOpacity>
                     </View>
                     <Modal
@@ -276,8 +277,8 @@ class HomeScreen extends React.Component {
                         }}>
                         <View style={{ flex: 1, backgroundColor: COLORS.okBackgroundColor, padding: 10}}>
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
-                                <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
+                                <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
+                                <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
                             </View>
                             <LevelSymbol playerLevel = { this.props.PlayerLevel } />
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

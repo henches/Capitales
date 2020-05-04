@@ -6,14 +6,13 @@ import { COLORS, Gstyles } from './Styles'
 import { G_GetImageForLevel } from '../Helpers/PointsManager'
 import { TextInput } from 'react-native';
 import { playSound } from '../Helpers/SoundFunctions'
-import { QrLevelSymbol } from './QrLevelSymbol'
-import imageExists from 'image-exists'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
 
 
 
-
+    
 class SeriesScreen extends React.Component {
 
     constructor() {
@@ -189,18 +188,18 @@ class SeriesScreen extends React.Component {
         // Popup Cheering View
         let cheeringView = 
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
+            <Text style={{  color: popupTextColor, fontSize: scale(16), fontWeight: 'bold' }}>{popupCheeringText}</Text>
         </View>
         if (levelChanged && queres.isResponseRight)
             cheeringView = 
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{  color: popupTextColor, fontSize: 20, fontWeight: 'bold' }}>{popupCheeringText} </Text>
+                    <Text style={{  color: popupTextColor, fontSize: scale(20), fontWeight: 'bold' }}>{popupCheeringText} </Text>
                     <Image style={{ width: imageLevelWidth, height: imageLevelHeight }} resizeMode="contain" source={ popupLevelImage } />
                 </View>
         else if (queres.isResponseRight) 
             cheeringView = 
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{  color: popupTextColor, fontSize: 16, fontWeight: 'bold' }}>{popupCheeringText}</Text>
+                    <Text style={{  color: popupTextColor, fontSize: scale(16), fontWeight: 'bold' }}>{popupCheeringText}</Text>
                 </View>
 
         // End of Popup View
@@ -331,7 +330,7 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.text_response_view}>
                     <TextInput
-                        style={{ fontSize:20, height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
+                        style={{ fontSize:scale(20), height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
                         placeholder='Ecris la capitale'
                         placeholderTextColor='dimgrey'
                         onChangeText={(text) => this.setState({inputResponse: text})}
@@ -354,7 +353,7 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.text_response_view}>
                     <TextInput
-                        style={{ fontSize:20, height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
+                        style={{ fontSize:scale(20), height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
                         placeholder='Ecris la capitale'
                         placeholderTextColor='dimgrey'
                         onChangeText={(text) => this.setState({inputResponse: text})}
@@ -384,15 +383,15 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={ styles.question_view }>
-                    <Text style={{ fontSize: 16, fontWeight: 'bold'}}> {questionIntro} </Text>
-                    <Text style={{ fontSize: 40, fontWeight: 'bold'}}> {question} ? </Text>
+                    <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}> {questionIntro} </Text>
+                    <Text style={{ fontSize: scale(40), fontWeight: 'bold'}}> {question} ? </Text>
                 </View>
                 <Divider/>
                 <View style={styles.image_view}>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image style={{ width: 220, height: 220 }} source={ capitalImage } />
+                        <Image style={{ width: scale(220), height: verticalScale(220) }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text>{ complexityText }</Text>
@@ -420,13 +419,13 @@ class SeriesScreen extends React.Component {
                         <TouchableWithoutFeedback onPress={() => { this.__hideResponseResults() }}>
                             <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: 10}}>
                                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupVerdict}</Text>
-                                        <Text style={{  color: popupTextColor, fontSize: 25, fontWeight: 'bold' }}>{popupPointsWon}</Text>
+                                        <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupVerdict}</Text>
+                                        <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupPointsWon}</Text>
                                     </View>
                                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontSize: 25, fontWeight: 'bold', margin: 9 }}>{popupConfirmationText} {question} est</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: 50, fontWeight: 'bold' }}>{answer}</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: 14, fontWeight: 'bold' }}>{typoWarningText}</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(25), fontWeight: 'bold', margin: 9 }}>{popupConfirmationText} {question} est</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(50), fontWeight: 'bold' }}>{answer}</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(14), fontWeight: 'bold' }}>{typoWarningText}</Text>
                                     </View>
                                     { cheeringView }
                                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

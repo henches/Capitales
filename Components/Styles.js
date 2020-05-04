@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
+
 
 export const COLORS = {
     okBackgroundColor: '#b6eb8b',
@@ -15,11 +17,11 @@ export const COLORS = {
 export const Gstyles = StyleSheet.create({
     main_view: {
         flex: 1, 
-        marginTop: 20, 
+        marginTop: verticalScale(20), 
         backgroundColor: COLORS.generalBackgroundColor
     },
     button: {
-        height: 50,
+        height: verticalScale(50),
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -30,7 +32,7 @@ export const Gstyles = StyleSheet.create({
         margin: 5
     },
     button_inactive: {
-        height: 50,
+        height: verticalScale(50),
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -39,12 +41,12 @@ export const Gstyles = StyleSheet.create({
         margin: 5
     },
     button_text: {
-        fontSize: 25,
+        fontSize: scale(25),
         color: 'white',
         padding: 10
     },
     check_text_inactive: {
-        fontSize: 25,
+        fontSize: scale(25),
         color: 'darkgrey',
         padding: 10
     },

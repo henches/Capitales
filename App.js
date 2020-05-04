@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesListFromFile from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
+import { Dimensions } from 'react-native';
 
 
 
@@ -11,6 +12,8 @@ export default class App extends React.Component {
 
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
+    const { width, height } = Dimensions.get('window');
+    console.log("width, height : ", width, " ", height)
     super()
     let i0 = require('./Images/star1.png')
     let i1 = require('./Images/star2.png')

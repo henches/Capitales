@@ -2,6 +2,7 @@
   "expo": {
     "name": "CAPITALES DU MONDE",
     "slug": "Capita",
+    "description": "Entrainez votre mémoire sur les capitales du monde !",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -11,7 +12,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/capitale-icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

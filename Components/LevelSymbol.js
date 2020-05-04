@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { array } from 'prop-types'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 var BoxHeight = 30
 var boxStyle = []
@@ -13,7 +14,7 @@ export class LevelSymbol extends React.Component {
         console.log("LevelSymbol Constructor !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
 
         for (let i = 0; i < G_Config.MaxPlayerLevelNumber; i++)
-            boxStyle.push({ fontSize: 20, color: 'transparent', fontWeight: 'normal', borderWidth : 2, boxHeight : BoxHeight })
+            boxStyle.push({ fontSize: scale(20), color: 'transparent', fontWeight: 'normal', borderWidth : 2, boxHeight : BoxHeight })
 
         super();
 
@@ -23,9 +24,9 @@ export class LevelSymbol extends React.Component {
 
     render() {
         for (let i = 0; i < G_Config.MaxPlayerLevelNumber; i++)
-            boxStyle[i] = { fontSize: 20, color: 'transparent', fontWeight: 'normal', borderWidth : 2, boxHeight : BoxHeight, marginTop: 5 }
+            boxStyle[i] = { fontSize: scale(20), color: 'transparent', fontWeight: 'normal', borderWidth : 2, boxHeight : BoxHeight, marginTop: 5 }
 
-        boxStyle[this.props.playerLevel].fontSize = 30
+        boxStyle[this.props.playerLevel].fontSize = scale(30)
         boxStyle[this.props.playerLevel].color = 'blue'
         boxStyle[this.props.playerLevel].fontWeight = 'bold'
         boxStyle[this.props.playerLevel].borderWidth = 4

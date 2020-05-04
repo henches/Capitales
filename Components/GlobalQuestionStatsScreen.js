@@ -4,6 +4,7 @@ import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
 import ModalDropdown from 'react-native-modal-dropdown'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
 
@@ -73,22 +74,22 @@ class GlobalQuestionStatsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: 20 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 30, fontWeight: 'bold'}}>LISTE DES CAPITALES</Text>
+                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>LISTE DES CAPITALES</Text>
                     </View>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ flex:1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 15, fontWeight: 'normal' }}>Filtres</Text>
+                            <Text style={{ fontSize: scale(15), fontWeight: 'normal' }}>Filtres</Text>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 15, fontWeight: 'normal' }}>Zone :</Text>
+                                <Text style={{ fontSize: scale(15), fontWeight: 'normal' }}>Zone :</Text>
                                 <View style={{  }}>
                                     <ModalDropdown
                                                 options = { dataZone }
                                                 defaultValue = { this.state.selectedZone }
                                                 style = { styles.dropDown }
-                                                textStyle = {{ fontSize: 15, color: 'white', fontWeight:'bold' }}
-                                                dropdownStyle={{ fontSize: 15, width:170 }}   
+                                                textStyle = {{ fontSize: scale(15), color: 'white', fontWeight:'bold' }}
+                                                dropdownStyle={{ fontSize: scale(15), width:170 }}   
                                                 onSelect={ (index,value)=>{
                                                     this._updateList(true, value) }}
                                                 onDropdownWillShow={ (index,value)=>{
@@ -98,14 +99,14 @@ class GlobalQuestionStatsScreen extends React.Component {
                                 </View>           
                             </View>           
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 15, fontWeight: 'normal' }}>Niveau :</Text>
+                                <Text style={{ fontSize: scale(15), fontWeight: 'normal' }}>Niveau :</Text>
                                 <View style={{  }}>
                                     <ModalDropdown
                                                 options = { dataLevel }
                                                 defaultValue = { this.state.selectedLevel }
                                                 style = { styles.dropDown }
-                                                textStyle = {{ fontSize: 15, color: 'white', fontWeight:'bold' }}
-                                                dropdownStyle={{ fontSize: 15, width:70 }}   
+                                                textStyle = {{ fontSize: scale(15), color: 'white', fontWeight:'bold' }}
+                                                dropdownStyle={{ fontSize: scale(15), width:70 }}   
                                                 onSelect={ (index,value)=>{
                                                     this._updateList(false, value) }}
                                         />
@@ -121,13 +122,13 @@ class GlobalQuestionStatsScreen extends React.Component {
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: 'darkslategrey', padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: 15, color: 'white' }}>{ item.Queres.state }</Text>
+                                        <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.state }</Text>
                                     </View>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: 15, color: 'white' }}>{ item.Queres.capital }</Text>
+                                        <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.capital }</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: 15, color: 'white' }}>{ item.Queres.niveau }</Text>
+                                        <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.niveau }</Text>
                                     </View>
                                 </View>
                             )}
@@ -137,13 +138,13 @@ class GlobalQuestionStatsScreen extends React.Component {
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: 'darkslategrey', padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
                                 <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}>PAYS</Text>
+                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>PAYS</Text>
                                 </View>
                                 <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}>CAPITALE</Text>
+                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>CAPITALE</Text>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}>NIV</Text>
+                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>NIV</Text>
                                 </View>
                              </View>
                             }   

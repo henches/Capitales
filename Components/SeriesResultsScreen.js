@@ -4,6 +4,7 @@ import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
 import { COLORS, Gstyles } from './Styles'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
 class SeriesResultsScreen extends React.Component {
@@ -85,8 +86,8 @@ class SeriesResultsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 20}}>{nbRightResponses} bonnes réponses</Text>
-                        <Text style={{ fontSize: 20 }}>{cheeringText}</Text>
+                        <Text style={{ fontSize: scale(20) }}>{nbRightResponses} bonnes réponses</Text>
+                        <Text style={{ fontSize: scale(20) }}>{cheeringText}</Text>
                     </View>
                     <Divider/>
                     <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'center'}}>
@@ -96,11 +97,11 @@ class SeriesResultsScreen extends React.Component {
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
                                                 backgroundColor: item.isResponseRight ? COLORS.okButtonBackgroundColor : COLORS.nokButtonBackgroundColor, 
                                                 padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
-                                    <Emoji name={item.isResponseRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: 20 }}/>
-                                    <Text style={{ fontSize: 15, color: 'white' }}> {item.state} </Text>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.givenResponse}</Text>
-                                    <Text style={{ fontSize: 15, color: 'white' }}> {item.pointsWon}</Text>
-                                    <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}> {item.afterResponseTotalPoints}</Text>
+                                    <Emoji name={item.isResponseRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: scale(20) }}/>
+                                    <Text style={{ fontSize: scale(15), color: 'white' }}> {item.state} </Text>
+                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}> {item.givenResponse}</Text>
+                                    <Text style={{ fontSize: scale(15), color: 'white' }}> {item.pointsWon}</Text>
+                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}> {item.afterResponseTotalPoints}</Text>
                                 </View>
                             )}
                             keyExtractor={item => item.id}
@@ -108,7 +109,7 @@ class SeriesResultsScreen extends React.Component {
                     </View>
                     <Divider/>
                     <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>  
-                        <Text style={{ fontSize: 20}}>{scoreProgressText}</Text>
+                        <Text style={{ fontSize: scale(20)}}>{scoreProgressText}</Text>
                     </View>
                    <Divider/>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  

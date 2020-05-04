@@ -4,6 +4,7 @@ import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
 import { LevelSymbol } from './LevelSymbol'
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
 
@@ -29,7 +30,7 @@ class GlobalQuestionStatsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: 20 }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 30, fontWeight: 'bold'}}>NIVEAU</Text>
+                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>NIVEAU</Text>
                     </View>
                     <View style={{ flex: 8, justifyContent: 'center' }}>
                         <LevelSymbol playerLevel = { this.props.PlayerLevel } />
