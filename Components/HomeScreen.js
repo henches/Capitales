@@ -7,7 +7,10 @@ import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPo
 import { ProgressSymbol } from './ProgressSymbol'
 import { LevelSymbol } from './LevelSymbol'
 import { YellowBox } from 'react-native'
-import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
+import { Icon } from 'react-native-elements'
+
+
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warning de React Native
 
 
@@ -143,7 +146,11 @@ class HomeScreen extends React.Component {
        this.setState({ modalVisible: false })
     }
 
-
+    _goConfigScreen() {
+        console.log("Go Config");
+        
+        this.props.navigation.navigate('ConfigScreen')   
+    }
 
 
     render() {
@@ -234,7 +241,15 @@ class HomeScreen extends React.Component {
             return (
                 <View style={Gstyles.main_view}>
                     <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>CAPITALES</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
+                            <Text></Text>
+                            <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>CAPITALES</Text>
+                            <TouchableOpacity 
+                                onPress={() => { this._goConfigScreen() }}>
+                                <Icon name='cog' type='font-awesome' size={ 30 }/>
+                            </TouchableOpacity> 
+  
+                        </View>
                         <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: verticalScale(35), justifyContent: 'center', 
                                         alignItems: 'center', borderStyle: 'solid', borderColor : 'black', borderWidth: 2, borderRadius: 5, width: '60%' }}>
                             <Text style={{ fontSize: scale(20), color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>

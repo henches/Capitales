@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux'
 import HandleQueresSeriesReducer from './Reducers/HandleQueresSeriesReducer'
 import HandleQueresStatsReducer from './Reducers/HandleQueresStatsReducer'
+import HandleUserPrefsReducer from './Reducers/HandleUserPrefsReducer'
 import { persistCombineReducers } from 'redux-persist'
 
 
@@ -22,4 +23,4 @@ export default createStore(persistCombineReducers(rootPersistConfig, { InitiateQ
 */
 
 
-export default createStore(combineReducers({ HandleQueresStatsReducer, HandleQueresSeriesReducer }))
+export default createStore(combineReducers({ HandleQueresStatsReducer, HandleQueresSeriesReducer, HandleUserPrefsReducer }))

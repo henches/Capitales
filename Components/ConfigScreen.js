@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native
 import { Divider, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
-import { LevelSymbol } from './LevelSymbol'
-import { scale, moderateScale, verticalScale } from '../Helpers/scaling_utils';
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
+import { CheckBox } from 'react-native-elements'
 
 
 
@@ -15,25 +15,41 @@ class GlobalQuestionStatsScreen extends React.Component {
     }
    
     constructor() {
-        console.log('LEVEL SCREEN CONSTRUCTOR *************************************************************************************')
+        console.log('CONFIG SCREEN CONSTRUCTOR *************************************************************************************')
         super()
-     }
+    }
+
+    state = {
+        checked: true
+    }
+
+
 
     _goHomeScreen = () => {
         let { routeName } = this.props.navigation.state;      
         console.log("On va à l'écran Home routeName = ", routeName)
+        this.props.dispatch({ type: "USER_PREFS-SOUNDS", value: this.state.checked })
         this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })   
     }
+
 
    
     render() {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>NIVEAU</Text>
+                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>PARAMETRES</Text>
                     </View>
                     <View style={{ flex: 8, justifyContent: 'center' }}>
-                        <LevelSymbol playerLevel = { this.props.PlayerLevel } />
+                        <CheckBox
+                            center
+                            title='Sons actifs :'
+                            checkedIcon='dot-circle-o'
+                            uncheckedIcon='circle-o'
+                            iconRight={ true }
+                            checked={ this.state.checked }
+                            onPress={() => { this.setState({ checked: !this.state.checked }) }}
+                            />
                     </View>
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
@@ -105,4 +121,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(GlobalQuestionStatsScreen)
+export default connect(mapStateToProps)(HandleUserPrefsReducer)

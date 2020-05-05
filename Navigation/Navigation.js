@@ -8,6 +8,7 @@ import SeriesScreen from '../Components/SeriesScreen'
 import SeriesResultsScreen from '../Components/SeriesResultsScreen'
 import GlobalQuestionStatsScreen from '../Components/GlobalQuestionStatsScreen'
 import LevelScreen from '../Components/LevelScreen'
+import ConfigScreen from '../Components/ConfigScreen'
 
 const SearchStackNavigator = createStackNavigator({
   HomeScreen: { 
@@ -38,6 +39,12 @@ const SearchStackNavigator = createStackNavigator({
     screen: LevelScreen,
     navigationOptions: {
       title: 'Niveau'
+    }
+  },
+  ConfigScreen: { 
+    screen: ConfigScreen,
+    navigationOptions: {
+      title: 'Paramètres'
     }
   }
 },
