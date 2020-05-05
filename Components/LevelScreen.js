@@ -28,7 +28,7 @@ class GlobalQuestionStatsScreen extends React.Component {
    
     render() {
         return(
-                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: 20 }}>
+                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>NIVEAU</Text>
                     </View>
@@ -38,7 +38,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
                                 <Icon
-                                    containerStyle={{ marginLeft: 10 }}
+                                    containerStyle={{ marginLeft: scale(10) }}
                                     size={ 30 }
                                     type='ionicon'
                                     name='ios-home'
@@ -54,28 +54,28 @@ class GlobalQuestionStatsScreen extends React.Component {
 const styles = StyleSheet.create({
     main_view: {
         flex: 1,
-        marginTop: 30
+        marginTop: verticalScale(30)
     },
     title_view: {
         flex:1
     },
     title_text: {
-        height: 50
+        height: verticalScale(50)
     },
     stats_view: {
         flex:1
     },
     stats_text: {
-        height: 50
+        height: verticalScale(50)
     },
     play_view: {
         flex:1
     },
     play_button: {
-        height: 50
+        height: verticalScale(50)
     },
     progressBar: {
-        height: 20,
+        height: verticalScale(20),
         width: '100%',
         backgroundColor: 'white',
         borderColor: '#000',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     button: {
-        height: 50,
+        height: verticalScale(50),
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',
-        margin: 5
+        margin: scale(5)
     },
 
 })

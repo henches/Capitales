@@ -12,7 +12,7 @@ class SeriesResultsScreen extends React.Component {
         title: "Home",
         headerLeft: (
           <Icon
-            containerStyle={{ marginLeft: 10 }}
+            containerStyle={{ marginLeft: scale(10) }}
             type='ionicon'
             name='ios-home'
             color='blue'
@@ -96,7 +96,7 @@ class SeriesResultsScreen extends React.Component {
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
                                                 backgroundColor: item.isResponseRight ? COLORS.okButtonBackgroundColor : COLORS.nokButtonBackgroundColor, 
-                                                padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
+                                                padding: 5, marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                     <Emoji name={item.isResponseRight ? 'ballot_box_with_check': 'flushed' } style={{ fontSize: scale(20) }}/>
                                     <Text style={{ fontSize: scale(15), color: 'white' }}> {item.state} </Text>
                                     <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}> {item.givenResponse}</Text>
@@ -126,28 +126,28 @@ class SeriesResultsScreen extends React.Component {
 const styles = StyleSheet.create({
     main_view: {
         flex: 1,
-        marginTop: 30
+        marginTop: verticalScale(30)
     },
     title_view: {
         flex:1
     },
     title_text: {
-        height: 50
+        height: verticalScale(50)
     },
     stats_view: {
         flex:1
     },
     stats_text: {
-        height: 50
+        height: verticalScale(50)
     },
     play_view: {
         flex:1
     },
     play_button: {
-        height: 50
+        height: verticalScale(50)
     },
     progressBar: {
-        height: 20,
+        height: verticalScale(20),
         width: '100%',
         backgroundColor: 'white',
         borderColor: '#000',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     button: {
-        height: 50,
+        height: verticalScale(50),
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',
-        margin: 5
+        margin: scale(5)
     },
 
 })

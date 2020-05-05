@@ -3,7 +3,7 @@ import { Text, View, Animated, TouchableOpacity, Easing, Bounce } from 'react-na
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
-const barHeight = 18
+const barHeight = verticalScale(18)
 progressDuration = 300
 progressCountDuration = 500
 

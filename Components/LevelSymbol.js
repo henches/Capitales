@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from 'react-native'
 import { array } from 'prop-types'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
-var BoxHeight = 30
+var BoxHeight = verticalScale(30)
 var boxStyle = []
 
 
@@ -24,7 +24,7 @@ export class LevelSymbol extends React.Component {
 
     render() {
         for (let i = 0; i < G_Config.MaxPlayerLevelNumber; i++)
-            boxStyle[i] = { fontSize: scale(20), color: 'transparent', fontWeight: 'normal', borderWidth : 2, boxHeight : BoxHeight, marginTop: 5 }
+            boxStyle[i] = { fontSize: scale(20), color: 'transparent', fontWeight: 'normal', borderWidth : 2, boxHeight : BoxHeight, marginTop: scale(5) }
 
         boxStyle[this.props.playerLevel].fontSize = scale(30)
         boxStyle[this.props.playerLevel].color = 'blue'
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
         borderRadius: 5, 
         height: BoxHeight, 
         width: '100%',
-        marginTop: 4,
-        marginBottom: 4
+        marginTop: verticalScale(4),
+        marginBottom: verticalScale(4)
     },
     triangle: {
         overflow: 'hidden',
@@ -126,20 +126,20 @@ const styles = StyleSheet.create({
         borderTopColor: 'transparent',
         borderTopWidth: BoxHeight*2/3,
         borderLeftWidth: BoxHeight,
-        marginRight: 4
+        marginRight: scale(4)
   // borderRadius: 10
     },
     stats_view: {
         flex:1
     },
     stats_text: {
-        height: 50
+        height: verticalScale(50)
     },
     play_view: {
         flex:1
     },
     play_button: {
-        height: 50
+        height: verticalScale(50)
     },
     
 })

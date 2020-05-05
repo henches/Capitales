@@ -235,7 +235,7 @@ class HomeScreen extends React.Component {
                 <View style={Gstyles.main_view}>
                     <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>CAPITALES</Text>
-                        <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: 35, justifyContent: 'center', 
+                        <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: verticalScale(35), justifyContent: 'center', 
                                         alignItems: 'center', borderStyle: 'solid', borderColor : 'black', borderWidth: 2, borderRadius: 5, width: '60%' }}>
                             <Text style={{ fontSize: scale(20), color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>
                         </View>
@@ -261,11 +261,11 @@ class HomeScreen extends React.Component {
                     <View style={{ flex: 6, justifyContent: 'center', alignItems: 'center' }}> 
                     <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goStatView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: scale(20), color:'white' }]}>Statistiques</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Statistiques</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goLevelView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: 15, paddingLeft: 15,fontSize: scale(20), color:'white' }]}>Niveau</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Niveau</Text>
                         </TouchableOpacity>
                     </View>
                     <Modal
@@ -275,7 +275,7 @@ class HomeScreen extends React.Component {
                         onRequestClose={() => {
                             console.log('Modal has been closed')
                         }}>
-                        <View style={{ flex: 1, backgroundColor: COLORS.okBackgroundColor, padding: 10}}>
+                        <View style={{ flex: 1, backgroundColor: COLORS.okBackgroundColor, padding: scale(10) }}>
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
                                 <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
@@ -300,19 +300,19 @@ const styles = StyleSheet.create({
         flex:1
     },
     title_text: {
-        height: 50
+        height: verticalScale(50)
     },
     stats_view: {
         flex:1
     },
     stats_text: {
-        height: 50
+        height: verticalScale(50)
     },
     play_view: {
         flex:1
     },
     play_button: {
-        height: 50
+        height: verticalScale(50)
     },
     
 })

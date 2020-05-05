@@ -156,7 +156,7 @@ class SeriesScreen extends React.Component {
         }
         
         // Popup Texts
-        let imageLevelHeight = 25
+        let imageLevelHeight = verticalScale(25)
         let imageLevelWidth = (imageLevelHeight+3)*(level+1)
         let popupConfirmationText = "La capitale de "
         let typoWarningText = ""
@@ -164,7 +164,7 @@ class SeriesScreen extends React.Component {
         if (level >= 3) {
             popupFlexSize = 5
         }
-        let popupCheeringText = "La question passe à la difficulté "
+        let popupCheeringText = ""
         let complexityText = "Difficulté"
 
         if (queres.isResponseRight) {
@@ -190,6 +190,7 @@ class SeriesScreen extends React.Component {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{  color: popupTextColor, fontSize: scale(16), fontWeight: 'bold' }}>{popupCheeringText}</Text>
         </View>
+        /* 
         if (levelChanged && queres.isResponseRight)
             cheeringView = 
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -201,6 +202,7 @@ class SeriesScreen extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{  color: popupTextColor, fontSize: scale(16), fontWeight: 'bold' }}>{popupCheeringText}</Text>
                 </View>
+        */
 
         // End of Popup View
 
@@ -330,7 +332,8 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.text_response_view}>
                     <TextInput
-                        style={{ fontSize:scale(20), height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
+                        style={{ fontSize:scale(20), height: verticalScale(40), backgroundColor: 'gainsboro', borderColor: 'darkgray', 
+                        borderWidth: 2, borderRadius: 10, marginLeft: scale(10), marginRight: scale(10), paddingLeft: scale(5), paddingRight: scale(5) }}
                         placeholder='Ecris la capitale'
                         placeholderTextColor='dimgrey'
                         onChangeText={(text) => this.setState({inputResponse: text})}
@@ -353,7 +356,8 @@ class SeriesScreen extends React.Component {
             responseView = 
             <View style={styles.text_response_view}>
                     <TextInput
-                        style={{ fontSize:scale(20), height: 40, backgroundColor: 'gainsboro', borderColor: 'darkgray', borderWidth: 2, borderRadius: 10, marginLeft: 10, marginRight: 10, paddingLeft: 5, paddingRight:5 }}
+                        style={{ fontSize:scale(20), height: verticalScale(40), backgroundColor: 'gainsboro', borderColor: 'darkgray', 
+                            borderWidth: 2, borderRadius: 10, marginLeft: scale(10), marginRight: scale(10), paddingLeft: scale(5), paddingRight: scale(5) }}
                         placeholder='Ecris la capitale'
                         placeholderTextColor='dimgrey'
                         onChangeText={(text) => this.setState({inputResponse: text})}
@@ -371,7 +375,7 @@ class SeriesScreen extends React.Component {
                 <View style={ styles.quitAndProgressBar_view }>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <TouchableOpacity onPress={()=> this._showAlertQuitSeries() }>
-                            <Image style={{ width: 35, height: 35 }} source={require('../Images/quit-screen.png')} />
+                            <Image style={{ width: 35, height: verticalScale(35) }} source={require('../Images/quit-screen.png')} />
                         </TouchableOpacity>
                     </View>
                     <View style={ styles.progressBar_view }>
@@ -417,13 +421,13 @@ class SeriesScreen extends React.Component {
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 6 }}></View>
                         <TouchableWithoutFeedback onPress={() => { this.__hideResponseResults() }}>
-                            <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: 10}}>
+                            <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: scale(10) }}>
                                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                         <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupVerdict}</Text>
                                         <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupPointsWon}</Text>
                                     </View>
                                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(25), fontWeight: 'bold', margin: 9 }}>{popupConfirmationText} {question} est</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(25), fontWeight: 'bold', margin: scale(9) }}>{popupConfirmationText} {question} est</Text>
                                         <Text style={{ color: popupTextColor, fontSize: scale(50), fontWeight: 'bold' }}>{answer}</Text>
                                         <Text style={{ color: popupTextColor, fontSize: scale(14), fontWeight: 'bold' }}>{typoWarningText}</Text>
                                     </View>
@@ -469,20 +473,20 @@ const styles = StyleSheet.create({
         flex: 7,
         flexDirection: 'column', 
         justifyContent: 'flex-start', 
-        paddingTop: 15
+        paddingTop: verticalScale(15)
     },
     ad_view: {
         flex: 1, 
     },
     title_text: {
-        height: 50
+        height: verticalScale(50)
     },
     progressBar_view: {
         flex: 6, 
         justifyContent: 'center' 
     },
     progressBar: {
-        position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, height: 20,
+        position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, height: verticalScale(20),
         width: '40%',
         borderColor: '#000',
         borderWidth: 4,
@@ -491,8 +495,8 @@ const styles = StyleSheet.create({
        },
     modal_view: {
         backgroundColor: "#fff",
-        width: 300,
-        height: 300
+        width: scale(300),
+        height: verticalScale(300)
     },
 })
 

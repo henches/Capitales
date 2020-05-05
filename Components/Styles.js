@@ -29,7 +29,7 @@ export const Gstyles = StyleSheet.create({
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',
-        margin: 5
+        margin: scale(5)
     },
     button_inactive: {
         height: verticalScale(50),
@@ -38,17 +38,17 @@ export const Gstyles = StyleSheet.create({
         alignItems: 'center',
         fontWeight: 'bold',
         backgroundColor: 'lightgrey',
-        margin: 5
+        margin: scale(5)
     },
     button_text: {
         fontSize: scale(25),
         color: 'white',
-        padding: 10
+        padding: scale(10)
     },
     check_text_inactive: {
         fontSize: scale(25),
         color: 'darkgrey',
-        padding: 10
+        padding: scale(10)
     },
 })
 

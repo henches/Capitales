@@ -72,7 +72,7 @@ class GlobalQuestionStatsScreen extends React.Component {
         let dataZone = ["Monde", "Europe", "Afrique", "Ameriques", "AsiePacif"]
         let dataLevel = ["Tous", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
         return(
-                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: 20 }}>
+                <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>LISTE DES CAPITALES</Text>
                     </View>
@@ -89,7 +89,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                                                 defaultValue = { this.state.selectedZone }
                                                 style = { styles.dropDown }
                                                 textStyle = {{ fontSize: scale(15), color: 'white', fontWeight:'bold' }}
-                                                dropdownStyle={{ fontSize: scale(15), width:170 }}   
+                                                dropdownStyle={{ fontSize: scale(15), width: scale(170) }}   
                                                 onSelect={ (index,value)=>{
                                                     this._updateList(true, value) }}
                                                 onDropdownWillShow={ (index,value)=>{
@@ -106,7 +106,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                                                 defaultValue = { this.state.selectedLevel }
                                                 style = { styles.dropDown }
                                                 textStyle = {{ fontSize: scale(15), color: 'white', fontWeight:'bold' }}
-                                                dropdownStyle={{ fontSize: scale(15), width:70 }}   
+                                                dropdownStyle={{ fontSize: scale(15), width: scale(70) }}   
                                                 onSelect={ (index,value)=>{
                                                     this._updateList(false, value) }}
                                         />
@@ -120,7 +120,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                             data={this.state.listQr.sort((a,b) => { return (a.Queres.niveau - b.Queres.niveau)})}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
-                                                backgroundColor: 'darkslategrey', padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
+                                                backgroundColor: 'darkslategrey', padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.state }</Text>
                                     </View>
@@ -136,7 +136,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                             extraData={ this.state }
                             ListHeaderComponent = {                         
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
-                                                backgroundColor: 'darkslategrey', padding: 5, marginVertical: 2, marginHorizontal: 8 }}>
+                                                backgroundColor: 'darkslategrey', padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                 <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                     <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>PAYS</Text>
                                 </View>
@@ -154,7 +154,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
                                 <Icon
-                                    containerStyle={{ marginLeft: 10 }}
+                                    containerStyle={{ marginLeft: scale(10) }}
                                     size={ 30 }
                                     type='ionicon'
                                     name='ios-home'
@@ -170,28 +170,28 @@ class GlobalQuestionStatsScreen extends React.Component {
 const styles = StyleSheet.create({
     main_view: {
         flex: 1,
-        marginTop: 30
+        marginTop: verticalScale(30)
     },
     title_view: {
         flex:1
     },
     title_text: {
-        height: 50
+        height: verticalScale(50)
     },
     stats_view: {
         flex:1
     },
     stats_text: {
-        height: 50
+        height: verticalScale(50)
     },
     play_view: {
         flex:1
     },
     play_button: {
-        height: 50
+        height: verticalScale(50)
     },
     progressBar: {
-        height: 20,
+        height: verticalScale(20),
         width: '100%',
         backgroundColor: 'white',
         borderColor: '#000',
@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     dropDown: {
-        width: 100,
-        height: 25,
+        width: scale(100),
+        height: verticalScale(25),
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
@@ -208,9 +208,9 @@ const styles = StyleSheet.create({
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',
-        margin: 5,
-        paddingLeft: 10,
-        paddingRight: 25
+        margin: scale(5),
+        paddingLeft: scale(10),
+        paddingRight: scale(25)
         
     },
 
