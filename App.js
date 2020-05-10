@@ -22,17 +22,17 @@ export default class App extends React.Component {
     let i4 = require('./Images/couronne.png')
     
     global.PlayerLevelStyle = [
-      { text: "Débutant", backgroundColor: 'lightGrey', textColor: 'black'},
-      { text: "Débutant+", backgroundColor: 'darkgrey', textColor: 'black'},
-      { text: "Débutant avancé", backgroundColor: 'lemonchiffon', textColor: 'black'},
-      { text: "Intermédiaire", backgroundColor: 'yellow', textColor: 'black'},
-      { text: "Intérmédiaire+", backgroundColor: 'gold', textColor: 'black'},
-      { text: "Intermédiaire avancé", backgroundColor: 'greenyellow', textColor: 'black'},
-      { text: "Expérimenté", backgroundColor: 'yellowgreen', textColor: 'white'},
-      { text: "Expérimenté+", backgroundColor: 'darkolivegreen', textColor: 'white'},
-      { text: "Expérimenté avancé", backgroundColor: 'red', textColor: 'white'},
-      { text: "Maitre", backgroundColor: 'brown', textColor: 'white'},
-      { text: "Dieu", backgroundColor: 'black', textColor: 'white'}
+      { text: "Débutant", backgroundColor: '#f2fce9', textColor: 'black'},
+      { text: "Débutant+", backgroundColor: '#d7f6bc', textColor: 'black'},
+      { text: "Débutant avancé", backgroundColor: '#c9f3a5', textColor: 'black'},
+      { text: "Intermédiaire", backgroundColor: '#afed78', textColor: 'black'},
+      { text: "Intérmédiaire+", backgroundColor: '#a1ea62', textColor: 'black'},
+      { text: "Intermédiaire avancé", backgroundColor: '#86e335', textColor: 'black'},
+      { text: "Expérimenté", backgroundColor: '#6dca1c', textColor: 'white'},
+      { text: "Expérimenté+", backgroundColor: '#61b418', textColor: 'white'},
+      { text: "Expérimenté avancé", backgroundColor: '#559d15', textColor: 'white'},
+      { text: "Maitre", backgroundColor: '#498712', textColor: 'white'},
+      { text: "Dieu", backgroundColor: '#305a0c', textColor: 'white'}
   ]
   
     global.G_Config = {

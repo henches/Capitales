@@ -80,7 +80,8 @@ class SeriesScreen extends React.Component {
        this.props.dispatch(action)
 
 
-        playSound(isMyResponseRight)
+        if (this.props.soundsActive)
+            playSound(isMyResponseRight)
 
         this.setState({ modalVisible: true })
     }
@@ -504,7 +505,8 @@ const mapStateToProps = state => {
     return {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
         QueresSeries: state.HandleQueresSeriesReducer.QueresSeries,
-        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel
+        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel,
+        soundsActive: state.HandleUserPrefsReducer.soundsActive,
     }
 }
 

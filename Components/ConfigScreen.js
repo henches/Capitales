@@ -9,14 +9,16 @@ import { CheckBox } from 'react-native-elements'
 
 
 
-class GlobalQuestionStatsScreen extends React.Component {
+class ConfigScreen extends React.Component {
     static navigationOptions = {
         headerShown: false,
     }
    
-    constructor() {
+    constructor(props) {
         console.log('CONFIG SCREEN CONSTRUCTOR *************************************************************************************')
-        super()
+        super(props)
+        console.log('CONFIG SCREEN CONSTRUCTOR this.props.soundsActive = ', this.props.soundsActive)
+        this.state = { checked: this.props.soundsActive }
     }
 
     state = {
@@ -28,7 +30,7 @@ class GlobalQuestionStatsScreen extends React.Component {
     _goHomeScreen = () => {
         let { routeName } = this.props.navigation.state;      
         console.log("On va à l'écran Home routeName = ", routeName)
-        this.props.dispatch({ type: "USER_PREFS-SOUNDS", value: this.state.checked })
+        this.props.dispatch({ type: "USER_PREFS", value: { soundsActive: this.state.checked }})
         this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })   
     }
 
@@ -43,6 +45,11 @@ class GlobalQuestionStatsScreen extends React.Component {
                     <View style={{ flex: 8, justifyContent: 'center' }}>
                         <CheckBox
                             center
+                            size={ scale(30) }
+                            containerStyle = {{ backgroundColor: Gstyles.generalBackgroundColor }}
+                            textStyle = {{ fontSize: scale(30), color: 'dodgerblue' }}
+                            checkedColor = 'dodgerblue'
+                            uncheckedColor = 'dodgerblue'
                             title='Sons actifs :'
                             checkedIcon='dot-circle-o'
                             uncheckedIcon='circle-o'
@@ -116,9 +123,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
-        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel
+        soundsActive: state.HandleUserPrefsReducer.soundsActive,
     }
 }
 
-export default connect(mapStateToProps)(HandleUserPrefsReducer)
+export default connect(mapStateToProps)(ConfigScreen)

@@ -2,9 +2,11 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Modal, TouchableWithoutFeedback, Animated, Easing } from 'react-native'
 import { connect } from 'react-redux'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
+import { getStoredUserPrefs } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
 import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone } from '../Helpers/PointsManager'
 import { ProgressSymbol } from './ProgressSymbol'
+import { ProgressLevelSymbol } from './ProgressLevelSymbol'
 import { LevelSymbol } from './LevelSymbol'
 import { YellowBox } from 'react-native'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
@@ -17,9 +19,9 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 
 class HomeScreen extends React.Component {
     
-    constructor() {
+    constructor(props) {
         console.log("HOME SCREEN CONSTRUCTOR DEBUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
-        super();
+        super(props);
 
     
         this._animateProgress = this._animateProgress.bind(this)
@@ -30,15 +32,21 @@ class HomeScreen extends React.Component {
         this._onEndAnim0 = this._onEndAnim0.bind(this)
 
         if (G_InitState) {  // Horrible verrue
-              console.log("HOME SCREEN CONSTRUCTOR")
-              getStoredQuestionStats()  // Récupère la liste des Questions Stats
-            .then(myList => {
-              console.log("HOME SCREEN CONSTRUCTOR APRES GetSTORED")
-              G_InitialQuestionStatsList = myList
-              this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
-              this._initProgressAnimation()
-            })
+            console.log("HOME SCREEN CONSTRUCTOR")
+            getStoredQuestionStats()  // Récupère la liste des Questions Stats
+                .then(myList => {
+                    console.log("HOME SCREEN CONSTRUCTOR APRES GetSTOREDQuestionsStats")
+                    G_InitialQuestionStatsList = myList
+                    this.props.dispatch({ type: "QUERES_STATS-INITIATE", value: 0 })
+                    this._initProgressAnimation()
+                    })
+            getStoredUserPrefs()  // Récupère la liste des Questions Stats
+                .then(myUserPrefs => {
+                    console.log("HOME SCREEN CONSTRUCTOR APRES GetSTOREDUserPrefs")
+                    this.props.dispatch({ type: "USER_PREFS-INITIATE", value: myUserPrefs })
+                    })
             G_InitState = false // Horrible verrue
+
             return null
         }
     }
@@ -99,6 +107,7 @@ class HomeScreen extends React.Component {
         this.pS3._initProgressAnimation(GetOldPointsForZone(pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Ameriques, this.props.PlayerLevel))
         this.pS4._initProgressAnimation(GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel))
         this.pS0._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
+        this.pS00._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
     }
 
     _animateProgress = () => {
@@ -132,7 +141,7 @@ class HomeScreen extends React.Component {
     
     _onEndAnim2 =() => { this.pS3._animateProgress() }
     _onEndAnim3 =() => { this.pS4._animateProgress() }
-    _onEndAnim4 =() => { this.pS0._animateProgress() }
+    _onEndAnim4 =() => { this.pS0._animateProgress(); this.pS00._animateProgress() }
     _onEndAnim0 =() => { // End of animations
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
@@ -240,22 +249,20 @@ class HomeScreen extends React.Component {
 
             return (
                 <View style={Gstyles.main_view}>
-                    <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
-                            <Text></Text>
-                            <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>CAPITALES</Text>
-                            <TouchableOpacity 
-                                onPress={() => { this._goConfigScreen() }}>
-                                <Icon name='cog' type='font-awesome' size={ 30 }/>
-                            </TouchableOpacity> 
-  
-                        </View>
-                        <View style={{ backgroundColor: PlayerLevelStyle[playerLevel].backgroundColor, height: verticalScale(35), justifyContent: 'center', 
-                                        alignItems: 'center', borderStyle: 'solid', borderColor : 'black', borderWidth: 2, borderRadius: 5, width: '60%' }}>
-                            <Text style={{ fontSize: scale(20), color: PlayerLevelStyle[playerLevel].textColor }}> { PlayerLevelStyle[playerLevel].text } </Text>
-                        </View>
-                    </View>
-                    <View style={{ flex: 6, borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 5, marginLeft: '3%', marginRight: '3%' }}>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
+                        <Text></Text>
+                        <Text style={{ fontSize: scale(30), fontWeight: 'normal'}}>CAPITALES</Text>
+                        <TouchableOpacity 
+                            onPress={() => { this._goConfigScreen() }}>
+                            <Icon name='cog' type='font-awesome' size={ 25 }/>
+                        </TouchableOpacity>
+                    </View> 
+                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                        <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
+                                    backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
+                                    onEndAnim3={ this._onEndAnim0 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
+                    </View> 
+                    <View style={{ flex: 3, borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 5, marginLeft: '3%', marginRight: '3%' }}>
                         <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
                         <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique } oldPoints={ oldPointsAfrique }  maxPoints={ maxPointsAfrique }
@@ -267,16 +274,16 @@ class HomeScreen extends React.Component {
                         <ProgressSymbol myFlex={ 2 } zone={ "MONDE" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
-                    <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'center' }}>   
+                    <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center' }}>   
                         <TouchableOpacity style={Gstyles.button}
                                 onPress={() => { this._goSeriesScreen() }}>
                                 <Text style={Gstyles.button_text}>JOUER</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={{ flex: 6, justifyContent: 'center', alignItems: 'center' }}> 
-                    <TouchableOpacity style={Gstyles.button}
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}> 
+                        <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goStatView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Statistiques</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
                                     onPress={() => { this._goLevelView() }}>

@@ -1,7 +1,12 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKey = 'QuestionStats96'
+const listKeyQuestionStats = 'QuestionStats96'
+const listKeyUserPrefs = 'UserPrefs'
+
+const defaultUserPrefs = {
+  soundsActive: true
+}
 
 function initQuestionStats() {
     console.log("InitQuestionStats")
@@ -15,23 +20,36 @@ function initQuestionStats() {
 }
 
 export async function storeQuestionStats (questionsStatsList) {
-//    console.log("storeQuestionStats  1 questionsStatsList=", questionsStatsList)
-    try {
-        // console.log("storeQuestionStats 2, questionStatsList=", questionsStatsList)
-        strQuestionsStatsList = JSON.stringify(questionsStatsList)
-//        console.log("storeQuestionStats 2, questionStatsList=", strQuestionsStatsList)
-        await AsyncStorage.setItem(listKey, strQuestionsStatsList)
-        //await AsyncStorage.setItem('Table#1', 'table#1value');
-        console.log("storeQuestionStats 3")
-    } catch (error) {
-      // Error saving data
-    }
+  //    console.log("storeQuestionStats  1 questionsStatsList=", questionsStatsList)
+      try {
+          // console.log("storeQuestionStats 2, questionStatsList=", questionsStatsList)
+          strQuestionsStatsList = JSON.stringify(questionsStatsList)
+  //        console.log("storeQuestionStats 2, questionStatsList=", strQuestionsStatsList)
+          await AsyncStorage.setItem(listKeyQuestionStats, strQuestionsStatsList)
+          //await AsyncStorage.setItem('Table#1', 'table#1value');
+          console.log("storeQuestionStats 3")
+      } catch (error) {
+        // Error saving data
+      }
 }
-
+  
+export async function storeUserPrefs (userPrefs) {
+        console.log("storeUserPrefs  userPrefs=", userPrefs)
+        try {
+            strUserPrefs = JSON.stringify(userPrefs)
+    //        console.log("storeQuestionStats 2, questionStatsList=", strQuestionsStatsList)
+            await AsyncStorage.setItem(listKeyUserPrefs, strUserPrefs)
+            //await AsyncStorage.setItem('Table#1', 'table#1value');
+            console.log("storeUserPrefs ")
+        } catch (error) {
+          // Error saving data
+        }
+}
+    
 export async function getStoredQuestionStats () {
     try {
       // console.log("juste avant getStoredQuestionStatsItem")
-      strList = await AsyncStorage.getItem(listKey)
+      strList = await AsyncStorage.getItem(listKeyQuestionStats)
       // console.log("juste après getStoredQuestionStatsItem strList= ", strList)
       if (strList !== null) {
         list = JSON.parse(strList)
@@ -47,3 +65,24 @@ export async function getStoredQuestionStats () {
       console.log('ERREUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUR error=', error)
     }
 }
+
+export async function getStoredUserPrefs() {
+  let myUserPrefs
+  try {
+    // console.log("getStoredUserPrefs")
+    strList = await AsyncStorage.getItem(listKeyUserPrefs)
+    // console.log("juste après getStoredQuestionStatsItem strList= ", strList)
+    if (strList !== null) {
+      myUserPrefs = JSON.parse(strList)
+      console.log("la key existe bien : Les UserPrefs existent bien en base")
+      return myUserPrefs
+    }
+    else {
+      console.log("la key n'existe pas, on donne les valeurs des users prefs par défaut")
+      return defaultUserPrefs
+    }
+  } catch (error) {
+    console.log('ERREUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUR error=', error)
+  }
+}
+
