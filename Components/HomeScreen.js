@@ -262,7 +262,8 @@ class HomeScreen extends React.Component {
                                     backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
                                     onEndAnim3={ this._onEndAnim0 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
                     </View> 
-                    <View style={{ flex: 3, borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 5, marginLeft: '3%', marginRight: '3%' }}>
+                    <View style={{ flex: 3, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
+                                borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 10,  }}>
                         <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
                         <ProgressSymbol myFlex={ 1 } zone={ "Afrique" } points={ pointsAfrique } oldPoints={ oldPointsAfrique }  maxPoints={ maxPointsAfrique }
@@ -271,7 +272,7 @@ class HomeScreen extends React.Component {
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim3 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
                         <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim4 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
-                        <ProgressSymbol myFlex={ 2 } zone={ "MONDE" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
+                        <ProgressSymbol myFlex={ 2 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
                     <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center' }}>   

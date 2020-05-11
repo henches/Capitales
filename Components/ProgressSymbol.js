@@ -133,15 +133,17 @@ export class ProgressSymbol extends React.Component {
             myFlexDirection = 'column-reverse'
             myJustifyContent = 'center'
             myFontSize = 20
-            myFontWeight = 'bold'
+            myFontWeight = 'normal'
         }
 
         return(
             <View style={{ flex: myFlex, flexDirection: myFlexDirection, justifyContent: myJustifyContent, alignItems: 'center', marginRight: myViewMarginRight, marginLeft: myViewMarginLeft }}>
                 <Text style={{ fontSize: scale(myFontSize), fontWeight: myFontWeight }}>{ zone }</Text>
                 <View onLayout={ this._onLayout } style={{ marginLeft:myProgressMarginLeft, flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: myProgressWidth }}>
-                    <Text style={{ position: 'absolute', left: '95%', fontSize: scale(10), color: 'black' }}> { this.props.maxPoints } </Text>
-                    <Animated.View style={{ flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
+                    <View style={{ flexDirection: 'row', justifyContent:'flex-end', alignItems: 'center', width: '100%' }}>
+                        <Text style={{ fontSize: scale(10), color: 'black' }}> { this.props.maxPoints } </Text>
+                    </View>
+                    <Animated.View style={{ position:'absolute', paddingLeft: 0, flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
                             width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>      
                         <Animated.View style={{ transform: [{ scale: this.state.circleSize }] }}>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue', borderRadius: 50, height: barHeight, width: barHeight }}>

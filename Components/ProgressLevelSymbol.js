@@ -74,10 +74,10 @@ export class ProgressLevelSymbol extends React.Component {
 
 
         return(
-            <View style={{ flexDirection: 'row', width: '60%', height: barHeight, backgroundColor: backgroundColor, borderColor: 'black', borderWidth: 2 }}>
-                <Animated.View style={[StyleSheet.absoluteFill], { backgroundColor: foregroundColor, width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>
+            <View style={{ flexDirection: 'row', width: '60%', height: barHeight, backgroundColor: backgroundColor, borderColor: '#006400', borderWidth: 2, borderRadius: 5 }}>
+                <Animated.View style={[StyleSheet.absoluteFill], { borderRadius: 5, backgroundColor: foregroundColor, width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>
                 </Animated.View>
-                <View style={{ position:'absolute', top:0, left:0, width:'100%' , justifyContent:'center', flexDirection:'row' }} > 
+                <View style={{ position:'absolute', top:0, left:0, width:'100%', justifyContent:'center', alignItem: 'center', flexDirection:'row' }} > 
                     <Text style={{ color:textColor, fontSize: scale(20), fontWeight: 'normal' }}>{ label }</Text>
                 </View>
              </View>
