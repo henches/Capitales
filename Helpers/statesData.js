@@ -70,13 +70,6 @@ export default data = [
       image: require('../Helpers/capital_images/victoria.jpeg'),
    },
    {
-      state: 'Vatican',
-      capital: 'Vatican',
-      niveau : 3,
-      continent: 'Europe',
-      image: require('../Helpers/capital_images/vatican.jpeg'),
-   },
-   {
       state: 'Pologne',
       capital: 'Varsovie',
       niveau : 2,
@@ -100,7 +93,7 @@ export default data = [
    {
       state: 'Libye',
       capital: 'Tripoli',
-      niveau : 3,
+      niveau : 4,
       continent: 'Afrique',
       image: require('../Helpers/capital_images/tripoli.jpeg'),
    },
@@ -196,13 +189,6 @@ export default data = [
       image: require('../Helpers/capital_images/stockholm.jpeg'),
    },
    {
-      state: 'Iles Falkland',
-      capital: 'Stanley',
-      niveau : 9,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/stanley.jpeg'),
-   },
-   {
       state: 'Bulgarie',
       capital: 'Sofia',
       niveau : 7,
@@ -280,13 +266,6 @@ export default data = [
       image: require('../Helpers/capital_images/san_jose.jpeg'),
    },
    {
-      state: 'Saint-Marin',
-      capital: 'Saint-Marin',
-      niveau : 8,
-      continent: 'Europe',
-      image: require('../Helpers/capital_images/saint-marin.jpeg'),
-   },
-   {
       state: 'Antigua et Barbuda',
       capital: 'Saint-Jean',
       niveau : -1,
@@ -310,7 +289,7 @@ export default data = [
    {
       state: 'Réunion',
       capital: 'Saint-Denis',
-      niveau : 6,
+      niveau : -1,
       continent: 'Afrique',
       image: require('../Helpers/capital_images/saint-denis.jpeg'),
    },
@@ -373,7 +352,7 @@ export default data = [
    {
       state: 'Equateur',
       capital: 'Quito',
-      niveau : 4,
+      niveau : 5,
       continent: 'Ameriques',
       image: require('../Helpers/capital_images/quito.jpeg'),
    },
@@ -399,7 +378,7 @@ export default data = [
       image: require('../Helpers/capital_images/praia.jpeg'),
    },
    {
-      state: 'République Tchèque',
+      state: 'Rép. Tchèque',
       capital: 'Prague',
       niveau : 3,
       continent: 'Europe',
@@ -520,16 +499,9 @@ export default data = [
    {
       state: 'Norvège',
       capital: 'Oslo',
-      niveau : 2,
+      niveau : 3,
       continent: 'Europe',
       image: require('../Helpers/capital_images/oslo.jpeg'),
-   },
-   {
-      state: 'Aruba',
-      capital: 'Oranjestad',
-      niveau : 10,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/oranjestad.jpeg'),
    },
    {
       state: 'Groenland',
@@ -544,13 +516,6 @@ export default data = [
       niveau : 10,
       continent: 'AsiePacif',
       image: require('../Helpers/capital_images/nuku_alofa.jpeg'),
-   },
-   {
-      state: 'Nouvelle Calédonie',
-      capital: 'Nouméa',
-      niveau : 5,
-      continent: 'AsiePacif',
-      image: require('../Helpers/capital_images/noumea.jpeg'),
    },
    {
       state: 'Mauritanie',
@@ -609,7 +574,7 @@ export default data = [
       image: require('../Helpers/capital_images/moscou.jpeg'),
    },
    {
-      state: 'Comoros',
+      state: 'Comores',
       capital: 'Moroni',
       niveau : 10,
       continent: 'Afrique',
@@ -639,7 +604,7 @@ export default data = [
    {
       state: 'Somalie',
       capital: 'Mogadiscio',
-      niveau : 4,
+      niveau : 5,
       continent: 'Afrique',
       image: require('../Helpers/capital_images/mogadiscio.jpeg'),
    },
@@ -994,13 +959,6 @@ export default data = [
       image: require('../Helpers/capital_images/grand_turk.jpeg'),
    },
    {
-      state: 'Gibraltar',
-      capital: 'Gibraltar',
-      niveau : 1,
-      continent: 'Europe',
-      image: require('../Helpers/capital_images/gibraltar.jpeg'),
-   },
-   {
       state: 'Iles Cayman',
       capital: 'Georgetown',
       niveau : -1,
@@ -1034,13 +992,6 @@ export default data = [
       niveau : 8,
       continent: 'Afrique',
       image: require('../Helpers/capital_images/freetown.jpeg'),
-   },
-   {
-      state: 'Martinique',
-      capital: 'Fort-de-France',
-      niveau : 5,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/fort-de-france.jpeg'),
    },
    {
       state: 'Arménie',
@@ -1134,13 +1085,6 @@ export default data = [
       image: require('../Helpers/capital_images/chisinau.jpeg'),
    },
    {
-      state: 'Guyane Française',
-      capital: 'Cayenne',
-      niveau : 6,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/cayenne.jpeg'),
-   },
-   {
       state: 'Sainte-Lucie',
       capital: 'Castries',
       niveau : -1,
@@ -1199,7 +1143,7 @@ export default data = [
    {
       state: 'Belgique',
       capital: 'Bruxelles',
-      niveau : 0,
+      niveau : 1,
       continent: 'Europe',
       image: require('../Helpers/capital_images/bruxelles.jpeg'),
    },
@@ -1227,7 +1171,7 @@ export default data = [
    {
       state: 'Brésil',
       capital: 'Brasilia',
-      niveau : 1,
+      niveau : 2,
       continent: 'Ameriques',
       image: require('../Helpers/capital_images/brasilia.jpeg'),
    },
@@ -1288,13 +1232,6 @@ export default data = [
       image: require('../Helpers/capital_images/belgrade.jpeg'),
    },
    {
-      state: 'Guadeloupe',
-      capital: 'Basse-Terre',
-      niveau : 5,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/basse-terre.jpeg'),
-   },
-   {
       state: 'Saint Kitts et Nevis',
       capital: 'Basse Terre',
       niveau : -1,
@@ -1318,7 +1255,7 @@ export default data = [
    {
       state: 'Thaïlande',
       capital: 'Bangkok',
-      niveau : 2,
+      niveau : 3,
       continent: 'AsiePacif',
       image: require('../Helpers/capital_images/bangkok.jpeg'),
    },
@@ -1381,7 +1318,7 @@ export default data = [
    {
       state: 'Madagascar',
       capital: 'Antananarivo',
-      niveau : 3,
+      niveau : 4,
       continent: 'Afrique',
       image: require('../Helpers/capital_images/antananarivo.jpeg'),
    },
@@ -1391,13 +1328,6 @@ export default data = [
       niveau : 2,
       continent: 'Europe',
       image: require('../Helpers/capital_images/ankara.jpeg'),
-   },
-   {
-      state: 'Andorre',
-      capital: 'Andorre La Vella',
-      niveau : 4,
-      continent: 'Europe',
-      image: require('../Helpers/capital_images/andorre_la_vella.jpeg'),
    },
    {
       state: 'Pays-Bas',
@@ -1463,7 +1393,7 @@ export default data = [
       image: require('../Helpers/capital_images/accra.jpeg'),
    },
    {
-      state: 'Emirats arabes unis',
+      state: 'Emirats Arabes Unis',
       capital: 'Abu Dhabi',
       niveau : 5,
       continent: 'AsiePacif',
