@@ -39,7 +39,7 @@ export default class App extends React.Component {
   
     global.G_Config = {
       MaxPlayerLevelNumber: 11,
-      SeriesLength: 10,
+      SeriesLength: 5,
       Level: [
         {
           QrNb: 1,

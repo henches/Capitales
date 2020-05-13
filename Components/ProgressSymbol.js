@@ -4,8 +4,8 @@ import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
 const barHeight = verticalScale(18)
-progressDuration = 300
-progressCountDuration = 500
+progressDuration = 200
+progressCountDuration = 300
 
 
 // Affiche la progression en cours pour une zone

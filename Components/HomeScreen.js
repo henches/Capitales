@@ -135,14 +135,12 @@ class HomeScreen extends React.Component {
     }
 
 
-    _onEndAnim1 =() => { 
-        this.pS2._animateProgress() 
-    }
-    
+    _onEndAnim1 =() => { this.pS2._animateProgress() }
     _onEndAnim2 =() => { this.pS3._animateProgress() }
     _onEndAnim3 =() => { this.pS4._animateProgress() }
-    _onEndAnim4 =() => { this.pS0._animateProgress(); this.pS00._animateProgress() }
-    _onEndAnim0 =() => { // End of animations
+    _onEndAnim4 =() => { this.pS0._animateProgress() }
+    _onEndAnim0 =() => { this.pS00._animateProgress() }
+    _onEndAnim00 =() => { // End of animations
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
             this.setState({ modalVisible: true })
@@ -260,7 +258,7 @@ class HomeScreen extends React.Component {
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
                         <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
-                                    onEndAnim3={ this._onEndAnim0 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
+                                    onEndAnim3={ this._onEndAnim00 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
                     </View> 
                     <View style={{ flex: 3, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
                                 borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 10,  }}>
