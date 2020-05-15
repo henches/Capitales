@@ -133,7 +133,15 @@ class SeriesScreen extends React.Component {
         // Popup CSS
         
         // const afterResponseRNbForNextLevel = queres.afterResponseRNbForNextLevel
-        const levelImage = levelChanged ? G_GetImageForLevel(afterResponseLevel) : G_GetImageForLevel(level) // l'image du niveau pour le popup ET pour la queres affichée (le nouveau niveau doit être mis à jour)
+        const levelForImage = levelChanged ? afterResponseLevel : level 
+        const levelImage = G_GetImageForLevel(levelForImage) // l'image du niveau pour le popup ET pour la queres affichée (le nouveau niveau doit être mis à jour)
+        let imageLevelHeightTab = [25,25,25,25,60]
+        let imageLevelWidthRatio = [1,2.1,3.2,4.3,2]
+        let imageLevelHeight = verticalScale(imageLevelHeightTab[levelForImage])
+        let imageLevelWidth = imageLevelHeight*imageLevelWidthRatio[levelForImage]
+        console.log("LEVEL = ", levelForImage)
+        console.log("HEIGHT = ", imageLevelHeight)
+        console.log("WIDTH = ", imageLevelWidth)
 
         let popupVerdict = ''
         let pointsWon = 0
@@ -148,7 +156,7 @@ class SeriesScreen extends React.Component {
             popupButtonBorderBottomColor = COLORS.okButtonBorderBottomColor
         }
         else {
-            popupVerdict = "ATTENTION !"
+            popupVerdict = "Attention !"
             popupPointsWon = ""
             popupBackgroundColor = COLORS.nokBackgroundColor
             popupTextColor = COLORS.nokTextColor
@@ -157,8 +165,6 @@ class SeriesScreen extends React.Component {
         }
         
         // Popup Texts
-        let imageLevelHeight = verticalScale(25)
-        let imageLevelWidth = (imageLevelHeight+3)*(level+1)
         let popupConfirmationText = "La capitale de "
         let typoWarningText = ""
         let popupFlexSize = 7
@@ -175,8 +181,6 @@ class SeriesScreen extends React.Component {
                 popupLevelImage = levelImage
              if (level == 3) {
                 popupCheeringText = "Cette capitale est maîtrisée  !"
-                imageLevelHeight = imageLevelHeight*4
-                imageLevelWidth = imageLevelHeight
                 complexityText = ""
             }
         }
@@ -376,7 +380,7 @@ class SeriesScreen extends React.Component {
                 <View style={ styles.quitAndProgressBar_view }>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <TouchableOpacity onPress={()=> this._showAlertQuitSeries() }>
-                            <Image style={{ width: 35, height: verticalScale(35) }} source={require('../Images/quit-screen.png')} />
+                            <Image style={{ width: scale(30), height: verticalScale(30) }} source={require('../Images/quit-screen.png')} />
                         </TouchableOpacity>
                     </View>
                     <View style={ styles.progressBar_view }>
@@ -400,7 +404,7 @@ class SeriesScreen extends React.Component {
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text>{ complexityText }</Text>
-                        <Image  style={{ width: imageLevelWidth, height: imageLevelHeight }} source={ levelImage } resizeMode= 'contain' />
+                        <Image  style={{ width: imageLevelWidth, height: imageLevelHeight }} source={ levelImage } resizeMode= 'stretch' />
                     </View>
                 </View>
                 <Divider/>

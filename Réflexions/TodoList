@@ -2,26 +2,22 @@ Bug / backlog
 - typer TOUTES les variables
 - changer les couleurs de la popup (pour ne pas trop ressembler à DuoLinguo :-))
 - remplacer la fonction largeur dans HomeScreen
-- mettre toutes les bonnes photos
 - progressBar des séries plus courtes que la norme
-- supprimer les espaces dans les réponses proposées
-- supprimer les capitales non pertinentes (Gibraltar)
-- débrayabilité des sons
 - Remise à zéro des points (de l'avancement du joueur)
-- ajouter un menu options (pour les deux features précédentes)
-- dans la popup : "ATTENTION" en minuscule
 - que des blancs dans une réponse doit être OK (pour Tarik)
-- adapter les tailles de polices et boutons aux différents écrans possibles
-- supprimer "passe à la difficulté" dans le popup des séries
 - mettre plus de points quand il répond vite ? -> à étudier ...
 - prévoir le bandeau de pub
 - confirmation de sortie de l'app
 - triangle à la place du bouton Jouer
-- ajuster les étoiles
-- rendre les étoiles plus foncées
 - augmenter la taille de la liste des résultats
 - changer le titre des résultats + le go back home
-- indiquer (mieux) que la capitale est maitrisée
+- indiquer (mieux) que la capitale est maitrisée -> Son différent ?
+- animations scores home page trop lentes -> paralléliser celles des zones ?
+- gérer correctement le bandeau OS du smartphone (en particulier sur Android)
+- ajouter la particule dans la question
+- mettre les etoiles en haut de l'écrans
+- gérer les pays ou capitales dont les mots sont trop longs
+- remplacer certaines images (Tunis)
 
 
 
@@ -42,5 +38,17 @@ Réalisé :
 - (09/04) permettre l'arrêt de la série quand on appuie sur la croix
 - (09/04) supprimer le bouton de test de l'animation
 - (xx/04) slice pM (dans le reducer Stats) -> faire une deep copy
+- (14/05) dans la popup : "ATTENTION" en minuscule
+- (10/05) supprimer les capitales non pertinentes (Gibraltar)
+- (10/05) débrayabilité des sons
+- (10/05) mettre toutes les bonnes photos
+- (10/05) supprimer "passe à la difficulté" dans le popup des séries
+- (10/05) supprimer les capitales non pertinentes (Gibraltar)
+- (10/05) ajouter un menu options 
+- (10/05) supprimer les espaces dans les réponses proposées
+- (10/05) adapter les tailles de polices et boutons aux différents écrans possibles
+- (10/05) ajuster les étoiles
+- (10/05) rendre les étoiles plus foncées
+
 
 

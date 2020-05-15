@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKeyQuestionStats = 'QuestionStats97'
+const listKeyQuestionStats = 'QuestionStats99'
 const listKeyUserPrefs = 'UserPrefs'
 
 const defaultUserPrefs = {
