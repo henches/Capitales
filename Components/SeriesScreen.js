@@ -223,19 +223,19 @@ class SeriesScreen extends React.Component {
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[0].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[0].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[1].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[1].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2]), level }}>
-                        <Text style={Gstyles.button_text}> {responses[2].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[2].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3]), level }}>
-                        <Text style={Gstyles.button_text}> {responses[3].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -246,37 +246,37 @@ class SeriesScreen extends React.Component {
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[0].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[0].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[1].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[1].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[2].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[2].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[3].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[3].capital} </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[4], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[4].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[4].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[5], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[5].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[5].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[6], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[6].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[6].capital} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[7], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[7].capital} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[7].capital} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -290,37 +290,37 @@ class SeriesScreen extends React.Component {
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[0].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[0].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[1].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[1].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[2], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[2].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[2].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[3], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[3].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[3].state} </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[4], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[4].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[4].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[5], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[5].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[5].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[6], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[6].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[6].state} </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={Gstyles.button}
                         onPress={() => { this._displayResponseResults(queres, responses[7], level) }}>
-                        <Text style={Gstyles.button_text}> {responses[7].state} </Text>
+                        <Text style={Gstyles.ans_button_text}> {responses[7].state} </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -404,7 +404,7 @@ class SeriesScreen extends React.Component {
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <Text>{ complexityText }</Text>
-                        <Image  style={{ width: imageLevelWidth, height: imageLevelHeight }} source={ levelImage } resizeMode= 'stretch' />
+                        <View style={{ width: scale(40), height: verticalScale(120), borderRadius:5, borderStyle: 'solid', borderColor: 'black' }}> </View>
                     </View>
                 </View>
                 <Divider/>
