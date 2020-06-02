@@ -86,11 +86,11 @@ class SeriesResultsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor }}>
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(20) }}>{nbRightResponses} bonnes réponses</Text>
-                        <Text style={{ fontSize: scale(20) }}>{cheeringText}</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: scale(20) }}>{ nbRightResponses } bonnes réponses</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: scale(20) }}>{ cheeringText }</Text>
                     </View>
                     <Divider/>
-                    <View style={{ flex: 5, flexDirection: 'column', justifyContent: 'center'}}>
+                    <View style={{ flex: 8, flexDirection: 'column', justifyContent: 'center'}}>
                         <FlatList
                             data={this.props.QueresSeries}
                             renderItem={({ item }) => (
@@ -108,8 +108,8 @@ class SeriesResultsScreen extends React.Component {
                         />
                     </View>
                     <Divider/>
-                    <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>  
-                        <Text style={{ fontSize: scale(20)}}>{scoreProgressText}</Text>
+                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>  
+                        <Text style={{ fontSize: scale(20)}}>{ scoreProgressText }</Text>
                     </View>
                    <Divider/>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  

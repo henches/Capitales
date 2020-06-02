@@ -26,7 +26,7 @@ const SearchStackNavigator = createStackNavigator({
   SeriesResultsScreen: { 
     screen: SeriesResultsScreen,
     navigationOptions: {
-      title: 'Results'
+      title: 'Resultats'
     }
   },
   GlobalQuestionStatsScreen: { 

@@ -16,7 +16,6 @@ Bug / backlog
 - gérer correctement le bandeau OS du smartphone (en particulier sur Android)
 - ajouter la particule dans la question
 - mettre les etoiles en haut de l'écrans
-- gérer les pays ou capitales dont les mots sont trop longs
 - remplacer certaines images (Tunis)
 
 
@@ -49,6 +48,7 @@ Réalisé :
 - (10/05) adapter les tailles de polices et boutons aux différents écrans possibles
 - (10/05) ajuster les étoiles
 - (10/05) rendre les étoiles plus foncées
+- (15/05) gérer les pays ou capitales dont les mots sont trop longs
 
 
 

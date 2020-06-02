@@ -45,6 +45,11 @@ export const Gstyles = StyleSheet.create({
         color: 'white',
         padding: scale(10)
     },
+    ans_button_text: {
+        fontSize: scale(18),
+        color: 'white',
+        padding: scale(10)
+    },
     check_text_inactive: {
         fontSize: scale(25),
         color: 'darkgrey',

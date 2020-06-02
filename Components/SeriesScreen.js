@@ -392,8 +392,8 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={ styles.question_view }>
-                    <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}> {questionIntro} </Text>
-                    <Text style={{ fontSize: scale(40), fontWeight: 'bold'}}> {question} ? </Text>
+                    <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}>{questionIntro}</Text>
+                    <Text style={{ fontSize: scale(40), fontWeight: 'bold'}}>{question} ?</Text>
                 </View>
                 <Divider/>
                 <View style={styles.image_view}>
@@ -403,8 +403,7 @@ class SeriesScreen extends React.Component {
                         <Image style={{ width: scale(220), height: verticalScale(220) }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text>{ complexityText }</Text>
-                        <View style={{ width: scale(40), height: verticalScale(120), borderRadius:5, borderStyle: 'solid', borderColor: 'black' }}> </View>
+                        <Text> { complexityText } </Text>
                     </View>
                 </View>
                 <Divider/>
@@ -432,14 +431,14 @@ class SeriesScreen extends React.Component {
                                         <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupPointsWon}</Text>
                                     </View>
                                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(25), fontWeight: 'bold', margin: scale(9) }}>{popupConfirmationText} {question} est</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(50), fontWeight: 'bold' }}>{answer}</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(14), fontWeight: 'bold' }}>{typoWarningText}</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(25), fontWeight: 'bold', margin: scale(9) }}>{ popupConfirmationText } { question } est</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(50), fontWeight: 'bold' }}>{ answer }</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(14), fontWeight: 'bold' }}>{ typoWarningText }</Text>
                                     </View>
                                     { cheeringView }
                                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                         <TouchableOpacity onPress={() => { this.__hideResponseResults() }} style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]}  >
-                                            <Text style={Gstyles.button_text}>OK</Text>
+                                            <Text style={ Gstyles.button_text }>OK</Text>
                                         </TouchableOpacity>
                                     </View>
                             </View>

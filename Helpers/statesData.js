@@ -259,7 +259,7 @@ export default data = [
       image: require('../Helpers/capital_images/saint-george.jpeg'),
    },
    {
-      state: 'République Dominicaine',
+      state: 'Rép. Dominicaine',
       capital: 'Saint-Domingue',
       niveau : 8,
       continent: 'Ameriques',
@@ -406,7 +406,7 @@ export default data = [
       image: require('../Helpers/capital_images/paramaribo.jpeg'),
    },
    {
-      state: 'Polynésie Française',
+      state: 'Tahiti',
       capital: 'Papeete',
       niveau : 6,
       continent: 'AsiePacif',
