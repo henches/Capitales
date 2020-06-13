@@ -194,6 +194,7 @@ class HomeScreen extends React.Component {
                 pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
                 oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
                 */
+                console.log('PLAYERRRRRRRRRRRRRRRRRRRRRRRRRR LEVEL = ',this.props.PlayerLevel)
                 maxPointsWorld = GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 pointsWorld = GetPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 oldPointsWorld = GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel)

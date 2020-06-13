@@ -29,11 +29,13 @@ with open(args.fichier_csv, newline='\n', encoding='UTF-16') as csvfile:
                 capitaleImage = capitaleImage.replace(" ", "_")
                 capitaleImage = capitaleImage.lower()
 
+                prefixe = row['PREFIXE']
                 pays = row['PAYS']
                 pays = pays.replace("\'", " ")
                 continent = row['CONTINENT']
                 js.write('   {'+"\n")
                 js.write("      state: \'"+pays+"\',\n")
+                js.write("      prefixe: \'"+prefixe+"\',\n")
                 js.write("      capital: \'"+capitale+"\',\n")
                 js.write("      niveau : "+niveau+",\n")
                 js.write("      continent: \'"+continent+"\',\n")

@@ -6,13 +6,9 @@ global.G_AsiePacif = 3
 global.G_Ameriques = 4
 
 
-let Points = []
-
 
 export function InitPointsManager(QuestionStatsList) {
   
-    InitPoints()
-
     let pM = new Array(G_Config.MaxPlayerLevelNumber)
     
     for (l = 0; l < G_Config.MaxPlayerLevelNumber; l++) {
@@ -56,7 +52,7 @@ export function InitPointsManager(QuestionStatsList) {
 
     for (let l = 0; l < pM.length; l++) {
         for (let z = 0; z < pM[l].length; z++) 
-            pM[l][z].maxPoints = pM[l][z].nb*Points[Points.length-1]
+            pM[l][z].maxPoints = pM[l][z].nb*3
     }
 
     for (let l = 0; l < pM.length; l++) {
@@ -113,108 +109,17 @@ export function IsPlayerLevelCompleted(pM, playerLevel) {
 }
 
 
-export function InitPoints() {
-    points = 0
-    Points.push(points)
-    for (l = 0; l < 4; l++) {
-        // console.log(l)
-        for (n = 0; n < G_Config.Level[l].QrNb; n++) {
-            points += G_Config.Level[l].Points
-            Points.push(points)
-        }
-    }
-}
-
-export function G_CalculateTotalPoints(QuestionStatsList) {
-    totalPoints = 0
-    for (i = 0; i < QuestionStatsList.length; i++) {
-        totalPoints += QuestionStatsList[i].totalPoints
-    }
-    return totalPoints
-}
-
-export function G_GetTotalPointsForRightResponseNb(rightResponsesNb) {
-    if (rightResponsesNb >= Points.length-1)
-        rightResponsesNb = Points.length-1
-    points = Points[rightResponsesNb]
-    console.log("rightResponsesNb  :", rightResponsesNb, " points : ", points)
-    return points
-}
-
-
-export function G_GetImageForLevel(level) {
-    return G_Config.Level[level].Image
-}
-
-
-export function G_GetLevelFromRightResponsesNb(rightResponsesNb) {
-    rr = rightResponsesNb
-    GCL = G_Config.Level
-    n0 = GCL[0].QrNb
-    n1 = GCL[1].QrNb
-    n2 = GCL[2].QrNb
-    n3 = GCL[3].QrNb
-    n4 = GCL[4].QrNb
-
-
-    lev = 0
-    respNb = 0
-
-    
-    if (rr >= n0+n1+n2+n3) {
-        lev = 4
-        respNb = 0
-        image = GCL[4].Image
-        // console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
-    }
-    else if (rr >= n0+n1+n2) {
-        lev = 3
-        respNb = n3-(rr-n0-n1-n2)
-        image = GCL[3].Image
-        // console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
-    }
-    else if (rr >= n0+n1) {
-        lev = 2
-        respNb = n2-(rr-n0-n1)
-        image = GCL[2].Image
-        // console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
-    }
-    else if (rr >= n0) {
-        lev = 1
-        respNb = n1-(rr-n0)
-        image = GCL[1].Image
-        // console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
-    }
-    else {
-        lev = 0
-        respNb = n0-rr
-        image = GCL[0].Image
-        // console.log("rightRespNb = ", rightResponsesNb, "lev = ", lev, " respNb = ", respNb)
-    }
-
-    return { level: lev, responsesNbForNextLevel: respNb, image:image } 
-}
-
-
-export function G_GetAdditionalPointsForRightResponseNb(rightResponsesNb) {
-    const r = G_GetLevelFromRightResponsesNb(rightResponsesNb)
-
-    return G_Config.Level[r.level].Points
-}
-
-
 export function GetPlayerLevel(pM) {
-    let level = G_Config.MaxPlayerLevelNumber-1 
-    
+    let level = G_Config.MaxPlayerLevelNumber 
+    console.log("GetPlayerLevel level = ", level)
     do {
-        let p = pM[level][G_Monde]
-        if (p.maxPoints == 0) { // Situation temporaire où tous les niveaux ne sont pas mentionnés dans le fichiers des questions (statesData)
-        }
-        else {
-            if (p.points == p.maxPoints)
-                break
-        }
         level--
+        let p = pM[level][G_Monde]
+        console.log("GetPlayerLevel level = ", level, "  p = ", p)
+        if (p.points == p.maxPoints) {
+            level++
+            break
+        }
     } while (level > 0)
 
     return level

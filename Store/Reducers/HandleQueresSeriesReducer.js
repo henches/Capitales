@@ -24,7 +24,7 @@ _findIndexInStateList = (normalDirection, statesList, question) => {
 
 }
 
-_createProposedResponsesList = (normalDirection, responsesNb, question) => { // normalDirection : booleen = le sens dans lequel on pose la question : true : "quelle est la capitale du pays", false: "l'inverse"
+_createProposedResponsesList = (normalDirection, responsesNb, question, continent) => { // normalDirection : booleen = le sens dans lequel on pose la question : true : "quelle est la capitale du pays", false: "l'inverse"
     // console.log("Reducer HandleQueresSeriesReducer / QUERES_SERIES-INITIATE _createProposedResponsesList  normalDirection = ", normalDirection, "responsesNb = ", responsesNb, " question = ", question)
     
     let myPossibleResponsesList = [];
@@ -33,6 +33,7 @@ _createProposedResponsesList = (normalDirection, responsesNb, question) => { // 
     const indexOfRightQueres = this._findIndexInStateList(normalDirection, cloneStatesList, question)
     const rightQueres = cloneStatesList[indexOfRightQueres]
     cloneStatesList.splice(indexOfRightQueres,1); // on enlève la bonne question-réponse de la liste clone des questions-reponses
+    filterListByOtherContinents(cloneStatesList, continent) // Supprime les éléments de la liste qui ne sont pas du continent de la question
     for (let i = 0; i < responsesNb-1; i++) {
         randomIndex = Math.floor(Math.random()*cloneStatesList.length); // on choisit une question-réponse au hasard dans la liste des questions répon
         myPossibleResponsesList.push(cloneStatesList[randomIndex]) // on ajoute la Queres dans la liste des réponses qu'on va proposer
@@ -68,6 +69,16 @@ function filterListByQueresLevel(queresStatList, level) {
     } 
 }
 
+function filterListByOtherContinents(statList, continent) {
+    let i = statList.length
+    while (i--) {
+        //console.log("filterListByOtherContinents: continent = ", continent, " statList[i].continent = ", statList[i].continent)
+        if (statList[i].continent.localeCompare(continent) != 0) {
+            //console.log("filterListByOtherContinents: suppression de ", statList[i].state)
+            statList.splice(i, 1);
+        }
+    } 
+}
 
 
 function HandleQueresSeriesReducer(state = initialState, action) {
@@ -81,7 +92,7 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             let playerLevel = action.value.playerLevel
 
             filterListByPlayerLevel(queresStatList, playerLevel) // Supprime les éléments de la liste qui ne sont pas du niveau actuel du joueur
-            filterListByQueresLevel(queresStatList, 4) // Supprime les éléments de la liste qui sont de niveau 4 (donc les questions pour lesquelles le joueur a prouvé qu'il les connait)
+            filterListByQueresLevel(queresStatList, 3) // Supprime les éléments de la liste qui sont de niveau 3 (donc les questions pour lesquelles le joueur a prouvé qu'il les connait)
 
             numberOfRemainingQuestionsToBeAsked = Math.min(G_Config.SeriesLength, queresStatList.length)
 
@@ -93,23 +104,20 @@ function HandleQueresSeriesReducer(state = initialState, action) {
                 // console.log("sl = ", sl)
                 // en function du niveau de la queres : propose les listes de réponses adaptées
                 if (sl.level == 0) {
-                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level[0].ProposedResponsesNb, sl.Queres.capital)
+                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level[0].ProposedResponsesNb, sl.Queres.capital, sl.Queres.continent)
                 }
                 else if (sl.level == 1) {
-                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level[1].ProposedResponsesNb, sl.Queres.capital)
+                    proposedResponsesList = this._createProposedResponsesList(false, G_Config.Level[1].ProposedResponsesNb, sl.Queres.state, sl.Queres.continent)
                 }
                 else if (sl.level == 2) {
-                    proposedResponsesList = this._createProposedResponsesList(false, G_Config.Level[2].ProposedResponsesNb, sl.Queres.state)
+                    proposedResponsesList = this._createProposedResponsesList(true, G_Config.Level[2].ProposedResponsesNb, sl.Queres.capital, sl.Queres.continent)
                 }
                 else if (sl.level == 3) {
                     proposedResponsesList = []
                 }
-                else if (sl.level == 4) {
-                    proposedResponsesList = []
-                }
                 // Ajoute le test (question + les réponses proposées) à la série
                 myQueresSeries.push( { id: myQueresSeries.length.toString(), 
-                    state: sl.Queres.state, capital: sl.Queres.capital, continent: sl.Queres.continent, image: sl.Queres.image, 
+                    state: sl.Queres.state, capital: sl.Queres.capital, continent: sl.Queres.continent, image: sl.Queres.image, prefixe: sl.Queres.prefixe,
                     proposedResponses: proposedResponsesList, 
                     level: sl.level, rightResponsesNb: sl.rightResponsesNb, wrongResponsesNb: sl.wrongResponsesNb, totalPoints: sl.totalPoints, 
                     isResponseRight: false, givenResponse: "", isTypo: false, pointsWon: 0, 
@@ -135,17 +143,14 @@ function HandleQueresSeriesReducer(state = initialState, action) {
             queres.isResponseRight = action.value.isResponseRight
             queres.givenResponse = action.value.givenResponse
             queres.isTypo = action.value.isTypo
-            queres.pointsWon = queres.isResponseRight ? G_GetAdditionalPointsForRightResponseNb(queres.rightResponsesNb) : 0
+            queres.pointsWon = queres.isResponseRight ? 1 : 0
 
-            const afterResponseRightResponsesNb = queres.rightResponsesNb + (queres.isResponseRight ? 1 : 0)
-            const afterResponseWrongResponsesNb = queres.wrongResponsesNb + (queres.isResponseRight ? 0 : 1)
-            const afterResponseElts = G_GetLevelFromRightResponsesNb(afterResponseRightResponsesNb)
+            queres.afterResponseRightResponsesNb = queres.rightResponsesNb + (queres.isResponseRight ? 1 : 0)
+            queres.afterResponseWrongResponsesNb = queres.wrongResponsesNb + (queres.isResponseRight ? 0 : 1)
+            queres.afterResponseLevel  = queres.afterResponseRightResponsesNb
 
-            queres.afterResponseLevel = afterResponseElts.level
-            queres.afterResponseRightResponsesNb = afterResponseRightResponsesNb 
-            queres.afterResponseWrongResponsesNb = afterResponseWrongResponsesNb 
             //            queres.afterResponseRNbForNextLevel = levelElements.rNbForNextLevel
-            queres.afterResponseTotalPoints = G_GetTotalPointsForRightResponseNb(afterResponseRightResponsesNb)
+            queres.afterResponseTotalPoints = queres.afterResponseRightResponsesNb
 
 
 //            console.log("Reducer HandleQueresSeries QUERES_SERIES-ADD_ANSWER elt = ", elt)

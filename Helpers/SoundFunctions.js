@@ -1,16 +1,23 @@
 import { Audio } from 'expo-av'
 
-SoundSuccess = null
+
+SoundSuccess = new Audio.Sound();
+SoundBigSuccess = new Audio.Sound();
+SoundFailure = new Audio.Sound();
 
 export async function initSounds() {
-    SoundSuccess = new Audio.Sound();
-    SoundFailure = new Audio.Sound();
     
     try {
-        await SoundSuccess.loadAsync(require('../Sounds/success2.mp3'));
-      } catch (error) {
-        console.log("ERREUR dans l'initialisation du son Success")
-      }
+      await SoundSuccess.loadAsync(require('../Sounds/success2.mp3'));
+    } catch (error) {
+      console.log("ERREUR dans l'initialisation du son Success")
+    }
+
+    try {
+      await SoundBigSuccess.loadAsync(require('../Sounds/bigsuccess.wav'));
+    } catch (error) {
+      console.log("ERREUR dans l'initialisation du son bigsuccess")
+    }
 
     try {
         await SoundFailure.loadAsync(require('../Sounds/failure.mp3'));
@@ -20,14 +27,15 @@ export async function initSounds() {
   }
 
 
-export async function playSound(success) {
+export async function playSound(soundType) {
     try {
-      if (success)
+      if (soundType == 0)
         await SoundSuccess.replayAsync()
-    else   
+      else if (soundType == 1)
+        await SoundBigSuccess.replayAsync()
+      else if (soundType == 2)
         await SoundFailure.replayAsync()
-      // sound is playing!
-    } catch (error) {
+      } catch (error) {
       console.log("ERREUR dans le play du son")
     }
     

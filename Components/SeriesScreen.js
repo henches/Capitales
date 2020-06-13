@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import { COLORS, Gstyles } from './Styles'
 import { G_GetImageForLevel } from '../Helpers/PointsManager'
+import { QuestionLevelSymbol } from './QuestionLevelSymbol'
 import { TextInput } from 'react-native';
 import { playSound } from '../Helpers/SoundFunctions'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
@@ -62,7 +63,7 @@ class SeriesScreen extends React.Component {
         // console.log('*****************************   go Popup ****************************')
         let isMyResponseRight = false
         let myIsTypo = false
-        if (level == 3 || level == 4) {
+        if (level == 2) {
             const levenshtein = require('js-levenshtein')
             let lev = levenshtein(qr.capital, myResponse.capital.trim()) 
             if (lev <= 2) {
@@ -80,9 +81,14 @@ class SeriesScreen extends React.Component {
        this.props.dispatch(action)
 
 
-        if (this.props.soundsActive)
-            playSound(isMyResponseRight)
-
+        if (this.props.soundsActive) {
+            if (isMyResponseRight && level != 2)
+                playSound(0) // success
+            if (isMyResponseRight && level == 2)
+                playSound(1) // Atteinte du niveau 3
+            else 
+                playSound(2) // echec
+        }
         this.setState({ modalVisible: true })
     }
 
@@ -134,7 +140,6 @@ class SeriesScreen extends React.Component {
         
         // const afterResponseRNbForNextLevel = queres.afterResponseRNbForNextLevel
         const levelForImage = levelChanged ? afterResponseLevel : level 
-        const levelImage = G_GetImageForLevel(levelForImage) // l'image du niveau pour le popup ET pour la queres affichée (le nouveau niveau doit être mis à jour)
         let imageLevelHeightTab = [25,25,25,25,60]
         let imageLevelWidthRatio = [1,2.1,3.2,4.3,2]
         let imageLevelHeight = verticalScale(imageLevelHeightTab[levelForImage])
@@ -165,49 +170,37 @@ class SeriesScreen extends React.Component {
         }
         
         // Popup Texts
-        let popupConfirmationText = "La capitale de "
+        let popupConfirmationText = "La capitale "+queres.prefixe
         let typoWarningText = ""
         let popupFlexSize = 7
         if (level >= 3) {
             popupFlexSize = 5
         }
         let popupCheeringText = ""
+        let popupCheeringText2 = ""
         let complexityText = "Difficulté"
+        let cheeringView = <View style={{ flex: 1 }}></View>
 
         if (queres.isResponseRight) {
             if (queres.isTypo) 
                 typoWarningText = "(attention : il y a une faute de frappe)"
-            if (levelChanged)
-                popupLevelImage = levelImage
-             if (level == 3) {
-                popupCheeringText = "Cette capitale est maîtrisée  !"
-                complexityText = ""
+             if (level == 2) {
+                popupCheeringText = "Capitale maîtrisée !"
+                popupCheeringText2 = "(elle ne vous sera plus demandée)"
+                cheeringView = 
+                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', borderColor: 'green', borderRadius: 10, borderWidth: 1, backgroundColor: 'chartreuse' }}>
+                        <Text style={{  color: popupTextColor, fontSize: scale(23), fontWeight: 'bold' }}>{popupCheeringText}</Text>
+                        <Text style={{  color: popupTextColor, fontSize: scale(17), fontWeight: 'normal' }}>{popupCheeringText2}</Text>
+                    </View>
+        
             }
         }
         else {
             popupCheeringText = ""
-            popupLevelImage = null
         }
          
     
         // Popup Cheering View
-        let cheeringView = 
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{  color: popupTextColor, fontSize: scale(16), fontWeight: 'bold' }}>{popupCheeringText}</Text>
-        </View>
-        /* 
-        if (levelChanged && queres.isResponseRight)
-            cheeringView = 
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{  color: popupTextColor, fontSize: scale(20), fontWeight: 'bold' }}>{popupCheeringText} </Text>
-                    <Image style={{ width: imageLevelWidth, height: imageLevelHeight }} resizeMode="contain" source={ popupLevelImage } />
-                </View>
-        else if (queres.isResponseRight) 
-            cheeringView = 
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{  color: popupTextColor, fontSize: scale(16), fontWeight: 'bold' }}>{popupCheeringText}</Text>
-                </View>
-        */
 
         // End of Popup View
 
@@ -215,32 +208,9 @@ class SeriesScreen extends React.Component {
         let responses = queres.proposedResponses
         let responseView = <View> <Text> fake </Text> </View> // juste pour intialiser la variable
         let question  = queres.state
-        let questionIntro = "Capitale de"
+        let questionIntro = "Capitale "
         let answer = queres.capital
-        if (level == 0) { 
-            responseView = 
-            <View style={styles.response_view}>
-                <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
-                    <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[0], level) }}>
-                        <Text style={Gstyles.ans_button_text}> {responses[0].capital} </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[1], level) }}>
-                        <Text style={Gstyles.ans_button_text}> {responses[1].capital} </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[2]), level }}>
-                        <Text style={Gstyles.ans_button_text}> {responses[2].capital} </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={Gstyles.button}
-                        onPress={() => { this._displayResponseResults(queres, responses[3]), level }}>
-                        <Text style={Gstyles.ans_button_text}> {responses[3].capital} </Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-        }
-        else if (level == 1) {
+        if (level == 0) {
             responseView = 
             <View style={styles.response_view}>
                 <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>
@@ -281,7 +251,7 @@ class SeriesScreen extends React.Component {
                 </View>
             </View>
         }
-        else if (level == 2) {
+        else if (level == 1) {
             question = queres.capital
             questionIntro = "Quel est le pays dont la capitale est "
             answer = queres.state
@@ -325,7 +295,7 @@ class SeriesScreen extends React.Component {
                 </View>
             </View>
         }
-        else if (level == 3) { // Text input
+        else if (level == 2) { // Text input
             if (this.state.inputResponse.localeCompare("") == 0) {
                 checkButtonStyle = Gstyles.button_inactive
                 checkTextButtonStyle = Gstyles.check_text_inactive
@@ -349,7 +319,7 @@ class SeriesScreen extends React.Component {
                     </TouchableOpacity>
             </View>
         }
-        else if (level == 4) { // Text input  (idem niveau 3)
+        else if (level == 3) { // Text input  (idem niveau 3)
             if (this.state.inputResponse.localeCompare("") == 0) {
                 checkButtonStyle = Gstyles.button_inactive
                 checkTextButtonStyle = Gstyles.check_text_inactive
@@ -374,7 +344,8 @@ class SeriesScreen extends React.Component {
             </View>
         }
 
-        
+        levelSquareDim = 20
+
         return (
             <View style={ Gstyles.main_view }>
                 <View style={ styles.quitAndProgressBar_view }>
@@ -392,8 +363,11 @@ class SeriesScreen extends React.Component {
                 </View>
                 <Divider/>
                 <View style={ styles.question_view }>
-                    <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}>{questionIntro}</Text>
-                    <Text style={{ fontSize: scale(40), fontWeight: 'bold'}}>{question} ?</Text>
+                    <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}>{ questionIntro }</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ fontSize: scale(16), fontWeight: 'bold' }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
+                        <Text style={{ fontSize: scale(40), fontWeight: 'bold' }}>{ question } ?</Text>
+                    </View>
                 </View>
                 <Divider/>
                 <View style={styles.image_view}>
@@ -403,8 +377,9 @@ class SeriesScreen extends React.Component {
                         <Image style={{ width: scale(220), height: verticalScale(220) }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                        <QuestionLevelSymbol level= { levelForImage }/>
                         <Text> { complexityText } </Text>
-                    </View>
+                   </View>
                 </View>
                 <Divider/>
                 { responseView }
@@ -425,18 +400,17 @@ class SeriesScreen extends React.Component {
                         <View style={{ flex: 1 }}></View>
                         <View style={{ flex: 6 }}></View>
                         <TouchableWithoutFeedback onPress={() => { this.__hideResponseResults() }}>
-                            <View style={{ flex: popupFlexSize, backgroundColor: popupBackgroundColor, padding: scale(10) }}>
+                            <View style={{ flex: popupFlexSize, flexDirection: 'column', backgroundColor: popupBackgroundColor, padding: scale(10) }}>
                                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupVerdict}</Text>
-                                        <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{popupPointsWon}</Text>
+                                        <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ popupVerdict }</Text>
                                     </View>
-                                    <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(25), fontWeight: 'bold', margin: scale(9) }}>{ popupConfirmationText } { question } est</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(50), fontWeight: 'bold' }}>{ answer }</Text>
+                                    <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(20), fontWeight: 'bold', margin: scale(9) }}>{ popupConfirmationText } { queres.state } est</Text>
+                                        <Text style={{ color: popupTextColor, fontSize: scale(30), fontWeight: 'bold' }}>{ queres.capital }</Text>
                                         <Text style={{ color: popupTextColor, fontSize: scale(14), fontWeight: 'bold' }}>{ typoWarningText }</Text>
                                     </View>
                                     { cheeringView }
-                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>
                                         <TouchableOpacity onPress={() => { this.__hideResponseResults() }} style={[Gstyles.button, { backgroundColor:popupButtonBackgroundColor, borderBottomColor:popupButtonBorderBottomColor }]}  >
                                             <Text style={ Gstyles.button_text }>OK</Text>
                                         </TouchableOpacity>

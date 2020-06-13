@@ -31,8 +31,8 @@ export default class App extends React.Component {
       { text: "Expérimenté", backgroundColor: '#6dca1c', textColor: 'white'},
       { text: "Expérimenté+", backgroundColor: '#61b418', textColor: 'white'},
       { text: "Expérimenté avancé", backgroundColor: '#559d15', textColor: 'white'},
-      { text: "Maitre", backgroundColor: '#228b22', textColor: 'white'},
-      { text: "Dieu", backgroundColor: '#006400', textColor: 'white'},
+      { text: "Maître", backgroundColor: '#228b22', textColor: 'white'},
+      { text: "Maître International", backgroundColor: '#006400', textColor: 'white'},
       { backgroundColor: '#305a0c' },
       { backgroundColor: '#013220' }
   ]
@@ -41,12 +41,6 @@ export default class App extends React.Component {
       MaxPlayerLevelNumber: 11,
       SeriesLength: 5,
       Level: [
-        {
-          QrNb: 1,
-          Points : 1,
-          ProposedResponsesNb: 4,
-          Image: i0,
-        },
         {
           QrNb: 1,
           Points: 1,

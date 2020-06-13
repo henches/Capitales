@@ -16,6 +16,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE")
             myPM = InitPointsManager(G_InitialQuestionStatsList)
             myPlayerLevel = GetPlayerLevel(myPM)
+            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE myPlayerLevel = ", myPlayerLevel) 
             // console.log("Reducer HandleQueresStatsReducer myPM= ", myPM)
             nextState = {
                 ...state,
@@ -32,6 +33,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
             myPM = state.pM.slice()
             const queresSeries = action.value
             SetOldPointsForZone(myPM, state.PlayerLevel) // recopie les points dans OldPoints avant d'incrémenter les points (permettra l'animation)
+            console.log("Reducer HandleQueresStatsReducer state.PlayerLevel = ", state.PlayerLevel) 
             for (let i=0; i < queresSeries.length; i++) {
                 const queres = queresSeries[i]
                 // console.log("queresSeries[", i, "]=", queresSeries[i])
