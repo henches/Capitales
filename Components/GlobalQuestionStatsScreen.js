@@ -74,7 +74,7 @@ class GlobalQuestionStatsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>LISTE DES CAPITALES</Text>
+                        <Text style={{ fontSize: scale(25), fontWeight: 'normal'}}>LISTE DES CAPITALES</Text>
                     </View>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ flex:1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -120,15 +120,16 @@ class GlobalQuestionStatsScreen extends React.Component {
                             data={this.state.listQr.sort((a,b) => { return (a.Queres.niveau - b.Queres.niveau)})}
                             renderItem={({ item }) => (
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
-                                                backgroundColor: 'darkslategrey', padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
+                                                backgroundColor: PlayerLevelStyle[item.Queres.niveau].backgroundColor, 
+                                                padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.state }</Text>
+                                        <Text style={{ fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.state }</Text>
                                     </View>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.capital }</Text>
+                                        <Text style={{ fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.capital }</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: scale(15), color: 'white' }}>{ item.Queres.niveau }</Text>
+                                        <Text style={{ fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.niveau }</Text>
                                     </View>
                                 </View>
                             )}
@@ -144,7 +145,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                                     <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>CAPITALE</Text>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>NIV</Text>
+                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>N</Text>
                                 </View>
                              </View>
                             }   

@@ -30,7 +30,7 @@ class GlobalQuestionStatsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>NIVEAU</Text>
+                        <Text style={{ fontSize: scale(25), fontWeight: 'normal'}}>NIVEAU</Text>
                     </View>
                     <View style={{ flex: 8, justifyContent: 'center' }}>
                         <LevelSymbol playerLevel = { this.props.PlayerLevel } />

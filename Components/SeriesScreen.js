@@ -100,18 +100,22 @@ class SeriesScreen extends React.Component {
     }
 
     _showAlertQuitSeries() {  
-        Alert.alert(  
-            'Es-tu sûr de vouloir quitter ?',  
-            'Tous les progès dans cette session seront perdus',  
-            [  
-                {  
-                    text: 'Annuler',  
-                    onPress: () => console.log('Annuler Pressed'),  
-                    style: 'cancel',  
-                },  
-                {text: 'Quitter', onPress: () => this._goHomeScreen()},  
-            ]  
-        )
+        if (this.props.navigation.state.params.indexInSeries > 0) {
+            Alert.alert(  
+                'Es-tu sûr de vouloir quitter ?',  
+                'Tous les progrès dans cette session seront perdus',  
+                [  
+                    {  
+                        text: 'Annuler',  
+                        onPress: () => console.log('Annuler Pressed'),  
+                        style: 'cancel',  
+                    },  
+                    {text: 'Quitter', onPress: () => this._goHomeScreen()},  
+                ]  
+            )
+        }
+        else 
+            this._goHomeScreen()
     }
 
 
@@ -366,7 +370,7 @@ class SeriesScreen extends React.Component {
                     <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}>{ questionIntro }</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ fontSize: scale(16), fontWeight: 'bold' }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
-                        <Text style={{ fontSize: scale(40), fontWeight: 'bold' }}>{ question } ?</Text>
+                        <Text style={{ fontSize: scale(36), fontWeight: 'bold' }}>{ question } ?</Text>
                     </View>
                 </View>
                 <Divider/>
@@ -377,7 +381,7 @@ class SeriesScreen extends React.Component {
                         <Image style={{ width: scale(220), height: verticalScale(220) }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <QuestionLevelSymbol level= { levelForImage }/>
+                        <QuestionLevelSymbol squareDim= { 20 } level= { levelForImage }/>
                         <Text> { complexityText } </Text>
                    </View>
                 </View>

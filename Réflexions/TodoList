@@ -1,28 +1,29 @@
 Bug / backlog
 - 5 typer TOUTES les variables
 - 5 changer les couleurs de la popup (pour ne pas trop ressembler à DuoLinguo :-))
-- progressBar des séries plus courtes que la norme
-- 4 mettre plus de points quand il répond vite ? -> à étudier ...
-- 4 prévoir le bandeau de pub
+- 5 progressBar des séries plus courtes que la norme
+- 5 mettre plus de points quand il répond vite ? -> à étudier ...
+- 5 prévoir le bandeau de pub
+- 5 animations scores home page trop lentes -> paralléliser celles des zones ?
 - 5 confirmation de sortie de l'app
-- 2 triangle à la place du bouton Jouer
-- 1 augmenter la taille de la liste des résultats
-- 1 changer le titre des résultats + le go back home
-- 0 animations scores home page trop lentes -> paralléliser celles des zones ?
 - 3 gérer correctement le bandeau OS du smartphone (en particulier sur Android)
-- 1 remplacer certaines images (Tunis)
-- 1 aligner les colonnes du résultats
-- 2 accepter que le joueur interrompe une série s'il n'a pas encore répondu.
+
+
+- 2 triangle à la place du bouton Jouer
 - 3 souligner la faute de frappe
 - 3 souligner aussi la faute de frappe dans les résultats
 - 3 pouvoir sélectionner dans la liste des capitales
-- 1 changer la tronche de la liste des capitales
-- 0 : bug du son Success2
-- 1 mettre un son de victoire lors du passage de Player Level Suivant 
-- 2 : Mettre un son différent lors de l'atteinte de la fin
+- 2 Mettre un son différent lors de l'atteinte de la fin
 - 1 Tester la fin du jeu
-- 1 remplcare le Home par l'icone correspondante
+- 1 indiquer la version
+- 2 Réparer le lien avec Github
+- 3 Bravo aléatoire après la bonne réponse à une questions
 
+
+
+
+
+- 1 mettre un son de victoire lors du passage de Player Level Suivant  -> à tester
 
 
 
@@ -59,6 +60,22 @@ Réalisé :
 - (13/06) 0 : bug commencer sur le bon niveau (Home screen) (aujourd'hui, même si on est en débutant +, on démarre l'applli sur le niveau débutant)
 - (13/06) 2 proposer des réponses du même continent
 - (13/06) 1 mettre "difficulté" en base de la jauge
+- (15/06) 1 aligner les colonnes du résultats
+- (15/06) 1 remplacer le Home par l'icone correspondante dans l'écran ResultScreen
+- (15/06) 1 changer le titre des résultats + le go back home
+- (15/10) 2 accepter que le joueur interrompe une série s'il n'a pas encore répondu.
+- (15/10) 1 changer la tronche de la liste des capitales
+- (16/10) 1 remplacer certaines images (Tunis)
+- (16/10) 3 Mettre le symbole niveau dans la liste des résultats
+- (16/10) 0 : bug du son Success2
+- (16/10) 1 Dans les résultats mettre la bonne réponse (avec la bonne orthographe) qd la réponse set ok
+
+
+
+
+
+
+
 
 
 

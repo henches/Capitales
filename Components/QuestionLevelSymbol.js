@@ -3,7 +3,6 @@ import { Text, View, StyleSheet } from 'react-native'
 import { array } from 'prop-types'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
-const squareDim = 20
 const radius = 3
 const okColor = "#90EE90"
 const nokColor = "#E8E8E8"
@@ -16,6 +15,7 @@ export class QuestionLevelSymbol extends React.Component {
 
     render() {
         let level = this.props.level
+        let squareDim = this.props.squareDim
         console.log("level=", level)
         const color3 = level > 2 ? okColor : nokColor
         console.log("color3=", color3)

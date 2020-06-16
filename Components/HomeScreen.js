@@ -11,6 +11,7 @@ import { LevelSymbol } from './LevelSymbol'
 import { YellowBox } from 'react-native'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 import { Icon } from 'react-native-elements'
+import { playSound } from '../Helpers/SoundFunctions'
 
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warning de React Native
@@ -144,6 +145,7 @@ class HomeScreen extends React.Component {
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
             this.setState({ modalVisible: true })
+            playSound(3)
             this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
             this._initProgressAnimation()
         }
