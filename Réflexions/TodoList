@@ -14,8 +14,8 @@ Bug / backlog
 - 3 souligner aussi la faute de frappe dans les résultats
 - 3 pouvoir sélectionner dans la liste des capitales
 - 2 Mettre un son différent lors de l'atteinte de la fin
+- 2 mettre un son différent lors de l'atteinte d'un nouveau niveau
 - 1 Tester la fin du jeu
-- 1 indiquer la version
 - 2 Réparer le lien avec Github
 - 3 Bravo aléatoire après la bonne réponse à une questions
 
@@ -63,12 +63,16 @@ Réalisé :
 - (15/06) 1 aligner les colonnes du résultats
 - (15/06) 1 remplacer le Home par l'icone correspondante dans l'écran ResultScreen
 - (15/06) 1 changer le titre des résultats + le go back home
-- (15/10) 2 accepter que le joueur interrompe une série s'il n'a pas encore répondu.
-- (15/10) 1 changer la tronche de la liste des capitales
-- (16/10) 1 remplacer certaines images (Tunis)
-- (16/10) 3 Mettre le symbole niveau dans la liste des résultats
-- (16/10) 0 : bug du son Success2
-- (16/10) 1 Dans les résultats mettre la bonne réponse (avec la bonne orthographe) qd la réponse set ok
+- (15/06) 2 accepter que le joueur interrompe une série s'il n'a pas encore répondu.
+- (15/06) 1 changer la tronche de la liste des capitales
+- (16/06) 1 remplacer certaines images (Tunis)
+- (16/06) 3 Mettre le symbole niveau dans la liste des résultats
+- (16/06) 0 : bug du son Success2
+- (16/06) 1 Dans les résultats mettre la bonne réponse (avec la bonne orthographe) qd la réponse set ok
+- (23/06) 1 indiquer la version
+- (24/06) 1 Changer le son de la bonne réponse à une question
+
+
 
 
 

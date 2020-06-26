@@ -41,15 +41,15 @@ export class ProgressSymbol extends React.Component {
 
     _initProgressAnimation = (oldPoints, maxPoints) => {
         this.setState({ counter: oldPoints })
-        console.log('Progress Symbol _initProgressAnimation : minWidth = ', this.state.minWidth)
-        console.log('Progress Symbol oldPoints  = ', oldPoints)
-        console.log('Progress Symbol maxPoints  = ', maxPoints)
+        // console.log('Progress Symbol _initProgressAnimation : minWidth = ', this.state.minWidth)
+        // console.log('Progress Symbol oldPoints  = ', oldPoints)
+        // console.log('Progress Symbol maxPoints  = ', maxPoints)
         this.state.progress.setValue(Math.max(oldPoints/maxPoints, this.state.minWidth ))
     }
 
 
    _animateProgress  = () => {
-        console.log("progress Symbol : _animateProgress zone = ", this.props.zone)
+        // console.log("progress Symbol : _animateProgress zone = ", this.props.zone)
         if (this.props.oldPoints == this.props.points) {
             this.props.onEndAnim3()
             return
@@ -65,7 +65,7 @@ export class ProgressSymbol extends React.Component {
 
     
     _animateProgress2  = () => {
-        console.log("progress Symbol : _animateProgress2  zone = ", this.props.zone)
+        // console.log("progress Symbol : _animateProgress2  zone = ", this.props.zone)
 
         this.setState({ counter: this.props.oldPoints })
         this.interval = setInterval(() => this._tick(), progressDuration/(this.props.points-this.props.oldPoints+1));
@@ -82,7 +82,7 @@ export class ProgressSymbol extends React.Component {
     }
 
     _animateProgress3  = () => {
-        console.log("progress Symbol : _animateProgress3  zone = ", this.props.zone)
+        // console.log("progress Symbol : _animateProgress3  zone = ", this.props.zone)
         Animated.timing(this.state.circleSize, {
                 toValue: 1,
                 duration: progressCountDuration, 
@@ -93,18 +93,18 @@ export class ProgressSymbol extends React.Component {
     }
 
     _closeAnimations  = () => {
-        console.log("progress Symbol : closeAnimations")
+        // console.log("progress Symbol : closeAnimations")
     }
 
     _onLayout = (e) => {
         if (e.nativeEvent.layout.width != 0) {
             let myMinWidth = barHeight/e.nativeEvent.layout.width
             this.setState({ minWidth: myMinWidth })
-            console.log('Progress Symbol _onLayout : e.nativeEvent.layout.width = ', e.nativeEvent.layout.width)
-            console.log('Progress Symbol _onLayout : % = ', myMinWidth)
+            // console.log('Progress Symbol _onLayout : e.nativeEvent.layout.width = ', e.nativeEvent.layout.width)
+            // console.log('Progress Symbol _onLayout : % = ', myMinWidth)
         }
-        else 
-            console.log('Progress Symbol _onLayout : e.nativeEvent.layout.width = 0')
+        // else 
+            // console.log('Progress Symbol _onLayout : e.nativeEvent.layout.width = 0')
 
       }
   

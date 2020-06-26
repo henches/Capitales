@@ -16,13 +16,9 @@ export class QuestionLevelSymbol extends React.Component {
     render() {
         let level = this.props.level
         let squareDim = this.props.squareDim
-        console.log("level=", level)
         const color3 = level > 2 ? okColor : nokColor
-        console.log("color3=", color3)
         const color2 = level > 1 ? okColor : nokColor
-        console.log("color2=", color2)
         const color1 = level > 0 ? okColor : nokColor
-        console.log("color1=", color1)
         return(
             <View style={{ flexDirection: 'column', borderColor: 'black', borderWidth: 1, borderRadius: radius, padding: 1 }}>
                 <View style={{ backgroundColor: color3, borderWidth: 1, borderRadius: radius, width: scale(squareDim), height:verticalScale(squareDim), marginBottom: 1 }}>

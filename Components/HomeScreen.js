@@ -12,6 +12,7 @@ import { YellowBox } from 'react-native'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 import { Icon } from 'react-native-elements'
 import { playSound } from '../Helpers/SoundFunctions'
+import { app_name, app_version, app_version_description }  from '../package.json'
 
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warning de React Native
@@ -22,6 +23,7 @@ class HomeScreen extends React.Component {
     
     constructor(props) {
         console.log("HOME SCREEN CONSTRUCTOR DEBUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
+        console.log("Name = ", app_name, " ---   Version = ", app_version,  " app_version_description = ", app_version_description)
         super(props);
 
     
@@ -145,7 +147,8 @@ class HomeScreen extends React.Component {
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
             this.setState({ modalVisible: true })
-            playSound(3)
+            if (this.props.soundsActive) 
+                playSound(3)
             this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
             this._initProgressAnimation()
         }
@@ -164,15 +167,7 @@ class HomeScreen extends React.Component {
 
     render() {
 
-        //        console.log("Go Séries : Qthis.props = ", this.props)
-        //      console.log("Go Séries : QuestionStats List = ", this.props.QuestionStatsList)
-        //     <Emoji name='flushed' style={{ fontSize: 30 }}/>
-    
-            // console.log("this.props = ", this.props)  
             console.log("HOME SCREEN RENDER ")  
-            // console.log("this.props.pM = ", this.props.pM)  
-            // console.log("this.props.QuestionStatsList = ", this.props.QuestionStatsList)  
-            // console.log("GetMaxPointsForZone(this.state.pm, G_Monde) = ", GetMaxPointsForZone(this.state.pM, G_Monde))  
 
             let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
             let pointsWorld = 0
@@ -276,10 +271,14 @@ class HomeScreen extends React.Component {
                         <ProgressSymbol myFlex={ 2 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
-                    <View style={{ flex: 4, flexDirection: 'column', justifyContent: 'center' }}>   
-                        <TouchableOpacity style={Gstyles.button}
-                                onPress={() => { this._goSeriesScreen() }}>
-                                <Text style={Gstyles.button_text}>JOUER</Text>
+                    <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>   
+                        <TouchableOpacity style={[Gstyles.button, { width: scale(120), height: verticalScale(120) }]}  onPress={() => { this._goSeriesScreen() }}>
+                                <Icon
+                                    size={ 80 }
+                                    type='fontawesome'
+                                    name='play-circle-outline'
+                                    color='white'
+                                />
                         </TouchableOpacity>
                     </View>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}> 

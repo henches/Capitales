@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 import { CheckBox } from 'react-native-elements'
+import { app_name, app_version, app_version_description }  from '../package.json'
+
 
 
 
@@ -42,21 +44,30 @@ class ConfigScreen extends React.Component {
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: scale(30), fontWeight: 'bold'}}>PARAMETRES</Text>
                     </View>
-                    <View style={{ flex: 8, justifyContent: 'center' }}>
+                    <View style={{ flex: 6, justifyContent: 'center' }}>
                         <CheckBox
                             center
                             size={ scale(30) }
                             containerStyle = {{ backgroundColor: Gstyles.generalBackgroundColor }}
-                            textStyle = {{ fontSize: scale(30), color: 'dodgerblue' }}
-                            checkedColor = 'dodgerblue'
-                            uncheckedColor = 'dodgerblue'
+                            textStyle = {{ fontSize: scale(25), color: 'black' }}
+                            checkedColor = 'blue'
+                            uncheckedColor = 'blue'
                             title='Sons actifs :'
-                            checkedIcon='dot-circle-o'
-                            uncheckedIcon='circle-o'
+                            iconType='feather'
+                            checkedIcon='check-square'
+                            uncheckedIcon='square'
+                            reverse={ true }
                             iconRight={ true }
                             checked={ this.state.checked }
                             onPress={() => { this.setState({ checked: !this.state.checked }) }}
                             />
+                    </View>
+                    <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
+                       <Text style={{ fontSize: scale(20), fontWeight: 'bold'}}>{ "About :" }</Text>
+                       <Text style={{ fontSize: scale(16), fontWeight: 'normal'}}>{ "Nom : " + app_name }</Text>
+                       <Text style={{ fontSize: scale(16), fontWeight: 'normal'}}>{ "Version : " + app_version }</Text>
+                       <Text style={{ fontSize: scale(16), fontWeight: 'normal'}}>{ "Description de la version : " }</Text>
+                       <Text style={{ fontSize: scale(16), fontWeight: 'normal'}}>{ "\""+ app_version_description + "\""}</Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>

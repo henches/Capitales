@@ -1,14 +1,18 @@
 import { Audio } from 'expo-av'
 
 
-SoundBigSuccess = new Audio.Sound()
-SoundFailure = new Audio.Sound()
-SoundSuccess = new Audio.Sound()
-SoundPlayerLevelSuccess = new Audio.Sound()
+let SoundBigSuccess = 0
+let SoundFailure = 0
+let SoundSuccess2 = 0
+let SoundPlayerLevelSuccess = 0
 
 export async function initSounds() {
-    
-   try {
+  SoundBigSuccess = new Audio.Sound()
+  SoundFailure = new Audio.Sound()
+  SoundSuccess2 = new Audio.Sound()
+  SoundPlayerLevelSuccess = new Audio.Sound()
+  
+  try {
       await SoundBigSuccess.loadAsync(require('../Sounds/bigsuccess.wav'));
     } catch (error) {
       console.log("ERREUR dans l'initialisation du son bigsuccess")
@@ -21,7 +25,7 @@ export async function initSounds() {
       }
 
     try {
-      await SoundSuccess.loadAsync(require('../Sounds/success2.mp3'));
+      await SoundSuccess2.loadAsync(require('../Sounds/success-bell.wav'));
     } catch (error) {
       console.log("ERREUR dans l'initialisation du son Success")
     }
@@ -36,16 +40,20 @@ export async function initSounds() {
 
 
 export async function playSound(soundType) {
+    let sound = 0
+
+    console.log("PLYA SOUNDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    if (soundType == 0)
+      sound = SoundSuccess2
+    else if (soundType == 1)
+      sound = SoundBigSuccess
+    else if (soundType == 2)
+      sound = SoundFailure
+    else if (soundType == 3)
+      sound = SoundPlayerLevelSuccess
     try {
-      if (soundType == 0)
-        await SoundSuccess.replayAsync()
-      else if (soundType == 1)
-        await SoundBigSuccess.replayAsync()
-      else if (soundType == 2)
-        await SoundFailure.replayAsync()
-      else if (soundType == 3)
-        await SoundPlayerLevelSuccess.replayAsync()
-      } catch (error) {
+        await sound.replayAsync()
+    } catch (error) {
       console.log("ERREUR dans le play du son")
     }
     

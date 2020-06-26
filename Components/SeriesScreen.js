@@ -82,10 +82,12 @@ class SeriesScreen extends React.Component {
 
 
         if (this.props.soundsActive) {
-            if (isMyResponseRight && level != 2)
-                playSound(0) // success
-            if (isMyResponseRight && level == 2)
-                playSound(1) // Atteinte du niveau 3
+            if (isMyResponseRight) {
+                if (level < 2)
+                    playSound(0) // success
+                else 
+                    playSound(1) // level == 2 (Atteinte du niveau 2)
+            }
             else 
                 playSound(2) // echec
         }
@@ -148,9 +150,6 @@ class SeriesScreen extends React.Component {
         let imageLevelWidthRatio = [1,2.1,3.2,4.3,2]
         let imageLevelHeight = verticalScale(imageLevelHeightTab[levelForImage])
         let imageLevelWidth = imageLevelHeight*imageLevelWidthRatio[levelForImage]
-        console.log("LEVEL = ", levelForImage)
-        console.log("HEIGHT = ", imageLevelHeight)
-        console.log("WIDTH = ", imageLevelWidth)
 
         let popupVerdict = ''
         let pointsWon = 0
@@ -355,7 +354,7 @@ class SeriesScreen extends React.Component {
                 <View style={ styles.quitAndProgressBar_view }>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <TouchableOpacity onPress={()=> this._showAlertQuitSeries() }>
-                            <Image style={{ width: scale(30), height: verticalScale(30) }} source={require('../Images/quit-screen.png')} />
+                            <Image style={{ width: scale(25), height: verticalScale(25) }} source={require('../Images/quit-screen.png')} />
                         </TouchableOpacity>
                     </View>
                     <View style={ styles.progressBar_view }>
