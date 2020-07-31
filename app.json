@@ -1,10 +1,19 @@
 {
   "expo": {
-    "name": "CAPITALES DU MONDE",
-    "slug": "Capita",
-    "description": "Entrainez votre mémoire sur les capitales du monde !",
+    "name": "Capitales",
+    "slug": "Capitales",
+    "description": "Apprenez les capitales du monde entier !",
     "privacy": "public",
     "sdkVersion": "35.0.0",
+    "ios": {
+      "bundleIdentifier": "com.henchie.capitales",
+      "buildNumber": "1.0.1",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.henchie.capitales",
+      "versionCode": 1
+    },   
     "platforms": [
       "ios",
       "android",
@@ -16,16 +25,16 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F5F5F5"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    ]
+  },
+  "android": {
+    "softwareKeyboardLayoutMode": "pan"
   }
 }

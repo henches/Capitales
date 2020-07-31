@@ -13,6 +13,7 @@ import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 import { Icon } from 'react-native-elements'
 import { playSound } from '../Helpers/SoundFunctions'
 import { app_name, app_version, app_version_description }  from '../package.json'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);  // POur masquer un warning de React Native
@@ -55,7 +56,8 @@ class HomeScreen extends React.Component {
     }
 
     state = {
-        modalVisible: false // popup pour indiquer le passage d'un niveau a un autre
+        modalVisible: false, // popup pour indiquer le passage d'un niveau a un autre
+        buttonDisabled: false // permet de desactiver les boutons le temps de l'animation avant de changer de niveau
     }
 
     static navigationOptions = {
@@ -105,6 +107,8 @@ class HomeScreen extends React.Component {
         if (pM == null) 
             return
 
+        
+
         this.pS1._initProgressAnimation(GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel))
         this.pS2._initProgressAnimation(GetOldPointsForZone(pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Afrique, this.props.PlayerLevel))
         this.pS3._initProgressAnimation(GetOldPointsForZone(pM, G_Ameriques, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Ameriques, this.props.PlayerLevel))
@@ -132,6 +136,9 @@ class HomeScreen extends React.Component {
         if (this.props.navigation.state.params.lastScreen.localeCompare("SeriesResultsScreen") != 0) // On revient d'un screen différent de SeriesResultsScreen
             return
 
+        if (IsPlayerLevelCompleted(pM, this.props.PlayerLevel)) 
+            this.setState({ buttonsDisabled: true })  // gèle les boutons pendant l'animation -> pour que s'affiche l'écran du passage à un nouveau niveau
+
         this.pS1._animateProgress()
 
 
@@ -145,6 +152,8 @@ class HomeScreen extends React.Component {
     _onEndAnim0 =() => { this.pS00._animateProgress() }
     _onEndAnim00 =() => { // End of animations
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
+        this.setState({ buttonsDisabled: false }) // dégèle les boutons à la fin de l'anmation (au cas ou ils auraient été gelés)
+
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
             this.setState({ modalVisible: true })
             if (this.props.soundsActive) 
@@ -168,6 +177,7 @@ class HomeScreen extends React.Component {
     render() {
 
             console.log("HOME SCREEN RENDER ")  
+            console.log("STATUS BAR HEIGHTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", getStatusBarHeight());
 
             let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
             let pointsWorld = 0
@@ -221,8 +231,6 @@ class HomeScreen extends React.Component {
                 oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel)
                 //pointsAsiePacif = 5
                 //oldPointsAsiePacif = 3
-    
-    
             }
     
     
@@ -247,8 +255,9 @@ class HomeScreen extends React.Component {
                 <View style={Gstyles.main_view}>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
                         <Text></Text>
-                        <Text style={{ fontSize: scale(30), fontWeight: 'normal'}}>CAPITALES</Text>
+                        <Text style={{ fontSize: scale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
                         <TouchableOpacity 
+                            disabled={this.state.buttonsDisabled} 
                             onPress={() => { this._goConfigScreen() }}>
                             <Icon name='cog' type='font-awesome' size={ 25 }/>
                         </TouchableOpacity>
@@ -272,7 +281,7 @@ class HomeScreen extends React.Component {
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
                     <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>   
-                        <TouchableOpacity style={[Gstyles.button, { width: scale(120), height: verticalScale(120) }]}  onPress={() => { this._goSeriesScreen() }}>
+                        <TouchableOpacity style={[Gstyles.button, { width: scale(120), height: verticalScale(120) }]}  disabled={this.state.buttonsDisabled} onPress={() => { this._goSeriesScreen() }}>
                                 <Icon
                                     size={ 80 }
                                     type='fontawesome'
@@ -283,10 +292,12 @@ class HomeScreen extends React.Component {
                     </View>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}> 
                         <TouchableOpacity style={Gstyles.button}
+                                    disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goStatView() }}>
                                     <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
+                                    disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goLevelView() }}>
                                     <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Niveau</Text>
                         </TouchableOpacity>

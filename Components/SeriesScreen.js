@@ -1,30 +1,86 @@
 import React from 'react'
-import { Alert, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Image, ImageEditor } from 'react-native'
+import { Keyboard, Animated, Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Modal, Image, ImageEditor } from 'react-native'
 import { connect } from 'react-redux'
-import { Divider } from 'react-native-elements'
 import { COLORS, Gstyles } from './Styles'
 import { G_GetImageForLevel } from '../Helpers/PointsManager'
 import { QuestionLevelSymbol } from './QuestionLevelSymbol'
 import { TextInput } from 'react-native';
 import { playSound } from '../Helpers/SoundFunctions'
-import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
+import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 
 
 
-
+const IMAGE_HEIGHT = verticalScale(220)
+const IMAGE_HEIGHT_SMALL = verticalScale(100)
 
     
 class SeriesScreen extends React.Component {
 
+
     constructor() {
         console.log('SERIES SCREEN CONSTRUCTOR ')
         super()
-     }
+        this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+    }
 
      componentDidMount() {
         console.log("SERIES SCREEN DID MOUNT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
 
 
+    }
+
+    componentWillMount () {
+        if (Platform.OS == "ios") {
+            this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow)
+            this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide)
+        }
+        else {
+            this.keyboardDidShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow)
+            this.keyboardDidHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide)
+        }
+    }
+    
+    componentWillUnmount() {
+       if (Platform.OS == "ios") {
+            this.keyboardWillShowSub.remove()
+            this.keyboardWillHideSub.remove()
+       }
+       else {
+            this.keyboardDidShowSub.remove()
+            this.keyboardDidHideSub.remove()
+       }
+    }
+
+    keyboardWillShow = (event) => {
+        console.log("keyboardShow")
+        Animated.timing(this.imageHeight, {
+          duration: 500,
+          toValue: IMAGE_HEIGHT_SMALL,
+        }).start()
+    }
+    
+    keyboardWillHide = (event) => {
+        console.log("keyboardWillHide")
+        Animated.timing(this.imageHeight, {
+          duration: 500,
+          toValue: IMAGE_HEIGHT,
+        }).start()
+    }
+  
+    keyboardDidShow = (event) => {
+        console.log("keyboardDidShow")
+        Animated.timing(this.imageHeight, {
+          duration: 500,
+          toValue: IMAGE_HEIGHT_SMALL,
+        }).start()
+    }
+    
+    keyboardDidHide = (event) => {
+        console.log("keyboardDidHide")
+        Animated.timing(this.imageHeight, {
+          duration: 500,
+          toValue: IMAGE_HEIGHT,
+        }).start()
     }
 
     
@@ -308,49 +364,28 @@ class SeriesScreen extends React.Component {
                 checkTextButtonStyle = Gstyles.button_text
             }
             responseView = 
-            <View style={styles.text_response_view}>
-                    <TextInput
-                        style={{ fontSize:scale(20), height: verticalScale(40), backgroundColor: 'gainsboro', borderColor: 'darkgray', 
-                        borderWidth: 2, borderRadius: 10, marginLeft: scale(10), marginRight: scale(10), paddingLeft: scale(5), paddingRight: scale(5) }}
-                        placeholder='Ecris la capitale'
-                        placeholderTextColor='dimgrey'
-                        onChangeText={(text) => this.setState({inputResponse: text})}
-                    />
-                    <TouchableOpacity style={checkButtonStyle}
-                        onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
-                        <Text style={checkTextButtonStyle}> Vérifier </Text>
-                    </TouchableOpacity>
-            </View>
-        }
-        else if (level == 3) { // Text input  (idem niveau 3)
-            if (this.state.inputResponse.localeCompare("") == 0) {
-                checkButtonStyle = Gstyles.button_inactive
-                checkTextButtonStyle = Gstyles.check_text_inactive
-            }
-            else {
-                checkButtonStyle = Gstyles.button
-                checkTextButtonStyle = Gstyles.button_text
-            }
-            responseView = 
-            <View style={styles.text_response_view}>
-                    <TextInput
-                        style={{ fontSize:scale(20), height: verticalScale(40), backgroundColor: 'gainsboro', borderColor: 'darkgray', 
+                //<KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 7, flexDirection: 'column', justifyContent: 'flex-start', paddingTop: verticalScale(15) }}>
+                <View style={{ flex: 7, flexDirection: 'column', justifyContent: 'flex-start', paddingTop: verticalScale(15) }}>
+                        <TextInput
+                            style={{ fontSize:scale(20), height: verticalScale(40), backgroundColor: 'gainsboro', borderColor: 'darkgray', 
                             borderWidth: 2, borderRadius: 10, marginLeft: scale(10), marginRight: scale(10), paddingLeft: scale(5), paddingRight: scale(5) }}
-                        placeholder='Ecris la capitale'
-                        placeholderTextColor='dimgrey'
-                        onChangeText={(text) => this.setState({inputResponse: text})}
-                    />
-                    <TouchableOpacity style={checkButtonStyle}
-                        onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
-                        <Text style={checkTextButtonStyle}> Vérifier </Text>
-                    </TouchableOpacity>
-            </View>
+                            placeholder='Ecris la capitale'
+                            placeholderTextColor='dimgrey'
+                            onChangeText={(text) => this.setState({inputResponse: text})}
+                        />
+                        <TouchableOpacity style={checkButtonStyle} 
+                            onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
+                            <Text style={checkTextButtonStyle}> Vérifier </Text>
+                        </TouchableOpacity>
+                        <View style={{ height: verticalScale(60) }}>
+                        </View>
+                </View>
         }
 
         levelSquareDim = 20
 
         return (
-            <View style={ Gstyles.main_view }>
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={ Gstyles.main_view }>
                 <View style={ styles.quitAndProgressBar_view }>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <TouchableOpacity onPress={()=> this._showAlertQuitSeries() }>
@@ -364,7 +399,6 @@ class SeriesScreen extends React.Component {
                         </View>      
                     </View>
                 </View>
-                <Divider/>
                 <View style={ styles.question_view }>
                     <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}>{ questionIntro }</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -372,21 +406,18 @@ class SeriesScreen extends React.Component {
                         <Text style={{ fontSize: scale(36), fontWeight: 'bold' }}>{ question } ?</Text>
                     </View>
                 </View>
-                <Divider/>
                 <View style={styles.image_view}>
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image style={{ width: scale(220), height: verticalScale(220) }} source={ capitalImage } />
+                        <Animated.Image style={{ height: this.imageHeight, width: this.imageHeight }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <QuestionLevelSymbol squareDim= { 20 } level= { levelForImage }/>
                         <Text> { complexityText } </Text>
                    </View>
                 </View>
-                <Divider/>
                 { responseView }
-                <Divider/>
                 <View style={styles.ad_view} >
                     <Text style={styles.title_text}></Text>
                 </View>
@@ -422,7 +453,7 @@ class SeriesScreen extends React.Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </Modal>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -453,7 +484,7 @@ const styles = StyleSheet.create({
     text_response_view: {
         flex: 7,
         flexDirection: 'column', 
-        justifyContent: 'flex-start', 
+        justifyContent: 'flex-end', 
         paddingTop: verticalScale(15)
     },
     ad_view: {

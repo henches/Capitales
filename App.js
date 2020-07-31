@@ -4,22 +4,28 @@ import { Provider } from 'react-redux'
 import Store from './Store/configureStore'
 import StatesListFromFile from './Helpers/statesData' // A changer pour avoir les vraies données
 import { initSounds } from './Helpers/SoundFunctions'
-import { Dimensions } from 'react-native';
-
+import { Dimensions, View, ActivityIndicator, StatusBar } from 'react-native'
+import * as Font from 'expo-font'
 
 
 export default class App extends React.Component {
+
+  state = {
+    fontsLoaded: false
+  }
 
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
     const { width, height } = Dimensions.get('window');
     console.log("width, height : ", width, " ", height)
     super()
-    let i0 = require('./Images/star1.png')
-    let i1 = require('./Images/star2.png')
-    let i2 = require('./Images/star3.png')
-    let i3 = require('./Images/star4.png')
-    let i4 = require('./Images/couronne.png')
+
+
+    let i0 = 1
+    let i1 = 1
+    let i2 = 1
+    let i3 = 1
+    let i4 = 1
     
     global.PlayerLevelStyle = [
       { text: "Débutant", backgroundColor: '#f2fce9', textColor: 'black'},
@@ -35,7 +41,7 @@ export default class App extends React.Component {
       { text: "Maître International", backgroundColor: '#006400', textColor: 'white'},
       { backgroundColor: '#305a0c' },
       { backgroundColor: '#013220' }
-  ]
+    ]
   
     global.G_Config = {
       MaxPlayerLevelNumber: 11,
@@ -65,24 +71,37 @@ export default class App extends React.Component {
       ]
     }
 
-
     // Variables globales
     global.G_StatesList = StatesListFromFile   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
     global.G_InitialQuestionStatsList = []  // Va contenir la liste initiale : soit G_StatesListe, soit celle récupérée sur le disque
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
 
-    
     initSounds()
   }
 
+  async componentDidMount() {
+    await Font.loadAsync({
+        //font1 can be any name. This'll be used in font-family
+        'fontFunhouse': require('./assets/fonts/Funhouse-Regular.ttf'),                         
+    })
+    this.setState({fontsLoaded: true})
+  }
 
   render() {
-
-    return (
-        <Provider store={Store}>
-            <Navigation/>
-        </Provider>
-    )
+    if (this.state.fontsLoaded) {
+      return (
+          <Provider store={Store}>
+              <Navigation/>
+          </Provider>
+      )
+    }
+    else 
+      return (
+        <View >
+            <ActivityIndicator />
+            <StatusBar barStyle="default" />
+        </View>
+      )
   }
 }
 

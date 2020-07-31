@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 
 
 export const COLORS = {
@@ -17,7 +18,7 @@ export const COLORS = {
 export const Gstyles = StyleSheet.create({
     main_view: {
         flex: 1, 
-        marginTop: verticalScale(20), 
+        marginTop: getStatusBarHeight(), // hauteur du status bar (iOs ou Android)
         backgroundColor: COLORS.generalBackgroundColor
     },
     button: {

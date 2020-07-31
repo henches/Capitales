@@ -85,7 +85,6 @@ class SeriesResultsScreen extends React.Component {
                         <Text style={{ fontWeight: 'bold', fontSize: scale(20) }}>{ nbRightResponses } bonnes réponses</Text>
                         <Text style={{ fontWeight: 'bold', fontSize: scale(20) }}>{ cheeringText }</Text>
                     </View>
-                    <Divider/>
                     <View style={{ flex: 6, flexDirection: 'column', justifyContent: 'center'}}>
                         <FlatList
                             data={this.props.QueresSeries}
@@ -107,11 +106,9 @@ class SeriesResultsScreen extends React.Component {
                             keyExtractor={item => item.id}
                         />
                     </View>
-                    <Divider/>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>  
                         <Text style={{ fontSize: scale(20)}}>{ scoreProgressText }</Text>
                     </View>
-                   <Divider/>
                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
                                 <Icon

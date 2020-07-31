@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
-import { Divider, Icon } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
 import { LevelSymbol } from './LevelSymbol'

@@ -6,18 +6,19 @@ Bug / backlog
 - 5 prévoir le bandeau de pub
 - 5 animations scores home page trop lentes -> paralléliser celles des zones ?
 - 5 confirmation de sortie de l'app
-- 3 gérer correctement le bandeau OS du smartphone (en particulier sur Android)
 
 
-- 2 triangle à la place du bouton Jouer
+
 - 3 souligner la faute de frappe
 - 3 souligner aussi la faute de frappe dans les résultats
-- 3 pouvoir sélectionner dans la liste des capitales
+- 2 pouvoir sélectionner dans la liste des capitales
 - 2 Mettre un son différent lors de l'atteinte de la fin
 - 2 mettre un son différent lors de l'atteinte d'un nouveau niveau
 - 1 Tester la fin du jeu
 - 2 Réparer le lien avec Github
 - 3 Bravo aléatoire après la bonne réponse à une questions
+- 2 boutons en vrai 3D
+- 3 jauge d'avancement dans la série a gérer par rapport au nombre de questions restantes
 
 
 
@@ -71,6 +72,13 @@ Réalisé :
 - (16/06) 1 Dans les résultats mettre la bonne réponse (avec la bonne orthographe) qd la réponse set ok
 - (23/06) 1 indiquer la version
 - (24/06) 1 Changer le son de la bonne réponse à une question
+- (24/06) 2 triangle à la place du bouton Jouer
+- (23/07) 0 corriger le bug sur android à la saisie du texte (la photo recouvre la question)
+- (30/07) 3 gérer correctement le bandeau OS du smartphone (en particulier sur Android)
+- (30/07) 0 empêcher de cliquer pendant la dernière animation avant de changer de niveau
+- (31/07) 1 changer la police de "CAPITALES" dans Home Screen vers la fonte Funhouse
+
+
 
 
 
