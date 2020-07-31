@@ -56,8 +56,9 @@ class HomeScreen extends React.Component {
     }
 
     state = {
-        modalVisible: false, // popup pour indiquer le passage d'un niveau a un autre
-        buttonDisabled: false // permet de desactiver les boutons le temps de l'animation avant de changer de niveau
+        modalNextLevelVisible: false, // popup pour indiquer le passage d'un niveau a un autre
+        modalTopLevelReachedVisible: false, // popup pour indiquer le passage d'un niveau a un autre
+        buttonsDisabled: false // permet de desactiver les boutons le temps de l'animation avant de changer de niveau
     }
 
     static navigationOptions = {
@@ -68,15 +69,22 @@ class HomeScreen extends React.Component {
 
     
     componentDidMount() {
-        console.log("HOME SCREEN DID MOUNT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
+        console.log("HOME SCREEN DID MOUNT !)")
 
 
         const { navigation } = this.props;
         this.focusListener = navigation.addListener("didFocus", () => { 
-            console.log("HOME SCREEN DIDFOCUS WORKS GREATTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT")
+            console.log("HOME SCREEN DIDFOCUS WORKS GREAT")
               this._initProgressAnimation()
               this._animateProgress()
         });
+
+        console.log("this.props.gameFinisheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed", this.props.gameFinished)
+        console.log("this.props.soundsActiveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", this.props.soundsActive)
+        if (this.props.gameFinished)  
+            this.setState({ modalTopLevelReachedVisible: true })  // Affiche l'écran de fin du jeu
+
+
 
     }
           
@@ -155,7 +163,7 @@ class HomeScreen extends React.Component {
         this.setState({ buttonsDisabled: false }) // dégèle les boutons à la fin de l'anmation (au cas ou ils auraient été gelés)
 
         if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel)) {
-            this.setState({ modalVisible: true })
+            this.setState({ modalNextLevelVisible: true })
             if (this.props.soundsActive) 
                 playSound(3)
             this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
@@ -164,10 +172,16 @@ class HomeScreen extends React.Component {
     }
 
     _hideNextPlayerLevelPopup = () => {
-       this.setState({ modalVisible: false })
+        this.setState({ modalNextLevelVisible: false })
+        this.props.dispatch({ type: "USER_PREFS", value: { gameFinished: true }})
+        this.setState({ modalTopLevelReachedVisible: true })
     }
-
-    _goConfigScreen() {
+ 
+     _hideTopLevelPopup = () => {
+        this.setState({ modalTopLevelReachedVisible: false })
+     }
+ 
+      _goConfigScreen() {
         console.log("Go Config");
         
         this.props.navigation.navigate('ConfigScreen')   
@@ -305,7 +319,7 @@ class HomeScreen extends React.Component {
                     <Modal
                         animationType="slide"
                         transparent={ true }
-                        visible={ this.state.modalVisible }
+                        visible={ this.state.modalNextLevelVisible }
                         onRequestClose={() => {
                             console.log('Modal has been closed')
                         }}>
@@ -320,6 +334,33 @@ class HomeScreen extends React.Component {
                                     style={[Gstyles.button, { backgroundColor: popupButtonBackgroundColor, borderBottomColor: popupButtonBorderBottomColor }]}  >
                                     <Text style={Gstyles.button_text}>OK</Text>
                                 </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
+                    <Modal
+                        animationType="slide"
+                        transparent={ true }
+                        visible={ this.state.modalTopLevelReachedVisible }
+                        onRequestClose={() => {
+                            console.log('Modal has been closed')
+                        }}>
+                        <View style={{ flex: 6, backgroundColor: COLORS.okBackgroundColor, padding: scale(10) }}>
+                            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: scale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
+                                <Text style={{  color: 'black', fontSize: scale(30), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontSize: scale(60), fontWeight: 'bold' }}>BRAVO !!!</Text>
+                                <Text style={{  color: 'black', fontSize: scale(50), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}>VOUS CONNAISSEZ TOUTES</Text>
+                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}>LES CAPITALES DU MONDE !</Text>
+                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}>Le jeu est terminé !</Text>
+                                <Text style={{  color: 'black', fontSize: scale(60), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'normal' }}>(Réinstallez l'app pour rejouer)</Text>
+                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'normal' }}>Guettez les prochaines versions </Text>
+                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'normal' }}>des évolutions sont en préparation ...</Text>
+                                <Text style={{  color: 'black', fontSize: scale(40), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'normal' }}>(votre avis à hhhhh@gmail.com)</Text>
                             </View>
                         </View>
                     </Modal>
@@ -355,7 +396,8 @@ const mapStateToProps = state => {
     return {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
         pM: state.HandleQueresStatsReducer.pM,
-        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel
+        PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel,
+        soundsActive: state.HandleUserPrefsReducer.soundsActive
     }
 }
 

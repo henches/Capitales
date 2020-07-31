@@ -2,6 +2,7 @@ import { storeUserPrefs } from '../../Helpers/StorageFunctions'
 
 const initialState = {
     soundsActive: true, 
+    gameFinished: false, 
 } 
 
 function HandleUserPrefsReducer(state = initialState, action) {
@@ -11,17 +12,24 @@ function HandleUserPrefsReducer(state = initialState, action) {
             nextState = {
                 ...state,
                     soundsActive: action.value.soundsActive,
+                    gameFinished: action.value.gameFinished
             }
             return nextState
         case 'USER_PREFS' :   // value : l'objet qui liste les User Preferences
             console.log("Reducer HandleUserPrefsReducer USER_PREFS value = ", action.value)
-            storeUserPrefs(action.value) // on sauvegarde cet objet sur le storage
+            nextState = {
+                ...state,
+                    soundsActive: action.value.soundsActive,
+                    gameFinished: action.value.gameFinished
+            } 
+            storeUserPrefs(nextState) // on sauvegarde cet objet sur le storage
             .then(myList => {
                 console.log('fin de l\'écriture de l\'objet UserPrefs')
             })
             nextState = {
                 ...state,
                     soundsActive: action.value.soundsActive,
+                    gameFinished: action.value.gameFinished
             } 
             return nextState
         default:

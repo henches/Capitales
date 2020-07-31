@@ -106,8 +106,10 @@ export function SetOldPointsForZone(pM, level) {
 toto = 0
 
 export function IsPlayerLevelCompleted(pM, playerLevel) {
-/* Tetss de la montée des niveaux (mettre toto ==1 pour changer de niveau à chaque fois
-    if (toto == 2) {
+// Tetss de la montée des niveaux (mettre toto ==1 pour changer de niveau à chaque fois
+    return true
+    
+    if (toto == 1) {
         toto = 0
         console.log("totoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo = ", toto)
         return true
@@ -117,7 +119,6 @@ export function IsPlayerLevelCompleted(pM, playerLevel) {
         console.log("totoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo = ", toto)
         return false
     }
-*/
     let pm=pM[playerLevel][G_Monde]
     return pm.points == pm.maxPoints
 }

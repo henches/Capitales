@@ -1,11 +1,12 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKeyQuestionStats = 'QuestionStats107'
-const listKeyUserPrefs = 'UserPrefs'
+const listKeyQuestionStats = 'QuestionStats109'
+const listKeyUserPrefs = 'UserPrefs1'
 
 const defaultUserPrefs = {
-  soundsActive: true
+  soundsActive: true,
+  gameFinished: false
 }
 
 function initQuestionStats() {
