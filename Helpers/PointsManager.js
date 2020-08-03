@@ -19,7 +19,8 @@ export function InitPointsManager(QuestionStatsList) {
                 nb: 0,
                 oldPoints: 0,
                 points: 0,
-                maxPoints: 0
+                maxPoints: 0,
+                knownQuestions: 0
             }
         }
     }
@@ -37,6 +38,10 @@ export function InitPointsManager(QuestionStatsList) {
                         // console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
                         pM[level][z].nb++
                         pM[level][z].points += QuestionStatsList[i].totalPoints
+                        if (QuestionStatsList[i].totalPoints == 3) { // question connue, donc
+                            pM[level][z].knownQuestions++
+                            pM[level][G_Monde].knownQuestions++
+                        }
                         pM[level][z].oldPoints = pM[level][z].points
                         pM[level][G_Monde].nb++
                         pM[level][G_Monde].points += QuestionStatsList[i].totalPoints
@@ -64,6 +69,14 @@ export function InitPointsManager(QuestionStatsList) {
 
 
     return pM
+}
+
+
+export function GetKnownQuestions(pM) {
+    let knownQuestions = 0
+    for (let l = 0; l < pM.length; l++) 
+        knownQuestions += pM[l][0].knownQuestions
+    return knownQuestions
 }
 
 export function GetIntegerZoneFromStringZone(stringZone) {
@@ -97,6 +110,10 @@ export function AddPointsForZone(pM, zone, points, level) {
 
 }
 
+export function AddOneKnownQuestionForLevel(pM, level) {
+    pM[level][G_Monde].knownQuestions++
+}
+
 export function SetOldPointsForZone(pM, level) {
     for (let z = 0; z < pM[level].length; z++)
         pM[level][z].oldPoints = pM[level][z].points
@@ -106,9 +123,9 @@ export function SetOldPointsForZone(pM, level) {
 toto = 0
 
 export function IsPlayerLevelCompleted(pM, playerLevel) {
-// Tetss de la montée des niveaux (mettre toto ==1 pour changer de niveau à chaque fois
-    return true
-    
+// Test de la montée des niveaux (mettre toto ==1 pour changer de niveau à chaque fois
+     // return true  // change de niveau apreès chaque serie
+/*  
     if (toto == 1) {
         toto = 0
         console.log("totoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo = ", toto)
@@ -119,6 +136,8 @@ export function IsPlayerLevelCompleted(pM, playerLevel) {
         console.log("totoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo = ", toto)
         return false
     }
+*/
+
     let pm=pM[playerLevel][G_Monde]
     return pm.points == pm.maxPoints
 }

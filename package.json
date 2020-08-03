@@ -1,8 +1,8 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "app_version": "1.0.0",
-  "app_version_description": "son 'succes' de base faux",
-  "app_name": "KAPeTAL",
+  "app_version": "1.0.1",
+  "app_version_description": "Full features",
+  "app_name": "Capitales",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

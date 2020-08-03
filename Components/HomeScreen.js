@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
 import { getStoredUserPrefs } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
-import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone } from '../Helpers/PointsManager'
+import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone, GetKnownQuestions } from '../Helpers/PointsManager'
 import { ProgressSymbol } from './ProgressSymbol'
 import { ProgressLevelSymbol } from './ProgressLevelSymbol'
 import { LevelSymbol } from './LevelSymbol'
@@ -57,7 +57,6 @@ class HomeScreen extends React.Component {
 
     state = {
         modalNextLevelVisible: false, // popup pour indiquer le passage d'un niveau a un autre
-        modalTopLevelReachedVisible: false, // popup pour indiquer le passage d'un niveau a un autre
         buttonsDisabled: false // permet de desactiver les boutons le temps de l'animation avant de changer de niveau
     }
 
@@ -81,8 +80,6 @@ class HomeScreen extends React.Component {
 
         console.log("this.props.gameFinisheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed", this.props.gameFinished)
         console.log("this.props.soundsActiveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", this.props.soundsActive)
-        if (this.props.gameFinished)  
-            this.setState({ modalTopLevelReachedVisible: true })  // Affiche l'écran de fin du jeu
 
 
 
@@ -173,15 +170,11 @@ class HomeScreen extends React.Component {
 
     _hideNextPlayerLevelPopup = () => {
         this.setState({ modalNextLevelVisible: false })
-        this.props.dispatch({ type: "USER_PREFS", value: { gameFinished: true }})
-        this.setState({ modalTopLevelReachedVisible: true })
+        if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel) && (this.props.PlayerLevel == G_Config.MaxPlayerLevelNumber-1)) 
+            this.props.dispatch({ type: "USER_PREFS-GAME_FINISHED", value: true })
     }
  
-     _hideTopLevelPopup = () => {
-        this.setState({ modalTopLevelReachedVisible: false })
-     }
- 
-      _goConfigScreen() {
+    _goConfigScreen() {
         console.log("Go Config");
         
         this.props.navigation.navigate('ConfigScreen')   
@@ -192,6 +185,7 @@ class HomeScreen extends React.Component {
 
             console.log("HOME SCREEN RENDER ")  
             console.log("STATUS BAR HEIGHTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", getStatusBarHeight());
+
 
             let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
             let pointsWorld = 0
@@ -208,6 +202,9 @@ class HomeScreen extends React.Component {
             let maxPointsAsiePacif = 0 
             let pointsAsiePacif = 0
             let oldPointsAsiePacif = 0
+
+            let knownQuestions = 0
+
             if (this.props.pM != null) {
                 console.log("HOME SCREEN RENDER PM is not NULL")
                 let pM = this.props.pM
@@ -245,6 +242,8 @@ class HomeScreen extends React.Component {
                 oldPointsAsiePacif = GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel)
                 //pointsAsiePacif = 5
                 //oldPointsAsiePacif = 3
+
+                knownQuestions = GetKnownQuestions(pM)
             }
     
     
@@ -275,6 +274,9 @@ class HomeScreen extends React.Component {
                             onPress={() => { this._goConfigScreen() }}>
                             <Icon name='cog' type='font-awesome' size={ 25 }/>
                         </TouchableOpacity>
+                    </View> 
+                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                        <Text style={{ fontSize: scale(20), fontWeight: 'normal'}}>Vous connaissez { knownQuestions } capitales </Text>
                     </View> 
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
                         <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
@@ -340,7 +342,7 @@ class HomeScreen extends React.Component {
                     <Modal
                         animationType="slide"
                         transparent={ true }
-                        visible={ this.state.modalTopLevelReachedVisible }
+                        visible={ this.props.gameFinished }
                         onRequestClose={() => {
                             console.log('Modal has been closed')
                         }}>
@@ -397,7 +399,8 @@ const mapStateToProps = state => {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
         pM: state.HandleQueresStatsReducer.pM,
         PlayerLevel: state.HandleQueresStatsReducer.PlayerLevel,
-        soundsActive: state.HandleUserPrefsReducer.soundsActive
+        soundsActive: state.HandleUserPrefsReducer.soundsActive,
+        gameFinished: state.HandleUserPrefsReducer.gameFinished
     }
 }
 

@@ -32,7 +32,7 @@ class ConfigScreen extends React.Component {
     _goHomeScreen = () => {
         let { routeName } = this.props.navigation.state;      
         console.log("On va à l'écran Home routeName = ", routeName)
-        this.props.dispatch({ type: "USER_PREFS", value: { soundsActive: this.state.checked }})
+        this.props.dispatch({ type: "USER_PREFS-SOUNDS_ACTIVE", value: this.state.checked })
         this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })   
     }
 

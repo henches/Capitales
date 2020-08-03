@@ -1,8 +1,8 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKeyQuestionStats = 'QuestionStats109'
-const listKeyUserPrefs = 'UserPrefs1'
+Aconst listKeyQuestionStats = 'QuestionStats112'
+const listKeyUserPrefs = 'UserPrefs9'
 
 const defaultUserPrefs = {
   soundsActive: true,
@@ -35,7 +35,7 @@ export async function storeQuestionStats (questionsStatsList) {
 }
   
 export async function storeUserPrefs (userPrefs) {
-        console.log("storeUserPrefs  userPrefs=", userPrefs)
+        console.log("storeUserPrefs  userPrefs===============================================================================================", userPrefs)
         try {
             strUserPrefs = JSON.stringify(userPrefs)
     //        console.log("storeQuestionStats 2, questionStatsList=", strQuestionsStatsList)

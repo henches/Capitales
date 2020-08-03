@@ -1,5 +1,5 @@
 import { storeQuestionStats } from '../../Helpers/StorageFunctions'
-import { GetPlayerLevel, InitPointsManager, AddPointsForZone, GetIntegerZoneFromStringZone, SetOldPointsForZone } from '../../Helpers/PointsManager'
+import { GetPlayerLevel, InitPointsManager, AddPointsForZone, GetIntegerZoneFromStringZone, SetOldPointsForZone, AddOneKnownQuestionForLevel } from '../../Helpers/PointsManager'
 
 
 const initialState = {
@@ -47,8 +47,11 @@ function HandleQueresStatsReducer(state = initialState, action) {
                 elt.totalPoints = queres.afterResponseTotalPoints
                 elt.rightResponsesNb = queres.afterResponseRightResponsesNb
                 elt.wrongResponsesNb = queres.afterResponseWrongResponsesNb
+                console.log("elt = ", elt)
                 const integerZone = GetIntegerZoneFromStringZone(queres.continent)
                 
+                if (elt.level == 3)
+                    AddOneKnownQuestionForLevel(myPM, state.PlayerLevel)
                 AddPointsForZone(myPM, integerZone, queres.pointsWon, state.PlayerLevel)
                 AddPointsForZone(myPM, G_Monde, queres.pointsWon, state.PlayerLevel)
             }

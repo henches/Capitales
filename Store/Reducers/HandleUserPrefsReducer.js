@@ -15,22 +15,27 @@ function HandleUserPrefsReducer(state = initialState, action) {
                     gameFinished: action.value.gameFinished
             }
             return nextState
-        case 'USER_PREFS' :   // value : l'objet qui liste les User Preferences
-            console.log("Reducer HandleUserPrefsReducer USER_PREFS value = ", action.value)
+        case 'USER_PREFS-SOUNDS_ACTIVE' :   // value : l'objet qui liste les User Preferences
+            console.log("Reducer HandleUserPrefsReducer USER_PREFS-SOUNDS_ACTIVE value = ", action.value)
             nextState = {
                 ...state,
-                    soundsActive: action.value.soundsActive,
-                    gameFinished: action.value.gameFinished
+                    soundsActive: action.value
             } 
             storeUserPrefs(nextState) // on sauvegarde cet objet sur le storage
             .then(myList => {
                 console.log('fin de l\'écriture de l\'objet UserPrefs')
             })
+            return nextState
+        case 'USER_PREFS-GAME_FINISHED' :   // value : l'objet qui liste les User Preferences
+            console.log("Reducer HandleUserPrefsReducer USER_PREFS-GAME_FINISHED value = ", action.value)
             nextState = {
                 ...state,
-                    soundsActive: action.value.soundsActive,
-                    gameFinished: action.value.gameFinished
+                    gameFinished: action.value
             } 
+            storeUserPrefs(nextState) // on sauvegarde cet objet sur le storage
+            .then(myList => {
+                console.log('fin de l\'écriture de l\'objet UserPrefs')
+            })
             return nextState
         default:
             return state

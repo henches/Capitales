@@ -244,7 +244,7 @@ class SeriesScreen extends React.Component {
             if (queres.isTypo) 
                 typoWarningText = "(attention : il y a une faute de frappe)"
              if (level == 2) {
-                popupCheeringText = "Capitale maîtrisée !"
+                popupCheeringText = "Capitale CONNUE !"
                 popupCheeringText2 = "(elle ne vous sera plus demandée)"
                 cheeringView = 
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', borderColor: 'green', borderRadius: 10, borderWidth: 1, backgroundColor: 'chartreuse' }}>
