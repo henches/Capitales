@@ -11,7 +11,7 @@ import { ProgressLevelSymbol } from './ProgressLevelSymbol'
 import { LevelSymbol } from './LevelSymbol'
 import { YellowBox } from 'react-native'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
-import { Icon } from 'react-native-elements'
+import { Icon, Divider } from 'react-native-elements'
 import { playSound } from '../Helpers/SoundFunctions'
 import { app_name, app_version, app_version_description }  from '../package.json'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -288,19 +288,22 @@ class HomeScreen extends React.Component {
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '80%', padding: verticalScale(4), 
                             borderColor: '#006400', borderWidth: 1, borderRadius: 5, backgroundColor: 'lightcyan' }} >
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>Connues</Text>
+                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(16) }}>Connues</Text>
                             <AnimatedCounter oldValue={ oldKnownQuestions } newValue={ knownQuestions } 
                                 onEndAnim={ this._onEndAnimAC1 } ref={ AnimatedCounter => { this.aC1 = AnimatedCounter }} />
                         </View> 
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>À apprendre</Text>
+                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(16) }}>À apprendre</Text>
                             <AnimatedCounter oldValue={ questionsNb-oldKnownQuestions } newValue={ questionsNb-knownQuestions } 
                                 onEndAnim={ this._onEndAnimAC2 } ref={ AnimatedCounter => { this.aC2 = AnimatedCounter }} />
                         </View> 
                     </View> 
-                    <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                    <Divider />
+                    <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingLeft: '15%', paddingRight: '10%' }} >
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}> Niveau   </Text>
                         <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
+                                    textColor = { PlayerLevelStyle[playerLevel].textColor }
                                     onEndAnim3={ this._onEndAnim00 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
                     </View> 
                     <View style={{ flex: 6, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
@@ -316,6 +319,7 @@ class HomeScreen extends React.Component {
                         <ProgressSymbol myFlex={ 3 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
+                    <Divider />
                     <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>   
                         <TouchableOpacity style={[Gstyles.button, { width: scale(120), height: verticalScale(120) }]}  disabled={this.state.buttonsDisabled} onPress={() => { this._goSeriesScreen() }}>
                                 <Icon
@@ -370,22 +374,22 @@ class HomeScreen extends React.Component {
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                 <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(30), fontFamily: 'fontFunhouse'  }}>CAPITALES</Text>
                                 <Image style={{ height: scale(60), width: scale(60) }} source={ G_AppIcon } />
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(10) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(60) }}>BRAVO !!!</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(30) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>VOUS CONNAISSEZ </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>LES { questionsNb} </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>CAPITALES DU MONDE !</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>Le jeu est terminé !</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(40) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>(Réinstallez l'app pour rejouer)</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>Guettez les prochaines versions </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>des évolutions sont en préparation ...</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(30) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>(votre avis à phcapitales@gmail.com)</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>(et pour me dire que vous avez réussi !)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(10) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(55) }}>BRAVO !!!</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>VOUS CONNAISSEZ </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>LES { questionsNb} </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>CAPITALES DU MONDE !</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>Le jeu est terminé !</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(35) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(Réinstallez l'app pour rejouer)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(20) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>Guettez les prochaines versions </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>des évolutions sont en préparation ...</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(votre avis à phcapitales@gmail.com)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(et pour me dire que vous avez réussi !)</Text>
                             </View>
                         </View>
                     </Modal>

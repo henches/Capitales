@@ -12,10 +12,11 @@ Bug / backlog
 - 3 Bravo aléatoire après la bonne réponse à une questions
 - 2 boutons en vrai 3D
 - 3 jauge d'avancement dans la série a gérer par rapport au nombre de questions restantes
-- 1 Améliorer le look des capitales connues et à apprendre
 - 1 (Tablette) Manque de place dans la popup de résultats (qd faute de frappe)
 - 2 (Android) Bande blanche en bas de la Status bar
-- 0 largeur dedu champo de saisie dans SerieView
+- 2 Il ne doit pas y avoir de faute de frappe si Maj/minuscules
+separateurs
+font dans les choix de la liste des capitales
 
 
 Progresser dans le dev react native
@@ -78,6 +79,11 @@ Réalisé :
 - 1 (Tablette) taille de la roue dentée en fonction de l'appareil
 - 1 (Tablette) Centrer (hauteur) le niveau dans la barre de progression verte dans home screen
 - 0 tester sur la tablette 
+- 2 Faire que l'image de la ville ne touche pas la popup
+- 0 largeur dedu champo de saisie dans SerieView
+label Niveau devant le niveau
+supprimer les capitales non encore connues
+- 1 Améliorer le look des capitales connues et à apprendre
 
 
 

@@ -137,7 +137,7 @@ toto = 0
 
 export function IsPlayerLevelCompleted(pM, playerLevel) {
 // Test de la montée des niveaux (mettre toto ==1 pour changer de niveau à chaque fois
-    //  return true  // change de niveau apreès chaque serie
+    // return true  // change de niveau apreès chaque serie
 /*  
     if (toto == 1) {
         toto = 0

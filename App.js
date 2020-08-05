@@ -32,7 +32,7 @@ export default class App extends React.Component {
       { text: "Débutant+", backgroundColor: '#d7f6bc', textColor: 'black'},
       { text: "Débutant avancé", backgroundColor: '#c9f3a5', textColor: 'black'},
       { text: "Intermédiaire", backgroundColor: '#afed78', textColor: 'black'},
-      { text: "Intérmédiaire+", backgroundColor: '#a1ea62', textColor: 'black'},
+      { text: "Intermédiaire+", backgroundColor: '#a1ea62', textColor: 'black'},
       { text: "Intermédiaire avancé", backgroundColor: '#86e335', textColor: 'black'},
       { text: "Expérimenté", backgroundColor: '#6dca1c', textColor: 'white'},
       { text: "Expérimenté+", backgroundColor: '#61b418', textColor: 'white'},

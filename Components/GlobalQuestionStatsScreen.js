@@ -126,7 +126,7 @@ class GlobalQuestionStatsScreen extends React.Component {
                                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.state }</Text>
                                     </View>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.capital }</Text>
+                                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.level == 3 ? item.Queres.capital : '----' }</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.niveau }</Text>

@@ -10,7 +10,7 @@ import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 
 
 
-const IMAGE_HEIGHT = verticalScale(220)
+const IMAGE_HEIGHT = verticalScale(200)
 const IMAGE_HEIGHT_SMALL = verticalScale(100)
 
     
@@ -392,7 +392,7 @@ class SeriesScreen extends React.Component {
                             <Image style={{ width: scale(25), height: verticalScale(25) }} source={require('../Images/quit-screen.png')} />
                         </TouchableOpacity>
                     </View>
-                    <View style={ styles.progressBar_view }>
+                    <View style={ styles.progressBar_view  }>
                         <View style={{ flexDirection: 'row', backgroundColor: 'gainsboro', borderRadius: 10, height: 10 }}>
                             <View style={{ backgroundColor: '#78c800', borderRadius: 10, position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, width: progressWidth}}>
                             </View>        
@@ -401,7 +401,7 @@ class SeriesScreen extends React.Component {
                 </View>
                 <View style={ styles.question_view }>
                     <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ questionIntro }</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
                         <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(36) }}>{ question } ?</Text>
                     </View>
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'  
     },
     image_view: {
-        flex: 6, 
+        flex: 5, 
         flexDirection: 'row', 
         justifyContent: 'center'
     },
