@@ -74,22 +74,22 @@ class GlobalQuestionStatsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(25), fontWeight: 'normal'}}>LISTE DES CAPITALES</Text>
+                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'normal'}}>LISTE DES CAPITALES</Text>
                     </View>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <View style={{ flex:1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: scale(15), fontWeight: 'normal' }}>Filtres</Text>
+                            <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'normal' }}>Filtres</Text>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontSize: scale(15), fontWeight: 'normal' }}>Zone :</Text>
+                                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'normal' }}>Zone :</Text>
                                 <View style={{  }}>
                                     <ModalDropdown
                                                 options = { dataZone }
                                                 defaultValue = { this.state.selectedZone }
                                                 style = { styles.dropDown }
-                                                textStyle = {{ fontSize: scale(15), color: 'white', fontWeight:'bold' }}
-                                                dropdownStyle={{ fontSize: scale(15), width: scale(170) }}   
+                                                textStyle = {{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), color: 'white', fontWeight:'bold' }}
+                                                dropdownStyle={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), width: scale(170) }}   
                                                 onSelect={ (index,value)=>{
                                                     this._updateList(true, value) }}
                                                 onDropdownWillShow={ (index,value)=>{
@@ -99,14 +99,14 @@ class GlobalQuestionStatsScreen extends React.Component {
                                 </View>           
                             </View>           
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontSize: scale(15), fontWeight: 'normal' }}>Niveau :</Text>
+                                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'normal' }}>Niveau :</Text>
                                 <View style={{  }}>
                                     <ModalDropdown
                                                 options = { dataLevel }
                                                 defaultValue = { this.state.selectedLevel }
                                                 style = { styles.dropDown }
-                                                textStyle = {{ fontSize: scale(15), color: 'white', fontWeight:'bold' }}
-                                                dropdownStyle={{ fontSize: scale(15), width: scale(70) }}   
+                                                textStyle = {{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), color: 'white', fontWeight:'bold' }}
+                                                dropdownStyle={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), width: scale(70) }}   
                                                 onSelect={ (index,value)=>{
                                                     this._updateList(false, value) }}
                                         />
@@ -123,13 +123,13 @@ class GlobalQuestionStatsScreen extends React.Component {
                                                 backgroundColor: PlayerLevelStyle[item.Queres.niveau].backgroundColor, 
                                                 padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.state }</Text>
+                                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.state }</Text>
                                     </View>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.capital }</Text>
+                                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.capital }</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                        <Text style={{ fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.niveau }</Text>
+                                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.niveau }</Text>
                                     </View>
                                 </View>
                             )}
@@ -139,13 +139,13 @@ class GlobalQuestionStatsScreen extends React.Component {
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center',
                                                 backgroundColor: 'darkslategrey', padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                 <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>PAYS</Text>
+                                    <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>PAYS</Text>
                                 </View>
                                 <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>CAPITALE</Text>
+                                    <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>CAPITALE</Text>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
-                                    <Text style={{ fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>N</Text>
+                                    <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'bold', color: 'white' }}>N</Text>
                                 </View>
                              </View>
                             }   

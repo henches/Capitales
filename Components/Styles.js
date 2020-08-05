@@ -19,6 +19,8 @@ export const Gstyles = StyleSheet.create({
     main_view: {
         flex: 1, 
         marginTop: getStatusBarHeight(), // hauteur du status bar (iOs ou Android)
+        flexDirection: 'column',
+        alignItems: 'center',
         backgroundColor: COLORS.generalBackgroundColor
     },
     button: {
@@ -42,17 +44,18 @@ export const Gstyles = StyleSheet.create({
         margin: scale(5)
     },
     button_text: {
-        fontSize: scale(25),
+        fontFamily: 'ComicHelvetic_Light',
+        fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25),
         color: 'white',
         padding: scale(10)
     },
     ans_button_text: {
-        fontSize: scale(18),
+        fontFamily: 'ComicHelvetic_Light',  fontSize: scale(18),
         color: 'white',
         padding: scale(10)
     },
     check_text_inactive: {
-        fontSize: scale(25),
+        fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25),
         color: 'darkgrey',
         padding: scale(10)
     },

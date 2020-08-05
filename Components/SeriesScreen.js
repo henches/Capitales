@@ -178,7 +178,7 @@ class SeriesScreen extends React.Component {
 
 
     render() {
-        //  <Text style={{ fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
+        //  <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
         // console.log('SeriesScreen : state', this.state)
         // console.log('SeriesScreen : Render props', this.props)
         console.log('SeriesScreen : Render SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
@@ -237,7 +237,8 @@ class SeriesScreen extends React.Component {
         }
         let popupCheeringText = ""
         let popupCheeringText2 = ""
-        let complexityText = "Difficulté"
+        let complexityText = "Degré de"
+        let complexityText2 = "connaissance"
         let cheeringView = <View style={{ flex: 1 }}></View>
 
         if (queres.isResponseRight) {
@@ -248,8 +249,8 @@ class SeriesScreen extends React.Component {
                 popupCheeringText2 = "(elle ne vous sera plus demandée)"
                 cheeringView = 
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', borderColor: 'green', borderRadius: 10, borderWidth: 1, backgroundColor: 'chartreuse' }}>
-                        <Text style={{  color: popupTextColor, fontSize: scale(23), fontWeight: 'bold' }}>{popupCheeringText}</Text>
-                        <Text style={{  color: popupTextColor, fontSize: scale(17), fontWeight: 'normal' }}>{popupCheeringText2}</Text>
+                        <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(23) }}>{popupCheeringText}</Text>
+                        <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(17) }}>{popupCheeringText2}</Text>
                     </View>
         
             }
@@ -365,15 +366,17 @@ class SeriesScreen extends React.Component {
             }
             responseView = 
                 //<KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 7, flexDirection: 'column', justifyContent: 'flex-start', paddingTop: verticalScale(15) }}>
-                <View style={{ flex: 7, flexDirection: 'column', justifyContent: 'flex-start', paddingTop: verticalScale(15) }}>
+                <View style={{ flex: 7, flexDirection: 'column', justifyContent: 'flex-start', width: '90%', 
+                    marginTop: verticalScale(15) }}>
                         <TextInput
-                            style={{ fontSize:scale(20), height: verticalScale(40), backgroundColor: 'gainsboro', borderColor: 'darkgray', 
-                            borderWidth: 2, borderRadius: 10, marginLeft: scale(10), marginRight: scale(10), paddingLeft: scale(5), paddingRight: scale(5) }}
-                            placeholder='Ecris la capitale'
-                            placeholderTextColor='dimgrey'
-                            onChangeText={(text) => this.setState({inputResponse: text})}
+                            style={{ fontFamily: 'ComicHelvetic_Light',  fontSize:scale(20), height: verticalScale(50),
+                                backgroundColor: 'gainsboro', borderColor: 'darkgray', 
+                                borderWidth: 2, borderRadius: 10, paddingLeft: scale(5), paddingRight: scale(5), marginLeft: scale(5), marginRight: scale(5)  }}
+                                placeholder='Ecris la capitale'
+                                placeholderTextColor='dimgrey'
+                                onChangeText={(text) => this.setState({inputResponse: text})}
                         />
-                        <TouchableOpacity style={checkButtonStyle} 
+                        <TouchableOpacity style={ checkButtonStyle } 
                             onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
                             <Text style={checkTextButtonStyle}> Vérifier </Text>
                         </TouchableOpacity>
@@ -400,10 +403,10 @@ class SeriesScreen extends React.Component {
                     </View>
                 </View>
                 <View style={ styles.question_view }>
-                    <Text style={{ fontSize: scale(16), fontWeight: 'bold'}}>{ questionIntro }</Text>
+                    <Text style={{ fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(16) }}>{ questionIntro }</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontSize: scale(16), fontWeight: 'bold' }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
-                        <Text style={{ fontSize: scale(36), fontWeight: 'bold' }}>{ question } ?</Text>
+                        <Text style={{ fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(16) }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
+                        <Text style={{ fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(36) }}>{ question } ?</Text>
                     </View>
                 </View>
                 <View style={styles.image_view}>
@@ -415,6 +418,7 @@ class SeriesScreen extends React.Component {
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <QuestionLevelSymbol squareDim= { 20 } level= { levelForImage }/>
                         <Text> { complexityText } </Text>
+                        <Text> { complexityText2 } </Text>
                    </View>
                 </View>
                 { responseView }
@@ -435,13 +439,11 @@ class SeriesScreen extends React.Component {
                         <View style={{ flex: 6 }}></View>
                         <TouchableWithoutFeedback onPress={() => { this.__hideResponseResults() }}>
                             <View style={{ flex: popupFlexSize, flexDirection: 'column', backgroundColor: popupBackgroundColor, padding: scale(10) }}>
-                                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ popupVerdict }</Text>
-                                    </View>
                                     <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(20), fontWeight: 'bold', margin: scale(9) }}>{ popupConfirmationText } { queres.state } est</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(30), fontWeight: 'bold' }}>{ queres.capital }</Text>
-                                        <Text style={{ color: popupTextColor, fontSize: scale(14), fontWeight: 'bold' }}>{ typoWarningText }</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: verticalScale(25) }}>{ popupVerdict }</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: verticalScale(15) }}>{ popupConfirmationText } { queres.state } est</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: verticalScale(20) }}>{ queres.capital }</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(14) }}>{ typoWarningText }</Text>
                                     </View>
                                     { cheeringView }
                                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>

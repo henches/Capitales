@@ -45,7 +45,7 @@ export default class App extends React.Component {
   
     global.G_Config = {
       MaxPlayerLevelNumber: 11,
-      SeriesLength: 5,
+      SeriesLength: 6,
       Level: [
         {
           QrNb: 1,
@@ -75,6 +75,7 @@ export default class App extends React.Component {
     global.G_StatesList = StatesListFromFile   // récupère la liste des capitales originelle (celle trouvée sur internet, améliorée avec des images)
     global.G_InitialQuestionStatsList = []  // Va contenir la liste initiale : soit G_StatesListe, soit celle récupérée sur le disque
     global.G_InitState = true // Horrible verrue pour déterminer si la fonction appellée dans Home Screen est appelé pour la première fois ... :-(
+    global.G_AppIcon = require('./assets/capitale-icon.png'),
 
     initSounds()
   }
@@ -83,8 +84,10 @@ export default class App extends React.Component {
     await Font.loadAsync({
         //font1 can be any name. This'll be used in font-family
         'fontFunhouse': require('./assets/fonts/Funhouse-Regular.ttf'),                         
+        'ComicHelvetic_Light': require('./assets/fonts/ComicHelvetic_Light.otf'),                         
+        'ComicHelvetic_Medium': require('./assets/fonts/ComicHelvetic_Medium.otf'),                         
     })
-    this.setState({fontsLoaded: true})
+    this.setState({ fontsLoaded: true })
   }
 
   render() {

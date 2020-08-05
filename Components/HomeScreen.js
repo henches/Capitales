@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TouchableWithoutFeedback, Animated, Easing } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Image, TouchableWithoutFeedback, Animated, Easing } from 'react-native'
 import { connect } from 'react-redux'
 import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
 import { getStoredUserPrefs } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
-import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone, GetKnownQuestions } from '../Helpers/PointsManager'
+import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone, GetKnownQuestions, GetOldKnownQuestions } from '../Helpers/PointsManager'
 import { ProgressSymbol } from './ProgressSymbol'
+import { AnimatedCounter } from './AnimatedCounter'
 import { ProgressLevelSymbol } from './ProgressLevelSymbol'
 import { LevelSymbol } from './LevelSymbol'
 import { YellowBox } from 'react-native'
@@ -112,6 +113,7 @@ class HomeScreen extends React.Component {
         if (pM == null) 
             return
 
+        let questionsNb = this.props.QuestionStatsList.length
         
 
         this.pS1._initProgressAnimation(GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel))
@@ -120,6 +122,8 @@ class HomeScreen extends React.Component {
         this.pS4._initProgressAnimation(GetOldPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_AsiePacif, this.props.PlayerLevel))
         this.pS0._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
         this.pS00._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
+        this.aC1._initProgressAnimation(GetOldKnownQuestions(pM), GetKnownQuestions(pM))
+        this.aC2._initProgressAnimation(questionsNb-GetOldKnownQuestions(pM), questionsNb-GetKnownQuestions(pM))
     }
 
     _animateProgress = () => {
@@ -155,7 +159,8 @@ class HomeScreen extends React.Component {
     _onEndAnim3 =() => { this.pS4._animateProgress() }
     _onEndAnim4 =() => { this.pS0._animateProgress() }
     _onEndAnim0 =() => { this.pS00._animateProgress() }
-    _onEndAnim00 =() => { // End of animations
+    _onEndAnim00 =() => { this.aC1._animateProgress(); this.aC2._animateProgress() }
+    _onEndAnimAC1 =() => { // End of animations
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         this.setState({ buttonsDisabled: false }) // dégèle les boutons à la fin de l'anmation (au cas ou ils auraient été gelés)
 
@@ -167,6 +172,7 @@ class HomeScreen extends React.Component {
             this._initProgressAnimation()
         }
     }
+    _onEndAnimAC2 =() => {}
 
     _hideNextPlayerLevelPopup = () => {
         this.setState({ modalNextLevelVisible: false })
@@ -204,6 +210,7 @@ class HomeScreen extends React.Component {
             let oldPointsAsiePacif = 0
 
             let knownQuestions = 0
+            let oldKnownQuestions = 0
 
             if (this.props.pM != null) {
                 console.log("HOME SCREEN RENDER PM is not NULL")
@@ -244,6 +251,7 @@ class HomeScreen extends React.Component {
                 //oldPointsAsiePacif = 3
 
                 knownQuestions = GetKnownQuestions(pM)
+                oldKnownQuestions = GetOldKnownQuestions(pM)
             }
     
     
@@ -264,26 +272,38 @@ class HomeScreen extends React.Component {
 
             playerLevel = this.props.PlayerLevel
 
+            let questionsNb = this.props.QuestionStatsList.length
+
             return (
                 <View style={Gstyles.main_view}>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
-                        <Text></Text>
-                        <Text style={{ fontSize: scale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
+                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(30)}}>    </Text>
+                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
                         <TouchableOpacity 
                             disabled={this.state.buttonsDisabled} 
                             onPress={() => { this._goConfigScreen() }}>
-                            <Icon name='cog' type='font-awesome' size={ 25 }/>
+                            <Icon name='cog' type='font-awesome' size={ scale(25) }/>
                         </TouchableOpacity>
                     </View> 
-                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                        <Text style={{ fontSize: scale(20), fontWeight: 'normal'}}>Vous connaissez { knownQuestions } capitales </Text>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '90%', 
+                            borderColor: '#006400', borderWidth: 2, borderRadius: 5, backgroundColor: 'lightcyan' }} >
+                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                            <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(20), fontWeight: 'normal'}}>Connues</Text>
+                            <AnimatedCounter oldValue={ oldKnownQuestions } newValue={ knownQuestions } 
+                                onEndAnim={ this._onEndAnimAC1 } ref={ AnimatedCounter => { this.aC1 = AnimatedCounter }} />
+                        </View> 
+                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                            <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(20), fontWeight: 'normal'}}>À apprendre</Text>
+                            <AnimatedCounter oldValue={ questionsNb-oldKnownQuestions } newValue={ questionsNb-knownQuestions } 
+                                onEndAnim={ this._onEndAnimAC2 } ref={ AnimatedCounter => { this.aC2 = AnimatedCounter }} />
+                        </View> 
                     </View> 
-                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                    <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
                         <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
                                     onEndAnim3={ this._onEndAnim00 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
                     </View> 
-                    <View style={{ flex: 3, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
+                    <View style={{ flex: 6, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
                                 borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 10,  }}>
                         <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />
@@ -293,13 +313,13 @@ class HomeScreen extends React.Component {
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim3 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
                         <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim4 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
-                        <ProgressSymbol myFlex={ 2 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
+                        <ProgressSymbol myFlex={ 3 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
-                    <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>   
+                    <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>   
                         <TouchableOpacity style={[Gstyles.button, { width: scale(120), height: verticalScale(120) }]}  disabled={this.state.buttonsDisabled} onPress={() => { this._goSeriesScreen() }}>
                                 <Icon
-                                    size={ 80 }
+                                    size={ scale(80) }
                                     type='fontawesome'
                                     name='play-circle-outline'
                                     color='white'
@@ -310,12 +330,12 @@ class HomeScreen extends React.Component {
                         <TouchableOpacity style={Gstyles.button}
                                     disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goStatView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
                                     disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goLevelView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontSize: scale(20), color:'white' }]}>Niveau</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), color:'white' }]}>Niveau</Text>
                         </TouchableOpacity>
                     </View>
                     <Modal
@@ -327,8 +347,8 @@ class HomeScreen extends React.Component {
                         }}>
                         <View style={{ flex: 1, backgroundColor: COLORS.okBackgroundColor, padding: scale(10) }}>
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
-                                <Text style={{  color: popupTextColor, fontSize: scale(25), fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
+                                <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
+                                <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
                             </View>
                             <LevelSymbol playerLevel = { this.props.PlayerLevel } />
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -346,23 +366,26 @@ class HomeScreen extends React.Component {
                         onRequestClose={() => {
                             console.log('Modal has been closed')
                         }}>
-                        <View style={{ flex: 6, backgroundColor: COLORS.okBackgroundColor, padding: scale(10) }}>
+                        <View style={{ flex: 6, backgroundColor: COLORS.generalBackgroundColor, padding: scale(10) }}>
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: scale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
-                                <Text style={{  color: 'black', fontSize: scale(30), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontSize: scale(60), fontWeight: 'bold' }}>BRAVO !!!</Text>
-                                <Text style={{  color: 'black', fontSize: scale(50), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}>VOUS CONNAISSEZ TOUTES</Text>
-                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}>LES CAPITALES DU MONDE !</Text>
-                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'bold' }}>Le jeu est terminé !</Text>
-                                <Text style={{  color: 'black', fontSize: scale(60), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontSize: scale(25), fontWeight: 'normal' }}>(Réinstallez l'app pour rejouer)</Text>
-                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'normal' }}>Guettez les prochaines versions </Text>
-                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'normal' }}>des évolutions sont en préparation ...</Text>
-                                <Text style={{  color: 'black', fontSize: scale(40), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontSize: scale(20), fontWeight: 'normal' }}>(votre avis à hhhhh@gmail.com)</Text>
+                                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
+                                <Image style={{ height: scale(60), width: scale(60) }} source={ G_AppIcon } />
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(10), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(60), fontWeight: 'bold' }}>BRAVO !!!</Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>VOUS CONNAISSEZ </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>LES { questionsNb} </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>CAPITALES DU MONDE !</Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>Le jeu est terminé !</Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(40), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>(Réinstallez l'app pour rejouer)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>Guettez les prochaines versions </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>des évolutions sont en préparation ...</Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontWeight: 'bold' }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>(votre avis à phcapitales@gmail.com)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>(et pour me dire que vous avez réussi !)</Text>
                             </View>
                         </View>
                     </Modal>

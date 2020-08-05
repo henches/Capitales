@@ -3,7 +3,7 @@ import { Text, View, Animated, Easing, StyleSheet } from 'react-native'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
-const barHeight = verticalScale(35)
+const barHeight = verticalScale(45)
 progressDuration = 200
 
 
@@ -74,13 +74,13 @@ export class ProgressLevelSymbol extends React.Component {
 
 
         return(
-            <View style={{ flexDirection: 'row', width: '60%', height: barHeight, backgroundColor: backgroundColor, borderColor: '#006400', borderWidth: 2, borderRadius: 5 }}>
-                <Animated.View style={[StyleSheet.absoluteFill], { borderRadius: 5, backgroundColor: foregroundColor, width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>
+            <View style={{ flexDirection: 'row', width: '90%', height: barHeight, backgroundColor: backgroundColor, borderColor: '#006400', borderWidth: 1, borderRadius: 5 }}>
+                <Animated.View style={{ position: 'absolute', top: 0, left: 0, bottom: 0, right: 0, borderRadius: 5, backgroundColor: foregroundColor, width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>
                 </Animated.View>
-                <View style={{ position:'absolute', top:0, left:0, width:'100%', justifyContent:'center', alignItem: 'center', flexDirection:'row' }} > 
-                    <Text style={{ color:textColor, fontSize: scale(20), fontWeight: 'normal' }}>{ label }</Text>
+                <View style={{  width:'100%', height: '100%', justifyContent:'center', alignItems: 'center', flexDirection:'row' }} > 
+                    <Text style={{ color:textColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>{ label }</Text>
                 </View>
-             </View>
+            </View>
       )
     }  
 }

@@ -20,7 +20,8 @@ export function InitPointsManager(QuestionStatsList) {
                 oldPoints: 0,
                 points: 0,
                 maxPoints: 0,
-                knownQuestions: 0
+                knownQuestions: 0,
+                oldKnownQuestions: 0
             }
         }
     }
@@ -41,6 +42,8 @@ export function InitPointsManager(QuestionStatsList) {
                         if (QuestionStatsList[i].totalPoints == 3) { // question connue, donc
                             pM[level][z].knownQuestions++
                             pM[level][G_Monde].knownQuestions++
+                            pM[level][z].oldKnownQuestions++
+                            pM[level][G_Monde].oldKnownQuestions++
                         }
                         pM[level][z].oldPoints = pM[level][z].points
                         pM[level][G_Monde].nb++
@@ -79,6 +82,13 @@ export function GetKnownQuestions(pM) {
     return knownQuestions
 }
 
+export function GetOldKnownQuestions(pM) {
+    let oldKnownQuestions = 0
+    for (let l = 0; l < pM.length; l++) 
+        oldKnownQuestions += pM[l][G_Monde].oldKnownQuestions
+    return oldKnownQuestions
+}
+
 export function GetIntegerZoneFromStringZone(stringZone) {
     for (let z = 1; z < Zones.length; z++) {
         if (Zones[z].localeCompare(stringZone) == 0) {
@@ -114,9 +124,12 @@ export function AddOneKnownQuestionForLevel(pM, level) {
     pM[level][G_Monde].knownQuestions++
 }
 
-export function SetOldPointsForZone(pM, level) {
-    for (let z = 0; z < pM[level].length; z++)
+export function SetOldPointsForZone(pM, level) {  // s'invoque quand l'animation de HomeScreen est terminée. On remet oldPoint = poins
+    for (let z = 0; z < pM[level].length; z++) {
         pM[level][z].oldPoints = pM[level][z].points
+    }
+    pM[level][G_Monde].oldKnownQuestions = pM[level][G_Monde].knownQuestions
+    
 
 }
 
@@ -124,7 +137,7 @@ toto = 0
 
 export function IsPlayerLevelCompleted(pM, playerLevel) {
 // Test de la montée des niveaux (mettre toto ==1 pour changer de niveau à chaque fois
-     // return true  // change de niveau apreès chaque serie
+    //  return true  // change de niveau apreès chaque serie
 /*  
     if (toto == 1) {
         toto = 0
