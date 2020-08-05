@@ -178,9 +178,6 @@ class SeriesScreen extends React.Component {
 
 
     render() {
-        //  <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: 10, fontWeight: 'bold'}}> rr={queres.rightResponsesNb} level={level}  </Text>  (mis de côté, pour debug : à afficher juste après l'affichage du pays)
-        // console.log('SeriesScreen : state', this.state)
-        // console.log('SeriesScreen : Render props', this.props)
         console.log('SeriesScreen : Render SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
 
 
@@ -249,8 +246,8 @@ class SeriesScreen extends React.Component {
                 popupCheeringText2 = "(elle ne vous sera plus demandée)"
                 cheeringView = 
                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', borderColor: 'green', borderRadius: 10, borderWidth: 1, backgroundColor: 'chartreuse' }}>
-                        <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(23) }}>{popupCheeringText}</Text>
-                        <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(17) }}>{popupCheeringText2}</Text>
+                        <Text style={{  color: popupTextColor, fontFamily: 'CapitalesFont_Medium',  fontSize: scale(23) }}>{popupCheeringText}</Text>
+                        <Text style={{  color: popupTextColor, fontFamily: 'CapitalesFont_Light',  fontSize: scale(17) }}>{popupCheeringText2}</Text>
                     </View>
         
             }
@@ -369,7 +366,7 @@ class SeriesScreen extends React.Component {
                 <View style={{ flex: 7, flexDirection: 'column', justifyContent: 'flex-start', width: '90%', 
                     marginTop: verticalScale(15) }}>
                         <TextInput
-                            style={{ fontFamily: 'ComicHelvetic_Light',  fontSize:scale(20), height: verticalScale(50),
+                            style={{ fontFamily: 'CapitalesFont_Light',  fontSize:scale(20), height: verticalScale(50),
                                 backgroundColor: 'gainsboro', borderColor: 'darkgray', 
                                 borderWidth: 2, borderRadius: 10, paddingLeft: scale(5), paddingRight: scale(5), marginLeft: scale(5), marginRight: scale(5)  }}
                                 placeholder='Ecris la capitale'
@@ -403,10 +400,10 @@ class SeriesScreen extends React.Component {
                     </View>
                 </View>
                 <View style={ styles.question_view }>
-                    <Text style={{ fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(16) }}>{ questionIntro }</Text>
+                    <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ questionIntro }</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(16) }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
-                        <Text style={{ fontFamily: 'ComicHelvetic_Medium',  fontSize: scale(36) }}>{ question } ?</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(36) }}>{ question } ?</Text>
                     </View>
                 </View>
                 <View style={styles.image_view}>
@@ -417,8 +414,8 @@ class SeriesScreen extends React.Component {
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <QuestionLevelSymbol squareDim= { 20 } level= { levelForImage }/>
-                        <Text> { complexityText } </Text>
-                        <Text> { complexityText2 } </Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(13) }}> { complexityText } </Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(13) }}> { complexityText2 } </Text>
                    </View>
                 </View>
                 { responseView }
@@ -440,10 +437,10 @@ class SeriesScreen extends React.Component {
                         <TouchableWithoutFeedback onPress={() => { this.__hideResponseResults() }}>
                             <View style={{ flex: popupFlexSize, flexDirection: 'column', backgroundColor: popupBackgroundColor, padding: scale(10) }}>
                                     <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: verticalScale(25) }}>{ popupVerdict }</Text>
-                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: verticalScale(15) }}>{ popupConfirmationText } { queres.state } est</Text>
-                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Medium',  fontSize: verticalScale(20) }}>{ queres.capital }</Text>
-                                        <Text style={{ color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(14) }}>{ typoWarningText }</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(30) }}>{ popupVerdict }</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(20) }}>{ popupConfirmationText } { queres.state } est</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>{ queres.capital }</Text>
+                                        <Text style={{ color: popupTextColor, fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(15) }}>{ typoWarningText }</Text>
                                     </View>
                                     { cheeringView }
                                     <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center' }}>

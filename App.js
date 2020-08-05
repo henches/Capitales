@@ -84,8 +84,8 @@ export default class App extends React.Component {
     await Font.loadAsync({
         //font1 can be any name. This'll be used in font-family
         'fontFunhouse': require('./assets/fonts/Funhouse-Regular.ttf'),                         
-        'ComicHelvetic_Light': require('./assets/fonts/ComicHelvetic_Light.otf'),                         
-        'ComicHelvetic_Medium': require('./assets/fonts/ComicHelvetic_Medium.otf'),                         
+        'CapitalesFont_Light': require('./assets/fonts/ComicSansMS_Regular.ttf'),                         
+        'CapitalesFont_Medium': require('./assets/fonts/ComicSansMS_Bold.ttf'),                         
     })
     this.setState({ fontsLoaded: true })
   }

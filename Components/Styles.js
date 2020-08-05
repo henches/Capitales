@@ -28,7 +28,6 @@ export const Gstyles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',
@@ -39,23 +38,22 @@ export const Gstyles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'bold',
         backgroundColor: 'lightgrey',
         margin: scale(5)
     },
     button_text: {
-        fontFamily: 'ComicHelvetic_Light',
-        fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25),
+        fontFamily: 'CapitalesFont_Light',
+        fontFamily: 'CapitalesFont_Light',  fontSize: scale(25),
         color: 'white',
         padding: scale(10)
     },
     ans_button_text: {
-        fontFamily: 'ComicHelvetic_Light',  fontSize: scale(18),
+        fontFamily: 'CapitalesFont_Light',  fontSize: scale(17),
         color: 'white',
         padding: scale(10)
     },
     check_text_inactive: {
-        fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25),
+        fontFamily: 'CapitalesFont_Light',  fontSize: scale(25),
         color: 'darkgrey',
         padding: scale(10)
     },

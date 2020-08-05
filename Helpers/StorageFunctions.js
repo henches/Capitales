@@ -1,8 +1,8 @@
 import { AsyncStorage } from 'react-native'
 
 
-const listKeyQuestionStats = 'QuestionStats113'
-const listKeyUserPrefs = 'UserPrefs10'
+const listKeyQuestionStats = 'QuestionStats114'
+const listKeyUserPrefs = 'UserPrefs11'
 
 const defaultUserPrefs = {
   soundsActive: true,

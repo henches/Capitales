@@ -277,23 +277,23 @@ class HomeScreen extends React.Component {
             return (
                 <View style={Gstyles.main_view}>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width:'100%', paddingHorizontal: '5%' }} >
-                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(30)}}>    </Text>
-                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(30)}}>    </Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(30), fontFamily: 'fontFunhouse' }}>CAPITALES</Text>
                         <TouchableOpacity 
                             disabled={this.state.buttonsDisabled} 
                             onPress={() => { this._goConfigScreen() }}>
                             <Icon name='cog' type='font-awesome' size={ scale(25) }/>
                         </TouchableOpacity>
                     </View> 
-                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '90%', 
-                            borderColor: '#006400', borderWidth: 2, borderRadius: 5, backgroundColor: 'lightcyan' }} >
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '80%', padding: verticalScale(4), 
+                            borderColor: '#006400', borderWidth: 1, borderRadius: 5, backgroundColor: 'lightcyan' }} >
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                            <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(20), fontWeight: 'normal'}}>Connues</Text>
+                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>Connues</Text>
                             <AnimatedCounter oldValue={ oldKnownQuestions } newValue={ knownQuestions } 
                                 onEndAnim={ this._onEndAnimAC1 } ref={ AnimatedCounter => { this.aC1 = AnimatedCounter }} />
                         </View> 
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                            <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(20), fontWeight: 'normal'}}>À apprendre</Text>
+                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>À apprendre</Text>
                             <AnimatedCounter oldValue={ questionsNb-oldKnownQuestions } newValue={ questionsNb-knownQuestions } 
                                 onEndAnim={ this._onEndAnimAC2 } ref={ AnimatedCounter => { this.aC2 = AnimatedCounter }} />
                         </View> 
@@ -330,12 +330,12 @@ class HomeScreen extends React.Component {
                         <TouchableOpacity style={Gstyles.button}
                                     disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goStatView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'CapitalesFont_Light',  fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
                                     disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goLevelView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), color:'white' }]}>Niveau</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'CapitalesFont_Light',  fontSize: scale(20), color:'white' }]}>Niveau</Text>
                         </TouchableOpacity>
                     </View>
                     <Modal
@@ -347,8 +347,8 @@ class HomeScreen extends React.Component {
                         }}>
                         <View style={{ flex: 1, backgroundColor: COLORS.okBackgroundColor, padding: scale(10) }}>
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>{ "Nouveau niveau !!" }</Text>
-                                <Text style={{  color: popupTextColor, fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>{ "Félicitations !!!" }</Text>
+                                <Text style={{  color: popupTextColor, fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>{ "Nouveau niveau !!" }</Text>
+                                <Text style={{  color: popupTextColor, fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>{ "Félicitations !!!" }</Text>
                             </View>
                             <LevelSymbol playerLevel = { this.props.PlayerLevel } />
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -368,24 +368,24 @@ class HomeScreen extends React.Component {
                         }}>
                         <View style={{ flex: 6, backgroundColor: COLORS.generalBackgroundColor, padding: scale(10) }}>
                             <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontFamily: 'fontFunhouse', fontWeight: 'normal'}}>CAPITALES</Text>
+                                <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(30), fontFamily: 'fontFunhouse'  }}>CAPITALES</Text>
                                 <Image style={{ height: scale(60), width: scale(60) }} source={ G_AppIcon } />
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(10), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(60), fontWeight: 'bold' }}>BRAVO !!!</Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>VOUS CONNAISSEZ </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>LES { questionsNb} </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>CAPITALES DU MONDE !</Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'bold' }}>Le jeu est terminé !</Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(40), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>(Réinstallez l'app pour rejouer)</Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>Guettez les prochaines versions </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>des évolutions sont en préparation ...</Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontWeight: 'bold' }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>(votre avis à phcapitales@gmail.com)</Text>
-                                <Text style={{  color: 'black', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'normal' }}>(et pour me dire que vous avez réussi !)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(10) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(60) }}>BRAVO !!!</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(30) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>VOUS CONNAISSEZ </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>LES { questionsNb} </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>CAPITALES DU MONDE !</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>Le jeu est terminé !</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(40) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>(Réinstallez l'app pour rejouer)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>Guettez les prochaines versions </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>des évolutions sont en préparation ...</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: scale(30) }}> </Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>(votre avis à phcapitales@gmail.com)</Text>
+                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: scale(20) }}>(et pour me dire que vous avez réussi !)</Text>
                             </View>
                         </View>
                     </Modal>

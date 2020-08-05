@@ -75,7 +75,7 @@ export class AnimatedCounter extends React.Component {
 
         return(
             <Animated.View style={{ transform: [{ scale: this.state.size }] }}>
-                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'bold' }}>{ this.state.counter }</Text>
+                <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ this.state.counter }</Text>
             </Animated.View>
       )
     }  

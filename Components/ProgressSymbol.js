@@ -124,7 +124,6 @@ export class ProgressSymbol extends React.Component {
         let myFlexDirection = 'row'
         let myJustifyContent = 'flex-end'
         let myFontSize = 16
-        let myFontWeight = 'normal'
             if (this.props.isTypeFull) {
             myViewMarginLeft = '3%'
             myViewMarginRight = '3%'
@@ -133,21 +132,20 @@ export class ProgressSymbol extends React.Component {
             myFlexDirection = 'column-reverse'
             myJustifyContent = 'center'
             myFontSize = 20
-            myFontWeight = 'normal'
         }
 
         return(
             <View style={{ flex: myFlex, flexDirection: myFlexDirection, justifyContent: myJustifyContent, alignItems: 'center', marginRight: myViewMarginRight, marginLeft: myViewMarginLeft }}>
-                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(myFontSize), fontWeight: myFontWeight }}>{ zone }</Text>
+                <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(myFontSize) }}>{ zone }</Text>
                 <View onLayout={ this._onLayout } style={{ marginLeft:myProgressMarginLeft, flexDirection: 'row', justifyContent:'flex-start', alignItems: 'center', backgroundColor: 'lightskyblue', borderRadius: 10, height: barHeight, width: myProgressWidth }}>
                     <View style={{ flexDirection: 'row', justifyContent:'flex-end', alignItems: 'center', width: '100%' }}>
-                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(10), color: 'black' }}> { this.props.maxPoints } </Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(10), color: 'black' }}> { this.props.maxPoints } </Text>
                     </View>
                     <Animated.View style={{ position:'absolute', paddingLeft: 0, flexDirection: 'row', justifyContent: 'flex-end', backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
                             width: this.state.progress.interpolate({ inputRange: [0,1], outputRange: ["0%","100%"] }) }}>      
                         <Animated.View style={{ transform: [{ scale: this.state.circleSize }] }}>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue', borderRadius: 50, height: barHeight, width: barHeight }}>
-                                <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: verticalScale(11), fontWeight: 'bold', color: 'white' }}> { this.state.counter } </Text>
+                                <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(11), color: 'white' }}> { this.state.counter } </Text>
                             </View>   
                         </Animated.View>
                     </Animated.View>

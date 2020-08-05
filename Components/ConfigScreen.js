@@ -42,14 +42,14 @@ class ConfigScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(30), fontWeight: 'bold'}}>PARAMETRES</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(30) }}>PARAMETRES</Text>
                     </View>
                     <View style={{ flex: 6, justifyContent: 'center' }}>
                         <CheckBox
                             center
                             size={ scale(30) }
                             containerStyle = {{ backgroundColor: Gstyles.generalBackgroundColor }}
-                            textStyle = {{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), color: 'black' }}
+                            textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(25), color: 'black' }}
                             checkedColor = 'blue'
                             uncheckedColor = 'blue'
                             title='Sons actifs :'
@@ -63,11 +63,11 @@ class ConfigScreen extends React.Component {
                             />
                     </View>
                     <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
-                       <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20), fontWeight: 'bold'}}>{ "About :" }</Text>
-                       <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(16), fontWeight: 'normal'}}>{ "Nom : " + app_name }</Text>
-                       <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(16), fontWeight: 'normal'}}>{ "Version : " + app_version }</Text>
-                       <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(16), fontWeight: 'normal'}}>{ "Description de la version : " }</Text>
-                       <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(16), fontWeight: 'normal'}}>{ "\""+ app_version_description + "\""}</Text>
+                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ "About :" }</Text>
+                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Nom : " + app_name }</Text>
+                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Version : " + app_version }</Text>
+                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Description de la version : " }</Text>
+                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "\""+ app_version_description + "\""}</Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',

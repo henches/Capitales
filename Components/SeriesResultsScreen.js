@@ -79,11 +79,11 @@ class SeriesResultsScreen extends React.Component {
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(25), fontWeight: 'normal'}}>RESULTATS</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(25) }}>RESULTATS</Text>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontWeight: 'bold', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20) }}>{ nbRightResponses } bonnes réponses</Text>
-                        <Text style={{ fontWeight: 'bold', fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20) }}>{ cheeringText }</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ nbRightResponses } bonnes réponses</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ cheeringText }</Text>
                     </View>
                     <View style={{ flex: 6, flexDirection: 'column', justifyContent: 'center'}}>
                         <FlatList
@@ -93,10 +93,10 @@ class SeriesResultsScreen extends React.Component {
                                                 backgroundColor: item.isResponseRight ? COLORS.okButtonBackgroundColor : COLORS.nokButtonBackgroundColor, 
                                                 padding: scale(5), marginVertical: verticalScale(2), marginHorizontal: scale(8) }}>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), color: 'white' }}> {item.state} </Text>
+                                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: 'white' }}> {item.state} </Text>
                                     </View>
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(15), fontWeight: 'bold', color: 'white' }}> { item.isResponseRight ? item.capital : item.givenResponse }</Text>
+                                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: 'white' }}> { item.isResponseRight ? item.capital : item.givenResponse }</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
                                         <QuestionLevelSymbol squareDim= { 8 } level= { item.afterResponseTotalPoints }/>
@@ -107,7 +107,7 @@ class SeriesResultsScreen extends React.Component {
                         />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>  
-                        <Text style={{ fontFamily: 'ComicHelvetic_Light',  fontSize: scale(20)}}>{ scoreProgressText }</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(20)}}>{ scoreProgressText }</Text>
                     </View>
                    <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center' }}>  
                         <TouchableOpacity style={Gstyles.button}  onPress={() => { this._goHomeScreen() }}>
@@ -161,7 +161,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        fontWeight: 'bold',
         borderBottomColor: 'steelblue',
         borderBottomWidth: 5,
         backgroundColor: 'dodgerblue',
