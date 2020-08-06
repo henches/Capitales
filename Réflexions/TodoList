@@ -12,7 +12,6 @@ Bug / backlog
 - 3 Bravo aléatoire après la bonne réponse à une questions
 - 2 boutons en vrai 3D
 - 3 jauge d'avancement dans la série a gérer par rapport au nombre de questions restantes
-- 2 (Android) Bande blanche en bas de la Status bar
 - 2 Il ne doit pas y avoir de faute de frappe si Maj/minuscules
 
 
@@ -84,6 +83,8 @@ Réalisé :
 - (06/08) 1 (Tablette) Manque de place dans la popup de résultats (qd faute de frappe)
 - (06/08) 1 font dans les choix de la liste des capitales
 - (06/08) 1 separateurs dans Home Screen
+- (06/08) 2 (Android) Bande blanche en bas de la Status bar (ne se voit pas avec l'apk installé)
+
 
 
 
