@@ -286,7 +286,7 @@ class HomeScreen extends React.Component {
                         </TouchableOpacity>
                     </View> 
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '80%', padding: verticalScale(4), 
-                            borderColor: '#006400', borderWidth: 1, borderRadius: 5, backgroundColor: 'lightcyan' }} >
+                            borderColor: '#006400', borderWidth: 1, borderRadius: 5 }} >
                         <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
                             <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(16) }}>Connues</Text>
                             <AnimatedCounter oldValue={ oldKnownQuestions } newValue={ knownQuestions } 
@@ -298,8 +298,8 @@ class HomeScreen extends React.Component {
                                 onEndAnim={ this._onEndAnimAC2 } ref={ AnimatedCounter => { this.aC2 = AnimatedCounter }} />
                         </View> 
                     </View> 
-                    <Divider />
-                    <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingLeft: '15%', paddingRight: '10%' }} >
+                    <Divider style={{ marginVertical: verticalScale(10), width: '90%' }}/>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingLeft: '15%', paddingRight: '10%' }} >
                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}> Niveau   </Text>
                         <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
@@ -319,8 +319,8 @@ class HomeScreen extends React.Component {
                         <ProgressSymbol myFlex={ 3 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
                     </View>
-                    <Divider />
-                    <View style={{ flex: 6, alignItems: 'center', justifyContent: 'center' }}>   
+                    <Divider style={{ marginVertical: verticalScale(10), width: '90%' }}/>
+                    <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>   
                         <TouchableOpacity style={[Gstyles.button, { width: scale(120), height: verticalScale(120) }]}  disabled={this.state.buttonsDisabled} onPress={() => { this._goSeriesScreen() }}>
                                 <Icon
                                     size={ scale(80) }
@@ -330,16 +330,17 @@ class HomeScreen extends React.Component {
                                 />
                         </TouchableOpacity>
                     </View>
+                    <Divider style={{ marginVertical: verticalScale(10), width: '90%' }}/>
                     <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}> 
                         <TouchableOpacity style={Gstyles.button}
                                     disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goStatView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'CapitalesFont_Light',  fontSize: scale(20), color:'white' }]}>Liste des capitales</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color:'white' }]}>Liste des capitales</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Gstyles.button}
                                     disabled={this.state.buttonsDisabled}
                                     onPress={() => { this._goLevelView() }}>
-                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'CapitalesFont_Light',  fontSize: scale(20), color:'white' }]}>Niveau</Text>
+                                    <Text style={[Gstyles.button_text, { paddingLeft: scale(15), paddingLeft: scale(15),fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color:'white' }]}>Niveau</Text>
                         </TouchableOpacity>
                     </View>
                     <Modal

@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "app_version": "1.0.1",
-  "app_version_description": "Full features",
+  "app_version_description": "First",
   "app_name": "Capitales",
   "scripts": {
     "start": "expo start",
