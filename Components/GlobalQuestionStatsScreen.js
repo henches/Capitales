@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native
 import { Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
-import ModalDropdown from 'react-native-modal-dropdown'
+//import ModalDropdown from 'react-native-modal-dropdown'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
 
 
@@ -84,32 +84,12 @@ class GlobalQuestionStatsScreen extends React.Component {
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                 <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15) }}>Zone :</Text>
                                 <View style={{  }}>
-                                    <ModalDropdown
-                                                options = { dataZone }
-                                                defaultValue = { this.state.selectedZone }
-                                                style = { styles.dropDown }
-                                                textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: COLORS.generalBackgroundColor }}
-                                                dropdownStyle={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), width: scale(70) }}   
-                                                onSelect={ (index,value)=>{
-                                                    this._updateList(true, value) }}
-                                                onDropdownWillShow={ (index,value)=>{
-                                                    console.log("DropDown") }}
-                                        />
                                     <View style={{ position: "absolute", right: 10, top: 7 }}><Text style={{ color: 'white' }}>▼</Text></View>  
                                 </View>           
                             </View>           
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                 <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15) }}>Niveau :</Text>
                                 <View style={{  }}>
-                                    <ModalDropdown
-                                                options = { dataLevel }
-                                                defaultValue = { this.state.selectedLevel }
-                                                style = { styles.dropDown }
-                                                textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: COLORS.generalBackgroundColor }}
-                                                dropdownStyle={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), width: scale(70) }}   
-                                                onSelect={ (index,value)=>{
-                                                    this._updateList(false, value) }}
-                                        />
                                     <View style={{ position: "absolute", right: 10, top: 7 }}><Text style={{ color: 'white' }}>▼</Text></View>  
                                 </View>           
                             </View>           

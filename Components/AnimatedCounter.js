@@ -44,6 +44,7 @@ export class AnimatedCounter extends React.Component {
         Animated.timing(this.state.size, {
                 toValue: 2,
                 duration: progressDuration, 
+                useNativeDriver: true, // <-- Add this
                 easing: Easing.linear
         }).start( () =>  {     
             this._animateProgress2()
@@ -57,6 +58,7 @@ export class AnimatedCounter extends React.Component {
         Animated.timing(this.state.size, {
                 toValue: 1,
                 duration: progressDuration, 
+                useNativeDriver: true, // <-- Add this
                 easing: Easing.linear
         }).start( () =>  {      
             this.props.onEndAnim()           

@@ -10,8 +10,7 @@ import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 
 
 
-const IMAGE_HEIGHT = verticalScale(200)
-const IMAGE_HEIGHT_SMALL = verticalScale(100)
+const SMALL_IMAGE_RATIO = 0.5
 
     
 class SeriesScreen extends React.Component {
@@ -20,7 +19,7 @@ class SeriesScreen extends React.Component {
     constructor() {
         console.log('SERIES SCREEN CONSTRUCTOR ')
         super()
-        this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+        this.imageHeight = new Animated.Value(1);
     }
 
      componentDidMount() {
@@ -55,7 +54,8 @@ class SeriesScreen extends React.Component {
         console.log("keyboardShow")
         Animated.timing(this.imageHeight, {
           duration: 500,
-          toValue: IMAGE_HEIGHT_SMALL,
+          useNativeDriver: true, // <-- Add this
+          toValue: SMALL_IMAGE_RATIO,
         }).start()
     }
     
@@ -63,7 +63,8 @@ class SeriesScreen extends React.Component {
         console.log("keyboardWillHide")
         Animated.timing(this.imageHeight, {
           duration: 500,
-          toValue: IMAGE_HEIGHT,
+          useNativeDriver: true, // <-- Add this
+          toValue: 1,
         }).start()
     }
   
@@ -71,7 +72,8 @@ class SeriesScreen extends React.Component {
         console.log("keyboardDidShow")
         Animated.timing(this.imageHeight, {
           duration: 500,
-          toValue: IMAGE_HEIGHT_SMALL,
+          useNativeDriver: true, // <-- Add this
+          toValue: SMALL_IMAGE_RATIO,
         }).start()
     }
     
@@ -79,7 +81,8 @@ class SeriesScreen extends React.Component {
         console.log("keyboardDidHide")
         Animated.timing(this.imageHeight, {
           duration: 500,
-          toValue: IMAGE_HEIGHT,
+          toValue: 1,
+          useNativeDriver: true
         }).start()
     }
 
@@ -410,7 +413,7 @@ class SeriesScreen extends React.Component {
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                     </View>
                     <View style={{ flex: 4, justifyContent: 'center', alignItems: 'center' }}>
-                        <Animated.Image style={{ height: this.imageHeight, width: this.imageHeight }} source={ capitalImage } />
+                        <Animated.Image style={{ height: verticalScale(200), width: verticalScale(200), transform: [{ scale: this.imageHeight }] }} source={ capitalImage } />
                     </View>
                     <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <QuestionLevelSymbol squareDim= { 20 } level= { levelForImage }/>

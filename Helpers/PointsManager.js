@@ -158,11 +158,11 @@ export function IsPlayerLevelCompleted(pM, playerLevel) {
 
 export function GetPlayerLevel(pM) {
     let level = G_Config.MaxPlayerLevelNumber 
-    console.log("GetPlayerLevel level = ", level)
+//    console.log("GetPlayerLevel level = ", level)
     do {
         level--
         let p = pM[level][G_Monde]
-        console.log("GetPlayerLevel level = ", level, "  p = ", p)
+//        console.log("GetPlayerLevel level = ", level, "  p = ", p)
         if (p.points == p.maxPoints) {
             level++
             break
