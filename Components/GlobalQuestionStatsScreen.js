@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { COLORS, Gstyles } from './Styles'
 //import ModalDropdown from 'react-native-modal-dropdown'
 import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils';
-
+import RNPickerSelect from 'react-native-picker-select'
+import {Picker} from 'react-native'
 
 
 class GlobalQuestionStatsScreen extends React.Component {
@@ -69,7 +70,11 @@ class GlobalQuestionStatsScreen extends React.Component {
     }
 
     render() {
-        let dataZone = ["Monde", "Europe", "Afrique", "Ameriques", "AsiePacif"]
+        let dataZone = [{ label: "Monde", value: "Monde" },
+                        { label : "Europe", value: "Europe" },
+                        { label : "Afrique", value: "Afrique" },
+                        { label : "Ameriques", value: "Ameriques" },
+                        { label : "AsiePacif", value: "AsiePacif" }]
         let dataLevel = ["Tous", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
         return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
@@ -105,6 +110,10 @@ class GlobalQuestionStatsScreen extends React.Component {
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.state }</Text>
                                     </View>
+                                    <RNPickerSelect
+                                                items = { dataZone }
+                                                onValueChange={(value) => console.log(value)}
+                                        />
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.level == 3 ? item.Queres.capital : '----' }</Text>
                                     </View>
@@ -205,3 +214,29 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(GlobalQuestionStatsScreen)
+
+/*
+                                    <ModalDropdown
+                                                options = { dataZone }
+                                                defaultValue = { this.state.selectedZone }
+                                                style = { styles.dropDown }
+                                                textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: COLORS.generalBackgroundColor }}
+                                                dropdownStyle={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), width: scale(70) }}   
+                                                onSelect={ (index,value)=>{
+                                                    this._updateList(true, value) }}
+                                                onDropdownWillShow={ (index,value)=>{
+                                                    console.log("DropDown") }}
+                                        />
+
+
+
+                                    <ModalDropdown
+                                                options = { dataLevel }
+                                                defaultValue = { this.state.selectedLevel }
+                                                style = { styles.dropDown }
+                                                textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: COLORS.generalBackgroundColor }}
+                                                dropdownStyle={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), width: scale(70) }}   
+                                                onSelect={ (index,value)=>{
+                                                    this._updateList(false, value) }}
+                                        />
+*/

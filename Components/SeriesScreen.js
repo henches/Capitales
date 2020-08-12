@@ -28,7 +28,7 @@ class SeriesScreen extends React.Component {
 
     }
 
-    componentWillMount () {
+    componentDidMount () {
         if (Platform.OS == "ios") {
             this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow)
             this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide)

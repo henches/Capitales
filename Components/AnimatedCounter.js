@@ -13,7 +13,7 @@ export class AnimatedCounter extends React.Component {
 
 
     constructor() {
-        console.log("Animated Counter Constructor !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
+        // console.log("Animated Counter Constructor !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)")
         super();
 
         this.state = {
@@ -23,20 +23,20 @@ export class AnimatedCounter extends React.Component {
     }
 
     componentDidMount() {
-        console.log("Component Animated Counter Didmount")
+        // console.log("Component Animated Counter Didmount")
         this.setState({ counter: this.props.oldValue })
     }
 
 
     _initProgressAnimation = (oldValue, newValue) => {
         this.setState({ counter: oldValue })
-        console.log('Animated Counter oldValue  = ', oldValue)
-        console.log('Animated Counter newValue  = ', newValue)
+        // console.log('Animated Counter oldValue  = ', oldValue)
+        // console.log('Animated Counter newValue  = ', newValue)
     }
 
 
    _animateProgress  = () => {
-        console.log("Animated Counter : animateProgress")
+        // console.log("Animated Counter : animateProgress")
         if (this.props.oldValue == this.props.newValue) {
             this.props.onEndAnim()
             return
@@ -53,7 +53,7 @@ export class AnimatedCounter extends React.Component {
 
 
     _animateProgress2  = () => {
-        console.log("Animated Counter : animateProgress2")
+        // console.log("Animated Counter : animateProgress2")
         this.setState({ counter: this.props.newValue })
         Animated.timing(this.state.size, {
                 toValue: 1,
@@ -71,8 +71,8 @@ export class AnimatedCounter extends React.Component {
 
         const oldValue = this.props.oldValue 
         const newValue = this.props.newValue 
-        console.log("Animated Counter oldValue = ", oldValue)
-        console.log("Animated Counter newValue = ", newValue)
+        // console.log("Animated Counter oldValue = ", oldValue)
+        // console.log("Animated Counter newValue = ", newValue)
 
 
         return(

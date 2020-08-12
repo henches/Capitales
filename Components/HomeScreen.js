@@ -157,8 +157,8 @@ class HomeScreen extends React.Component {
     _onEndAnim1 =() => { this.pS2._animateProgress() }
     _onEndAnim2 =() => { this.pS3._animateProgress() }
     _onEndAnim3 =() => { this.pS4._animateProgress() }
-    _onEndAnim4 =() => { this.pS0._animateProgress() }
-    _onEndAnim0 =() => { this.pS00._animateProgress() }
+    _onEndAnim4 =() => { console.log("avant anim PS0"); this.pS0._animateProgress(); console.log("après anim PS0");  }
+    _onEndAnim0 =() => { console.log("avant anim PS00"); this.pS00._animateProgress(); console.log("après anim PS00");  }
     _onEndAnim00 =() => { this.aC1._animateProgress(); this.aC2._animateProgress() }
     _onEndAnimAC1 =() => { // End of animations
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
@@ -186,11 +186,11 @@ class HomeScreen extends React.Component {
         this.props.navigation.navigate('ConfigScreen')   
     }
 
-
     render() {
 
             console.log("HOME SCREEN RENDER ")  
-            console.log("STATUS BAR HEIGHTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", getStatusBarHeight());
+            // console.log("STATUS BAR HEIGHTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT", getStatusBarHeight());
+            // console.log("G_ScreenWidth = ", G_ScreenWidth)
 
 
             let maxPointsWorld = 0 // Valeurs par défaut dans le cas ou le render est fait avant que l'initialisation de QuestionsStatList et pM ne soit réalisée
@@ -219,7 +219,7 @@ class HomeScreen extends React.Component {
                 pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
                 oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
                 */
-                console.log('PLAYERRRRRRRRRRRRRRRRRRRRRRRRRR LEVEL = ',this.props.PlayerLevel)
+                // console.log('PLAYERRRRRRRRRRRRRRRRRRRRRRRRRR LEVEL = ',this.props.PlayerLevel)
                 maxPointsWorld = GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 pointsWorld = GetPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 oldPointsWorld = GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel)
@@ -299,14 +299,16 @@ class HomeScreen extends React.Component {
                         </View> 
                     </View> 
                     <Divider style={{ marginVertical: verticalScale(10), width: '90%' }}/>
-                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingLeft: '15%', paddingRight: '10%' }} >
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginLeft: '10%', marginRight: '10%' }} >
                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}> Niveau   </Text>
-                        <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
+                        <View style={{ width: '80%' }}>
+                            <ProgressLevelSymbol label={ PlayerLevelStyle[playerLevel].text } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     backgroundColor={ PlayerLevelStyle[playerLevel].backgroundColor } foregroundColor={ PlayerLevelStyle[playerLevel+2].backgroundColor }
                                     textColor = { PlayerLevelStyle[playerLevel].textColor }
                                     onEndAnim3={ this._onEndAnim00 } ref={ ProgressLevelSymbol => { this.pS00 = ProgressLevelSymbol }} />
+                        </View> 
                     </View> 
-                    <View style={{ flex: 6, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
+                    <View style={{  flex: 6, paddingTop: verticalScale(10), marginLeft: '3%', marginRight: '3%', backgroundColor: 'lightcyan',
                                 borderStyle: 'solid', borderColor : 'black', borderWidth: 1, borderRadius: 10,  }}>
                         <ProgressSymbol myFlex={ 1 } zone={ "Europe" } points={ pointsEurope } oldPoints={ oldPointsEurope }  maxPoints={ maxPointsEurope }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim1 } ref={ ProgressSymbol => { this.pS1 = ProgressSymbol }} />

@@ -8,18 +8,20 @@ import { Dimensions, View, ActivityIndicator, StatusBar } from 'react-native'
 import * as Font from 'expo-font'
 
 
+
 export default class App extends React.Component {
 
   state = {
     fontsLoaded: false
   }
 
+
   constructor() {
     console.log('*************************************************** DEBUT / APP  / constructor *************************************************************************************')
-    const { width, height } = Dimensions.get('window');
-    console.log("width, height : ", width, " ", height)
     super()
 
+    global.G_ScreenWidth = Dimensions.get('window').width  // SERVIRA A UNE ENORME VERRUE : parce que je n'ai pas réussi a trouver la largeur de la fenetre de ProgressSymbol
+    console.log("G_ScreenWidth = ", G_ScreenWidth)
 
     let i0 = 1
     let i1 = 1
@@ -45,7 +47,7 @@ export default class App extends React.Component {
   
     global.G_Config = {
       MaxPlayerLevelNumber: 11,
-      SeriesLength: 2,
+      SeriesLength: 5,
       Level: [
         {
           QrNb: 1,
