@@ -9,11 +9,10 @@ Bug / backlog
 - 2 pouvoir sélectionner dans la liste des capitales
 - 2 Mettre un son différent lors de l'atteinte de la fin
 - 2 mettre un son différent lors de l'atteinte d'un nouveau niveau
-- 3 Bravo aléatoire après la bonne réponse à une questions
+- 3 Bravo aléatoire après la bonne réponse à une question
 - 2 boutons en vrai 3D
 - 3 jauge d'avancement dans la série a gérer par rapport au nombre de questions restantes
 - 2 Il ne doit pas y avoir de faute de frappe si Maj/minuscules
-- 0 Remettre les filtres dans la liste des capitales
 - 0 Animation dans Home Screen -> remettre le scale sur la boule
 
 
@@ -90,9 +89,10 @@ Réalisé :
 - (06/08) 1 font dans les choix de la liste des capitales
 - (06/08) 1 separateurs dans Home Screen
 - (06/08) 2 (Android) Bande blanche en bas de la Status bar (ne se voit pas avec l'apk installé)
-- 0 proprifier  ProgressSymbol (oldPoints notamment)
-- 0 Truc jaune au début (Will Mount)
-- 0 Truc jaune au début 
+- (13/08) 0 proprifier  ProgressSymbol (oldPoints notamment)
+- (13/08) 0 Truc jaune au début (Will Mount)
+- (13/08) 0 Truc jaune au début 
+- (13/08) 0 Remettre les filtres dans la liste des capitales
 
 
 

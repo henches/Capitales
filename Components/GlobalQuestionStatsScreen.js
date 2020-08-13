@@ -75,32 +75,61 @@ class GlobalQuestionStatsScreen extends React.Component {
                         { label : "Afrique", value: "Afrique" },
                         { label : "Ameriques", value: "Ameriques" },
                         { label : "AsiePacif", value: "AsiePacif" }]
-        let dataLevel = ["Tous", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-        return(
+        let dataLevel = [
+                        { label: "Tous", value: "Tous" },
+                        { label: "0", value: "0" },
+                        { label: "1", value: "1" },
+                        { label: "2", value: "2" },
+                        { label: "3", value: "3" },
+                        { label: "4", value: "4" },
+                        { label: "5", value: "5" },
+                        { label: "6", value: "6" },
+                        { label: "7", value: "7" },
+                        { label: "8", value: "8" },
+                        { label: "9", value: "9" },
+                        { label: "10", value: "10" }]
+       return(
                 <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, marginTop: verticalScale(20) }}>
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(25) }}>LISTE DES CAPITALES</Text>
                     </View>
-                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: scale(20) }}>
                         <View style={{ flex:1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         </View>
-                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15) }}>Filtres</Text>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15) }}>Zone :</Text>
-                                <View style={{  }}>
-                                    <View style={{ position: "absolute", right: 10, top: 7 }}><Text style={{ color: 'white' }}>▼</Text></View>  
-                                </View>           
+                        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                                    <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(15) }}>Zone : </Text>
+                                    <RNPickerSelect
+                                            items={ dataZone }
+                                            placeholder={ {} } 
+                                            onValueChange={value => {
+                                                this.setState({
+                                                    selectedZone: value,
+                                                })
+                                                this._updateList(true, value)
+                                            }}
+                                            style={pickerSelectStyles}
+                                            useNativeAndroidPickerStyle={false}
+                                    />
                             </View>           
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15) }}>Niveau :</Text>
-                                <View style={{  }}>
-                                    <View style={{ position: "absolute", right: 10, top: 7 }}><Text style={{ color: 'white' }}>▼</Text></View>  
-                                </View>           
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+                                    <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(15) }}>Niveau : </Text>
+                                    <RNPickerSelect
+                                            items={ dataLevel }
+                                            placeholder={ {} } 
+                                            onValueChange={value => {
+                                                this.setState({
+                                                    selectedLevel: value,
+                                                })
+                                                this._updateList(false, value)
+                                            }}
+                                            style={pickerSelectStyles}
+                                            useNativeAndroidPickerStyle={false}
+                                    />
                             </View>           
                         </View>
                     </View>
-                    <View style={{ flex: 10, justifyContent: 'center' }}>
+                    <View style={{ flex: 13, justifyContent: 'center' }}>
                         <FlatList
                             data={this.state.listQr.sort((a,b) => { return (a.Queres.niveau - b.Queres.niveau)})}
                             renderItem={({ item }) => (
@@ -110,10 +139,6 @@ class GlobalQuestionStatsScreen extends React.Component {
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.Queres.state }</Text>
                                     </View>
-                                    <RNPickerSelect
-                                                items = { dataZone }
-                                                onValueChange={(value) => console.log(value)}
-                                        />
                                     <View style={{ flex: 3, flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: PlayerLevelStyle[item.Queres.niveau].textColor }}>{ item.level == 3 ? item.Queres.capital : '----' }</Text>
                                     </View>
@@ -202,11 +227,34 @@ const styles = StyleSheet.create({
         paddingRight: scale(25)
         
     },
-
 })
 
-
-
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+      fontSize: 16,
+      paddingVertical: 12,
+      paddingHorizontal: 10,
+      borderWidth: 1,
+      borderColor: 'gray',
+      borderRadius: 4,
+      color: 'black',
+      paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+      fontFamily: 'CapitalesFont_Light',  
+      fontSize: verticalScale(15),
+      paddingHorizontal: scale(4),
+      paddingVertical: verticalScale(1),
+      borderWidth: 1,
+      borderColor: 'black',
+      borderRadius: 4,
+      color: 'black',
+      width: scale(100),
+      height: verticalScale(25),
+      paddingRight: 30, // to ensure the text is never behind the icon
+    },
+  });
+  
 const mapStateToProps = state => {
     return {
         QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList
@@ -214,29 +262,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps)(GlobalQuestionStatsScreen)
-
-/*
-                                    <ModalDropdown
-                                                options = { dataZone }
-                                                defaultValue = { this.state.selectedZone }
-                                                style = { styles.dropDown }
-                                                textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: COLORS.generalBackgroundColor }}
-                                                dropdownStyle={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), width: scale(70) }}   
-                                                onSelect={ (index,value)=>{
-                                                    this._updateList(true, value) }}
-                                                onDropdownWillShow={ (index,value)=>{
-                                                    console.log("DropDown") }}
-                                        />
-
-
-
-                                    <ModalDropdown
-                                                options = { dataLevel }
-                                                defaultValue = { this.state.selectedLevel }
-                                                style = { styles.dropDown }
-                                                textStyle = {{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), color: COLORS.generalBackgroundColor }}
-                                                dropdownStyle={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(15), width: scale(70) }}   
-                                                onSelect={ (index,value)=>{
-                                                    this._updateList(false, value) }}
-                                        />
-*/

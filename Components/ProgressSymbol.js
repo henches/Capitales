@@ -157,7 +157,7 @@ export class ProgressSymbol extends React.Component {
                             paddingLeft: 0, flexDirection: 'row', justifyContent: 'flex-end', 
                             backgroundColor: 'blue', borderRadius: 10, height: barHeight, 
                             transform: [{ translateX: this.state.progress}] }}>      
-                        <Animated.View style={{ transform: [{ scale: this.state.circleSize }] }}>
+                        <Animated.View style={{ transform: [{ scaleX: this.state.circleSize }] }}>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: 'blue', 
                                     borderRadius: 50, height: barHeight, width: barHeight }}>
                                 <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(11), color: 'white' }}> { this.state.counter } </Text>
