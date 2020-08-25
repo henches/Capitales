@@ -11,9 +11,9 @@ export function InitPointsManager(QuestionStatsList) {
   
     let pM = new Array(G_Config.MaxPlayerLevelNumber)
     
-    for (l = 0; l < G_Config.MaxPlayerLevelNumber; l++) {
+    for (let l = 0; l < G_Config.MaxPlayerLevelNumber; l++) {
         pM[l] = new Array(Zones.length)
-        for (z = 0; z < Zones.length; z++) {
+        for (let z = 0; z < Zones.length; z++) {
             pM[l][z] = {
                 zone: Zones[z],
                 nb: 0,
@@ -27,7 +27,7 @@ export function InitPointsManager(QuestionStatsList) {
     }
 
     let level
-    for (i = 0; i < QuestionStatsList.length; i++) {
+    for (let i = 0; i < QuestionStatsList.length; i++) {
         // console.log(" QuestionStatsList[i] = ", QuestionStatsList[i])
         // console.log("QuestionStatsList[i].Queres.continent = ", QuestionStatsList[i].Queres.continent)
         let found = false

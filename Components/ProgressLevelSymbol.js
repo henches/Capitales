@@ -75,7 +75,7 @@ export class ProgressLevelSymbol extends React.Component {
         const delta =  Math.abs(e.nativeEvent.layout.width/this.state.progressViewWidth-1)
         // console.log("ProgressSymbol Dans onLayout delta entre e.nativeEvent.layout.width et this.state.progressViewWidth ----------->" , delta )
         if (delta > 0.5/100) {
-            console.log("ProgressLevelSymbol problème de largeur en pixels de la view barre de progression - cf. VERRUE - le layout a du changer - revoir le calcul manuel - le ratio est de ", delta)
+            console.log("ERREUR VERRUE !!!!!!   ARRET DU SOFT ... ProgressLevelSymbol problème de largeur en pixels de la view barre de progression - cf. VERRUE - le layout a du changer - revoir le calcul manuel - le ratio est de ", delta)
             RNExitApp.exitApp()
         }
     }

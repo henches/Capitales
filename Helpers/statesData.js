@@ -272,22 +272,6 @@ export default data = [
       image: require('../Helpers/capital_images/san_salvador.jpeg'),
    },
    {
-      state: 'Porto Rico',
-      prefixe: 'de',
-      capital: 'San Juan',
-      niveau : 8,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/san_juan.jpeg'),
-   },
-   {
-      state: 'Costa Rica',
-      prefixe: 'de',
-      capital: 'San José',
-      niveau : 7,
-      continent: 'Ameriques',
-      image: require('../Helpers/capital_images/san_jose.jpeg'),
-   },
-   {
       state: 'Grenade',
       prefixe: 'de',
       capital: 'Saint-George',
@@ -818,10 +802,10 @@ export default data = [
    {
       state: 'Nigéria',
       prefixe: 'du',
-      capital: 'Lagos',
+      capital: 'Abuja',
       niveau : 8,
       continent: 'Afrique',
-      image: require('../Helpers/capital_images/lagos.jpeg'),
+      image: require('../Helpers/capital_images/abuja.jpeg'),
    },
    {
       state: 'Malte',
@@ -930,10 +914,18 @@ export default data = [
    {
       state: 'Israël',
       prefixe: 'd’',
-      capital: 'Jérusalem',
+      capital: 'Tel Aviv',
       niveau : 1,
       continent: 'AsiePacif',
-      image: require('../Helpers/capital_images/jerusalem.jpeg'),
+      image: require('../Helpers/capital_images/tel_aviv.jpeg'),
+   },
+   {
+      state: 'Palestine',
+      prefixe: 'de la',
+      capital: 'Ramallah',
+      niveau : 1,
+      continent: 'AsiePacif',
+      image: require('../Helpers/capital_images/ramallah.jpeg'),
    },
    {
       state: 'Indonésie',
@@ -1082,10 +1074,10 @@ export default data = [
    {
       state: 'Danemark',
       prefixe: 'du',
-      capital: 'Copenhage',
+      capital: 'Copenhagen',
       niveau : 2,
       continent: 'Europe',
-      image: require('../Helpers/capital_images/copenhage.jpeg'),
+      image: require('../Helpers/capital_images/copenhagen.jpeg'),
    },
    {
       state: 'Guinée',

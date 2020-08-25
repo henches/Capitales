@@ -12,8 +12,10 @@ Bug / backlog
 - 3 Bravo aléatoire après la bonne réponse à une question
 - 2 boutons en vrai 3D
 - 3 jauge d'avancement dans la série a gérer par rapport au nombre de questions restantes
-- 2 Il ne doit pas y avoir de faute de frappe si Maj/minuscules
-- 0 Animation dans Home Screen -> remettre le scale sur la boule
+
+- 1 mettre un feu d'artifice à la fin du jeu
+- 3 mettre les hymnes des pays quand apprise
+- 1 inactiver la touche "Verifier" (truc de Claudine)
 
 
 
@@ -25,6 +27,19 @@ Progresser dans le dev react native
 - Améliorer l'utilisation du débugguer 
 
 Réalisé :
+- 1 AsiePacif -> Asie Pacidifque
+- 1 mettre un numéro devant les niveaux (dans l'écarn niveau et dans le Home Screen)
+- 0 pbs taille de caractères dans SeriesDScreen 
+- 0 pbs de taille de caractère dans LevelScreen
+- 0 pbs de taille de caractères dans HomeScreen
+- 1 Il ne doit pas y avoir de faute de frappe si Maj/minuscules
+- 0 bug de persistance
+- 0 Bug de fin du jeu "ecran blanc"
+- 0 Capitale Nigéria
+- 0 Supprimer POrto Rico
+- 0 Tel Aviv plutot que Jerusalem
+- 0 Palestine
+------
 - (09/04) empêcher le dépassement du niveau 4 dans les questions de la séie
 - (09/04) changer le texte de la popup du niveau 3 (captales - pays)
 - (09/04) permettre l'arrêt de la série quand on appuie sur la croix
@@ -93,6 +108,8 @@ Réalisé :
 - (13/08) 0 Truc jaune au début (Will Mount)
 - (13/08) 0 Truc jaune au début 
 - (13/08) 0 Remettre les filtres dans la liste des capitales
+- 0 Animation dans Home Screen -> remettre le scale sur la boule
+- 0 Faute d'orthographe Copenhague
 
 
 

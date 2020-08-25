@@ -21,7 +21,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/capitale-icon.png",
+    "icon": "./assets/icon-for-IoS.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

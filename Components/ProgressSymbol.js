@@ -32,7 +32,7 @@ export class ProgressSymbol extends React.Component {
         
         // console.log("ProgressSymbol ComponentDidmount this.props.isTypeFull = ", this.props.isTypeFull)
 
-        let percent = this.props.isTypeFull ? 1 : 75/100
+        let percent = this.props.isTypeFull ? 1 : 62/100
         this.setState({ progressViewWidth: G_ScreenWidth*(100-3-3-3-3)/100*percent }) // HORRIBLE VERRUE Pour avoir la largeur de la progressView (puisque OnLayout ne fonstionne pas correctement)
                                                     // 100-3-3-3-3 = les 2x3% de marge de la fenetre englobante + les 2x3% de marge déclarés plus haut
 
@@ -129,7 +129,7 @@ export class ProgressSymbol extends React.Component {
         let myViewMarginLeft = '3%'
         let myViewMarginRight = '3%'
         let myProgressMarginLeft = '3%'
-        let myProgressWidth = '75%'
+        let myProgressWidth = '62%'
         let myFlexDirection = 'row'
         let myJustifyContent = 'flex-end'
         let myFontSize = 16

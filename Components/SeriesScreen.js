@@ -123,8 +123,15 @@ class SeriesScreen extends React.Component {
         let isMyResponseRight = false
         let myIsTypo = false
         if (level == 2) {
+            if (myResponse.capital.localeCompare("Abracadabra") == 0) {
+                // ShortCut pour afficher l'écran de fin (suggestion de Tarik)
+                this.props.dispatch({ type: "USER_PREFS-GAME_FINISHED", value: true })
+                let { routeName } = this.props.navigation.state;      
+                console.log("On va à l'écran Home routeName = ", routeName)
+                this.props.navigation.navigate('HomeScreen', { lastScreen: routeName })
+            }
             const levenshtein = require('js-levenshtein')
-            let lev = levenshtein(qr.capital, myResponse.capital.trim()) 
+            let lev = levenshtein(qr.capital.toLowerCase(), myResponse.capital.trim().toLowerCase()) 
             if (lev <= 2) {
                 isMyResponseRight = true
                 myIsTypo =  (lev != 0)
@@ -406,7 +413,7 @@ class SeriesScreen extends React.Component {
                     <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ questionIntro }</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ level == 1 ? "" : queres.prefixe+"  " }</Text>
-                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(36) }}>{ question } ?</Text>
+                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(30) }}>{ question } ?</Text>
                     </View>
                 </View>
                 <View style={styles.image_view}>

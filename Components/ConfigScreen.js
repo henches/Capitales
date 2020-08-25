@@ -20,14 +20,19 @@ class ConfigScreen extends React.Component {
         console.log('CONFIG SCREEN CONSTRUCTOR *************************************************************************************')
         super(props)
         console.log('CONFIG SCREEN CONSTRUCTOR this.props.soundsActive = ', this.props.soundsActive)
-        this.state = { checked: this.props.soundsActive }
+        this.state = {
+            checked: this.props.soundsActive,
+            shortcutClickNb: 0
+        }
     }
 
-    state = {
-        checked: true
+
+    _shortcut = () => {
+        this.setState({ shortcutClickNb: this.state.shortcutClickNb+1 })
+        if (this.state.shortcutClickNb == 2) {
+            console.log("QuestionStatsList", this.props.QuestionStatsList)
+        }
     }
-
-
 
     _goHomeScreen = () => {
         let { routeName } = this.props.navigation.state;      
@@ -63,7 +68,10 @@ class ConfigScreen extends React.Component {
                             />
                     </View>
                     <View style={{ flex: 4, alignItems: 'center', justifyContent: 'center' }}>
-                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ "About :" }</Text>
+                        <TouchableOpacity onPress={ () => { this._shortcut() } }>
+                            <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ "About" }</Text>
+                        </TouchableOpacity>
+                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "clickNb : " + this.state.shortcutClickNb }</Text>
                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Nom : " + app_name }</Text>
                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Version : " + app_version }</Text>
                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Description de la version : " }</Text>
@@ -134,6 +142,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         soundsActive: state.HandleUserPrefsReducer.soundsActive,
+        QuestionStatsList: state.HandleQueresStatsReducer.QuestionStatsList,
     }
 }
 

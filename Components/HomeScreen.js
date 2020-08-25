@@ -38,6 +38,13 @@ class HomeScreen extends React.Component {
 
         if (G_InitState) {  // Horrible verrue
             console.log("HOME SCREEN CONSTRUCTOR")
+            // Ici il s'agit d'une tentative de contourner le bug apparu après la première mise sur Play Store (13 aout 2020)
+            // Il semble que la première fois, la sauvegarde des données ne se fait pas (l'utilisateur perd la première fois l'avancement de son jeu après reprise de l'app)
+            // Je fais l'hypothèse vient du fait que la première lecture ecriture après install depuis playstore serait défaillante
+            // (pourquoi ? ... aucune idée ...)
+            // Du coup, Je fais une lecture ecriture bidon ici pour voir ... En levant un message pas trop stressant si pb d'écriture
+            // testStorage()
+
             getStoredQuestionStats()  // Récupère la liste des Questions Stats
                 .then(myList => {
                     console.log("HOME SCREEN CONSTRUCTOR APRES GetSTOREDQuestionsStats")
@@ -316,7 +323,7 @@ class HomeScreen extends React.Component {
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim2 } ref={ ProgressSymbol => { this.pS2 = ProgressSymbol }} />
                         <ProgressSymbol myFlex={ 1 } zone={ "Ameriques" } points={ pointsAmeriques } oldPoints={ oldPointsAmeriques }  maxPoints={ maxPointsAmeriques }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim3 } ref={ ProgressSymbol => { this.pS3 = ProgressSymbol }} />
-                        <ProgressSymbol myFlex={ 1 } zone={ "AsiePacif" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
+                        <ProgressSymbol myFlex={ 1 } zone={ "Asie Pacifique" } points={ pointsAsiePacif } oldPoints={ oldPointsAsiePacif }  maxPoints={ maxPointsAsiePacif }
                                     isTypeFull={ false } onEndAnim3={ this._onEndAnim4 } ref={ ProgressSymbol => { this.pS4 = ProgressSymbol }} />
                         <ProgressSymbol myFlex={ 3 } zone={ "Monde" } points={ pointsWorld } oldPoints={ oldPointsWorld }  maxPoints={ maxPointsWorld }
                                     isTypeFull={ true } onEndAnim3={ this._onEndAnim0 } ref={ ProgressSymbol => { this.pS0 = ProgressSymbol }} />
@@ -370,30 +377,27 @@ class HomeScreen extends React.Component {
                         animationType="slide"
                         transparent={ true }
                         visible={ this.props.gameFinished }
-                        onRequestClose={() => {
-                            console.log('Modal has been closed')
-                        }}>
-                        <View style={{ flex: 6, backgroundColor: COLORS.generalBackgroundColor, padding: scale(10) }}>
-                            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(30), fontFamily: 'fontFunhouse'  }}>CAPITALES</Text>
-                                <Image style={{ height: scale(60), width: scale(60) }} source={ G_AppIcon } />
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(10) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(55) }}>BRAVO !!!</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>VOUS CONNAISSEZ </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>LES { questionsNb} </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>CAPITALES DU MONDE !</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>Le jeu est terminé !</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(35) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(Réinstallez l'app pour rejouer)</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(20) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>Guettez les prochaines versions </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>des évolutions sont en préparation ...</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(votre avis à phcapitales@gmail.com)</Text>
-                                <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(et pour me dire que vous avez réussi !)</Text>
-                            </View>
+                        onRequestClose={() => { console.log('Modal has been closed') }}>
+                        <View style={{ flex: 1, backgroundColor: COLORS.generalBackgroundColor, padding: scale(10),
+                                flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontFamily: 'CapitalesFont_Light',  fontSize: scale(30), fontFamily: 'fontFunhouse'  }}>CAPITALES</Text>
+                            <Image style={{ height: scale(60), width: scale(60) }} source={ G_AppIcon } />
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(10) }}> </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(55) }}>BRAVO !!!</Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>VOUS CONNAISSEZ </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>LES { questionsNb} </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>CAPITALES DU MONDE !</Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}>Le jeu est fini !</Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(35) }}> </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(Réinstallez l'app pour rejouer)</Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(20) }}> </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>Guettez les prochaines versions, </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>des évolutions sont en préparation ...</Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Medium',  fontSize: verticalScale(25) }}> </Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(votre avis à phcapitales@gmail.com)</Text>
+                            <Text style={{  color: 'black', fontFamily: 'CapitalesFont_Light',  fontSize: verticalScale(20) }}>(et pour me dire que vous avez réussi !)</Text>
                         </View>
                     </Modal>
                 </View>  
