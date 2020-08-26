@@ -145,7 +145,7 @@ class HomeScreen extends React.Component {
 
         if (this.props.navigation.state.params == null) // Il n'y a pas de paramètres de navigation : c'est la première fois qu'on affiche Homme Screen -> pas besoin d'animation
             return
-
+        
         if (this.props.navigation.state.params.lastScreen == null) // Le paramètre LastScreen n' pas été positionné : erreur dans le code
             return
 
@@ -176,7 +176,9 @@ class HomeScreen extends React.Component {
             if (this.props.soundsActive) 
                 playSound(3)
             this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
+            console.log("Après Dispatch")
             this._initProgressAnimation()
+            console.log("Après _initProgressAnimation")
         }
     }
     _onEndAnimAC2 =() => {}
@@ -226,7 +228,7 @@ class HomeScreen extends React.Component {
                 pointsWorld = GetPointsForZone(this.props.pM, G_Monde)
                 oldPointsWorld = GetOldPointsForZone(this.props.pM, G_Monde)
                 */
-                // console.log('PLAYERRRRRRRRRRRRRRRRRRRRRRRRRR LEVEL = ',this.props.PlayerLevel)
+                console.log('PLAYERRRRRRRRRRRRRRRRRRRRRRRRRR LEVEL = ',this.props.PlayerLevel)
                 maxPointsWorld = GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 pointsWorld = GetPointsForZone(pM, G_Monde, this.props.PlayerLevel)
                 oldPointsWorld = GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel)

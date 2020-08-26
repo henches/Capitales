@@ -14,7 +14,7 @@ function HandleQueresStatsReducer(state = initialState, action) {
     switch (action.type) {
         case 'QUERES_STATS-INITIATE' :   
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE")
-            myPM = InitPointsManager(G_InitialQuestionStatsList)
+            myPM = InitPointsManager(G_InitialQuestionStatsList, false)
             myPlayerLevel = GetPlayerLevel(myPM)
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INITIATE myPlayerLevel = ", myPlayerLevel) 
             // console.log("Reducer HandleQueresStatsReducer myPM= ", myPM)
@@ -66,6 +66,44 @@ function HandleQueresStatsReducer(state = initialState, action) {
                     pM: myPM,
             } 
             return nextState
+
+        
+        case 'QUERES_STATS-SHORTCUT' :   // value : questionStateList
+            console.log("Reducer HandleQueresStatsReducer QUERES_STATS-SHORTCUT")
+            //console.log("Reducer HandleQueresStatsReducer QUERES_STATS-SHORTCUT value = ", action.value)
+            let qList = [...action.value]
+            qList.map((q) => {
+                if (q.Queres.niveau <= 10) {
+                    q.level = 3
+                    q.rightResponsesNb = 3
+                    q.totalPoints = 3
+                }
+                if (q.Queres.niveau == 10) {
+                    //console.log("q.id = ", q.id)  // Fait qu'il reste une capitale à saisir
+                    //console.log("q.id % 10 = ", q.id % 10)
+                    if (q.id % 10 == 2) {
+                        console.log("q= ", q)
+                        q.level = 2
+                        q.rightResponsesNb = 2
+                        q.totalPoints = 2
+                    }
+                }
+            })
+                
+            //console.log("Reducer HandleQueresStatsReducer QUERES_STATS-SHORTCUT qList = ", qList)
+        
+            let myPM = InitPointsManager(qList, true)
+            //console.log("Reducer HandleQueresStatsReducer QUERES_STATS-SHORTCUT myPM = ", myPM)
+
+            nextState = {
+                ...state,
+                    QuestionStatsList: qList,
+                    pM: myPM,
+                    PlayerLevel: 10,
+            } 
+            return nextState
+
+        
         case 'QUERES_STATS-DISPLAYED' :   // value : null
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-DISPLAYED")
             myPM = state.pM.slice()
@@ -77,8 +115,9 @@ function HandleQueresStatsReducer(state = initialState, action) {
             return nextState
         case 'QUERES_STATS-INCREMENT_PLAYER_LEVEL' :   
             console.log("Reducer HandleQueresStatsReducer QUERES_STATS-INCREMENT_PLAYER_LEVEL")
-            let myPlayerLevel = state.PlayerLevel+1
-            // console.log("Reducer HandleQueresStatsReducer myPM= ", myPM)
+            let myPlayerLevel = state.PlayerLevel + 1  
+            console.log("Reducer HandleQueresStatsReducer state.PlayerLevel= ", state.PlayerLevel)
+            console.log("Reducer HandleQueresStatsReducer myPlayerLevel= ", myPlayerLevel)
             nextState = {
                 ...state,
                     PlayerLevel: myPlayerLevel

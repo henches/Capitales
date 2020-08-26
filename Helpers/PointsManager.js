@@ -7,8 +7,11 @@ global.G_Ameriques = 4
 
 
 
-export function InitPointsManager(QuestionStatsList) {
+export function InitPointsManager(QuestionStatsList, shortcut) {
   
+    // shortcut permet de passer a un nouveau niveau articifiellement à des fins de test
+    // Ici, permet de ne pas mettre les oldPoints = Points
+
     let pM = new Array(G_Config.MaxPlayerLevelNumber)
     
     for (let l = 0; l < G_Config.MaxPlayerLevelNumber; l++) {
@@ -39,16 +42,18 @@ export function InitPointsManager(QuestionStatsList) {
                         // console.log("init Pm : level : ", level, " zone = ", z, " continent = ", QuestionStatsList[i].Queres.continent)
                         pM[level][z].nb++
                         pM[level][z].points += QuestionStatsList[i].totalPoints
-                        if (QuestionStatsList[i].totalPoints == 3) { // question connue, donc
+                        if (QuestionStatsList[i].totalPoints == 3) { // question connue
                             pM[level][z].knownQuestions++
                             pM[level][G_Monde].knownQuestions++
                             pM[level][z].oldKnownQuestions++
                             pM[level][G_Monde].oldKnownQuestions++
                         }
-                        pM[level][z].oldPoints = pM[level][z].points
+                        if (!shortcut) 
+                            pM[level][z].oldPoints = pM[level][z].points
                         pM[level][G_Monde].nb++
                         pM[level][G_Monde].points += QuestionStatsList[i].totalPoints
-                        pM[level][G_Monde].oldPoints = pM[level][G_Monde].points
+                        if (!shortcut) 
+                            pM[level][G_Monde].oldPoints = pM[level][G_Monde].points
                         found = true
                         break
                     }
@@ -157,7 +162,7 @@ export function IsPlayerLevelCompleted(pM, playerLevel) {
 
 
 export function GetPlayerLevel(pM) {
-    let level = G_Config.MaxPlayerLevelNumber 
+    let level = G_Config.MaxPlayerLevelNumber-1
 //    console.log("GetPlayerLevel level = ", level)
     do {
         level--

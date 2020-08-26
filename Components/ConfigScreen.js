@@ -30,7 +30,9 @@ class ConfigScreen extends React.Component {
     _shortcut = () => {
         this.setState({ shortcutClickNb: this.state.shortcutClickNb+1 })
         if (this.state.shortcutClickNb == 2) {
-            console.log("QuestionStatsList", this.props.QuestionStatsList)
+            //console.log("QuestionStatsList", this.props.QuestionStatsList)
+            this.props.dispatch({ type: 'QUERES_STATS-SHORTCUT', value: this.props.QuestionStatsList })
+            this.props.navigation.navigate('HomeScreen', { lastScreen: 'SeriesResultsScreen' })   
         }
     }
 

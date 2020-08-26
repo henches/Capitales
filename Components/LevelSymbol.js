@@ -35,6 +35,12 @@ export class LevelSymbol extends React.Component {
         return(
             <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', marginRight: '8%', marginLeft: '8%' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={ [styles.triangle, { borderLeftColor: boxStyle[11].color }]}></View>
+                    <View style={ [styles.levelBox, { backgroundColor: PlayerLevelStyle[11].backgroundColor, borderWidth: boxStyle[11].borderWidth, height: boxStyle[11].boxHeight }] }>
+                        <Text style={{ fontFamily: boxStyle[11].fontFamily,  fontSize: boxStyle[11].fontSize, color: PlayerLevelStyle[11].textColor }}> { PlayerLevelStyle[11].text } </Text>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <View style={ [styles.triangle, { borderLeftColor: boxStyle[10].color }]}></View>
                     <View style={ [styles.levelBox, { backgroundColor: PlayerLevelStyle[10].backgroundColor, borderWidth: boxStyle[10].borderWidth, height: boxStyle[10].boxHeight }] }>
                         <Text style={{ fontFamily: boxStyle[10].fontFamily,  fontSize: boxStyle[10].fontSize, color: PlayerLevelStyle[10].textColor }}> { PlayerLevelStyle[10].text } </Text>

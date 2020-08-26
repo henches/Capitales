@@ -30,23 +30,24 @@ export default class App extends React.Component {
     let i4 = 1
     
     global.PlayerLevelStyle = [
-      { text: "1 - Débutant", backgroundColor: '#f2fce9', textColor: 'black'},
-      { text: "2 - Débutant+", backgroundColor: '#d7f6bc', textColor: 'black'},
-      { text: "3 - Débutant avancé", backgroundColor: '#c9f3a5', textColor: 'black'},
-      { text: "4 - Intermédiaire", backgroundColor: '#afed78', textColor: 'black'},
-      { text: "5 - Intermédiaire+", backgroundColor: '#a1ea62', textColor: 'black'},
-      { text: "6 - Intermédiaire avancé", backgroundColor: '#86e335', textColor: 'black'},
-      { text: "7 - Expérimenté", backgroundColor: '#6dca1c', textColor: 'white'},
-      { text: "8 - Expérimenté+", backgroundColor: '#61b418', textColor: 'white'},
-      { text: "9 - Expérimenté avancé", backgroundColor: '#559d15', textColor: 'white'},
-      { text: "10 - Maître", backgroundColor: '#228b22', textColor: 'white'},
-      { text: "11 - Grand Maître", backgroundColor: '#006400', textColor: 'white'},
+      { text: "0 - Débutant", backgroundColor: '#f2fce9', textColor: 'black'},
+      { text: "1 - Débutant+", backgroundColor: '#d7f6bc', textColor: 'black'},
+      { text: "2 - Débutant avancé", backgroundColor: '#c9f3a5', textColor: 'black'},
+      { text: "3 - Intermédiaire", backgroundColor: '#afed78', textColor: 'black'},
+      { text: "4 - Intermédiaire+", backgroundColor: '#a1ea62', textColor: 'black'},
+      { text: "5 - Intermédiaire avancé", backgroundColor: '#86e335', textColor: 'black'},
+      { text: "6 - Expérimenté", backgroundColor: '#6dca1c', textColor: 'white'},
+      { text: "7 - Expérimenté+", backgroundColor: '#61b418', textColor: 'white'},
+      { text: "8 - Expérimenté avancé", backgroundColor: '#559d15', textColor: 'white'},
+      { text: "9 - Maître", backgroundColor: '#228b22', textColor: 'white'},
+      { text: "10 - Grand Maître", backgroundColor: '#006400', textColor: 'white'},
+      { text: "Seigneur des Capitales", backgroundColor: '#006400', textColor: 'white'},
       { backgroundColor: '#305a0c' },
       { backgroundColor: '#013220' }
     ]
   
     global.G_Config = {
-      MaxPlayerLevelNumber: 11,
+      MaxPlayerLevelNumber: 12,
       SeriesLength: 6,
       Level: [
         {
