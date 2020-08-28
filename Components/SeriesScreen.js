@@ -383,7 +383,7 @@ class SeriesScreen extends React.Component {
                                 placeholderTextColor='dimgrey'
                                 onChangeText={(text) => this.setState({inputResponse: text})}
                         />
-                        <TouchableOpacity style={ checkButtonStyle } 
+                        <TouchableOpacity style={ checkButtonStyle } disabled={ this.state.inputResponse.localeCompare("") == 0 }
                             onPress={() => { this._displayResponseResults(queres, { state : queres.state, capital: this.state.inputResponse }, level) }}>
                             <Text style={checkTextButtonStyle}> Vérifier </Text>
                         </TouchableOpacity>

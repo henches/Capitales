@@ -1,8 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Modal, Image, TouchableWithoutFeedback, Animated, Easing } from 'react-native'
 import { connect } from 'react-redux'
-import { getStoredQuestionStats } from '../Helpers/StorageFunctions'
-import { getStoredUserPrefs } from '../Helpers/StorageFunctions'
+import { testStorage, getStoredQuestionStats, getStoredUserPrefs } from '../Helpers/StorageFunctions'
 import { COLORS, Gstyles } from './Styles'
 import { IsPlayerLevelCompleted, GetMaxPointsForZone, GetPointsForZone, GetOldPointsForZone, GetKnownQuestions, GetOldKnownQuestions } from '../Helpers/PointsManager'
 import { ProgressSymbol } from './ProgressSymbol'
@@ -43,7 +42,7 @@ class HomeScreen extends React.Component {
             // Je fais l'hypothèse vient du fait que la première lecture ecriture après install depuis playstore serait défaillante
             // (pourquoi ? ... aucune idée ...)
             // Du coup, Je fais une lecture ecriture bidon ici pour voir ... En levant un message pas trop stressant si pb d'écriture
-            // testStorage()
+            testStorage().then(() => { console.log("Après Tests Storage") })
 
             getStoredQuestionStats()  // Récupère la liste des Questions Stats
                 .then(myList => {
@@ -78,7 +77,6 @@ class HomeScreen extends React.Component {
     componentDidMount() {
         console.log("HOME SCREEN DID MOUNT !)")
 
-
         const { navigation } = this.props;
         this.focusListener = navigation.addListener("didFocus", () => { 
             console.log("HOME SCREEN DIDFOCUS WORKS GREAT")
@@ -88,9 +86,6 @@ class HomeScreen extends React.Component {
 
         console.log("this.props.gameFinisheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeed", this.props.gameFinished)
         console.log("this.props.soundsActiveeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", this.props.soundsActive)
-
-
-
     }
           
 
@@ -119,9 +114,11 @@ class HomeScreen extends React.Component {
         let pM = this.props.pM
         if (pM == null) 
             return
+        console.log("2 ");
 
         let questionsNb = this.props.QuestionStatsList.length
         
+        console.log("3 ");
 
         this.pS1._initProgressAnimation(GetOldPointsForZone(pM, G_Europe, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Europe, this.props.PlayerLevel))
         this.pS2._initProgressAnimation(GetOldPointsForZone(pM, G_Afrique, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Afrique, this.props.PlayerLevel))
@@ -131,6 +128,7 @@ class HomeScreen extends React.Component {
         this.pS00._initProgressAnimation(GetOldPointsForZone(pM, G_Monde, this.props.PlayerLevel), GetMaxPointsForZone(pM, G_Monde, this.props.PlayerLevel))
         this.aC1._initProgressAnimation(GetOldKnownQuestions(pM), GetKnownQuestions(pM))
         this.aC2._initProgressAnimation(questionsNb-GetOldKnownQuestions(pM), questionsNb-GetKnownQuestions(pM))
+        console.log("4 ");
     }
 
     _animateProgress = () => {
@@ -168,6 +166,7 @@ class HomeScreen extends React.Component {
     _onEndAnim0 =() => { console.log("avant anim PS00"); this.pS00._animateProgress(); console.log("après anim PS00");  }
     _onEndAnim00 =() => { this.aC1._animateProgress(); this.aC2._animateProgress() }
     _onEndAnimAC1 =() => { // End of animations
+        console.log("Après _onEndAnimAC1")
         this.props.dispatch({ type: "QUERES_STATS-DISPLAYED" })   // positionne oldPoints = Point (puisque l'anmation a été réalisée)
         this.setState({ buttonsDisabled: false }) // dégèle les boutons à la fin de l'anmation (au cas ou ils auraient été gelés)
 
@@ -175,9 +174,11 @@ class HomeScreen extends React.Component {
             this.setState({ modalNextLevelVisible: true })
             if (this.props.soundsActive) 
                 playSound(3)
+            console.log("Avant Dispatch")
             this.props.dispatch({ type: "QUERES_STATS-INCREMENT_PLAYER_LEVEL" })   // positionne oldPoints = Point (puisque l'animation a été réalisée)
             console.log("Après Dispatch")
-            this._initProgressAnimation()
+            if (this.props.PlayerLevel < G_Config.MaxPlayerLevelNumber-1)  // POur éviter le dernier niveau (11) fictif
+                this._initProgressAnimation()
             console.log("Après _initProgressAnimation")
         }
     }
@@ -185,7 +186,7 @@ class HomeScreen extends React.Component {
 
     _hideNextPlayerLevelPopup = () => {
         this.setState({ modalNextLevelVisible: false })
-        if (IsPlayerLevelCompleted(this.props.pM, this.props.PlayerLevel) && (this.props.PlayerLevel == G_Config.MaxPlayerLevelNumber-1)) 
+        if (this.props.PlayerLevel == G_Config.MaxPlayerLevelNumber-1) // Niveau final (11) atteint
             this.props.dispatch({ type: "USER_PREFS-GAME_FINISHED", value: true })
     }
  

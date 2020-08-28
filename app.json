@@ -11,7 +11,10 @@
     },
     "android": {
       "package": "com.henchie.capitales",
-      "permissions":["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
       "versionCode": 2
     },
     "platforms": [
@@ -32,7 +35,8 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "sdkVersion": "38.0.0"
   },
   "android": {
     "softwareKeyboardLayoutMode": "pan"

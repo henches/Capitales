@@ -1,8 +1,8 @@
 import { Alert } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 
-const listKeyQuestionStats = 'QuestionStats151'
-const listKeyUserPrefs = 'UserPrefs35'
+const listKeyQuestionStats = 'QuestionStats168'
+const listKeyUserPrefs = 'UserPrefs52'
 
 const defaultUserPrefs = {
   soundsActive: true,
@@ -37,17 +37,11 @@ export async function testStorage() {
       }
     } catch (error) {
       Alert.alert(  
-        "Problème de lecture des données",  
-        dataTest,  
-          [  {  text: 'OK', onPress: () => console.log('OK'),  style: 'OK',  } ]  )
+        "Problème de lecture des données", dataTest, [  {  text: 'OK', onPress: () => console.log('OK'),  style: 'OK',  } ]  )
     }
   }
   catch (error) {
-    Alert.alert(  
-      "Test écriture disque",  
-      dataTest,  
-        [  {  text: 'OK',  onPress: () => console.log('OK'),  style: 'OK' } ]  
-  )
+    Alert.alert("Test écriture disque", dataTest, [  {  text: 'OK',  onPress: () => console.log('OK'),  style: 'OK' } ]  )
   }
 }
 

@@ -35,7 +35,7 @@ export function InitPointsManager(QuestionStatsList, shortcut) {
         // console.log("QuestionStatsList[i].Queres.continent = ", QuestionStatsList[i].Queres.continent)
         let found = false
         for (let z = 1; z < pM.length; z++) {
-            if (QuestionStatsList[i].Queres.niveau < G_Config.MaxPlayerLevelNumber)
+            if (QuestionStatsList[i].Queres.niveau < G_Config.MaxPlayerLevelNumber-1)
                 if (QuestionStatsList[i].Queres.continent.localeCompare(Zones[z]) == 0) {
                     level = QuestionStatsList[i].Queres.niveau
                     if (level >= 0) {
@@ -162,8 +162,8 @@ export function IsPlayerLevelCompleted(pM, playerLevel) {
 
 
 export function GetPlayerLevel(pM) {
-    let level = G_Config.MaxPlayerLevelNumber-1
-//    console.log("GetPlayerLevel level = ", level)
+    let level = G_Config.MaxPlayerLevelNumber-2 // Pour ne pas prendre en compte le niveau (11) niveau final, qui n'est pas géré comme les autres.
+    //    console.log("GetPlayerLevel level = ", level)
     do {
         level--
         let p = pM[level][G_Monde]

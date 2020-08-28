@@ -36,7 +36,7 @@ export class AnimatedCounter extends React.Component {
 
 
    _animateProgress  = () => {
-        // console.log("Animated Counter : animateProgress")
+        console.log("Animated Counter : animateProgress")
         if (this.props.oldValue == this.props.newValue) {
             this.props.onEndAnim()
             return
@@ -53,7 +53,7 @@ export class AnimatedCounter extends React.Component {
 
 
     _animateProgress2  = () => {
-        // console.log("Animated Counter : animateProgress2")
+        console.log("Animated Counter : animateProgress2")
         this.setState({ counter: this.props.newValue })
         Animated.timing(this.state.size, {
                 toValue: 1,

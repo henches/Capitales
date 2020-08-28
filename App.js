@@ -41,7 +41,7 @@ export default class App extends React.Component {
       { text: "8 - Expérimenté avancé", backgroundColor: '#559d15', textColor: 'white'},
       { text: "9 - Maître", backgroundColor: '#228b22', textColor: 'white'},
       { text: "10 - Grand Maître", backgroundColor: '#006400', textColor: 'white'},
-      { text: "Seigneur des Capitales", backgroundColor: '#006400', textColor: 'white'},
+      { text: "SEIGNEUR des CAPITALES", backgroundColor: 'black', textColor: 'white'},
       { backgroundColor: '#305a0c' },
       { backgroundColor: '#013220' }
     ]

@@ -73,7 +73,6 @@ class ConfigScreen extends React.Component {
                         <TouchableOpacity onPress={ () => { this._shortcut() } }>
                             <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(20) }}>{ "About" }</Text>
                         </TouchableOpacity>
-                       <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "clickNb : " + this.state.shortcutClickNb }</Text>
                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Nom : " + app_name }</Text>
                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Version : " + app_version }</Text>
                        <Text style={{ fontFamily: 'CapitalesFont_Medium',  fontSize: scale(16) }}>{ "Description de la version : " }</Text>
