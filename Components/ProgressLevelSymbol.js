@@ -30,19 +30,19 @@ export class ProgressLevelSymbol extends React.Component {
         const myWidth = G_ScreenWidth*(100-10-10)/100*80/100 // HORRIBLE VERRUE Pour avoir la largeur de la progressView (puisque OnLayout ne fonstionne pas correctement)
                                                     // 100-3-3-3-3 = les 2x3% de marge de la fenetre englobante + les 2x3% de marge déclarés plus haut
         this.setState({ progressViewWidth: myWidth }) 
-        console.log("Progress Level Symbole - progressViewWidth = ",  myWidth)
+        //console.log("Progress Level Symbole - progressViewWidth = ",  myWidth)
     }
 
 
     _initProgressAnimation = (oldPoints, maxPoints) => {
-        console.log('Progress Level Symbol oldPoints  = ', oldPoints)
-        console.log('Progress Level Symbol maxPoints  = ', maxPoints)
+        //console.log('Progress Level Symbol oldPoints  = ', oldPoints)
+        //console.log('Progress Level Symbol maxPoints  = ', maxPoints)
         this.state.progress.setValue(oldPoints/maxPoints * this.state.progressViewWidth)
     }
 
 
     _animateProgress  = () => {
-        console.log("progress Level Symbol : _animateProgress label = ", this.props.label)
+        //console.log("progress Level Symbol : _animateProgress label = ", this.props.label)
         if (this.props.oldPoints == this.props.points) {
             this.props.onEndAnim3()
             return
@@ -52,9 +52,9 @@ export class ProgressLevelSymbol extends React.Component {
 
     
     _animateProgress2  = () => {
-        console.log("progress Level Symbol : _animateProgress2  this.props.points ", this.props.points)
-        console.log("progress Level Symbol : _animateProgress2  this.props.points ", this.props.maxPoints)
-        console.log("progress Level Symbol : _animateProgress2  this.state.progressViewWidth ", this.state.progressViewWidth)
+        //console.log("progress Level Symbol : _animateProgress2  this.props.points ", this.props.points)
+        //console.log("progress Level Symbol : _animateProgress2  this.props.points ", this.props.maxPoints)
+        //console.log("progress Level Symbol : _animateProgress2  this.state.progressViewWidth ", this.state.progressViewWidth)
 
         Animated.timing(this.state.progress, {
                 toValue: this.props.points/this.props.maxPoints * this.state.progressViewWidth,
@@ -71,7 +71,7 @@ export class ProgressLevelSymbol extends React.Component {
     }
 
     _onLayout = (e) => {
-        console.log("ProgressLevelSymbol / Dans onLayout, e.nativeEvent.layout.width = ", e.nativeEvent.layout.width)
+        //console.log("ProgressLevelSymbol / Dans onLayout, e.nativeEvent.layout.width = ", e.nativeEvent.layout.width)
         const delta =  Math.abs(e.nativeEvent.layout.width/this.state.progressViewWidth-1)
         // console.log("ProgressSymbol Dans onLayout delta entre e.nativeEvent.layout.width et this.state.progressViewWidth ----------->" , delta )
         if (delta > 0.5/100) {

@@ -10,7 +10,7 @@ import { scale, moderateScale, verticalScale} from '../Helpers/scaling_utils'
 
 
 
-const SMALL_IMAGE_RATIO = 0.5
+const SMALL_IMAGE_RATIO = 0.4
 
     
 class SeriesScreen extends React.Component {
