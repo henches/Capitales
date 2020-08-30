@@ -120,8 +120,6 @@ const styles = StyleSheet.create({
         borderRadius: 5, 
         height: BoxHeight, 
         width: '100%',
-        marginTop: verticalScale(1),
-        marginBottom: verticalScale(1)
     },
     triangle: {
         overflow: 'hidden',

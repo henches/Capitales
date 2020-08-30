@@ -6,7 +6,7 @@
     "privacy": "public",
     "ios": {
       "bundleIdentifier": "com.henchie.capitales",
-      "buildNumber": "1.0.1",
+      "buildNumber": "1.0.2",
       "supportsTablet": true
     },
     "android": {
@@ -22,9 +22,9 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon-for-IoS.png",
+    "icon": "./assets/capitale-icon-for-google-play.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
